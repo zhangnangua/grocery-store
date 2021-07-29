@@ -1,9 +1,9 @@
-package com.simple.csdndemo.view.head_image_demo
+package com.simple.demo.view.head_image_demo
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.simple.csdndemo.databinding.ActivityHeadViewDemoBinding
+import com.simple.demo.databinding.ActivityHeadViewDemoBinding
 import java.util.*
 
 /**

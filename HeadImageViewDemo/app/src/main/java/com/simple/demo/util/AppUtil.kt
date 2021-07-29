@@ -1,4 +1,4 @@
-package com.simple.csdndemo.util
+package com.simple.demo.util
 
 import android.app.Application
 

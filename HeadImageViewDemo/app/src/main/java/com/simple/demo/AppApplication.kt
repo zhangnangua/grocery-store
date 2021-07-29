@@ -1,9 +1,9 @@
-package com.simple.csdndemo
+package com.simple.demo
 
 import android.app.Application
 import com.itheima.roundedimageview.BuildConfig
-import com.simple.csdndemo.head.HeadImageViewHelp
-import com.simple.csdndemo.util.AppUtil
+import com.simple.demo.head.HeadImageViewHelp
+import com.simple.demo.util.AppUtil
 
 /**
  * 作者： zxf

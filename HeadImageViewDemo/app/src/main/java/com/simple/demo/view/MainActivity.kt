@@ -1,10 +1,10 @@
-package com.simple.csdndemo.view
+package com.simple.demo.view
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.simple.csdndemo.databinding.ActivityMainBinding
-import com.simple.csdndemo.view.head_image_demo.HeadViewTestDemoActivity
+import com.simple.demo.databinding.ActivityMainBinding
+import com.simple.demo.view.head_image_demo.HeadViewTestDemoActivity
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding

@@ -1,4 +1,4 @@
-package com.simple.csdndemo.head
+package com.simple.demo.head
 
 import android.animation.Animator
 import android.animation.ObjectAnimator
@@ -11,9 +11,9 @@ import androidx.annotation.NonNull
 import androidx.annotation.Px
 import androidx.core.content.ContextCompat
 import com.itheima.roundedimageview.RoundedImageView
-import com.simple.csdndemo.R
-import com.simple.csdndemo.util.AppUtil
-import com.simple.csdndemo.util.spToPx
+import com.simple.demo.R
+import com.simple.demo.util.AppUtil
+import com.simple.demo.util.spToPx
 import java.lang.ref.SoftReference
 
 /**

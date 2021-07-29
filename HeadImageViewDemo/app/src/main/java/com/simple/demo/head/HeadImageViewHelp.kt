@@ -1,4 +1,4 @@
-package com.simple.csdndemo.head
+package com.simple.demo.head
 
 import android.graphics.Color
 import android.graphics.drawable.Drawable
@@ -6,7 +6,7 @@ import android.text.TextUtils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomViewTarget
 import com.bumptech.glide.request.transition.Transition
-import com.simple.csdndemo.R
+import com.simple.demo.R
 import kotlin.math.absoluteValue
 
 

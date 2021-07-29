@@ -1,4 +1,4 @@
-package com.simple.csdndemo.util
+package com.simple.demo.util
 
 import android.text.Editable
 import android.text.TextWatcher

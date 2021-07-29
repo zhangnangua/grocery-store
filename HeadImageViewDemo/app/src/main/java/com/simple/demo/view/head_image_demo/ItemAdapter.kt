@@ -1,12 +1,11 @@
-package com.simple.csdndemo.view.head_image_demo
+package com.simple.demo.view.head_image_demo
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.simple.csdndemo.databinding.HeadItemBinding
-import com.simple.csdndemo.head.loadImage
-import kotlin.random.Random
+import com.simple.demo.databinding.HeadItemBinding
+import com.simple.demo.head.loadImage
 
 /**
  * 作者： zxf
