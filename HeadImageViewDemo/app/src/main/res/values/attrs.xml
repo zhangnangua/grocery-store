@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="HeadImageView">
+        <!--文字的颜色-->
+        <attr name="font_color" format="color" />
+        <!--文字的大小-->
+        <attr name="font_size" format="dimension" />
+        <!--默认文字对应的背景色-->
+        <attr name="background_font_color" format="color"/>
+        <!--是否使用默认的图片   即背景色加上汉字-->
+        <attr name="is_default_pic" format="boolean"/>
+    </declare-styleable>
+</resources>

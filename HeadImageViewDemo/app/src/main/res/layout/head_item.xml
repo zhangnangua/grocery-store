@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <com.simple.csdndemo.head.HeadImageView
+        android:id="@+id/hiv_pic"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="20dp"
+        android:scaleType="centerCrop"
+        app:riv_oval="true"
+        app:riv_border_width="0dp"
+        app:riv_mutate_background="true"
+        app:font_color="@color/white"
+        app:font_size="17sp"
+        tool:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tv_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        tool:text="猪小明" />
+</LinearLayout>
