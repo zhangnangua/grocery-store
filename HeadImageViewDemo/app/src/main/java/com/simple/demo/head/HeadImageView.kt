@@ -125,8 +125,7 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) :
         //初始化  取消显示defaultPic 动画
         if (enableAnim) {
             if (objectAnimatorSoft == null) {
-                objectAnimatorSoft =
-                    SoftReference(ObjectAnimator.ofFloat(this, "animationControl", 1F, 0F))
+                objectAnimatorSoft = SoftReference(ObjectAnimator.ofFloat(this, "animationControl", 1F, 0F))
             }
             objectAnimatorSoft?.get()?.let {
                 it.duration = animatorTime
