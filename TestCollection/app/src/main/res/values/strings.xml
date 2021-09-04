@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TestCollection</string>
+    <!--    MainActivity-->
+    <string name="bt_ems">ems调试</string>
+    <!--    EMSActivity-->
+    <string name="hint1">输入要显示的字体</string>
+    <string name="hint2">num</string>
+</resources>

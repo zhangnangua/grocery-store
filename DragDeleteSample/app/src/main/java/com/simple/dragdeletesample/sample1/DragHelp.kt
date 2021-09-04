@@ -18,7 +18,6 @@ class MyDragShadowBuilder(view: View) : View.DragShadowBuilder(view) {
     init {
 //        view.visibility = View.INVISIBLE
         //将view  转换为drawable
-//        view.drawToBitmap()
 //        shadow = BitmapDrawable(null, view.drawToBitmap())
     }
 

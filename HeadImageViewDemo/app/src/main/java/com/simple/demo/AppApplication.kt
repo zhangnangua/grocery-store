@@ -1,6 +1,8 @@
 package com.simple.demo
 
+import android.app.Activity
 import android.app.Application
+import android.os.Bundle
 import com.itheima.roundedimageview.BuildConfig
 import com.simple.demo.head.HeadImageViewHelp
 import com.simple.demo.util.AppUtil
@@ -16,7 +18,7 @@ class AppApplication : Application() {
         initHeadSetting()
     }
 
-    private fun initHeadSetting(){
+    private fun initHeadSetting() {
         HeadImageViewHelp.animatorTime = 500
     }
 }
