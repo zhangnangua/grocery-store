@@ -3,6 +3,7 @@ package com.zxf.jetpackrelated
 import android.content.Intent
 import com.zxf.jetpackrelated.databinding.ActivityMainBinding
 import com.zxf.jetpackrelated.lifecycle.activityOrfragment.LifecycleActivity
+import com.zxf.jetpackrelated.viewModel.TimingActivity
 
 class MainActivity : BaseActivity() {
 
@@ -16,9 +17,21 @@ class MainActivity : BaseActivity() {
 
     private fun setEvent() {
         with(binding) {
+            //lifecycle
             btnGoLifecycleActivity.setOnClickListener {
-                startActivity(Intent(this@MainActivity, LifecycleActivity::class.java))
+                startActivity(LifecycleActivity::class.java)
+            }
+            //viewModel 简单倒计时 demo
+            btnGoViewmodelTimingActivity.setOnClickListener {
+                startActivity(TimingActivity::class.java)
             }
         }
+    }
+
+    /**
+     * startActivity 简单封装
+     */
+    private fun <T> startActivity(cls: Class<T>) {
+        startActivity(Intent(this@MainActivity, cls))
     }
 }
