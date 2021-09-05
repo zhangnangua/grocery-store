@@ -19,6 +19,8 @@
         </activity>
         <activity android:name=".lifecycle.activityOrfragment.LifecycleActivity"/>
         <activity android:name=".viewModel.TimingActivity"/>
+        <activity android:name=".liveData.TimingWithLiveDataActivity"/>
+        <activity android:name=".liveData.share_fragment.ShareFragmentActivity"/>
 
 
         <service android:name=".lifecycle.service.MyLifecycleService"/>

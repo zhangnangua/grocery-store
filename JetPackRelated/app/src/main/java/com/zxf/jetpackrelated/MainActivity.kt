@@ -3,6 +3,8 @@ package com.zxf.jetpackrelated
 import android.content.Intent
 import com.zxf.jetpackrelated.databinding.ActivityMainBinding
 import com.zxf.jetpackrelated.lifecycle.activityOrfragment.LifecycleActivity
+import com.zxf.jetpackrelated.liveData.TimingWithLiveDataActivity
+import com.zxf.jetpackrelated.liveData.share_fragment.ShareFragmentActivity
 import com.zxf.jetpackrelated.viewModel.TimingActivity
 
 class MainActivity : BaseActivity() {
@@ -25,6 +27,15 @@ class MainActivity : BaseActivity() {
             btnGoViewmodelTimingActivity.setOnClickListener {
                 startActivity(TimingActivity::class.java)
             }
+            //liveData  计数器demo 改进
+            btnGoLivedataTimingActivity.setOnClickListener {
+                startActivity(TimingWithLiveDataActivity::class.java)
+            }
+            //liveData fragment 共享数据
+            btnGoLivedataShareFragment.setOnClickListener {
+                startActivity(ShareFragmentActivity::class.java)
+            }
+
         }
     }
 
