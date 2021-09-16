@@ -5,7 +5,9 @@ buildscript {
     //kotlin coroutine version
     ext.kotlin_coroutines_version = "1.4.3"
     //android lifecycle version
-    ext.lifecycle_version = "2.3.0"
+    ext.lifecycle_version = "2.3.1"
+    //android room version
+    ext.room_version = '2.3.0'
 
     repositories {
         google()
