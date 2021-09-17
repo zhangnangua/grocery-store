@@ -1,11 +1,29 @@
 package com.zxf.jetpackrelated.room.liveDataOrFlow.flow
 
+import androidx.room.*
+import com.zxf.jetpackrelated.room.liveDataOrFlow.STUDENT_TABLE_NAME
+import com.zxf.jetpackrelated.room.liveDataOrFlow.STUDENT_TABLE_STUDENT_NAME
+import com.zxf.jetpackrelated.room.liveDataOrFlow.StudentEntity
+import kotlinx.coroutines.flow.Flow
+
 /**
- * 作者： 张先锋
- * 创建时间： 2021/9/16 10:59
- * 版本： [1.0, 2021/9/16]
- * 版权： 国泰新点软件股份有限公司
- * 描述： 描述
+ * 作者： zxf
+ * 描述： flowDao
  */
-class StudentFlowDao {
+@Dao
+interface StudentFlowDao{
+    @Insert
+    suspend fun insertStudent(student: StudentEntity)
+
+    @Update
+    suspend fun updateStudent(student: StudentEntity)
+
+    @Delete
+    suspend fun deleteStudent(student: StudentEntity)
+
+    @Query("select * from $STUDENT_TABLE_NAME where $STUDENT_TABLE_STUDENT_NAME = :name")
+     fun obtainStudentByName(name: String): Flow<List<StudentEntity>>
+
+    @Query("select * from $STUDENT_TABLE_NAME")
+     fun obtainStudentAll(): Flow<List<StudentEntity>>
 }

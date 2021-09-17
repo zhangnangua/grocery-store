@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
  * 作者： zxf
  * 描述： Entity
  */
-@Entity
+@Entity(tableName = STUDENT_TABLE_NAME)
 data class StudentEntity(
     @NonNull
     @PrimaryKey(autoGenerate = true)
@@ -30,7 +30,7 @@ data class StudentEntity(
 /**
  * 表名字相关，统一定义.避免互相引用
  */
-const val STUDENT_TABLE_NAME = "simple_student"
+const val STUDENT_TABLE_NAME = "student"
 const val STUDENT_TABLE_STUDENT_ID = "student_id"
 const val STUDENT_TABLE_STUDENT_NAME = "student_name"
 const val STUDENT_TABLE_STUDENT_AGE = "student_age"

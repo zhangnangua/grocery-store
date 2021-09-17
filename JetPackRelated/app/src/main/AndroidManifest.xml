@@ -22,7 +22,7 @@
         <activity android:name=".liveData.TimingWithLiveDataActivity"/>
         <activity android:name=".liveData.share_fragment.ShareFragmentActivity"/>
         <activity android:name=".room.baseUse.SimpleRoomDemoActivity"/>
-
+        <activity android:name=".room.liveDataOrFlow.RoomDemoActivity"/>
 
         <service android:name=".lifecycle.service.MyLifecycleService"/>
 

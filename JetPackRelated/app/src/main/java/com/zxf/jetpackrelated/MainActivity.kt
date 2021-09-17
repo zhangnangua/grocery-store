@@ -6,6 +6,7 @@ import com.zxf.jetpackrelated.lifecycle.activityOrfragment.LifecycleActivity
 import com.zxf.jetpackrelated.liveData.TimingWithLiveDataActivity
 import com.zxf.jetpackrelated.liveData.share_fragment.ShareFragmentActivity
 import com.zxf.jetpackrelated.room.baseUse.SimpleRoomDemoActivity
+import com.zxf.jetpackrelated.room.liveDataOrFlow.RoomDemoActivity
 import com.zxf.jetpackrelated.viewModel.TimingActivity
 
 class MainActivity : BaseActivity() {
@@ -39,6 +40,10 @@ class MainActivity : BaseActivity() {
             //room 简单使用demo
             btnGoRoomSimpleActivity.setOnClickListener {
                 startActivity(SimpleRoomDemoActivity::class.java)
+            }
+            //room liveData Flow demo
+            btnGoRoomActivity.setOnClickListener {
+                startActivity(RoomDemoActivity::class.java)
             }
         }
     }

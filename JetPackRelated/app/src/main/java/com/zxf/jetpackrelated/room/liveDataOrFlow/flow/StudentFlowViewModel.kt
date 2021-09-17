@@ -1,9 +1,8 @@
-package com.zxf.jetpackrelated.room.liveDataOrFlow
+package com.zxf.jetpackrelated.room.liveDataOrFlow.flow
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.zxf.jetpackrelated.room.liveDataOrFlow.flow.StudentFlowDao
+import com.zxf.jetpackrelated.room.liveDataOrFlow.StudentEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -31,11 +30,11 @@ class StudentViewModel(private val dao: StudentFlowDao) : ViewModel() {
         }
     }
 
-//    suspend fun obtainStudentByNameUseFlow(name: String): Flow<List<StudentEntity>> {
-//        return withContext(Dispatchers.IO) {
-//            dao.obtainStudentByName(name) as Flow<List<StudentEntity>>
-//        }
-//    }
+    fun obtainStudentByNameUseFlow(name: String): Flow<List<StudentEntity>> {
+        return dao.obtainStudentByName(name)
+    }
+
+    fun obtainStudentAllUseFlow() = dao.obtainStudentAll()
 }
 
 class StudentFactory(private val dao: StudentFlowDao) : ViewModelProvider.Factory {
