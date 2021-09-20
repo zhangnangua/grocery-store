@@ -1,17 +1,23 @@
 package com.zxf.jetpackrelated.room.liveDataOrFlow
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.room.withTransaction
 import com.zxf.jetpackrelated.databinding.ActivitySimpleUseRoomBinding
 import com.zxf.jetpackrelated.room.liveDataOrFlow.flow.StudentFactory
 import com.zxf.jetpackrelated.room.liveDataOrFlow.flow.StudentViewModel
 import com.zxf.jetpackrelated.room.liveDataOrFlow.liveData.StudentLiveDataViewModel
+import com.zxf.jetpackrelated.room.liveDataOrFlow.migration.FruitEntity
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * 作者： zxf
@@ -42,8 +48,12 @@ class RoomDemoActivity : AppCompatActivity() {
         _binding = ActivitySimpleUseRoomBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
+            throwable.printStackTrace()
+        }
+
         //lifecycleScope 默认调度器主线程 主从作用域 根据lifecycleStore的生命周期判断协程的取消 直接拉取显示
-        lifecycleScope.launch {
+        lifecycleScope.launch(exceptionHandler) {
             //flow
             viewModel.obtainStudentAllUseFlow()
                 .collect {
@@ -62,6 +72,7 @@ class RoomDemoActivity : AppCompatActivity() {
         setEvent()
     }
 
+    @SuppressLint("SetTextI18n")
     fun setEvent() {
         with(binding) {
             btnInsert.setOnClickListener {
@@ -84,9 +95,30 @@ class RoomDemoActivity : AppCompatActivity() {
             btnGetId.visibility = View.GONE
             btnGetAll.visibility = View.GONE
             btnTransactionInsertGet.visibility = View.GONE
+
+            /**
+             * 升级测试
+             */
+            btnTransactionInsertGet.visibility = View.VISIBLE
+            btnTransactionInsertGet.text = "MIGRATION TEST"
+            btnTransactionInsertGet.setOnClickListener {
+                val conflateEntityDao = StudentDataBase.getDataBase().getConflateEntityDao()
+                lifecycleScope.launch {
+                    StudentDataBase.getDataBase().withTransaction {
+                        conflateEntityDao.insertFruit(FruitEntity(text = "apple",text2 = "other apple2"))
+                        val obtainFruit = conflateEntityDao.obtainFruit()
+                        withContext(Dispatchers.Main.immediate){
+                            binding.text.text = obtainFruit.toString()
+                        }
+                    }
+                }
+            }
         }
     }
 
+    /**
+     * student
+     */
     private fun displayToTextView(students: List<StudentEntity>) {
         val string = students.joinToString(
             """
