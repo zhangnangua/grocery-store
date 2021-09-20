@@ -16,18 +16,23 @@ abstract class StudentDataBase : RoomDatabase() {
 
     companion object {
 
+        //禁止指令重排序
+        @Volatile
         private var INSTANT: StudentDataBase? = null
 
         /**
          * 双重锁单例
+         *  fallbackToDestructiveMigration 此方法会指示 Room 在需要执行没有定义迁移路径的增量迁移时，
+         *  破坏性地重新创建应用的数据库表。不会抛出IllegalStateException
          */
         fun getDataBase(): StudentDataBase {
             return INSTANT ?: synchronized(this) {
                 INSTANT ?: Room.databaseBuilder(
                     AppUtil.application,
                     StudentDataBase::class.java,
-                    STUDENT_TABLE_NAME
-                ).build()
+                    STUDENT_DB_NAME
+                ).fallbackToDestructiveMigration()
+                    .build()
                     .also {
                         INSTANT = it
                     }

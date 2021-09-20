@@ -30,6 +30,7 @@ data class StudentEntity(
 /**
  * 表名字相关，统一定义.避免互相引用
  */
+const val STUDENT_DB_NAME = "student.db"
 const val STUDENT_TABLE_NAME = "student"
 const val STUDENT_TABLE_STUDENT_ID = "student_id"
 const val STUDENT_TABLE_STUDENT_NAME = "student_name"
