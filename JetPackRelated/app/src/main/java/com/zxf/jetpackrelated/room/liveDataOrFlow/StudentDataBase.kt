@@ -59,6 +59,20 @@ abstract class StudentDataBase : RoomDatabase() {
                 database.execSQL("ALTER TABLE `$FRUIT_TABLE_NAME` ADD COLUMN `$FRUIT_TABLE_OTHER_NAME` TEXT ")
             }
         }
+
+        /**
+         * 销毁与重建策略
+         * 在Sqlite中修改表结构比较麻烦。
+         * 例如，我们想将Student表中的age字段类型从INTEGER改为TEXT。
+         */
+        private val MIGRATION_3_4 = object :Migration(3,4){
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("CREATE TABLE IF NOT EXISTS `temp_student` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT) ")
+                database.execSQL("INSERT INTO temp_student (id,name) SELECT id , name FROM student")
+                database.execSQL("DROP TABLE student")
+                database.execSQL("ALTER TABLE temp_student RENAME TO student")
+            }
+        }
     }
 
     /**

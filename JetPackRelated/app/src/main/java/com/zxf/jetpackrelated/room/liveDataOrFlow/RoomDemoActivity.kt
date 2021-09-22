@@ -4,15 +4,15 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.room.withTransaction
 import com.zxf.jetpackrelated.databinding.ActivitySimpleUseRoomBinding
 import com.zxf.jetpackrelated.room.liveDataOrFlow.flow.StudentFactory
 import com.zxf.jetpackrelated.room.liveDataOrFlow.flow.StudentViewModel
-import com.zxf.jetpackrelated.room.liveDataOrFlow.liveData.StudentLiveDataViewModel
 import com.zxf.jetpackrelated.room.liveDataOrFlow.migration.FruitEntity
+import com.zxf.jetpackrelated.utils.AppUtil
+import com.zxf.jetpackrelated.utils.DbUtil
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -105,10 +105,43 @@ class RoomDemoActivity : AppCompatActivity() {
                 val conflateEntityDao = StudentDataBase.getDataBase().getConflateEntityDao()
                 lifecycleScope.launch {
                     StudentDataBase.getDataBase().withTransaction {
-                        conflateEntityDao.insertFruit(FruitEntity(text = "apple",text2 = "other apple2"))
+                        conflateEntityDao.insertFruit(
+                            FruitEntity(
+                                text = "apple",
+                                text2 = "other apple2"
+                            )
+                        )
                         val obtainFruit = conflateEntityDao.obtainFruit()
-                        withContext(Dispatchers.Main.immediate){
+                        withContext(Dispatchers.Main.immediate) {
                             binding.text.text = obtainFruit.toString()
+                        }
+                    }
+                }
+            }
+
+            /**
+             * key-value Test
+             */
+            btnGetId.visibility = View.VISIBLE
+            btnGetId.text = "INSERT KEY VALUE"
+            btnGetId.setOnClickListener {
+                lifecycleScope.launch() {
+                    DbUtil.withTransaction {
+                        DbUtil.writeCache("zxf", "hahahhahah")
+                        DbUtil.writeCache("zxf", "recover test")
+                        DbUtil.writeCache("ddd", "hhhhhhh")
+                        DbUtil.writeCache("ddd", "recover test")
+                    }
+                }
+            }
+            btnGetAll.visibility = View.VISIBLE
+            btnGetAll.text = "OBTAIN KEY VALUE"
+            btnGetAll.setOnClickListener {
+                lifecycleScope.launch {
+                    withContext(Dispatchers.IO){
+                        val value = DbUtil.obtainValue("zxf")
+                        withContext(Dispatchers.Main){
+                            binding.text.text = value
                         }
                     }
                 }
