@@ -11,6 +11,7 @@ object AppUtil {
     /**
      * obtain application
      */
+    @JvmStatic
     lateinit var application: AppApplication
         private set
 

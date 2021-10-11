@@ -1,6 +1,7 @@
 package com.zxf.jetpackrelated
 
 import android.app.Application
+import android.view.Choreographer
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.zxf.jetpackrelated.lifecycle.application.ProcessLifecycleObserver
 import com.zxf.jetpackrelated.utils.AppUtil
@@ -28,5 +29,12 @@ class AppApplication : Application() {
                 LogUtil.i("app background")
             })
         })
+
+
+        //Choreographer  test
+        //postFrameCallback   Posts a frame callback to run on the next frame. The callback runs once then is automatically removed.
+//        Choreographer.getInstance().postFrameCallback {
+//            LogUtil.i("frameframeframeframeframeframeframeframeframeframeframe:$it")
+//        }
     }
 }

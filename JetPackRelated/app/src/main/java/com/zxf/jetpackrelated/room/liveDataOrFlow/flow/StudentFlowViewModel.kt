@@ -44,6 +44,10 @@ class StudentFactory(private val dao: StudentFlowDao) : ViewModelProvider.Factor
             return StudentViewModel(dao) as T
         }
         throw IllegalArgumentException("Unknown viewModel class. ")
+
+//        第二种实例化的方式
+//        modelClass.getConstructor(StudentFlowDao::class.java).newInstance(dao)
+
     }
 
 }

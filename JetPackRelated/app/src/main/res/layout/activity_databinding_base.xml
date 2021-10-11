@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <!--        事件绑定-->
+        <variable
+            name="eventHandler"
+            type="com.zxf.jetpackrelated.databinding.simpleUse.SimpleDataBindingActivity.EventHandleListener" />
+        <!--        实体类-->
+        <variable
+            name="videoEntity"
+            type="com.zxf.jetpackrelated.databinding.simpleUse.VideoEntity" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_video_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{videoEntity.videoName}"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_video_introduction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{videoEntity.videoIntroduction}"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_video_name" />
+
+            <TextView
+                android:id="@+id/tv_video_Starring"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{videoEntity.videoStarring}"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_video_introduction" />
+
+            <TextView
+                android:id="@+id/tv_video_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{videoEntity.convertRatingString(videoEntity.videoRatingObservable)}"
+                android:textColor="?android:attr/textColorHint"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_video_Starring" />
+
+            <!--        <Button-->
+            <!--            android:id="@+id/bt_button1"-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_marginTop="10dp"-->
+            <!--            android:onClick="@{eventHandler::onButtonClick1}"-->
+            <!--            android:text="BUTTON1"-->
+            <!--            app:layout_constraintEnd_toStartOf="@+id/bt_button2"-->
+            <!--            app:layout_constraintHorizontal_chainStyle="spread"-->
+            <!--            app:layout_constraintStart_toStartOf="parent"-->
+            <!--            app:layout_constraintTop_toBottomOf="@id/tv_video_rating"-->
+            <!--            tools:ignore="HardcodedText" />-->
+
+            <!--        <Button-->
+            <!--            android:id="@+id/bt_button2"-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_marginTop="10dp"-->
+            <!--            android:onClick="@{eventHandler::onButtonClick2}"-->
+            <!--            android:text="BUTTON1"-->
+            <!--            app:layout_constraintEnd_toEndOf="parent"-->
+            <!--            app:layout_constraintStart_toEndOf="@+id/bt_button1"-->
+            <!--            app:layout_constraintTop_toBottomOf="@id/tv_video_rating"-->
+            <!--            tools:ignore="HardcodedText" />-->
+            <!--        事件/数据 传递  ConstraintLayout 使用include需要增加宽高-->
+            <ImageView
+                android:id="@+id/iv_video_image"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:image="@{videoEntity.videoImageUrl}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_video_rating" />
+
+            <include
+                android:id="@+id/in_bt"
+                layout="@layout/layout_databinding_base"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:eventHandlerLayout="@{eventHandler}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_video_image" />
+
+            <ImageView
+                android:id="@+id/iv_video_image_local"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:defaultImageRes="@{videoEntity.localImage}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/in_bt"
+                app:padding="@{videoEntity.paddingTestObservable}" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{eventHandler::onButtonChangePadding}"
+                android:text="CHANGE PADDING"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_video_image_local"
+                tools:ignore="HardcodedText" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

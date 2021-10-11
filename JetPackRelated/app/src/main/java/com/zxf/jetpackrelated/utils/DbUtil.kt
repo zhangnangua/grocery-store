@@ -19,7 +19,7 @@ object DbUtil {
     /**
      * 写入缓存
      */
-    suspend fun writeCache(@NonNull key: String, @NonNull value: String?) {
+    suspend fun writeCache(@NonNull key: String, @NonNull    value: String?) {
         if (TextUtils.isEmpty(key) || TextUtils.isEmpty(value)) {
             return
         }

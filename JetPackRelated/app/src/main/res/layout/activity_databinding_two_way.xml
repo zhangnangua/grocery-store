@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="entityObservable"
+            type="com.zxf.jetpackrelated.databinding.twoWayBinding.TwoBindingEntityObservable" />
+
+        <variable
+            name="entityObservable2"
+            type="com.zxf.jetpackrelated.databinding.twoWayBinding.TwoBindingEntityObservable2" />
+
+        <variable
+            name="entityObservable3"
+            type="com.zxf.jetpackrelated.databinding.twoWayBinding.TwoBindingEntityObservable3" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/et_input"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="30dp"
+            android:autofillHints="no"
+            android:background="@color/white"
+            android:hint="PLEASE INPUT"
+            android:inputType="text"
+            android:text="@={entityObservable3.displayEntityField}"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/tv_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="200dp"
+            android:text="@={entityObservable3.displayEntityField}"
+            android:textColor="?attr/colorPurple"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/bt_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
+            android:onClick="goNextTwoBindingActivity"
+            android:text="GO_NEXT_TWO_Binding_Test"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/bt_next_recycler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:onClick="goRecyclerDisplay"
+            android:text="GO_RECYCLER_DISPLAY"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+</layout>

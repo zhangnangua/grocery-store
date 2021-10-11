@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.zxf.jetpackrelated">
+    <!--网络权限-->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".AppApplication"
@@ -9,7 +12,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.JetPackRelated">
+        android:theme="@style/Theme.JetPackRelated.My"
+        tools:ignore="AllowBackup">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,14 +21,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".lifecycle.activityOrfragment.LifecycleActivity"/>
-        <activity android:name=".viewModel.TimingActivity"/>
-        <activity android:name=".liveData.TimingWithLiveDataActivity"/>
-        <activity android:name=".liveData.share_fragment.ShareFragmentActivity"/>
-        <activity android:name=".room.baseUse.SimpleRoomDemoActivity"/>
-        <activity android:name=".room.liveDataOrFlow.RoomDemoActivity"/>
+        <activity android:name=".lifecycle.activityOrfragment.LifecycleActivity" />
+        <activity android:name=".viewModel.TimingActivity" />
+        <activity android:name=".liveData.TimingWithLiveDataActivity" />
+        <activity android:name=".liveData.share_fragment.ShareFragmentActivity" />
+        <activity android:name=".room.baseUse.SimpleRoomDemoActivity" />
+        <activity android:name=".room.liveDataOrFlow.RoomDemoActivity" />
+        <activity android:name=".databinding.simpleUse.SimpleDataBindingActivity" />
+        <activity android:name=".databinding.twoWayBinding.TwoWayDataBindingActivity" />
+        <activity android:name=".databinding.twoWayBinding.TwoWayDataBindingActivity2" />
+        <activity android:name=".databinding.recyclerDemo.DataBindingRecyclerViewActivity" />
 
-        <service android:name=".lifecycle.service.MyLifecycleService"/>
+        <service android:name=".lifecycle.service.MyLifecycleService" />
 
     </application>
 

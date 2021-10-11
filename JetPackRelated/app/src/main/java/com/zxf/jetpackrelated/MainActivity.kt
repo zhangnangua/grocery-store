@@ -2,6 +2,8 @@ package com.zxf.jetpackrelated
 
 import android.content.Intent
 import com.zxf.jetpackrelated.databinding.ActivityMainBinding
+import com.zxf.jetpackrelated.databinding.simpleUse.SimpleDataBindingActivity
+import com.zxf.jetpackrelated.databinding.twoWayBinding.TwoWayDataBindingActivity
 import com.zxf.jetpackrelated.lifecycle.activityOrfragment.LifecycleActivity
 import com.zxf.jetpackrelated.liveData.TimingWithLiveDataActivity
 import com.zxf.jetpackrelated.liveData.share_fragment.ShareFragmentActivity
@@ -44,6 +46,14 @@ class MainActivity : BaseActivity() {
             //room liveData Flow demo
             btnGoRoomActivity.setOnClickListener {
                 startActivity(RoomDemoActivity::class.java)
+            }
+            //dataBinding 简单使用
+            btnGoSimpleDatabindingActivity.setOnClickListener {
+                startActivity(SimpleDataBindingActivity::class.java)
+            }
+            //dataBinding 双向绑定
+            btnGoTwoWayDatabindingActivity.setOnClickListener {
+                startActivity(TwoWayDataBindingActivity::class.java)
             }
         }
     }

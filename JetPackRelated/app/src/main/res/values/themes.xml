@@ -13,4 +13,14 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <!-- Base application theme. -->
+    <style name="Theme.JetPackRelated.My" parent="Theme.AppCompat.Light">
+        <!-- Primary brand color. -->
+        <item name="colorPurple">@color/purple_500</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+
+    <attr name="colorPurple" format="color" />
 </resources>

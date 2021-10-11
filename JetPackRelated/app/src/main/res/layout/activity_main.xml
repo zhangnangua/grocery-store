@@ -53,7 +53,7 @@
         android:text="GO_ROOM_SIMPLE_DEMO_ACTIVITY"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_go_livedata_timing_activity"
+        app:layout_constraintTop_toBottomOf="@id/btn_go_livedata_share_fragment"
         tools:ignore="HardcodedText" />
 
     <Button
@@ -64,6 +64,26 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_go_room_simple_activity"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btn_go_simple_databinding_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GO_SIMPLE_DATA_BINDING_ACTIVITY"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_go_room_activity"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btn_go_two_way_databinding_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GO_TWO_WAY_DATA_BINDING_ACTIVITY"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_go_simple_databinding_activity"
         tools:ignore="HardcodedText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
