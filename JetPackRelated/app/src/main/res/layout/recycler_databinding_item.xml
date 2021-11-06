@@ -30,7 +30,6 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:scaleType="fitXY"
-            android:layout_marginEnd="20dp"
             app:image="@{entityVideo.videoImageUrl}" />
 
     </RelativeLayout>

@@ -34,6 +34,14 @@
 
         <service android:name=".lifecycle.service.MyLifecycleService" />
 
+        <service
+            android:name=".ServiceTest.AIDLSimple.AIDLServiceSimpleDemo"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.zxf.aidl"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

@@ -1,11 +1,34 @@
 package com.zxf.jetpackrelated.ServiceTest.AIDLSimple
 
-/**
-  * 作者： 张先锋
-  * 创建时间： 2021/11/5 14:09
-  * 版本： [1.0, 2021/11/5]
-  * 版权： 国泰新点软件股份有限公司
-  * 描述： 描述
-  */
-class AIDLServiceSimpleDemo {
+import android.app.Service
+import android.content.Intent
+import android.os.IBinder
+import com.zxf.jetpackrelated.IMyAidlInterface
+
+class AIDLServiceSimpleDemo : Service() {
+
+    private val iMyAidlInterface = object : IMyAidlInterface.Stub() {
+        override fun basicTypes(
+            anInt: Int,
+            aLong: Long,
+            aBoolean: Boolean,
+            aFloat: Float,
+            aDouble: Double,
+            aString: String?
+        ) {
+
+        }
+
+        override fun getName(): String {
+            return "zxf"
+        }
+
+    }
+
+
+    override fun onBind(intent: Intent?): IBinder {
+        return iMyAidlInterface
+    }
+
+
 }

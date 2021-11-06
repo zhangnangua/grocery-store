@@ -1,4 +1,4 @@
-package com.zxf.jetpackrelated.ServiceTest
+package com.zxf.jetpackrelated.ServiceTest.SimpleBind
 
 import android.content.ComponentName
 import android.content.Context

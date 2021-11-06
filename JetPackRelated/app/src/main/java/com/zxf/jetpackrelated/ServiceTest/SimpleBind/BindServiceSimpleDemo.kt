@@ -1,4 +1,4 @@
-package com.zxf.jetpackrelated.ServiceTest
+package com.zxf.jetpackrelated.ServiceTest.SimpleBind
 
 import android.app.Service
 import android.content.Intent
