@@ -1,6 +1,9 @@
 package com.zxf.jetpackrelated
 
 import android.content.Intent
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
 import com.zxf.jetpackrelated.databinding.ActivityMainBinding
 import com.zxf.jetpackrelated.databinding.simpleUse.SimpleDataBindingActivity
 import com.zxf.jetpackrelated.databinding.twoWayBinding.TwoWayDataBindingActivity
@@ -9,16 +12,31 @@ import com.zxf.jetpackrelated.liveData.TimingWithLiveDataActivity
 import com.zxf.jetpackrelated.liveData.share_fragment.ShareFragmentActivity
 import com.zxf.jetpackrelated.room.baseUse.SimpleRoomDemoActivity
 import com.zxf.jetpackrelated.room.liveDataOrFlow.RoomDemoActivity
+import com.zxf.jetpackrelated.utils.toLogI
 import com.zxf.jetpackrelated.viewModel.TimingActivity
+import com.zxf.learn_test.LearnTestActivity
 
 class MainActivity : BaseActivity() {
+
+    companion object {
+        var instanceTest: BaseActivity? = null
+    }
 
     lateinit var binding: ActivityMainBinding
 
     override fun initView() {
+        instanceTest = this
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setEvent()
+
+        lifecycle.addObserver(object : LifecycleEventObserver {
+            override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+                "MainActivity${event.name}".toLogI()
+            }
+        })
+
     }
 
     private fun setEvent() {
@@ -55,6 +73,12 @@ class MainActivity : BaseActivity() {
             btnGoTwoWayDatabindingActivity.setOnClickListener {
                 startActivity(TwoWayDataBindingActivity::class.java)
             }
+
+
+            //其他界面学习
+            btnGoOtherLearnActivity.setOnClickListener {
+                startActivity(LearnTestActivity::class.java)
+            }
         }
     }
 
@@ -63,5 +87,10 @@ class MainActivity : BaseActivity() {
      */
     private fun <T> startActivity(cls: Class<T>) {
         startActivity(Intent(this@MainActivity, cls))
+    }
+
+    override fun onDestroy() {
+        instanceTest = null
+        super.onDestroy()
     }
 }

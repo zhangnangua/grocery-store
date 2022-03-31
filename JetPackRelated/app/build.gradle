@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     defaultConfig {
@@ -62,6 +62,9 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     // optional - room kotlin 扩展
     implementation "androidx.room:room-ktx:$room_version"
+    // windowManager
+    implementation "androidx.window:window:$windowmanager_version"
+    implementation "androidx.window:window-java:$windowmanager_version"
 
     //glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'

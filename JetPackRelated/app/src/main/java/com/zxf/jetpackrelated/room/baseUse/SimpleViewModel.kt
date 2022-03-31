@@ -162,7 +162,7 @@ class SimpleViewModel(private val simpleStudentDao: SimpleStudentDao) : ViewMode
  * 自定义工厂，可传入Dao参数
  */
 class MyViewModelFactory(private val dao: SimpleStudentDao) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(SimpleViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return SimpleViewModel(dao) as T

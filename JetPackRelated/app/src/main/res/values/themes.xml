@@ -18,8 +18,16 @@
     <style name="Theme.JetPackRelated.My" parent="Theme.AppCompat.Light">
         <!-- Primary brand color. -->
         <item name="colorPurple">@color/purple_500</item>
-        <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.JetPackRelated.My1" parent="Theme.AppCompat.Light">
+        <!-- Primary brand color. -->
+        <item name="colorPurple">@color/purple_500</item>
+
+        <!--    是窗口透明    -->
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
 
 
     <attr name="colorPurple" format="color" />

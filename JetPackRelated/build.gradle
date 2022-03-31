@@ -1,13 +1,15 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     //kotlin version
-    ext.kotlin_version = "1.4.32"
+    ext.kotlin_version = "1.6.0"
     //kotlin coroutine version
-    ext.kotlin_coroutines_version = "1.4.3"
+    ext.kotlin_coroutines_version = "1.6.0"
     //android lifecycle version
-    ext.lifecycle_version = "2.3.1"
+    ext.lifecycle_version = "2.4.1"
     //android room version
-    ext.room_version = '2.3.0'
+    ext.room_version = '2.4.2'
+    //android windowManager
+    ext.windowmanager_version = '1.0.0'
 
     repositories {
         google()

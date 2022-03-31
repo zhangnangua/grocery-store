@@ -1,7 +1,10 @@
 package com.zxf.jetpackrelated
 
+import android.annotation.SuppressLint
 import android.app.Application
-import android.view.Choreographer
+import android.app.NotificationManager
+import android.os.Binder
+import android.widget.Toast
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.zxf.jetpackrelated.lifecycle.application.ProcessLifecycleObserver
 import com.zxf.jetpackrelated.utils.AppUtil
@@ -12,6 +15,7 @@ import com.zxf.jetpackrelated.utils.LogUtil
  * 描述： application
  */
 class AppApplication : Application() {
+
     override fun onCreate() {
         super.onCreate()
         //appUtil  注册

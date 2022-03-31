@@ -32,6 +32,10 @@
         <activity android:name=".databinding.twoWayBinding.TwoWayDataBindingActivity2" />
         <activity android:name=".databinding.recyclerDemo.DataBindingRecyclerViewActivity" />
 
+        <!--  其他学习测试相关界面  -->
+        <activity android:name="com.zxf.learn_test.LearnTestActivity"
+            android:theme="@style/Theme.JetPackRelated.My1"/>
+
         <service android:name=".lifecycle.service.MyLifecycleService" />
 
         <service

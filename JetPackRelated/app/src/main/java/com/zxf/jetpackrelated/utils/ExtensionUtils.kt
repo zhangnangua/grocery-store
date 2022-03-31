@@ -1,5 +1,6 @@
 package com.zxf.jetpackrelated.utils
 
+import android.widget.Toast
 import kotlin.contracts.contract
 
 /**
@@ -18,3 +19,51 @@ private fun dp2px(dpValue: Float): Int {
 fun CharSequence?.isNotNullOrEmpty(): Boolean {
     return !isNullOrEmpty()
 }
+
+
+/// region log打印扩展
+fun String?.toLogV() {
+    if (this == null) return
+
+    LogUtil.v(this)
+}
+
+fun String?.toLogD() {
+    if (this == null) return
+
+    LogUtil.d(this)
+}
+
+fun String?.toLogI() {
+    if (this == null) return
+
+    LogUtil.i(this)
+}
+
+fun String?.toLogW() {
+    if (this == null) return
+
+    LogUtil.w(this)
+}
+
+fun String?.toLogE() {
+    if (this == null) return
+
+    LogUtil.e(this)
+}
+
+/// endregion
+
+/// region toast打印
+fun String?.toShortToast() {
+    if (this == null) return
+
+    Toast.makeText(AppUtil.application,this, Toast.LENGTH_SHORT).show()
+}
+
+fun String?.toLongToast() {
+    if (this == null) return
+
+    Toast.makeText(AppUtil.application,this, Toast.LENGTH_LONG).show()
+}
+/// endregion
