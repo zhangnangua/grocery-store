@@ -20,4 +20,11 @@
         android:layout_marginTop="30dp"
         android:text="BT-TOAST-TEST" />
 
+    <Button
+        android:id="@+id/bt_lru_test_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="GO-LRU-TEST-ACTIVITY" />
+
 </LinearLayout>

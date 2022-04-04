@@ -1,5 +1,6 @@
 package com.zxf.learn_test
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
@@ -11,6 +12,7 @@ import com.zxf.jetpackrelated.BaseActivity
 import com.zxf.jetpackrelated.R
 import com.zxf.jetpackrelated.databinding.ActivityLeanTestActivityBinding
 import com.zxf.jetpackrelated.utils.*
+import com.zxf.learn_test.LruUtil.LruTestActivity
 
 /**
  *
@@ -81,6 +83,13 @@ class LearnTestActivity : BaseActivity() {
                 //异步toast
                 ToastUtil.toastShort("异步线程toast！！！线程名字：${Thread.currentThread().name}")
             }.start()
+        }
+
+        /**
+         * lru 测试界面
+         */
+        binding.btLruTestActivity.setOnClickListener {
+            startActivity(Intent(this, LruTestActivity::class.java))
         }
 
     }

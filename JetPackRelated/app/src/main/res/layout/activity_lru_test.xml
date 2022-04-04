@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et_input1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入" />
+
+    <Button
+        android:id="@+id/bt1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="插入" />
+
+    <Button
+        android:id="@+id/bt1_get"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="获取" />
+
+    <Button
+        android:id="@+id/bt1_clear_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="清除所有" />
+
+    <EditText
+        android:id="@+id/et_input2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入最大缓存size"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/bt2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="修改最大缓存size" />
+
+    <TextView
+        android:id="@+id/tv_display"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

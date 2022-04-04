@@ -38,6 +38,8 @@
 
         <service android:name=".lifecycle.service.MyLifecycleService" />
 
+        <activity android:name="com.zxf.learn_test.LruUtil.LruTestActivity"/>
+
         <service
             android:name=".ServiceTest.AIDLSimple.AIDLServiceSimpleDemo"
             android:exported="true">
