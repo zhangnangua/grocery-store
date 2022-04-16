@@ -19,3 +19,8 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# #保留注解，如果不添加改行会导致我们的@Keep注解失效
+-keepattributes *Annotation*
+# 被@keep修饰的不被混淆
+-keep @androidx.annotation.Keep class **

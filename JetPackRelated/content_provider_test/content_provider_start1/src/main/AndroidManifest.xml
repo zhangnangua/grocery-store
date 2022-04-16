@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.pumpkin.content_provider_start1">
+
+    <application>
+        <provider
+            android:authorities="${applicationId}.ContentProviderStart1"
+            android:name=".ContentProviderStart1"
+            android:exported="false"/>
+    </application>
+
+</manifest>

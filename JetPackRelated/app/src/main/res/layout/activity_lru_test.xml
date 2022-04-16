@@ -41,6 +41,18 @@
         android:layout_height="wrap_content"
         android:text="修改最大缓存size" />
 
+    <Button
+        android:id="@+id/bt3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="弹出hash值" />
+
+    <Button
+        android:id="@+id/bt4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="测试异常会不会闪退" />
+
     <TextView
         android:id="@+id/tv_display"
         android:layout_width="match_parent"

@@ -12,6 +12,7 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
+        title = this::class.java.simpleName
     }
 
     /**

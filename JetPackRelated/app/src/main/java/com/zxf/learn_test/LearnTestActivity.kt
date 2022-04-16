@@ -1,6 +1,7 @@
 package com.zxf.learn_test
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
@@ -9,6 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import com.zxf.jetpackrelated.BaseActivity
+import com.zxf.jetpackrelated.MainActivity
 import com.zxf.jetpackrelated.R
 import com.zxf.jetpackrelated.databinding.ActivityLeanTestActivityBinding
 import com.zxf.jetpackrelated.utils.*
@@ -27,22 +29,23 @@ class LearnTestActivity : BaseActivity() {
     lateinit var binding: ActivityLeanTestActivityBinding
 
     override fun initView() {
-
-        //尝试调整Activity的高度  todo 点击等相关事件的传递
-        val window = window
-        val lp: WindowManager.LayoutParams = window.attributes
-        lp.height = (obtainPhoneCurrentHeight(this) * 0.8).toInt()
-        lp.gravity = Gravity.BOTTOM
-        window.attributes = lp
-
+        // TODO: 2022/4/16 生命周期测试
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE
         //布局加载
         binding = ActivityLeanTestActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //尝试调整Activity的高度  todo 点击等相关事件的传递
+        val window = window
+        val lp: WindowManager.LayoutParams = window.attributes
+        lp.height = (obtainPhoneCurrentHeight(this) * 0.6).toInt()
+        lp.gravity = Gravity.BOTTOM
+        window.attributes = lp
+
         //生命周期事件监听
         lifecycle.addObserver(object : LifecycleEventObserver {
             override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
-                "LearnTestActivity${event.name}".toLogI()
+                "AllLifecycle-LearnTestActivity${event.name}".toLogI()
             }
         })
 

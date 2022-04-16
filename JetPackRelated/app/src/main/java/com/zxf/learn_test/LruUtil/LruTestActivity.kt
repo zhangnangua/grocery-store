@@ -76,6 +76,18 @@ class LruTestActivity : AppCompatActivity() {
 
             send()
         }
+        binding.bt3.setOnClickListener {
+            // TODO: 2022/4/11 hashvalue 测试
+            System.identityHashCode("测试我的hash值").toString().toShortToast()
+        }
+        binding.bt4.setOnClickListener {
+            // TODO: 2022/4/11 子线程异常测试
+            Thread{
+                val dividend = 0
+                val divisor = 1
+                val result = divisor/dividend
+            }.start()
+        }
     }
 
     private fun send() {

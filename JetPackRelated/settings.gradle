@@ -1,3 +1,5 @@
 include ':app'
 rootProject.name = "JetPackRelated"
 include ':p_engine'
+include ':content_provider_test:content_provider_start1'
+include ':content_provider_test:content_provider_start2'

@@ -6,6 +6,11 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
 
+/**
+ * WebViewCacheInterceptor
+ *
+ * @author pumpkin
+ */
 object WebViewCacheInterceptor : WebViewRequestInterceptor {
 
     @SuppressLint("StaticFieldLeak")

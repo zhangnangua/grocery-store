@@ -33,7 +33,7 @@ class MainActivity : BaseActivity() {
 
         lifecycle.addObserver(object : LifecycleEventObserver {
             override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
-                "MainActivity${event.name}".toLogI()
+                "AllLifecycle-MainActivity${event.name}".toLogI()
             }
         })
 
