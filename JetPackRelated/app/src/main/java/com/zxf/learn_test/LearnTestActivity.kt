@@ -30,7 +30,7 @@ class LearnTestActivity : BaseActivity() {
 
     override fun initView() {
         // TODO: 2022/4/16 生命周期测试
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE
+//        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE
         //布局加载
         binding = ActivityLeanTestActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
