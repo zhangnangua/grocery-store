@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.pumpkin.mvvm.widget.MultiStateView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:msv_emptyView="@layout/layout_test_empty"
+    app:msv_loadingView="@layout/layout_test_loading"
+    app:msv_netErrorView="@layout/layout_test_neterror"
+    app:msv_enableAnimateChanges="true"
+    app:msv_currentViewState="empty">
+
+    <include
+        android:id="@+id/i_normal"
+        layout="@layout/layout_test_normal" />
+
+</com.pumpkin.mvvm.widget.MultiStateView>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="这是正常内容"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="迪迦一般指迪迦奥特曼。 迪迦奥特曼，日本圆谷特摄剧《迪迦奥特曼》及其衍生作品中的主角，也是首位拥有形态转化能力的奥特曼。不同于其他奥特曼的是，迪迦奥特曼是在地球的超古代时期就已经出现的巨人，但并非是地球出生的奥特曼。" />
+
+    <Button
+        android:id="@+id/bt_refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="刷新" />
+
+</LinearLayout>

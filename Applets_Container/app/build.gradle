@@ -29,6 +29,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -44,5 +47,8 @@ dependencies {
 
     //小程序库依赖
     implementation project(':pac')
+
+    //mvvm依赖
+    implementation project(':base:mvvm')
 
 }

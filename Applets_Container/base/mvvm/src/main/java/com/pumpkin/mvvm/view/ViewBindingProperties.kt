@@ -12,17 +12,16 @@ import kotlin.reflect.KProperty
 /**
  * 作者:  pumpkin
  * 描述:  viewBinding委托代理生成
- *
- *       使用示例:
- *       Activity中：val binding by ActivityVB(TestBinding::inflate)
- *       Fragment中：val binding by FragmentVB(TestBinding::inflate)
  */
 
-class ActivityVB<in A : AppCompatActivity, out V : ViewBinding>(
+internal class ActivityVB<in A : AppCompatActivity, out V : ViewBinding>(
     private val viewBinder: (A) -> V
 ) : ReadOnlyProperty<A, V> {
     private var binding: V? = null
 
+    /**
+     * 在真正使用的时候，才会第一次调用。
+     */
     @MainThread
     override fun getValue(thisRef: A, property: KProperty<*>): V {
         //已经绑定过了，则直接返回
@@ -63,6 +62,6 @@ class ActivityVB<in A : AppCompatActivity, out V : ViewBinding>(
 
 }
 
-class FragmentVB {
+internal class FragmentVB {
 
 }
