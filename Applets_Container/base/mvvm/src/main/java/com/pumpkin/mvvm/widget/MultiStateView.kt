@@ -234,6 +234,7 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) :
                     previousView.visibility = View.GONE
                     obtainView(currentState)?.let {
                         //当前View显示
+                        it.visibility = View.VISIBLE
                         ObjectAnimator.ofFloat(it, "alpha", 0.0F, 1.0F)
                             .apply { duration = animateDuration }.start()
                     } ?: throw IllegalStateException("当前状态的view不能为null")
@@ -269,15 +270,18 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) :
         ViewState.values()
             .superReduce<Pair<Boolean, Boolean>, ViewState> { lastValue, currentViewState ->
                 var isNeedSetContent = lastValue ?: false to true
-                if (currentViewState == ViewState.CONTENT && views[currentViewState.ordinal] == null) {
+                if (currentViewState == ViewState.CONTENT && obtainView(currentViewState) == null) {
                     isNeedSetContent = true to isNeedSetContent.second
                 }
-                if (views[currentViewState.ordinal] == view) {
+                if (obtainView(currentViewState) === view) {
                     isNeedSetContent = isNeedSetContent.first to false
                 }
                 isNeedSetContent
             }.takeIf { it != null && it.first && it.first == it.second }?.let {
                 views[ViewState.CONTENT.ordinal] = view
+                if (currentState != ViewState.CONTENT) {
+                    obtainView(ViewState.CONTENT)?.visibility = View.GONE
+                }
             }
     }
 

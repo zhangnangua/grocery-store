@@ -7,7 +7,7 @@ inline fun <S, T> Array<out T>.superReduce(operation: (lastValue: S?, T) -> S?):
     if (isEmpty())
         throw UnsupportedOperationException("Empty array can't be reduced.")
     var accumulator: S? = null
-    for (index in 1..lastIndex) {
+    for (index in 0..lastIndex) {
         accumulator = operation(accumulator, this[index])
     }
     return accumulator
