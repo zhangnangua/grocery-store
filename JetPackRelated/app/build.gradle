@@ -65,12 +65,22 @@ dependencies {
     // windowManager
     implementation "androidx.window:window:$windowmanager_version"
     implementation "androidx.window:window-java:$windowmanager_version"
+    //paging
+    implementation "androidx.paging:paging-runtime:$paging_version"
 
     //glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
+    //gson
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
+    //okhttp
+    implementation "com.google.code.gson:gson:$gson_version"
+    //retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+
+
     //contentProviderTest
-    implementation(project(":content_provider_test:content_provider_start2"))
-    implementation(project(":content_provider_test:content_provider_start1"))
+//    implementation(project(":content_provider_test:content_provider_start2"))
+//    implementation(project(":content_provider_test:content_provider_start1"))
 }

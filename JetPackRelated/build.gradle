@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     //kotlin version
-    ext.kotlin_version = "1.6.0"
+    ext.kotlin_version = "1.6.10"
     //kotlin coroutine version
     ext.kotlin_coroutines_version = "1.6.0"
     //android lifecycle version
@@ -10,6 +10,14 @@ buildscript {
     ext.room_version = '2.4.2'
     //android windowManager
     ext.windowmanager_version = '1.0.0'
+    //okhttp
+    ext.okhttp_version = '4.9.0'
+    //gson
+    ext.gson_version = '2.6.2'
+    //retorfit
+    ext.retrofit_version = '2.9.0'
+    //paging
+    ext.paging_version = '3.1.1'
 
     repositories {
         google()

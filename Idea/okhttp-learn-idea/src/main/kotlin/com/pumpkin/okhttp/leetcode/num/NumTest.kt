@@ -95,14 +95,14 @@ fun exchangeDoubleNumber(num1: Int, num2: Int) {
 }
 
 
-fun main() {
-    println(versionCheck("0.1", "1.1"))
-    println(versionCheck("1.0.1", "1"))
-    println(versionCheck("7.5.2.4", "7.5.3"))
-    println(versionCheck("1.01", "1.001"))
-    println(versionCheck("1.0", "1.0.0"))
-    println(versionCheck("6.3.2", "6.3.2.5"))
-}
+//fun main() {
+//    println(versionCheck("0.1", "1.1"))
+//    println(versionCheck("1.0.1", "1"))
+//    println(versionCheck("7.5.2.4", "7.5.3"))
+//    println(versionCheck("1.01", "1.001"))
+//    println(versionCheck("1.0", "1.0.0"))
+//    println(versionCheck("6.3.2", "6.3.2.5"))
+//}
 
 
 /**
@@ -110,84 +110,26 @@ fun main() {
  *
  * @return v1<v2 -1; v1>v2 1 ; 其他 0
  */
-fun versionCheck(v1: String, v2: String): Int {
-
-    val newVersions = v1.split(".")
-    val oldVersions = v2.split(".")
-    val n1 = newVersions.size
-    val n2 = oldVersions.size
-    var i1: Int
-    var i2: Int
-    for (i in 0 until Math.max(n1, n2)) {
-        i1 = if (i < n1) newVersions[i].toInt() else 0
-        i2 = if (i < n2) oldVersions[i].toInt() else 0
-
-        if (i1 < i2) {
-            return -1
-        } else if (i1 > i2) {
-            return 1
-        }
-    }
-    return 0
-
-
-//    val v1s = v1.split(".")
-//    val v2s = v2.split(".")
+//fun versionCheck(v1: String, v2: String): Int {
 //
-//    var currentV1: Int
-//    var currentV2: Int
+//    val newVersions = v1.split(".")
+//    val oldVersions = v2.split(".")
+//    val n1 = newVersions.size
+//    val n2 = oldVersions.size
+//    var i1: Int
+//    var i2: Int
+//    for (i in 0 until Math.max(n1, n2)) {
+//        i1 = if (i < n1) newVersions[i].toInt() else 0
+//        i2 = if (i < n2) oldVersions[i].toInt() else 0
 //
-//    var lastV1: Int = -1
-//    var lastV2: Int = -1
-//
-//    var p1: Int = 0
-//    var p2: Int = 0
-//
-//    while (p1 < v1s.size - 1 || p2 < v2s.size - 1) {
-//        currentV1 = if (p1 < v1s.size) v1s[p1].toInt() else 0
-//        currentV2 = if (p2 < v2s.size) v2s[p2].toInt() else 0
-//
-//        while (currentV1 == lastV1 && currentV1 == 0) {
-//            p1++
-//            currentV1 = if (p1 < v1s.size) {
-//                v1s[p1].toInt()
-//            } else {
-//                lastV1 = -1
-//                0
-//            }
-//            if (lastV1 != -1) {
-//                lastV1 = currentV1
-//            }
-//        }
-//
-//        while (currentV2 == lastV2 && currentV2 == 0) {
-//            p2++
-//            currentV2 = if (p2 < v2s.size) {
-//                v2s[p2].toInt()
-//            } else {
-//                lastV2 = -1
-//                0
-//            }
-//            if (lastV2 != -1) {
-//                lastV2 = currentV2
-//            }
-//        }
-//
-//        lastV1 = currentV1
-//        lastV2 = currentV2
-//
-//        if (lastV1 < lastV2) {
+//        if (i1 < i2) {
 //            return -1
-//        } else if (lastV1 > lastV2) {
+//        } else if (i1 > i2) {
 //            return 1
-//        } else {
-//            p1++
-//            p2++
 //        }
 //    }
-//
 //    return 0
-}
+//}
 
 
 
