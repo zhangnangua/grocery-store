@@ -31,6 +31,8 @@
         <activity
             android:name=".view.ClientActivity2"
             android:process="com.howie.client.client2" />
+
+        <service android:name=".aidl_service.RemoteService"/>
     </application>
 
 </manifest>
