@@ -18,6 +18,9 @@ class RemoteService : Service() {
 
 object RemoteServiceImpl : IRemoteService.Stub() {
 
+    /**
+     * 获取服务端进程ID
+     */
     override fun getPid(): Int = Process.myPid()
 
     override fun basicTypes(

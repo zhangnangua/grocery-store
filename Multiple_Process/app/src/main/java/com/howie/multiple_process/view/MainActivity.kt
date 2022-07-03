@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.howie.multiple_process.databinding.ActivityMainBinding
+import com.howie.multiple_process.view.aidlClient.ClientActivity1
+import com.howie.multiple_process.view.aidlClient.ClientActivity2
 
 class MainActivity : AppCompatActivity() {
 

@@ -25,14 +25,16 @@
         </activity>
 
         <activity
-            android:name=".view.ClientActivity1"
+            android:name=".view.aidlClient.ClientActivity1"
             android:process=":client1" />
 
         <activity
-            android:name=".view.ClientActivity2"
+            android:name=".view.aidlClient.ClientActivity2"
             android:process="com.howie.client.client2" />
 
         <service android:name=".aidl_service.RemoteService"/>
+
+        <service android:name=".aidl_service.BookManagerService"/>
     </application>
 
 </manifest>
