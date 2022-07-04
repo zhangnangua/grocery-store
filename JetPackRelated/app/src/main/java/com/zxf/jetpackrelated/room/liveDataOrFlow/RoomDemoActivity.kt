@@ -77,18 +77,18 @@ class RoomDemoActivity : AppCompatActivity() {
         with(binding) {
             btnInsert.setOnClickListener {
                 lifecycleScope.launch {
-                    viewModel.insertStudent(StudentEntity(0, "zxf", "18"))
+                    viewModel.insertStudent(StudentEntity(0, "zxf", "18","addColumn"))
                 }
             }
             //delete 和 update 是根据什么来的  看了源码生成的sql默认根据主键来的
             btnDelete.setOnClickListener {
                 lifecycleScope.launch {
-                    viewModel.deleteStudent(StudentEntity(2, "delete", "99"))
+                    viewModel.deleteStudent(StudentEntity(2, "delete", "99","addColumn"))
                 }
             }
             btnUpdate.setOnClickListener {
                 lifecycleScope.launch {
-                    viewModel.updateStudent(StudentEntity(199, "update", "99"))
+                    viewModel.updateStudent(StudentEntity(199, "update", "99","addColumn"))
                 }
             }
             btnInsertAll.visibility = View.GONE

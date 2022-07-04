@@ -14,7 +14,7 @@ import com.zxf.jetpackrelated.utils.AppUtil
  * 作者： zxf
  * 描述： 数据库
  */
-@Database(entities = arrayOf(StudentEntity::class,FruitEntity::class), version = 3)
+@Database(entities = arrayOf(StudentEntity::class, FruitEntity::class), version = 4)
 abstract class StudentDataBase : RoomDatabase() {
 
     companion object {
@@ -34,7 +34,7 @@ abstract class StudentDataBase : RoomDatabase() {
                     AppUtil.application,
                     StudentDataBase::class.java,
                     STUDENT_DB_NAME
-                ).addMigrations(MIGRATION_1_2,MIGRATION_2_3)
+                ).addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
                     .fallbackToDestructiveMigration()
                     .build()
                     .also {
@@ -46,14 +46,14 @@ abstract class StudentDataBase : RoomDatabase() {
         /**
          * 数据库升级 1 到 2
          */
-        private val MIGRATION_1_2 = object :Migration(1,2){
+        private val MIGRATION_1_2 = object : Migration(1, 2) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 //新增 FRUIT 表
                 database.execSQL("CREATE TABLE IF NOT EXISTS `$FRUIT_TABLE_NAME` (`$FRUIT_TABLE_ID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `$FRUIT_TABLE_TEXT` TEXT)")
             }
         }
 
-        private val MIGRATION_2_3 = object :Migration(2,3){
+        private val MIGRATION_2_3 = object : Migration(2, 3) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 //FRUIT 表  新增一列
                 database.execSQL("ALTER TABLE `$FRUIT_TABLE_NAME` ADD COLUMN `$FRUIT_TABLE_OTHER_NAME` TEXT ")
@@ -63,12 +63,12 @@ abstract class StudentDataBase : RoomDatabase() {
         /**
          * 销毁与重建策略
          * 在Sqlite中修改表结构比较麻烦。
-         * 例如，我们想将Student表中的age字段类型从INTEGER改为TEXT。
+         * 例如，我们想将Student表中的age字段类型从INTEGER改为TEXT。同时新增一列student_add_column。
          */
-        private val MIGRATION_3_4 = object :Migration(3,4){
+        private val MIGRATION_3_4 = object : Migration(3, 4) {
             override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("CREATE TABLE IF NOT EXISTS `temp_student` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT) ")
-                database.execSQL("INSERT INTO temp_student (id,name) SELECT id , name FROM student")
+                database.execSQL("CREATE TABLE IF NOT EXISTS `temp_student` (`student_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `student_name` TEXT, `student_age` TEXT, `student_add_column` TEXT DEFAULT 'default') ")
+                database.execSQL("INSERT INTO temp_student (student_id,student_name,student_age) SELECT student_id , student_name ,student_age FROM student")
                 database.execSQL("DROP TABLE student")
                 database.execSQL("ALTER TABLE temp_student RENAME TO student")
             }
@@ -88,6 +88,6 @@ abstract class StudentDataBase : RoomDatabase() {
     /**
      * 获取ConflateEntityDao
      */
-    abstract fun getConflateEntityDao():ConflateDao
+    abstract fun getConflateEntityDao(): ConflateDao
 
 }

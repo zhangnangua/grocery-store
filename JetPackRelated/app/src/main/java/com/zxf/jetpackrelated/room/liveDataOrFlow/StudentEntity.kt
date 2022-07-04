@@ -4,6 +4,7 @@ import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import org.jetbrains.annotations.NotNull
 
 /**
  * 作者： zxf
@@ -24,7 +25,14 @@ data class StudentEntity(
 
     @NonNull
     @ColumnInfo(name = STUDENT_TABLE_STUDENT_AGE, typeAffinity = ColumnInfo.TEXT)
-    val age: String?
+    val age: String?,
+
+    /**
+     * 测试 新增的列
+     */
+    @NonNull
+    @ColumnInfo(name = STUDENT_TABLE_STUDENT_ADD_COLUMN, typeAffinity = ColumnInfo.TEXT)
+    val addColumn: String?
 )
 
 /**
@@ -35,3 +43,4 @@ const val STUDENT_TABLE_NAME = "student"
 const val STUDENT_TABLE_STUDENT_ID = "student_id"
 const val STUDENT_TABLE_STUDENT_NAME = "student_name"
 const val STUDENT_TABLE_STUDENT_AGE = "student_age"
+const val STUDENT_TABLE_STUDENT_ADD_COLUMN = "student_add_column"
