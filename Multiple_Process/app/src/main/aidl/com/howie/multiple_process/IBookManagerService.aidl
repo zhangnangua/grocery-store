@@ -8,7 +8,7 @@ interface IBookManagerService {
     //获取book列表
     List<Book> getBookList();
     //增加书籍
-    void addBook(in Book book);
+    void addBook(inout Book book);
 
     //注册与反注册监听
     void registerListener(IBookSizeChangeListener listener);

@@ -5,7 +5,8 @@ import android.os.Parcelable
 
 class Book
 @JvmOverloads
-constructor(var bookId: Int = 0, var bookName: String? = "", var bookDescribe: String? = "") : Parcelable {
+constructor(var bookId: Int = 0, var bookName: String? = "", var bookDescribe: String? = "") :
+    Parcelable {
 
     constructor(parcel: Parcel) : this() {
         bookId = parcel.readInt()
@@ -18,6 +19,13 @@ constructor(var bookId: Int = 0, var bookName: String? = "", var bookDescribe: S
         parcel.writeString(bookName)
         parcel.writeString(bookDescribe)
     }
+
+    fun readFromParcel(parcel: Parcel) {
+        bookId = parcel.readInt()
+        bookName = parcel.readString()
+        bookDescribe = parcel.readString()
+    }
+
 
     override fun describeContents(): Int {
         return 0

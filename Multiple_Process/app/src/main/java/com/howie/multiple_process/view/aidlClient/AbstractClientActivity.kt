@@ -45,6 +45,8 @@ abstract class AbstractClientActivity : AppCompatActivity() {
         }
     }
 
+    private val books: ArrayList<Book> = ArrayList()
+
     private val mConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             iRemoteService = IRemoteService.Stub.asInterface(service)
@@ -134,16 +136,16 @@ abstract class AbstractClientActivity : AppCompatActivity() {
             }
         }
         // add book to BookManager
+        var bookId = 0
         binding.btAddBook.setOnClickListener {
-            var bookId = 0
             safeLaunch(context = Dispatchers.IO) {
-                iBookManagerService?.addBook(
-                    Book(
-                        ++bookId,
-                        "Hello,Howie$bookId",
-                        "No description here."
-                    )
+                val book = Book(
+                    ++bookId,
+                    "Hello,Howie$bookId",
+                    "No description here."
                 )
+                iBookManagerService?.addBook(book)
+                books.add(book)
             }
         }
         //obtain book list
@@ -184,6 +186,9 @@ abstract class AbstractClientActivity : AppCompatActivity() {
                 )
             }
             iBookManagerService?.unRegisterListener(callback)
+        }
+        binding.btClientBook.setOnClickListener {
+            binding.tvDisplayBook.text = books.joinToString("")
         }
 
         // TODO: 多进程文件写入测试

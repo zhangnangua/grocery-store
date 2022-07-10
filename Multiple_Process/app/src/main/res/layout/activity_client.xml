@@ -75,4 +75,15 @@
         tools:ignore="HardcodedText" />
 
 
+    <Button
+        android:id="@+id/bt_client_book"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CLIENT_BOOK"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

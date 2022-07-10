@@ -38,6 +38,15 @@ object BookManagerServiceImpl : IBookManagerService.Stub() {
     }
 
     override fun addBook(book: Book?) {
+        if (AppUtil.isDebug) {
+            Log.d(TAG, "addBook: book is ${book?.toString()}")
+        }
+
+        //do 测试out服务端的改动，可以改变客户端的对象
+        book?.let {
+            it.bookDescribe = "it modify by service ."
+        }
+
         //在binder线程池进行操作，故需要进行同步处理
         synchronized(books) {
             books.add(book ?: Book())
@@ -75,10 +84,10 @@ object BookManagerServiceImpl : IBookManagerService.Stub() {
         listener?.asBinder()?.linkToDeath(object : IBinder.DeathRecipient {
             override fun binderDied() {
                 // TODO: 收到死亡通知，可以做一些事情
-                
+
             }
 
-        },0)
+        }, 0)
         if (listener != null) {
             callbacks.register(listener)
         }
