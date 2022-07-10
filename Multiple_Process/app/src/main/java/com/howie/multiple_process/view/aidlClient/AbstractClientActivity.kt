@@ -24,12 +24,27 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 abstract class AbstractClientActivity : AppCompatActivity() {
+
     lateinit var binding: ActivityClientBinding
 
     /**
      * simple aidl example
      */
     private var iRemoteService: IRemoteService? = null
+
+    /**
+     * register/unregister book callback
+     */
+    private val callback = object : IBookSizeChangeListener.Stub() {
+        override fun bookSizeChange(books: MutableList<Book>?) {
+            //binder 线程池中执行 需要调度到主线程
+            Log.d(TAG, "callback book size is ${books?.size}")
+            safeLaunch {
+                binding.tvDisplayBook.text = books?.joinToString("\t\n")
+            }
+        }
+    }
+
     private val mConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             iRemoteService = IRemoteService.Stub.asInterface(service)
@@ -80,6 +95,7 @@ abstract class AbstractClientActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        iBookManagerService?.unRegisterListener(callback)
         unBind()
         unBindBookManagerService()
     }
@@ -143,22 +159,14 @@ abstract class AbstractClientActivity : AppCompatActivity() {
                 }
             }
         }
-
-
-        //register/unregister book callback
-        val callback = object : IBookSizeChangeListener.Stub() {
-            override fun bookSizeChange(books: MutableList<Book>?) {
-                binding.tvDisplayBook.text = books?.joinToString("\t\n")
-            }
-        }
         binding.btRegisterBookCallback.setOnClickListener {
             if (AppUtil.isDebug) {
                 Log.d(
-                    "BookManagerServiceImpl",
+                    TAG,
                     "Client IBookSizeChangeListener hash code is ${callback.hashCode()}"
                 )
                 Log.d(
-                    "BookManagerServiceImpl",
+                    TAG,
                     "Client IBookSizeChangeListener binder is ${callback.asBinder()}"
                 )
             }
@@ -167,11 +175,11 @@ abstract class AbstractClientActivity : AppCompatActivity() {
         binding.btUnregisterBookCallback.setOnClickListener {
             if (AppUtil.isDebug) {
                 Log.d(
-                    "BookManagerServiceImpl",
+                    TAG,
                     "Client IBookSizeChangeListener hash code is ${callback.hashCode()}"
                 )
                 Log.d(
-                    "BookManagerServiceImpl",
+                    TAG,
                     "Client IBookSizeChangeListener binder is ${callback.asBinder()}"
                 )
             }
@@ -193,5 +201,10 @@ abstract class AbstractClientActivity : AppCompatActivity() {
 //                writeString(content = "i am client2")
 //            }
 //        }
+    }
+
+
+    companion object {
+        private const val TAG = "BookManagerServiceImpl"
     }
 }
