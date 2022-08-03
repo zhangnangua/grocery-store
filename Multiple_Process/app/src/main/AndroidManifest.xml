@@ -32,9 +32,14 @@
             android:name=".view.aidlClient.ClientActivity2"
             android:process="com.howie.client.client2" />
 
-        <service android:name=".aidl_service.RemoteService"/>
+        <activity
+            android:name=".view.general_lifecycle.GeneralLifecycleActivity"
+            android:exported="false"
+            android:theme="@style/Theme.GeneralLifecycle" />
 
-        <service android:name=".aidl_service.BookManagerService"/>
+        <service android:name=".aidl_service.RemoteService" />
+
+        <service android:name=".aidl_service.BookManagerService" />
     </application>
 
 </manifest>

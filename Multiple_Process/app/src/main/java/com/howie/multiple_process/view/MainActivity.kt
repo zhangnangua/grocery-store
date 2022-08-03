@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.howie.multiple_process.databinding.ActivityMainBinding
 import com.howie.multiple_process.view.aidlClient.ClientActivity1
 import com.howie.multiple_process.view.aidlClient.ClientActivity2
+import com.howie.multiple_process.view.general_lifecycle.GeneralLifecycleActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,6 +34,10 @@ class MainActivity : AppCompatActivity() {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
                 addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
             })
+        }
+
+        binding.btStartGeneralLifecycleActivity.setOnClickListener {
+            startActivity(Intent(this, GeneralLifecycleActivity::class.java))
         }
     }
 
