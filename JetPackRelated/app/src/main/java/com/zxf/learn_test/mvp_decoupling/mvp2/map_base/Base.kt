@@ -2,7 +2,7 @@ package com.zxf.learn_test.mvp_decoupling.mvp2.map_base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.zxf.jetpackrelated.utils.ToastUtil
+import com.zxf.utils.ToastUtil
 import java.lang.ref.SoftReference
 
 interface Model

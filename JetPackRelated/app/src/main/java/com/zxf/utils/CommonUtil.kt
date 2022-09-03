@@ -1,7 +1,6 @@
-package com.zxf.jetpackrelated.utils
+package com.zxf.utils
 
 import android.app.Activity
-import androidx.window.layout.WindowMetrics
 import androidx.window.layout.WindowMetricsCalculator
 
 

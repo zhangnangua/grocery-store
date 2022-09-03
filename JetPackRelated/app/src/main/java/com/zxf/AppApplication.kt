@@ -1,14 +1,11 @@
-package com.zxf.jetpackrelated
+package com.zxf
 
-import android.annotation.SuppressLint
 import android.app.Application
-import android.app.NotificationManager
-import android.os.Binder
-import android.widget.Toast
 import androidx.lifecycle.ProcessLifecycleOwner
+import com.zxf.jetpackrelated.BuildConfig
 import com.zxf.jetpackrelated.lifecycle.application.ProcessLifecycleObserver
-import com.zxf.jetpackrelated.utils.AppUtil
-import com.zxf.jetpackrelated.utils.LogUtil
+import com.zxf.utils.AppUtil
+import com.zxf.utils.LogUtil
 
 /**
  * 作者： zxf

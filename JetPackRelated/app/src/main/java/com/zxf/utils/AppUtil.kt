@@ -1,6 +1,6 @@
-package com.zxf.jetpackrelated.utils
+package com.zxf.utils
 
-import com.zxf.jetpackrelated.AppApplication
+import com.zxf.AppApplication
 
 /**
  * 作者： zxf

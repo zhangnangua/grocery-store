@@ -3,7 +3,7 @@ package com.zxf.jetpackrelated.lifecycle.application
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
-import com.zxf.jetpackrelated.utils.LogUtil
+import com.zxf.utils.LogUtil
 
 /**
  * 作者： zxf

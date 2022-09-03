@@ -1,6 +1,6 @@
 package com.zxf.jetpackrelated.lifecycle.mock
 
-import com.zxf.jetpackrelated.utils.LogUtil
+import com.zxf.utils.LogUtil
 
 /**
  * 作者： zxf

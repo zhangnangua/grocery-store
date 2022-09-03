@@ -4,7 +4,7 @@ import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import androidx.databinding.ObservableField
 import androidx.databinding.library.baseAdapters.BR
-import com.zxf.jetpackrelated.utils.isNotNullOrEmpty
+import com.zxf.utils.isNotNullOrEmpty
 
 /**
  * 作者： zxf

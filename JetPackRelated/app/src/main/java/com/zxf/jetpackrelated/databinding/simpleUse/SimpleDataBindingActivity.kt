@@ -2,15 +2,11 @@ package com.zxf.jetpackrelated.databinding.simpleUse
 
 import android.content.Context
 import android.os.Bundle
-import android.view.Choreographer
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.ObservableInt
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import com.zxf.jetpackrelated.databinding.ActivityDatabindingBaseBinding
-import com.zxf.jetpackrelated.utils.LogUtil
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

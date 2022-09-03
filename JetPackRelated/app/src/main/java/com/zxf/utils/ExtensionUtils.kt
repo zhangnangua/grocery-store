@@ -1,7 +1,6 @@
-package com.zxf.jetpackrelated.utils
+package com.zxf.utils
 
 import android.widget.Toast
-import kotlin.contracts.contract
 
 /**
  * 作者： zxf

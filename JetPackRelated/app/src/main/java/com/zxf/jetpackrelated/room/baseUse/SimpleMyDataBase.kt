@@ -3,7 +3,7 @@ package com.zxf.jetpackrelated.room.baseUse
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.zxf.jetpackrelated.utils.AppUtil
+import com.zxf.utils.AppUtil
 
 /**
  * 作者： zxf

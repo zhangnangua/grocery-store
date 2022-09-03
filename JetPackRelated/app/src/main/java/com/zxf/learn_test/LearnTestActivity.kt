@@ -1,7 +1,6 @@
 package com.zxf.learn_test
 
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
@@ -10,10 +9,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import com.zxf.jetpackrelated.BaseActivity
-import com.zxf.jetpackrelated.MainActivity
 import com.zxf.jetpackrelated.R
 import com.zxf.jetpackrelated.databinding.ActivityLeanTestActivityBinding
-import com.zxf.jetpackrelated.utils.*
+import com.zxf.utils.*
 import com.zxf.learn_test.LruUtil.LruTestActivity
 
 /**

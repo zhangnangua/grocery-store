@@ -12,7 +12,7 @@ import com.zxf.jetpackrelated.liveData.TimingWithLiveDataActivity
 import com.zxf.jetpackrelated.liveData.share_fragment.ShareFragmentActivity
 import com.zxf.jetpackrelated.room.baseUse.SimpleRoomDemoActivity
 import com.zxf.jetpackrelated.room.liveDataOrFlow.RoomDemoActivity
-import com.zxf.jetpackrelated.utils.toLogI
+import com.zxf.utils.toLogI
 import com.zxf.jetpackrelated.viewModel.TimingActivity
 import com.zxf.learn_test.LearnTestActivity
 

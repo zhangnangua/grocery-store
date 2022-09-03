@@ -1,4 +1,4 @@
-package com.zxf.jetpackrelated.utils
+package com.zxf.utils
 
 import android.text.TextUtils
 import androidx.annotation.NonNull

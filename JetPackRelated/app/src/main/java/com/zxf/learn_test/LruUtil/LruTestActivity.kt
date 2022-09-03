@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.zxf.jetpackrelated.databinding.ActivityLruTestBinding
-import com.zxf.jetpackrelated.utils.toShortToast
+import com.zxf.utils.toShortToast
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.launchIn

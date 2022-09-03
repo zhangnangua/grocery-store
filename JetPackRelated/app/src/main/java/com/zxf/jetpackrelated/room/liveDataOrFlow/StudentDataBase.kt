@@ -8,7 +8,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.zxf.jetpackrelated.room.liveDataOrFlow.flow.StudentFlowDao
 import com.zxf.jetpackrelated.room.liveDataOrFlow.liveData.StudentLiveDao
 import com.zxf.jetpackrelated.room.liveDataOrFlow.migration.*
-import com.zxf.jetpackrelated.utils.AppUtil
+import com.zxf.utils.AppUtil
 
 /**
  * 作者： zxf

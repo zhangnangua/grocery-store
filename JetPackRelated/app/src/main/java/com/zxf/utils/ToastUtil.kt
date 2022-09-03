@@ -1,4 +1,4 @@
-package com.zxf.jetpackrelated.utils
+package com.zxf.utils
 
 import android.os.Looper
 import android.widget.Toast

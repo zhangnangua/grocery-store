@@ -5,8 +5,8 @@ import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
-import com.zxf.jetpackrelated.utils.LogUtil
-import com.zxf.jetpackrelated.utils.isNotNullOrEmpty
+import com.zxf.utils.LogUtil
+import com.zxf.utils.isNotNullOrEmpty
 
 /**
  * 作者： zxf

@@ -11,11 +11,9 @@ import com.zxf.jetpackrelated.databinding.ActivitySimpleUseRoomBinding
 import com.zxf.jetpackrelated.room.liveDataOrFlow.flow.StudentFactory
 import com.zxf.jetpackrelated.room.liveDataOrFlow.flow.StudentViewModel
 import com.zxf.jetpackrelated.room.liveDataOrFlow.migration.FruitEntity
-import com.zxf.jetpackrelated.utils.AppUtil
-import com.zxf.jetpackrelated.utils.DbUtil
+import com.zxf.utils.DbUtil
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
