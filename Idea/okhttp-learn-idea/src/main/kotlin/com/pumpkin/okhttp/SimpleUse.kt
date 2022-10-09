@@ -1,7 +1,6 @@
 package com.pumpkin.okhttp
 
 import com.pumpkin.okhttp.util.log
-import com.sun.xml.internal.messaging.saaj.util.Base64
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
@@ -20,6 +19,7 @@ import okio.source
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.util.*
 import java.util.concurrent.SynchronousQueue
 import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
@@ -128,7 +128,7 @@ fun main() {
 
     //增加token请求头
     val authString = "zhangnangua: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"
-    val bytesBase64 = Base64.encode(authString.encodeToByteArray())
+    val bytesBase64 = Base64.getEncoder().encode(authString.encodeToByteArray())
     val realRequestAuth = String(bytesBase64).also { log(it) }
 
 //    simpleGetUse("https://api.github.com/users/zhangnangua", mapOf("Authorization" to "Basic $realRequestAuth"))
