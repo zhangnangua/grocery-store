@@ -1,5 +1,7 @@
 package com.pumpkin.okhttp.leetcode.tree
 
+import java.util.TreeMap
+
 fun main() {
     //前序遍历
 //    binaryTreePreIterator(Helper.createBinaryTree())
@@ -18,9 +20,20 @@ fun main() {
 //    }
 
     //广度优先搜索
-    binaryTreeBreadth(Helper.createBinaryTree()).forEach {
-        println(it)
-    }
+//    binaryTreeBreadth(Helper.createBinaryTree()).forEach {
+//        println(it)
+//    }
+
+    //二叉搜索树 查找值 O(h)
+//    binarySearchTreeFind(Helper.createBinarySearchTree(), 9).let {
+//        println("value is ${it?.value ?: "is null"}")
+//    }
+
+    //日程表
+    val calendar = MyCalendar()
+    println(calendar.book(10, 20))
+    println(calendar.book(15, 25))
+    println(calendar.book(20, 30))
 }
 
 /**
@@ -175,6 +188,25 @@ fun binaryTreeBreadth(node: TreeNode): ArrayList<String> {
     return result
 }
 
+/**
+ * 二叉搜索树，查找值，时间复杂度O(log(n))
+ */
+fun binarySearchTreeFind(node: TreeNode1, value: Int): TreeNode1? {
+    var currentNode: TreeNode1? = node;
+    while (currentNode != null) {
+        if (currentNode.value == value) {
+            break
+        }
+        if (currentNode.value > value) {
+            currentNode = currentNode.leftNode
+        } else {
+            currentNode = currentNode.rightNode
+        }
+    }
+    return currentNode
+}
+
+
 object Helper {
 
     /**
@@ -195,6 +227,67 @@ object Helper {
             )
         )
     }
+
+    /**
+     * 简单二叉搜索树创建
+     */
+    fun createBinarySearchTree(): TreeNode1 {
+        return TreeNode1(
+            value = 7,
+            leftNode = TreeNode1(
+                value = 5,
+                leftNode = TreeNode1(value = 4),
+                rightNode = TreeNode1(value = 6)
+            ),
+            rightNode = TreeNode1(
+                value = 9,
+                leftNode = TreeNode1(value = 8),
+                rightNode = TreeNode1(value = 10)
+            )
+        )
+    }
 }
 
 class TreeNode(var value: String, var leftNode: TreeNode? = null, var rightNode: TreeNode? = null)
+
+class TreeNode1(var value: Int, var leftNode: TreeNode1? = null, var rightNode: TreeNode1? = null)
+
+
+/**
+ * 利用TreeMap实现日程表
+ */
+class MyCalendar {
+
+    /**
+     * key : start
+     * value : end
+     */
+    private val events = TreeMap<Int, Int>()
+
+    fun book(start: Int, end: Int): Boolean {
+
+        val event = events.floorEntry(start)
+        if (event != null && event.value > start) {
+            return false
+        }
+
+        val event2 = events.ceilingEntry(start)
+        if (event2 != null && event2.key < end) {
+            return false
+        }
+
+        //存入
+        events[start] = end
+        return true
+    }
+
+}
+
+
+
+
+
+
+
+
+
