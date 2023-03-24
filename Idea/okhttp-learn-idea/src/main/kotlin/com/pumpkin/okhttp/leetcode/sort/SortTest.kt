@@ -1,5 +1,6 @@
 package com.pumpkin.okhttp.leetcode.sort
 
+import java.util.*
 import kotlin.random.Random
 
 fun main() {
@@ -14,8 +15,10 @@ fun main() {
 
     //快速排序
     val array1 = intArrayOf(2, 3, 4, 2, 3, 2, 1)
-    fastSortArray(array1, 0, array1.size - 1)
+    fastSortArray(array1)
     println("快速排序 ${array1.joinToString()}")
+
+
 }
 
 /**
@@ -80,6 +83,10 @@ fun countSortArrayQuestion(array1: IntArray, array2: IntArray) {
 /**
  * 快速排序
  */
+fun fastSortArray(array: IntArray) {
+    fastSortArray(array, 0, array.size - 1)
+}
+
 fun fastSortArray(array: IntArray, start: Int, end: Int) {
     if (end > start) {
         val pivot = partition(start, end, array)
@@ -120,3 +127,45 @@ fun swap(array: IntArray, position1: Int, position2: Int) {
         array[position2] = temporary
     }
 }
+
+/**
+ * 搜索第k个大的值
+ */
+fun kthLargestValue(array: IntArray, k: Int) {
+    val minPriorityQueue = PriorityQueue<Int>()
+
+    array.forEach {
+        if (minPriorityQueue.size < k){
+            
+        }
+    }
+
+}
+
+private fun addMinPriorityQueue(minPriorityQueue: PriorityQueue<Int>,) {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
