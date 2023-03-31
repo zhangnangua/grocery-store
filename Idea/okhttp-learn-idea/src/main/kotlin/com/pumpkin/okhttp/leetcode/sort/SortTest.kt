@@ -27,7 +27,7 @@ fun main() {
 
     //归并排序
     val array3 = intArrayOf(2, 3, 4, 2, 3, 2, 1)
-    println("归并排序 ${mergeIntoSort(array3).joinToString()}")
+    println("归并排序 ${mergeIntoSort3(array3).joinToString()}")
 
 }
 
@@ -193,7 +193,7 @@ private fun kthLargestValueByPartition(start: Int, end: Int, array: IntArray, kI
 /**
  * 归并排序
  */
-fun mergeIntoSort(array3: IntArray):IntArray {
+fun mergeIntoSort(array3: IntArray): IntArray {
 
     val length = array3.size
     var src = array3
@@ -219,10 +219,10 @@ fun mergeIntoSort(array3: IntArray):IntArray {
 
             start += seg * 2
         }
-
+        //交换的目的 是让dst和src不指向同一个数据 避免互相影响
         val temp = src
         src = dst
-//        dst = temp
+        dst = temp
 
         seg += seg
     }
@@ -230,6 +230,71 @@ fun mergeIntoSort(array3: IntArray):IntArray {
     return src
 }
 
+
+fun mergeIntoSort2(array: IntArray): IntArray {
+    val length = array.size
+    var src = array
+    var dst = IntArray(length)
+
+    var seg = 1
+    while (seg < length) {
+        var start = 0
+        while (start < length) {
+            val mid = (start + seg).coerceAtMost(length)
+            val end = (start + seg * 2).coerceAtMost(length)
+            var i = start
+            var j = mid
+            var k = start
+
+            while (i < mid || j < end) {
+                if (j == end || (src[i] < src[j] && i < mid)) {
+                    dst[k++] = src[i++]
+                } else {
+                    dst[k++] = src[j++]
+                }
+            }
+            start += seg * 2
+        }
+        val temp = src
+        src = dst
+        dst = temp
+
+        seg += seg
+    }
+    return src
+}
+
+/**
+ * 归并排序的递归写法
+ */
+fun mergeIntoSort3(array: IntArray): IntArray {
+    val src = array
+    val dst = array.copyOf()
+    mergeIntoSort3(src, dst, 0, array.size)
+    return dst
+}
+
+private fun mergeIntoSort3(src: IntArray, dst: IntArray, start: Int, end: Int) {
+    if (start + 1 >= end) {
+        return
+    }
+
+    val mid = (start + end) / 2
+    mergeIntoSort3(dst, src, start, mid)
+    mergeIntoSort3(dst, src, mid, end)
+
+    var i = start
+    var j = mid
+    var k = start
+    while (i < mid || j < end) {
+        if (j == end || (i < mid && src[i] < src[j])) {
+            dst[k++] = src[i++]
+        } else {
+            dst[k++] = src[j++]
+        }
+    }
+
+}
 
 
 
