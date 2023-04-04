@@ -1,6 +1,8 @@
 package com.pumpkin.okhttp.leetcode.sort
 
+import com.pumpkin.okhttp.leetcode.bean.ListNode
 import java.util.*
+import kotlin.math.min
 import kotlin.random.Random
 
 fun main() {
@@ -27,7 +29,34 @@ fun main() {
 
     //归并排序
     val array3 = intArrayOf(2, 3, 4, 2, 3, 2, 1)
-    println("归并排序 ${mergeIntoSort3(array3).joinToString()}")
+    println("归并排序 ${mergeIntoSort4(array3).joinToString()}")
+
+    //归并排序 链表排序  3 5 1 4 2 6
+    val node = ListNode().apply {
+        value = 3
+        next = ListNode().apply {
+            value = 5
+            next = ListNode().apply {
+                value = 1
+                next = ListNode().apply {
+                    value = 4
+                    next = ListNode().apply {
+                        value = 2
+                        next = ListNode().apply {
+                            value = 6
+                        }
+                    }
+                }
+            }
+        }
+    }
+    var sortListNodeByMergeInto = sortListNodeByMergeInto(node)
+    var result = ArrayList<Int>()
+    while (sortListNodeByMergeInto != null) {
+        result.add(sortListNodeByMergeInto.value)
+        sortListNodeByMergeInto = sortListNodeByMergeInto.next
+    }
+    println("链表排序结果 ${result.joinToString(",")}")
 
 }
 
@@ -294,6 +323,103 @@ private fun mergeIntoSort3(src: IntArray, dst: IntArray, start: Int, end: Int) {
         }
     }
 
+}
+
+fun mergeIntoSort4(array: IntArray): IntArray {
+    val length = array.size
+    var src = array
+    var dst = IntArray(length)
+    //合并相邻序列的数组，从1开始
+    var sequence = 1
+    while (sequence < length) {
+        //循环数组 按照序列进行 子数组排序
+        var start = 0
+        while (start < length) {
+            val middle = min(sequence + start, length)
+            val end = min(sequence * 2 + start, length)
+            var i = start
+            var j = middle
+            var k = start
+            //字数组 具体的排序过程
+            while (i < middle || j < end) {
+                if (j == end || (i < middle && src[i] < src[j])) {
+                    dst[k++] = src[i++]
+                } else {
+                    dst[k++] = src[j++]
+                }
+            }
+            start += sequence * 2
+        }
+        //交换数组 主要是防止真正的排序是 dst和src指向同一个数组
+        val temp = src
+        src = dst
+        dst = temp
+        //下一个序列
+        sequence += sequence
+    }
+    return src
+}
+
+/**
+ * 以归并的方式 排序链表
+ */
+fun sortListNodeByMergeInto(node: ListNode?): ListNode? {
+    if (node == null || node.next == null) {
+        return null
+    }
+
+    val middleNode = findMiddleNodeAndSplit(node)
+    val node1 = sortListNodeByMergeInto(node)
+    val node2 = sortListNodeByMergeInto(middleNode)
+
+    return merge(node1, node2)
+
+}
+
+fun merge(node1: ListNode?, node2: ListNode?): ListNode? {
+    if (node1 == null || node2 == null) {
+        return null
+    }
+
+    var leftNode = node1
+    var rightNode = node2
+    var newNode = if (leftNode.value < rightNode.value) {
+        leftNode = leftNode.next
+        leftNode
+    } else {
+        rightNode = rightNode.next
+        rightNode
+    }
+    while (leftNode != null && rightNode != null) {
+        if (leftNode.value < rightNode.value) {
+            newNode!!.next = leftNode
+            leftNode = leftNode.next
+        } else {
+            newNode!!.next = rightNode
+            rightNode = rightNode.next
+        }
+        newNode = newNode.next
+    }
+
+    newNode!!.next = leftNode ?: rightNode
+    return newNode
+}
+
+/**
+ * 以快慢指针的形式寻找中间节点  并分离节点
+ */
+fun findMiddleNodeAndSplit(node: ListNode): ListNode? {
+    var slowPointer: ListNode? = node
+    var quickPointer: ListNode? = node.next
+    while (quickPointer != null && quickPointer.next != null) {
+        slowPointer = slowPointer?.next
+        quickPointer = quickPointer.next!!.next
+    }
+
+    val second = slowPointer?.next
+    slowPointer?.next = null
+
+    return second
 }
 
 
