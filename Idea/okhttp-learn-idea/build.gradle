@@ -20,6 +20,9 @@ dependencies {
     //kotlin协程Android支持
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
 
+    implementation 'org.jsoup:jsoup:1.14.1'
+
+
 }
 
 test {
