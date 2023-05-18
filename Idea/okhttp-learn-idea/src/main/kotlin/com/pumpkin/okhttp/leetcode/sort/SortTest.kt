@@ -365,7 +365,7 @@ fun mergeIntoSort4(array: IntArray): IntArray {
  */
 fun sortListNodeByMergeInto(node: ListNode?): ListNode? {
     if (node == null || node.next == null) {
-        return null
+        return node
     }
 
     val middleNode = findMiddleNodeAndSplit(node)
@@ -373,23 +373,13 @@ fun sortListNodeByMergeInto(node: ListNode?): ListNode? {
     val node2 = sortListNodeByMergeInto(middleNode)
 
     return merge(node1, node2)
-
 }
 
 fun merge(node1: ListNode?, node2: ListNode?): ListNode? {
-    if (node1 == null || node2 == null) {
-        return null
-    }
-
+    val dummy = ListNode()
+    var newNode: ListNode? = dummy
     var leftNode = node1
     var rightNode = node2
-    var newNode = if (leftNode.value < rightNode.value) {
-        leftNode = leftNode.next
-        leftNode
-    } else {
-        rightNode = rightNode.next
-        rightNode
-    }
     while (leftNode != null && rightNode != null) {
         if (leftNode.value < rightNode.value) {
             newNode!!.next = leftNode
@@ -400,9 +390,8 @@ fun merge(node1: ListNode?, node2: ListNode?): ListNode? {
         }
         newNode = newNode.next
     }
-
     newNode!!.next = leftNode ?: rightNode
-    return newNode
+    return dummy.next
 }
 
 /**
