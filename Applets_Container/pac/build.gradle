@@ -43,4 +43,11 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
     //kotlin协程Android支持
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
+    //leakcanary
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary_android"
+
+    //mvvm依赖
+    api project(':base:mvvm')
+    api project(':base:ui')
+    api project(':pac_core')
 }

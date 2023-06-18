@@ -110,6 +110,9 @@ class RoomDemoActivity : AppCompatActivity() {
                             )
                         )
                         val obtainFruit = conflateEntityDao.obtainFruit()
+
+                        Dispatchers.IO
+
                         withContext(Dispatchers.Main.immediate) {
                             binding.text.text = obtainFruit.toString()
                         }

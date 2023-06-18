@@ -8,7 +8,10 @@ import android.webkit.MimeTypeMap;
  */
 
 public class MimeTypeMapUtils {
-
+    /**
+     * url = "https://example.com/images/image.jpg"
+     * .jpg
+     */
     public static String getFileExtensionFromUrl(String url) {
         url = url.toLowerCase();
         if (!TextUtils.isEmpty(url)) {

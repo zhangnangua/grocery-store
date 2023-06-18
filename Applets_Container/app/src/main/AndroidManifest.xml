@@ -8,6 +8,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".PACApplication"
         android:theme="@style/Theme.Applets_Container">
         <activity
             android:name=".MainActivity"
