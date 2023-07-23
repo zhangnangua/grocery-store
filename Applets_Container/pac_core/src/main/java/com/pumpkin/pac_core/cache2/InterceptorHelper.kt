@@ -3,15 +3,7 @@ package com.pumpkin.pac_core.cache2
 import android.content.Context
 import android.net.Uri
 import android.text.TextUtils
-import android.util.Log
-import android.webkit.WebResourceRequest
-import com.pumpkin.pac_core.download.WebDownloadCallback
-import com.pumpkin.pac_core.download.WebDownloadHelper
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
-import okhttp3.ResponseBody
-import java.io.*
+import java.io.File
 
 /**
  * howie
@@ -22,15 +14,16 @@ object InterceptorHelper {
     private const val CACHE_FILE_NAME = "pac"
     private const val FILE_SUFFIX = ".pac"
 
-    fun destinationFolder(context: Context, url: String?): String? {
-        val zipId = zipId(url) ?: return null
+    fun destinationFolder(context: Context, rootUrl: String?): String? {
+        val zipId = zipId(rootUrl) ?: return null
         return getRootPath(context) + File.separator + zipId
 
     }
 
-    fun urlToPath(context: Context, url: String?): String? {
+    fun urlToPath(context: Context, url: String?, rootUrl: String): String? {
         val urlToPath = urlToPathInternal(url) ?: return null
-        return destinationFolder(context, url) + File.separator + urlToPath + FILE_SUFFIX
+        // TODO:  destinationFolder(context, url) 理论上是固定的
+        return destinationFolder(context, rootUrl) + File.separator + urlToPath + FILE_SUFFIX
     }
 
     private fun getRootPath(context: Context) =
@@ -65,7 +58,8 @@ object InterceptorHelper {
         }
         //if the last character is /,remove
         if (removeQueryAndFragment.endsWith("/")) {
-            removeQueryAndFragment = removeQueryAndFragment.substring(0, removeQueryAndFragment.length - 1)
+            removeQueryAndFragment =
+                removeQueryAndFragment.substring(0, removeQueryAndFragment.length - 1)
         }
         return removeQueryAndFragment
     }

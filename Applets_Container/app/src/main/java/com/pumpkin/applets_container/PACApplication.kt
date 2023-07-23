@@ -1,8 +1,7 @@
 package com.pumpkin.applets_container
 
 import android.app.Application
-import com.pumpkin.mvvm.util.AppUtil
-import com.pumpkin.pac.pool.WebViewPool
+import com.pumpkin.ui.util.AppUtil
 
 class PACApplication : Application() {
 
@@ -10,8 +9,12 @@ class PACApplication : Application() {
         super.onCreate()
 
         AppUtil.inject(this, BuildConfig.DEBUG)
-        WebViewPool.preLoad()
 
+        preload()
+    }
+
+    private fun preload() {
+        Preload.pacPreload()
     }
 
 }

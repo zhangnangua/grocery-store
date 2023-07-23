@@ -5,7 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.pumpkin.applets_container.databinding.ActivityTestMultistateViewBinding
-import com.pumpkin.mvvm.widget.MultiStateView
+import com.pumpkin.ui.widget.MultiStateView
 
 class TestMultiStateViewActivity : AppCompatActivity() {
 

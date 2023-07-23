@@ -1,9 +1,16 @@
 package com.pumpkin.mvvm.view
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.FrameLayout
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import com.pumpkin.mvvm.R
+import com.pumpkin.mvvm.databinding.BaseLayoutBinding
 import com.pumpkin.mvvm.setting_bean.ActivitySettingBean
-import com.pumpkin.mvvm.util.AppUtil
+import com.pumpkin.ui.util.AppUtil
+import com.pumpkin.ui.widget.MultiStateView
 
 /**
  * Activity顶层基类
@@ -13,36 +20,70 @@ import com.pumpkin.mvvm.util.AppUtil
  * todo 设置基础布局，title、页面状态
  * todo 设置binding
  * todo 统一进出动画
+ * todo 埋点
  */
 open class SuperBaseActivity : AppCompatActivity() {
+
+    protected lateinit var superBinding: BaseLayoutBinding
 
     /**
      * 页面设置bean
      */
-    private var _pageSettingBean: ActivitySettingBean? = null
-    val pageSettingBean =
-        _pageSettingBean ?: throw NullPointerException("ActivitySettingBean 没有初始化或者界面已经被关闭了")
+    private var pageSettingBean: ActivitySettingBean = ActivitySettingBean()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        onCreateBefore(savedInstanceState)
         super.onCreate(savedInstanceState)
-        //设置默认的页面bean
-        setPageSettings(ActivitySettingBean())
-        // TODO: 2022/4/19 统一处理进行被回收后则进行重启
         if (savedInstanceState != null && AppUtil.isKill) {
+            // TODO: 2022/4/19 统一处理进行被回收后则进行重启
 
         }
+        superBinding = BaseLayoutBinding.inflate(layoutInflater)
+        // 设置基础布局
+        setContentView(superBinding.root)
 
-        // TODO: 2022/4/19 设置基础布局
+        onCreateAfter(savedInstanceState)
+    }
 
+    open fun onCreateBefore(savedInstanceState: Bundle?) {}
+    open fun onCreateAfter(savedInstanceState: Bundle?) {}
 
-        // TODO: 2022/4/21 设置binding
+    /**
+     * customize basic relate layout settings.
+     */
+    open fun setBaseContentForState(
+        @LayoutRes layoutRes: Int,
+        state: MultiStateView.ViewState,
+        switchToState: Boolean = false
+    ) {
+        val multiplyState = superBinding.multiplyState
+        multiplyState.addViewForState(layoutRes, state, switchToState)
+    }
+
+    fun setRootState(state: MultiStateView.ViewState) {
+        superBinding.multiplyState.currentState = state
     }
 
     /**
-     * 页面bean设置
+     * basic related layout settings.
+     */
+    fun setPACContentView(@LayoutRes layoutResID: Int) {
+        val container = findViewById<FrameLayout>(R.id.pac_container)
+        container.removeAllViews()
+        LayoutInflater.from(this).inflate(layoutResID, container)
+    }
+
+    fun setPACContentView(v: View) {
+        val container = findViewById<FrameLayout>(R.id.pac_container)
+        container.removeAllViews()
+        container.addView(v)
+    }
+
+    /**
+     * 设置默认的页面bean
      */
     open fun setPageSettings(pageSettingBean: ActivitySettingBean) {
-        this._pageSettingBean = pageSettingBean
+        this.pageSettingBean = pageSettingBean
     }
 
     override fun finish() {

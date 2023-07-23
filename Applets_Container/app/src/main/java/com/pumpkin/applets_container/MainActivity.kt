@@ -2,26 +2,27 @@ package com.pumpkin.applets_container
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import com.pumpkin.applets_container.databinding.ActivityMainBinding
 import com.pumpkin.applets_container.test_multiStateView.TestMultiStateViewActivity
-import com.pumpkin.mvvm.util.AppUtil
-import com.pumpkin.pac_core.cache2.InterceptorHelper
+import com.pumpkin.mvvm.view.SuperBaseActivity
+import com.pumpkin.ui.widget.MultiStateView
 
 /**
  * pumpkin
  *
  * 测试
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : SuperBaseActivity() {
 
     lateinit var binding: ActivityMainBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateAfter(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setPACContentView(binding.root)
+        setRootState(MultiStateView.ViewState.CONTENT)
 
+        binding.btGoTestMultiStateView.setOnClickListener {
+            startActivity(Intent(this@MainActivity, TestMultiStateViewActivity::class.java))
+        }
     }
 }

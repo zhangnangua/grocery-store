@@ -6,10 +6,8 @@ import android.os.Looper
 import android.util.Log
 import android.view.ViewGroup
 import android.view.ViewParent
-import com.pumpkin.mvvm.util.AppUtil
+import com.pumpkin.ui.util.AppUtil
 import com.pumpkin.pac_core.webview.PACWebView
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
 
 /**
  * @author pumpkin

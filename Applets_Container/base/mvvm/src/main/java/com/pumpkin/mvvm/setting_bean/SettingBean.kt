@@ -42,7 +42,7 @@ class FragmentSettingBean(
 
 ) : CommonSettingBean(
     //默认使用顶部导航栏
-    enableTopBar = true,
+    enableTopBar = false,
     //默认字体为黑色
     enableStatusBarDarkFont = true
 )

@@ -14,8 +14,10 @@ import java.util.concurrent.TimeUnit
  * howie
  *
  * 资源拦截核心实现
+ *
+ * todo 放到统一池子中进行缓存，在每个文件夹添加标识，属于那个域名（如果需要删除的话，或者统一删除）
  */
-class ResourceInterceptionGlobal(val context: Context) {
+class ResourceInterceptionGlobal(val context: Context, val rootUrl: String) {
 
     var cacheEnable = false
 
@@ -47,6 +49,7 @@ class ResourceInterceptionGlobal(val context: Context) {
     ): WebResourceResponse? {
         //just intercept GET
         if (request?.method != "GET") {
+            // TODO: 其他请求 okhttp代理？
             return null
         }
 
@@ -55,7 +58,7 @@ class ResourceInterceptionGlobal(val context: Context) {
             //can cache
 
             //find cache resource
-            val filePath = InterceptorHelper.urlToPath(context, url)
+            val filePath = InterceptorHelper.urlToPath(context, url, rootUrl)
             if (filePath != null) {
                 val file = File(filePath)
 

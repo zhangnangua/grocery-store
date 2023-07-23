@@ -11,7 +11,7 @@ rootProject.name = "Applets_Container"
 
 include ':app'
 
-
+include ':base:data'
 include ':base:mvvm'
 include ':base:ui'
 

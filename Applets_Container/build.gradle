@@ -26,6 +26,18 @@ buildscript {
     //leakcanary
     ext.leakcanary_android = "2.11"
 
+    //android windowManager
+    ext.windowmanager_version = '1.0.0'
+    //gson
+    ext.gson_version = '2.6.2'
+    //android room version
+    ext.room_version = '2.4.2'
+    //build 相关的东西
+    ext.applicationId = "com.pumpkin.applets_container"
+    ext.minSdk = 21
+    ext.targetSdk = 32
+    ext.compileSdk = 32
+
     repositories {
         google()
         mavenCentral()
@@ -38,7 +50,6 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
-
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
