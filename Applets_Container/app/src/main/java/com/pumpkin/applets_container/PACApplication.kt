@@ -1,6 +1,7 @@
 package com.pumpkin.applets_container
 
 import android.app.Application
+import com.pumpkin.pac.PACPreload
 import com.pumpkin.ui.util.AppUtil
 
 class PACApplication : Application() {
@@ -14,7 +15,7 @@ class PACApplication : Application() {
     }
 
     private fun preload() {
-        Preload.pacPreload()
+        PACPreload.pacPreload()
     }
 
 }

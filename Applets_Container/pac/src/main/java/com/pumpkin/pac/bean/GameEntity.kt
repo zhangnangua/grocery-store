@@ -10,7 +10,7 @@ import com.pumpkin.data.db.entity.GameTable
  * id 、name、icon is required parameters.
  */
 class GameEntity(
-    val id: String,// id
+    val id: String,// id  todo 默认没有id，考虑使用url 转换成md5
     val name: String,// name
     val describe: String = "",// 描述
     val icon: String,// 游戏icon

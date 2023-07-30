@@ -24,10 +24,11 @@
             </intent-filter>
         </activity>
 
+        <!--   私有进程，其他应用不可访问     -->
         <activity
             android:name=".view.aidlClient.ClientActivity1"
             android:process=":client1" />
-
+        <!--    完整的命名方式，属于全局进程，其它应用通过ShareUID方式可以和它跑在同一个进程中    -->
         <activity
             android:name=".view.aidlClient.ClientActivity2"
             android:process="com.howie.client.client2" />

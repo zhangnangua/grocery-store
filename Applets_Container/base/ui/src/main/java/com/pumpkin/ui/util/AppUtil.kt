@@ -1,6 +1,8 @@
 package com.pumpkin.ui.util
 
+import android.annotation.SuppressLint
 import android.app.Application
+import android.os.Build
 import android.util.ArrayMap
 
 /**
@@ -8,6 +10,8 @@ import android.util.ArrayMap
  * 描述： appUtil 需要在最外层进行相关初始化操作
  */
 object AppUtil {
+
+    private var sProcessName: String? = null
 
     /**
      * obtain application
@@ -36,5 +40,25 @@ object AppUtil {
         AppUtil.isDebug = isDebug
     }
 
+    fun obtainProcessName(): String {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            return Application.getProcessName()
+        }
+        return sProcessName ?: try {
+            @SuppressLint("PrivateApi") val clz = Class.forName("android.app.ActivityThread")
+            @SuppressLint("DiscouragedPrivateApi") val method =
+                clz.getDeclaredMethod("currentProcessName")
+            val processName = method.invoke(null) as String
+            sProcessName = processName
+            processName
+        } catch (e: Exception) {
+            e.printStackTrace()
+            if (isDebug) {
+                throw e
+            } else {
+                ""
+            }
+        }
+    }
 
 }

@@ -81,6 +81,7 @@ object BookManagerServiceImpl : IBookManagerService.Stub() {
             )
         }
         //RemoteCallbackList  内部保证了线程安全，故不需要加锁
+        //onServiceDisconnected在客户端的UI线程中被回调，而binderDied在客户端的Binder线程池中被回调
         listener?.asBinder()?.linkToDeath(object : IBinder.DeathRecipient {
             override fun binderDied() {
                 // TODO: 收到死亡通知，可以做一些事情
