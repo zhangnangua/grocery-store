@@ -18,6 +18,7 @@ class GameTable(
     @PrimaryKey
     val id: String,
     val name: String,
+    val link: String,
     @ColumnInfo(defaultValue = "")
     val describe: String,
     val icon: String,

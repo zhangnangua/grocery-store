@@ -17,3 +17,4 @@ include ':base:ui'
 
 include ':pac_core'
 include ':pac'
+include ':parse'

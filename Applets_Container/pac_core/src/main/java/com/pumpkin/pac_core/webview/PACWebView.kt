@@ -53,6 +53,11 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) :
         pacWebViewClient = PACWebViewClient()
     }
 
+    fun addClient() {
+        webViewClient = pacWebViewClient
+        webChromeClient = pacWebViewChrome
+    }
+
     fun clear() {
         pacWebViewChrome.clear()
         pacWebViewClient.clear()
@@ -108,6 +113,51 @@ interface Webinterface {
         ): WebResourceResponse?
 
         fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean
+    }
+
+
+    open class DefaultPage : PageInterface {
+        override fun onPageFinished(view: WebView?, url: String?) {
+        }
+
+        override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+        }
+
+        override fun onProgressChanged(view: WebView?, newProgress: Int) {
+        }
+
+        override fun onReceivedIcon(view: WebView?, icon: Bitmap?) {
+        }
+
+        override fun onReceivedTitle(view: WebView?, title: String?) {
+        }
+    }
+
+    open class DefaultError : ErrorInterface {
+        override fun onReceivedError(
+            view: WebView?,
+            request: WebResourceRequest?,
+            error: WebResourceError?
+        ) {
+
+        }
+
+        override fun onReceivedHttpError(
+            view: WebView?,
+            request: WebResourceRequest?,
+            errorResponse: WebResourceResponse?
+        ) {
+
+        }
+
+        override fun onReceivedSslError(
+            view: WebView?,
+            handler: SslErrorHandler?,
+            error: SslError?
+        ) {
+
+        }
+
     }
 
 }

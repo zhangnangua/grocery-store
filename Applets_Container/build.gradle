@@ -32,8 +32,13 @@ buildscript {
     ext.gson_version = '2.6.2'
     //android room version
     ext.room_version = '2.4.2'
+    //android lifecycle version
+    ext.lifecycle_version = "2.4.1"
     //build 相关的东西
     ext.applicationId = "com.pumpkin.applets_container"
+    //json
+    ext.jsoup = "1.16.1"
+
     ext.minSdk = 21
     ext.targetSdk = 32
     ext.compileSdk = 32

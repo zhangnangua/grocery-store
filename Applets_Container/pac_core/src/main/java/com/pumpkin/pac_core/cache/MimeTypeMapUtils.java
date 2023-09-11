@@ -1,13 +1,18 @@
 package com.pumpkin.pac_core.cache;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.webkit.MimeTypeMap;
+
+import com.pumpkin.pac_core.BuildConfig;
 
 /**
  * Created by yale on 2018/1/9.
  */
 
 public class MimeTypeMapUtils {
+    private static final String TAG = "MimeTypeMapUtils";
+
     /**
      * url = "https://example.com/images/image.jpg"
      * .jpg
@@ -41,9 +46,18 @@ public class MimeTypeMapUtils {
 
         return "";
     }
+
     public static String getMimeTypeFromUrl(String url) {
-        return  MimeTypeMap.getSingleton().getMimeTypeFromExtension(getFileExtensionFromUrl(url));
+        String extension = getFileExtensionFromUrl(url);
+        if (TextUtils.isEmpty(extension)) {
+            if (BuildConfig.DEBUG) {
+                Log.d(TAG, "getMimeTypeFromUrl: parsing error " + url);
+            }
+            extension = "html";
+        }
+        return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
     }
+
     public static String getMimeTypeFromExtension(String extension) {
         return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
     }

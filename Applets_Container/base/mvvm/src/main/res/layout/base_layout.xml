@@ -1,32 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.pumpkin.ui.widget.MultiStateView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<!--    todo状态栏可以协助全局设置 并且是否隐藏-->
-<!--    <View-->
-<!--        android:id="@+id/status_bar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="24dp" />-->
+    android:layout_height="match_parent"
+    app:msv_enableAnimateChanges="false">
 
-<!--    <FrameLayout-->
-<!--        android:id="@+id/fl_title"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@id/status_bar"/>-->
-    <!--  content  -->
+<!--    app:msv_currentViewState="loading"-->
     <!--  todo need to set basic related layout -->
-    <com.pumpkin.ui.widget.MultiStateView
-        android:id="@+id/multiply_state"
+    <FrameLayout
+        android:id="@+id/pac_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:msv_currentViewState="loading"
-        app:msv_enableAnimateChanges="true">
-
-        <FrameLayout
-            android:id="@+id/pac_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </com.pumpkin.ui.widget.MultiStateView>
-</LinearLayout>
+        android:layout_height="match_parent" />
+</com.pumpkin.ui.widget.MultiStateView>

@@ -9,7 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.pumpkin.mvvm.R
 import com.pumpkin.mvvm.databinding.BaseLayoutBinding
 import com.pumpkin.mvvm.setting_bean.ActivitySettingBean
+import com.pumpkin.mvvm.util.toLogD
 import com.pumpkin.ui.util.AppUtil
+import com.pumpkin.ui.util.DeviceParams
 import com.pumpkin.ui.widget.MultiStateView
 
 /**
@@ -39,6 +41,7 @@ open class SuperBaseActivity : AppCompatActivity() {
 
         }
         superBinding = BaseLayoutBinding.inflate(layoutInflater)
+
         // 设置基础布局
         setContentView(superBinding.root)
 
@@ -56,13 +59,44 @@ open class SuperBaseActivity : AppCompatActivity() {
         state: MultiStateView.ViewState,
         switchToState: Boolean = false
     ) {
-        val multiplyState = superBinding.multiplyState
+        val multiplyState = superBinding.root
         multiplyState.addViewForState(layoutRes, state, switchToState)
     }
 
-    fun setRootState(state: MultiStateView.ViewState) {
-        superBinding.multiplyState.currentState = state
+    /**
+     * customize basic relate layout settings.
+     */
+    open fun setBaseContentForState(
+        view: View,
+        state: MultiStateView.ViewState,
+        switchToState: Boolean = false
+    ) {
+        val multiplyState = superBinding.root
+        multiplyState.addViewByViewState(view, state, switchToState)
     }
+
+//    fun setStatusHeight(view: View) {
+//        //设置状态栏高度
+//        val statusBarHeight: Int = DeviceParams.getStatusBarHeight(AppUtil.application)
+//        if (AppUtil.isDebug) {
+//            "status height is $statusBarHeight .".toLogD(TAG)
+//        }
+//        val layoutParams = view.layoutParams
+//        layoutParams.height = statusBarHeight
+//    }
+
+    /**
+     * set current state
+     */
+    fun switchState(state: MultiStateView.ViewState) {
+        superBinding.root.currentState = state
+    }
+
+    /**
+     * obtain view by state
+     */
+    fun getViewByState(state: MultiStateView.ViewState) =
+        superBinding.root.obtainView(state)
 
     /**
      * basic related layout settings.
@@ -89,7 +123,11 @@ open class SuperBaseActivity : AppCompatActivity() {
     override fun finish() {
         super.finish()
         //设置动画
-        overridePendingTransition(pageSettingBean.startEnterAnim, pageSettingBean.startExitAnim)
+//        overridePendingTransition(pageSettingBean.startEnterAnim, pageSettingBean.startExitAnim)
+    }
+
+    companion object {
+        private const val TAG = "superBase"
     }
 
 }

@@ -14,6 +14,11 @@ object InterceptorHelper {
     private const val CACHE_FILE_NAME = "pac"
     private const val FILE_SUFFIX = ".pac"
 
+    /**
+     * 默认5个G
+     */
+    const val CACHE_SIZE = 5 * 1024 * 1024 * 1024L
+
     fun destinationFolder(context: Context, rootUrl: String?): String? {
         val zipId = zipId(rootUrl) ?: return null
         return getRootPath(context) + File.separator + zipId
@@ -25,6 +30,8 @@ object InterceptorHelper {
         // TODO:  destinationFolder(context, url) 理论上是固定的
         return destinationFolder(context, rootUrl) + File.separator + urlToPath + FILE_SUFFIX
     }
+
+    fun getCacheFile(context: Context) = File(context.filesDir, CACHE_FILE_NAME)
 
     private fun getRootPath(context: Context) =
         context.filesDir.toString() + File.separator + CACHE_FILE_NAME

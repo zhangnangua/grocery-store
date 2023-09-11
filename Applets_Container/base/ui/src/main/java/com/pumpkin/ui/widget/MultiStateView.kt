@@ -168,7 +168,7 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) :
      * @param state ViewState
      * @param isImmediatelyShow 是否需要直接展示
      */
-    private fun addViewByViewState(
+    fun addViewByViewState(
         view: View,
         state: ViewState,
         isImmediatelyShow: Boolean = false
@@ -181,7 +181,7 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) :
         views[state.ordinal] = view
         addView(view)
         //如果当前添加的view，需要立即展示，则设置状态即可
-        if (isImmediatelyShow) currentState = state
+        if (isImmediatelyShow) currentState = state else view.visibility = View.GONE
     }
 
     /**
@@ -226,6 +226,7 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) :
                 ?: throw IllegalStateException("当前状态的view不能为null")
             return
         }
+        // TODO: 动画是否需要
         val animateDuration = 200L
         ObjectAnimator.ofFloat(previousView, "alpha", 1.0F, 0.0F).apply {
             duration = animateDuration

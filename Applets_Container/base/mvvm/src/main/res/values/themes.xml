@@ -1,0 +1,30 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Theme.Applets_Container" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/page_background_color</item>
+    </style>
+
+    <style name="Theme.Main" parent="Theme.Applets_Container">
+        <!--        隐藏状态栏-->
+        <item name="windowActionBar">false</item>
+        <!--        隐藏标题栏-->
+        <item name="windowNoTitle">true</item>
+        <!--        状态栏透明色-->
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <!--  导航栏颜色  -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+<!--        <item name="android:windowLightStatusBar">true</item>-->
+    </style>
+</resources>

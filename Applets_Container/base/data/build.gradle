@@ -44,9 +44,17 @@ dependencies {
     implementation "com.google.android.material:material:$material_version"
 
     //kotlin协程标准库
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
     //kotlin协程Android支持
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
+    //lifecycle 标准的lifecycle
+    api "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    //lifecycle-service  支持
+    api "androidx.lifecycle:lifecycle-service:$lifecycle_version"
+    //lifecycle-application  支持
+    api "androidx.lifecycle:lifecycle-process:$lifecycle_version"
+    // ViewModel
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     // room
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"

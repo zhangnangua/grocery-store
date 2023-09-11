@@ -11,7 +11,7 @@ object PACPreload {
         /**
          * 在游戏进程 初始化
          */
-        if (ProcessUtil.isPAcProcess()) {
+        if (ProcessUtil.isPACProcess()) {
             WebViewPool.preLoad()
         }
     }

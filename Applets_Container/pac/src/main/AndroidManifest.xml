@@ -10,7 +10,8 @@
         <activity
             android:name=".view.PACActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:process=":pac" />
+            android:process=":pac"
+            android:theme="@style/Theme.Main" />
     </application>
 
 </manifest>

@@ -9,9 +9,10 @@ import com.pumpkin.data.db.entity.GameTable
 /**
  * id 、name、icon is required parameters.
  */
-class GameEntity(
+class GameEntity constructor(
     val id: String,// id  todo 默认没有id，考虑使用url 转换成md5
     val name: String,// name
+    val link: String,//link
     val describe: String = "",// 描述
     val icon: String,// 游戏icon
     val bigIcon: String = "",// 大图
@@ -19,6 +20,7 @@ class GameEntity(
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
+        parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
@@ -40,6 +42,7 @@ class GameEntity(
     fun GameEntity.entityToTable(moduleId: String) = GameTable(
         id = this.id,
         name = this.name,
+        link = this.link,
         describe = this.describe,
         icon = this.icon,
         bigIcon = this.bigIcon,
@@ -60,6 +63,7 @@ class GameEntity(
     fun GameTable.tableToEntity() = GameEntity(
         id = this.id,
         name = this.name,
+        link = this.link,
         describe = this.describe,
         icon = this.icon,
         bigIcon = this.bigIcon,
@@ -84,6 +88,7 @@ class GameEntity(
         if (dest != null) {
             dest.writeString(id)
             dest.writeString(name)
+            dest.writeString(link)
             dest.writeString(describe)
             dest.writeString(icon)
             dest.writeString(bigIcon)

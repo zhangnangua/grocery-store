@@ -16,7 +16,12 @@ import java.io.*
 object RequestHelper {
     private const val TAG = "RequestHelper"
 
-    fun request(request: WebResourceRequest, url: String, okHttpClient: OkHttpClient): Response {
+    fun request(
+        request: WebResourceRequest,
+        url: String,
+        okHttpClient: OkHttpClient,
+        extraHeaders: Map<String, String>?
+    ): Response {
         val builder = Request.Builder().url(url).also { requestBuilder ->
             request.requestHeaders?.forEach(action = { entry ->
                 val key = entry.key
@@ -25,6 +30,9 @@ object RequestHelper {
                     requestBuilder.addHeader(key, value)
                 }
             })
+            extraHeaders?.forEach {
+                requestBuilder.addHeader(it.key, it.value)
+            }
         }
         //request
         return okHttpClient.newCall(builder.build()).execute()
@@ -35,10 +43,10 @@ object RequestHelper {
         var fos: FileOutputStream? = null
         var srcInputStream: InputStream? = null
         try {
-            val contentLength = body.contentLength()
-            if (BuildConfig.DEBUG) {
-                Log.d(TAG, "current download length: $contentLength")
-            }
+//            val contentLength = body.contentLength()
+//            if (BuildConfig.DEBUG) {
+//                Log.d(TAG, "current download length: $contentLength")
+//            }
 //            var total = 0
             var len: Int
             srcInputStream = body.byteStream()
@@ -104,8 +112,8 @@ object RequestHelper {
 
 
     fun resourceResponseByResponse(response: Response, url: String): WebResourceResponse? {
-        val mimeType = MimeTypeMapUtils.getMimeTypeFromUrl(url)
-        val webResourceResponse = WebResourceResponse(mimeType, "", response.body?.byteStream())
+//        val mimeType = MimeTypeMapUtils.getMimeTypeFromUrl(url)
+        val webResourceResponse = WebResourceResponse("", "", response.body?.byteStream())
         var message = response.message
         if (TextUtils.isEmpty(message)) {
             message = "OK"
@@ -115,8 +123,21 @@ object RequestHelper {
         } catch (e: Exception) {
             return null
         }
-        webResourceResponse.responseHeaders =
-            NetUtils.multimapToSingle(response.headers.toMultimap())
+
+        // TODO: 需要  但是需要对它进行优化
+        if (BuildConfig.DEBUG) {
+            val startTime = System.currentTimeMillis()
+            webResourceResponse.responseHeaders =
+                NetUtils.multimapToSingle(response.headers.toMultimap())
+            val endTime = System.currentTimeMillis()
+            Log.d(
+                TAG,
+                "NetUtils.multimapToSingle(response.headers.toMultimap()): execute time is ${endTime - startTime}"
+            )
+        } else {
+            webResourceResponse.responseHeaders =
+                NetUtils.multimapToSingle(response.headers.toMultimap())
+        }
         return webResourceResponse
     }
 }

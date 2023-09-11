@@ -6,11 +6,14 @@ import android.os.Looper
 import android.util.Log
 import android.view.ViewGroup
 import android.view.ViewParent
-import com.pumpkin.ui.util.AppUtil
+import com.pumpkin.pac.process.ProcessUtil
 import com.pumpkin.pac_core.webview.PACWebView
+import com.pumpkin.ui.util.AppUtil
 
 /**
  * @author pumpkin
+ *
+ * todo 支持预加载改造
  */
 object WebViewPool {
     private const val TAG = "WebViewPool"
@@ -24,7 +27,10 @@ object WebViewPool {
                 if (stack.size < MAX_NUM) {
                     stack.addFirst(createWebView())
                     if (AppUtil.isDebug) {
-                        Log.d(TAG, "preLoad -> () , the current stack count is  ${stack.size}")
+                        Log.d(
+                            TAG,
+                            "preLoad -> () , the current stack count is  ${stack.size} , current process name is ${ProcessUtil.obtainPACProcessName()}"
+                        )
                     }
                 }
             }
@@ -35,7 +41,7 @@ object WebViewPool {
     /**
      * 获取一个CacheWebView
      */
-    fun obtain(context: Context): PACWebView {
+    fun obtain(context: Context, id: String): PACWebView {
         if (AppUtil.isDebug) {
             Log.d(TAG, "obtain: the current stack count is ${stack.size}")
         }
