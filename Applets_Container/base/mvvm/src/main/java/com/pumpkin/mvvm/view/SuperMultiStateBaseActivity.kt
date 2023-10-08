@@ -1,17 +1,11 @@
 package com.pumpkin.mvvm.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.widget.FrameLayout
 import androidx.annotation.LayoutRes
-import androidx.appcompat.app.AppCompatActivity
-import com.pumpkin.mvvm.R
+import com.pumpkin.data.AppUtil
 import com.pumpkin.mvvm.databinding.BaseLayoutBinding
 import com.pumpkin.mvvm.setting_bean.ActivitySettingBean
-import com.pumpkin.mvvm.util.toLogD
-import com.pumpkin.ui.util.AppUtil
-import com.pumpkin.ui.util.DeviceParams
 import com.pumpkin.ui.widget.MultiStateView
 
 /**
@@ -19,19 +13,14 @@ import com.pumpkin.ui.widget.MultiStateView
  * pumpkin
  *
  * todo 统一处理进程被回收之后，则进行重启
- * todo 设置基础布局，title、页面状态
+ * todo 设置基础布局、title、页面状态
  * todo 设置binding
  * todo 统一进出动画
  * todo 埋点
  */
-open class SuperBaseActivity : AppCompatActivity() {
+open class SuperMultiStateBaseActivity : BaseActivity() {
 
-    protected lateinit var superBinding: BaseLayoutBinding
-
-    /**
-     * 页面设置bean
-     */
-    private var pageSettingBean: ActivitySettingBean = ActivitySettingBean()
+    private lateinit var superBinding: BaseLayoutBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         onCreateBefore(savedInstanceState)
@@ -75,16 +64,6 @@ open class SuperBaseActivity : AppCompatActivity() {
         multiplyState.addViewByViewState(view, state, switchToState)
     }
 
-//    fun setStatusHeight(view: View) {
-//        //设置状态栏高度
-//        val statusBarHeight: Int = DeviceParams.getStatusBarHeight(AppUtil.application)
-//        if (AppUtil.isDebug) {
-//            "status height is $statusBarHeight .".toLogD(TAG)
-//        }
-//        val layoutParams = view.layoutParams
-//        layoutParams.height = statusBarHeight
-//    }
-
     /**
      * set current state
      */
@@ -98,32 +77,8 @@ open class SuperBaseActivity : AppCompatActivity() {
     fun getViewByState(state: MultiStateView.ViewState) =
         superBinding.root.obtainView(state)
 
-    /**
-     * basic related layout settings.
-     */
-    fun setPACContentView(@LayoutRes layoutResID: Int) {
-        val container = findViewById<FrameLayout>(R.id.pac_container)
-        container.removeAllViews()
-        LayoutInflater.from(this).inflate(layoutResID, container)
-    }
-
     fun setPACContentView(v: View) {
-        val container = findViewById<FrameLayout>(R.id.pac_container)
-        container.removeAllViews()
-        container.addView(v)
-    }
-
-    /**
-     * 设置默认的页面bean
-     */
-    open fun setPageSettings(pageSettingBean: ActivitySettingBean) {
-        this.pageSettingBean = pageSettingBean
-    }
-
-    override fun finish() {
-        super.finish()
-        //设置动画
-//        overridePendingTransition(pageSettingBean.startEnterAnim, pageSettingBean.startExitAnim)
+        setBaseContentForState(v, MultiStateView.ViewState.CONTENT, true)
     }
 
     companion object {

@@ -8,7 +8,7 @@ import com.pumpkin.pac.repo.GameRepo
 import com.pumpkin.pac_core.cache2.ResourceInterceptionGlobal
 import com.pumpkin.pac_core.webview.PACWebView
 import com.pumpkin.pac_core.webview.Webinterface
-import com.pumpkin.ui.util.AppUtil
+import com.pumpkin.data.AppUtil
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class GameViewModel : ViewModel() {
@@ -27,32 +27,6 @@ class GameViewModel : ViewModel() {
         interceptionGlobal = ResourceInterceptionGlobal(AppUtil.application, gameEntity.link)
         interceptionGlobal!!.cacheEnable = true
     }
-
-    fun start(wv: PACWebView) {
-        wv.setPageInterface(object : Webinterface.PageInterface {
-            override fun onPageFinished(view: WebView?, url: String?) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onProgressChanged(view: WebView?, newProgress: Int) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onReceivedIcon(view: WebView?, icon: Bitmap?) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onReceivedTitle(view: WebView?, title: String?) {
-                TODO("Not yet implemented")
-            }
-
-        })
-    }
-
 
     fun check(gameEntity: GameEntity?) {
         if (gameEntity == null) {

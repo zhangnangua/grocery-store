@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "544025572453",
+    "project_id": "pgame-8c9af",
+    "storage_bucket": "pgame-8c9af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544025572453:android:adecfb6b689044fa0a828c",
+        "android_client_info": {
+          "package_name": "com.pumpkin.applets_container"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIGdOyro9d5q6pOZblJWMYvGpRQXQxZs4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

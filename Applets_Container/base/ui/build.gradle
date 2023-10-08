@@ -39,4 +39,7 @@ dependencies {
     // windowManager
     implementation "androidx.window:window:$windowmanager_version"
     implementation "androidx.window:window-java:$windowmanager_version"
+
+    //data
+    api project(':base:data')
 }

@@ -32,7 +32,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_hello_world" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_hello_world"
+        app:rippleColor="?attr/colorOnSurface" />
 
     <Button
         android:id="@+id/bt_other_test"
@@ -42,6 +43,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt_go_test_multi_state_view" />
+        app:layout_constraintTop_toBottomOf="@+id/bt_go_test_multi_state_view"
+        app:rippleColor="?attr/colorOnSurface" />
+
+    <Button
+        android:id="@+id/bt_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GO_CRASH"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_other_test"
+        app:rippleColor="?attr/colorOnSurface" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

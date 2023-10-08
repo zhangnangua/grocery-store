@@ -1,4 +1,4 @@
-package com.pumpkin.ui.util
+package com.pumpkin.data
 
 import android.annotation.SuppressLint
 import android.app.Application

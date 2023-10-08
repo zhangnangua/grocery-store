@@ -47,6 +47,6 @@ dependencies {
     api project(':base:mvvm')
     //core
     api project(':pac_core')
-    //data
-    api project(':base:data')
+    //parse
+    api project(':parse')
 }

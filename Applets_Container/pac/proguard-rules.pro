@@ -24,3 +24,7 @@
 -keepattributes *Annotation*
 # 被@keep修饰的不被混淆
 -keep @androidx.annotation.Keep class **
+
+-keep class com.pumpkin.pac.bean.**{
+    *;
+}

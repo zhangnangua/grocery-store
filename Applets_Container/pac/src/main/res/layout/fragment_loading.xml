@@ -9,7 +9,11 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"/>
 
-    <com.pumpkin.pac.widget.loadingFish.FishRelativeLayout
+<!--    <com.pumpkin.pac.widget.loadingFish.FishRelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"/>-->
+
+    <com.pumpkin.pac.widget.gloading.FishSurfaceView
         android:id="@+id/fl_fish"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

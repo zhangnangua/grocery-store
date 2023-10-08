@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.view.ViewParent
 import com.pumpkin.pac.process.ProcessUtil
 import com.pumpkin.pac_core.webview.PACWebView
-import com.pumpkin.ui.util.AppUtil
+import com.pumpkin.data.AppUtil
 
 /**
  * @author pumpkin

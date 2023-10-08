@@ -231,11 +231,11 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) :
         ObjectAnimator.ofFloat(previousView, "alpha", 1.0F, 0.0F).apply {
             duration = animateDuration
             addListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationStart(animation: Animator?) {
+                override fun onAnimationStart(animation: Animator) {
                     previousView.visibility = View.VISIBLE
                 }
 
-                override fun onAnimationEnd(animation: Animator?) {
+                override fun onAnimationEnd(animation: Animator) {
                     previousView.visibility = View.GONE
                     obtainView(currentState)?.let {
                         //当前View显示

@@ -8,7 +8,7 @@ val Float.dpToPx
     get() = dp2px(this)
 
 private fun dp2px(dpValue: Float): Int {
-    val scale: Float = AppUtil.application.resources.displayMetrics.density
+    val scale: Float = com.pumpkin.data.AppUtil.application.resources.displayMetrics.density
     return (dpValue * scale + 0.5f).toInt()
 }
 
@@ -20,13 +20,13 @@ fun CharSequence?.isNotNullOrEmpty(): Boolean {
 fun String?.toShortToast() {
     if (this == null) return
 
-    Toast.makeText(AppUtil.application,this, Toast.LENGTH_SHORT).show()
+    Toast.makeText(com.pumpkin.data.AppUtil.application,this, Toast.LENGTH_SHORT).show()
 }
 
 fun String?.toLongToast() {
     if (this == null) return
 
-    Toast.makeText(AppUtil.application,this, Toast.LENGTH_LONG).show()
+    Toast.makeText(com.pumpkin.data.AppUtil.application,this, Toast.LENGTH_LONG).show()
 }
 
 /// region 宽高获取

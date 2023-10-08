@@ -84,16 +84,14 @@ class GameEntity constructor(
 
     override fun describeContents(): Int = 0
 
-    override fun writeToParcel(dest: Parcel?, flags: Int) {
-        if (dest != null) {
-            dest.writeString(id)
-            dest.writeString(name)
-            dest.writeString(link)
-            dest.writeString(describe)
-            dest.writeString(icon)
-            dest.writeString(bigIcon)
-            dest.writeString(extra?.toString())
-        }
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeString(id)
+        dest.writeString(name)
+        dest.writeString(link)
+        dest.writeString(describe)
+        dest.writeString(icon)
+        dest.writeString(bigIcon)
+        dest.writeString(extra?.toString())
     }
 
     companion object CREATOR : Parcelable.Creator<GameEntity> {

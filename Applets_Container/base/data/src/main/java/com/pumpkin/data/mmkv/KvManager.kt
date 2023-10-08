@@ -3,6 +3,7 @@ package com.pumpkin.data.mmkv
 import android.app.Application
 import com.getkeepsafe.relinker.ReLinker
 import com.tencent.mmkv.MMKV
+import java.io.File
 
 internal object KvManager {
 
@@ -13,7 +14,6 @@ internal object KvManager {
 
     private fun init(application: Application) {
         MMKV.initialize(application) { libName -> ReLinker.loadLibrary(application, libName) }
-
     }
 
 
@@ -32,7 +32,12 @@ internal object KvManager {
             }
         }
 
-        return MMKV.mmkvWithID(name, mode, cryptKey, ROOT_PATH)
+        return MMKV.mmkvWithID(
+            name,
+            mode,
+            cryptKey,
+            "${application.filesDir}${File.separator}$ROOT_PATH"
+        )
     }
 
 

@@ -27,7 +27,7 @@ import androidx.interpolator.view.animation.FastOutLinearInInterpolator;
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 
 import com.pumpkin.pac.R;
-import com.pumpkin.ui.util.AppUtil;
+import com.pumpkin.data.AppUtil;
 import com.pumpkin.ui.util.ExtensionHelperKt;
 
 import java.lang.annotation.Retention;

@@ -15,7 +15,7 @@ import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.pumpkin.mvvm.util.Constant
 import com.pumpkin.mvvm.util.toLogD
-import com.pumpkin.mvvm.view.SuperBaseActivity
+import com.pumpkin.mvvm.view.SuperMultiStateBaseActivity
 import com.pumpkin.mvvm.viewmodel.PACViewModelProviders
 import com.pumpkin.pac.R
 import com.pumpkin.pac.bean.GameEntity
@@ -24,10 +24,9 @@ import com.pumpkin.pac.pool.WebViewPool
 import com.pumpkin.pac.util.GameProgressHelper
 import com.pumpkin.pac.viewmodel.GameViewModel
 import com.pumpkin.pac.widget.loading.LoadingView
-import com.pumpkin.pac.widget.loadingFish.FishRelativeLayout
 import com.pumpkin.pac_core.webview.PACWebView
 import com.pumpkin.pac_core.webview.Webinterface
-import com.pumpkin.ui.util.AppUtil
+import com.pumpkin.data.AppUtil
 import com.pumpkin.ui.widget.MultiStateView
 import kotlinx.coroutines.launch
 
@@ -39,7 +38,7 @@ import kotlinx.coroutines.launch
  *
  * todo webview 剥离 预热 ！！！！
  */
-class PACActivity : SuperBaseActivity() {
+class PACActivity : SuperMultiStateBaseActivity() {
 
     private lateinit var binding: ActivityPacBinding
 

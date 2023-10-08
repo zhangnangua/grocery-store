@@ -1,7 +1,7 @@
 package com.pumpkin.mvvm.util
 
 import android.util.Log
-import com.pumpkin.ui.util.AppUtil
+import com.pumpkin.data.AppUtil
 
 /**
  * 作者： pumpkin
@@ -75,4 +75,4 @@ private fun e(tag: String, log: String) {
 /**
  * 是否是debug模式
  */
-private fun isDebug(): Boolean = AppUtil.isDebug
+private fun isDebug(): Boolean = com.pumpkin.data.AppUtil.isDebug

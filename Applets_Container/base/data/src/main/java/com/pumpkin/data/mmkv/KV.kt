@@ -12,7 +12,7 @@ object KV {
         fileName: String = DEFAULT_FILE,
         mode: Int = MMKV.MULTI_PROCESS_MODE
     ): MMKV {
-        return KvManager.get(application, fileName, MMKV.MULTI_PROCESS_MODE)
+        return KvManager.get(application, fileName, mode)
     }
 
 }

@@ -8,7 +8,8 @@ import android.content.ServiceConnection
 import android.os.IBinder
 import android.os.IInterface
 import com.pumpkin.mvvm.util.toLogD
-import com.pumpkin.ui.util.AppUtil
+import com.pumpkin.data.AppUtil
+import com.pumpkin.pac.process.service.PACService
 import java.util.concurrent.locks.ReentrantReadWriteLock
 
 /**
@@ -33,7 +34,7 @@ abstract class ConnectPool<iInterface : IInterface>(private val retry: Boolean) 
     }
 
     companion object {
-        private const val TAG = "ConnectPool"
+        const val TAG = "ConnectPool"
 
         const val STATE_UNCONNECTED = -1
         const val STATE_CONNECTING = 1
@@ -166,7 +167,6 @@ abstract class ConnectPool<iInterface : IInterface>(private val retry: Boolean) 
     }
 
     protected open fun serviceConnected(service: IBinder?, serviceConnection: ServiceConnection) {
-
     }
 
     protected abstract fun asInterface(service: IBinder?): iInterface?

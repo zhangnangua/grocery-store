@@ -1,8 +1,10 @@
 package com.pumpkin.applets_container
 
 import android.app.Application
+import com.pumpkin.data.AppUtil
+import com.pumpkin.data.fb.FBFetch
 import com.pumpkin.pac.PACPreload
-import com.pumpkin.ui.util.AppUtil
+import com.pumpkin.pac.process.ProcessUtil
 
 class PACApplication : Application() {
 
@@ -15,6 +17,12 @@ class PACApplication : Application() {
     }
 
     private fun preload() {
+        //fb data pull
+        if (ProcessUtil.isMainProcess()) {
+            FBFetch().fetchListener()
+        }
+
+        //game process preload
         PACPreload.pacPreload()
     }
 

@@ -10,6 +10,8 @@ import android.webkit.*
 /**
  * 小程序容器
  *
+ * todo 使用次数回收 增加
+ *
  * @author pumpkin
  */
 @SuppressLint("SetJavaScriptEnabled")
@@ -36,8 +38,8 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) :
 //        settings.allowUniversalAccessFromFileURLs = true
 //        settings.allowFileAccessFromFileURLs = true
 
-        settings.setAppCacheEnabled(true)
-        settings.setAppCachePath(context.cacheDir.absolutePath)
+//        settings.setAppCacheEnabled(true)
+//        settings.setAppCachePath(context.cacheDir.absolutePath)
         settings.databaseEnabled = true
 
         settings.userAgentString = "${settings.userAgentString}PAC"
