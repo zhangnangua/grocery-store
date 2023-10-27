@@ -1,7 +1,11 @@
 package com.pumpkin.mvvm.view
 
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.pumpkin.data.AppUtil
 import com.pumpkin.mvvm.setting_bean.ActivitySettingBean
+import com.pumpkin.mvvm.util.toLogD
+import com.pumpkin.ui.util.DeviceParams
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -9,17 +13,6 @@ abstract class BaseActivity : AppCompatActivity() {
      * 页面设置bean
      */
     private var pageSettingBean: ActivitySettingBean = ActivitySettingBean()
-
-
-//    fun setStatusHeight(view: View) {
-//        //设置状态栏高度
-//        val statusBarHeight: Int = DeviceParams.getStatusBarHeight(AppUtil.application)
-//        if (AppUtil.isDebug) {
-//            "status height is $statusBarHeight .".toLogD(TAG)
-//        }
-//        val layoutParams = view.layoutParams
-//        layoutParams.height = statusBarHeight
-//    }
 
     /**
      * 设置默认的页面bean

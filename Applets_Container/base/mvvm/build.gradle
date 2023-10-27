@@ -36,6 +36,7 @@ dependencies {
     implementation "androidx.core:core-ktx:$core_ktx"
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation "com.google.android.material:material:$material_version"
+    api "androidx.paging:paging-runtime:$paging_version"
 
     api project(':base:ui')
 }

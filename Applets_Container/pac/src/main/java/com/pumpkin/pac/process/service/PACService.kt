@@ -10,6 +10,13 @@ import com.pumpkin.pac.ICallback
 import com.pumpkin.pac.IPACService
 import com.pumpkin.pac.process.ProcessUtil
 import com.pumpkin.parse.ParseEngine
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.launch
 
 /**
  * pac 进程的预热service
@@ -39,6 +46,12 @@ class PACService : Service() {
          * 数据爬取
          */
         private fun parseData(callback: ICallback?) {
+//            GlobalScope.launch(Dispatchers.Main+ SupervisorJob()){
+//                flow<Unit> {
+//                    ParseEngine(AppUtil.application).loadUrl("https://yandex.com/games/")
+//                }.flowOn(Dispatchers.Main)
+//                    .collect()
+//            }
             // todo 爬虫测试  需要切换到主线程
             ThreadHelper.runOnUiThread{
                 ParseEngine(AppUtil.application).loadUrl("https://yandex.com/games/")

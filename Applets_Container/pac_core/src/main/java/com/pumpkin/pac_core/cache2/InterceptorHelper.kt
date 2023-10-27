@@ -31,7 +31,7 @@ object InterceptorHelper {
         return destinationFolder(context, rootUrl) + File.separator + urlToPath + FILE_SUFFIX
     }
 
-    fun getCacheFile(context: Context) = File(context.filesDir, CACHE_FILE_NAME)
+    fun getCacheFile(context: Context) = File("${context.filesDir}${File.separator}$CACHE_FILE_NAME")
 
     private fun getRootPath(context: Context) =
         context.filesDir.toString() + File.separator + CACHE_FILE_NAME

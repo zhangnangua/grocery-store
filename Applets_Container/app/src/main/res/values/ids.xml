@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="vh_title" type="id" />
+    <item name="vh_big_card" type="id" />
+    <item name="vh_recent_item" type="id" />
+    <item name="vh_carousel" type="id" />
+    <item name="vh_common_horizontal" type="id" />
+    <item name="vh_carousel_horizontal" type="id" />
+    <item name="vh_recent_horizontal" type="id" />
+</resources>

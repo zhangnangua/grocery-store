@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/main_item"
+        android:title="mail_subheader_title">
+        <menu>
+            <item
+                android:id="@+id/inbox_item"
+                android:icon="@drawable/tab_net_24dp"
+                android:title="inbox_title"
+                android:checkable="true"/>
+            <item
+                android:id="@+id/outbox_item"
+                android:icon="@drawable/tab_home_24dp"
+                android:title="outbox_title"
+                android:checkable="true"/>
+            <item
+                android:id="@+id/favourites_item"
+                android:icon="@drawable/tab_mine_24dp"
+                android:title="favourites_title"
+                android:checkable="true"/>
+        </menu>
+    </item>
+</menu>

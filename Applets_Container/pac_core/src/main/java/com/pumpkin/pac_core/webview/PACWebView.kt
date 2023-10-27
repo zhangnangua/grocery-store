@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.net.http.SslError
 import android.util.AttributeSet
 import android.webkit.*
+import com.pumpkin.pac_core.BuildConfig
 
 /**
  * 小程序容器
@@ -43,6 +44,8 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) :
         settings.databaseEnabled = true
 
         settings.userAgentString = "${settings.userAgentString}PAC"
+
+        setWebContentsDebuggingEnabled(BuildConfig.DEBUG)
 
         //设置缓存模式
         //LOAD_DEFAULT 根据HTTP协议header中设置的cache-control属性来执行加载策略

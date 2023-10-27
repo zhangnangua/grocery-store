@@ -5,6 +5,8 @@ import android.os.Parcelable
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.pumpkin.data.db.entity.GameTable
+import com.pumpkin.mvvm.util.Event
+import com.pumpkin.pac_core.cache2.MD5Utils
 
 /**
  * id 、name、icon is required parameters.
@@ -17,7 +19,7 @@ class GameEntity constructor(
     val icon: String,// 游戏icon
     val bigIcon: String = "",// 大图
     val extra: JsonObject? = null // 额外的参数
-) : Parcelable {
+) : Parcelable, Event {
 
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
@@ -35,52 +37,7 @@ class GameEntity constructor(
         } catch (e: Exception) {
             null
         }
-    ) {
-    }
-
-    ///region 转换
-    fun GameEntity.entityToTable(moduleId: String) = GameTable(
-        id = this.id,
-        name = this.name,
-        link = this.link,
-        describe = this.describe,
-        icon = this.icon,
-        bigIcon = this.bigIcon,
-        extra = this.extra,
-        moduleId = moduleId
     )
-
-    fun List<GameEntity?>.entityToTables(moduleId: String): List<GameTable> {
-        val tables = mutableListOf<GameTable>()
-        forEach {
-            if (it != null) {
-                tables.add(it.entityToTable(moduleId))
-            }
-        }
-        return tables
-    }
-
-    fun GameTable.tableToEntity() = GameEntity(
-        id = this.id,
-        name = this.name,
-        link = this.link,
-        describe = this.describe,
-        icon = this.icon,
-        bigIcon = this.bigIcon,
-        extra = this.extra
-    )
-
-
-    fun List<GameTable?>.tablesToEntities(): List<GameEntity> {
-        val tables = mutableListOf<GameEntity>()
-        forEach {
-            if (it != null) {
-                tables.add(it.tableToEntity())
-            }
-        }
-        return tables
-    }
-    ///endregion
 
     override fun describeContents(): Int = 0
 
@@ -94,6 +51,11 @@ class GameEntity constructor(
         dest.writeString(extra?.toString())
     }
 
+    override fun toString(): String {
+        return "GameEntity(id='$id', name='$name', link='$link', describe='$describe', icon='$icon', bigIcon='$bigIcon', extra=$extra)"
+    }
+
+
     companion object CREATOR : Parcelable.Creator<GameEntity> {
         override fun createFromParcel(parcel: Parcel): GameEntity {
             return GameEntity(parcel)
@@ -104,3 +66,68 @@ class GameEntity constructor(
         }
     }
 }
+
+///region 转换
+fun GameEntity.entityToTableMd5(moduleId: String) = GameTable(
+    id = MD5Utils.md5(this.id + moduleId),
+    name = this.name,
+    link = this.link,
+    describe = this.describe,
+    icon = this.icon,
+    bigIcon = this.bigIcon,
+    extra = this.extra,
+    moduleId = moduleId
+)
+
+fun GameEntity.entityToTable(moduleId: String) = GameTable(
+    id = this.id,
+    name = this.name,
+    link = this.link,
+    describe = this.describe,
+    icon = this.icon,
+    bigIcon = this.bigIcon,
+    extra = this.extra,
+    moduleId = moduleId
+)
+
+fun List<GameEntity?>.entityToTables(moduleId: String): List<GameTable> {
+    val tables = mutableListOf<GameTable>()
+    forEach {
+        if (it != null) {
+            tables.add(it.entityToTable(moduleId))
+        }
+    }
+    return tables
+}
+
+fun List<GameEntity?>.entityToTablesMd5(moduleId: String): List<GameTable> {
+    val tables = mutableListOf<GameTable>()
+    forEach {
+        if (it != null) {
+            tables.add(it.entityToTableMd5(moduleId))
+        }
+    }
+    return tables
+}
+
+fun GameTable.tableToEntity() = GameEntity(
+    id = this.id,
+    name = this.name,
+    link = this.link,
+    describe = this.describe,
+    icon = this.icon,
+    bigIcon = this.bigIcon,
+    extra = this.extra
+)
+
+
+fun List<GameTable?>.tablesToEntities(): ArrayList<GameEntity> {
+    val tables = ArrayList<GameEntity>()
+    forEach {
+        if (it != null) {
+            tables.add(it.tableToEntity())
+        }
+    }
+    return tables
+}
+///endregion

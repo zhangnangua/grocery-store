@@ -4,9 +4,11 @@ import android.app.Application
 import androidx.room.*
 import com.pumpkin.data.JsonObjectConverters
 import com.pumpkin.data.db.dao.GameDao
+import com.pumpkin.data.db.dao.RecentlyGameDao
 import com.pumpkin.data.db.entity.GameTable
+import com.pumpkin.data.db.entity.RecentlyGameTable
 
-@Database(entities = [GameTable::class], version = 1)
+@Database(entities = [GameTable::class, RecentlyGameTable::class], version = 1)
 @TypeConverters(JsonObjectConverters::class)
 abstract class MyDataBase : RoomDatabase() {
     companion object {
@@ -14,7 +16,7 @@ abstract class MyDataBase : RoomDatabase() {
         /**
          * 使用const val修饰在直接以静态字段形式初始化（编译时常量）
          */
-        private const val DATA_NAME = "pac_db"
+        private const val DATA_NAME = "pac_db.db"
 
         /**
          * 双重校验锁单例
@@ -30,6 +32,9 @@ abstract class MyDataBase : RoomDatabase() {
         fun getDataBase(application: Application): MyDataBase = INSTANCE ?: synchronized(this) {
             INSTANCE ?: Room
                 .databaseBuilder(application, MyDataBase::class.java, DATA_NAME)
+                .fallbackToDestructiveMigrationOnDowngrade()
+                .fallbackToDestructiveMigration()
+                .createFromAsset("data/save.db")
                 .build()
                 .also {
                     INSTANCE = it
@@ -38,4 +43,6 @@ abstract class MyDataBase : RoomDatabase() {
     }
 
     abstract fun gameDao(): GameDao
+
+    abstract fun recentlyGameDao(): RecentlyGameDao
 }

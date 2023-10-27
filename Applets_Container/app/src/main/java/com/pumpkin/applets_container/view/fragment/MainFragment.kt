@@ -1,4 +1,4 @@
-package com.pumpkin.applets_container.view
+package com.pumpkin.applets_container.view.fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +13,7 @@ import com.pumpkin.data.AppUtil
 import com.pumpkin.mvvm.util.Constant
 import com.pumpkin.mvvm.util.UIHelper
 import com.pumpkin.mvvm.view.BaseFragment
+import com.pumpkin.pac_core.cache2.RequestHelper
 
 
 class MainFragment : BaseFragment() {
@@ -30,7 +31,7 @@ class MainFragment : BaseFragment() {
         currentId = savedInstanceState?.getInt(Constant.FIRST_PARAMETER) ?: R.id.home
 
         return FragmentMainBinding.inflate(layoutInflater).let {
-
+            //底部导航栏
             it.bottomNavigation.setOnItemSelectedListener(onItemSelectedListener)
             it.bottomNavigation.selectedItemId = currentId
 
@@ -63,7 +64,7 @@ class MainFragment : BaseFragment() {
                     R.id.offline -> {
                         OfflineFragment::class.java.simpleName
                     }
-                    else -> MineFragment::class.java.simpleName
+                    else -> WorldFragment::class.java.simpleName
                 }
 
                 UIHelper.switchFragment(lastTag, tag, fragmentManager, containerId) {
@@ -86,7 +87,7 @@ class MainFragment : BaseFragment() {
                 OfflineFragment()
             }
             else -> {
-                MineFragment()
+                WorldFragment()
             }
         }
     }

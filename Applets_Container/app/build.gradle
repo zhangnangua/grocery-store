@@ -52,4 +52,11 @@ dependencies {
 
     //leakcanary
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
+
+    //启动
+    implementation "androidx.core:core-splashscreen:$splashscreen"
+
+    //glide
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
 }

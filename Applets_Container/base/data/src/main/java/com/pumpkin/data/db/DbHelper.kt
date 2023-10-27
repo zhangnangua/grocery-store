@@ -9,5 +9,7 @@ object DbHelper {
 
     fun providesGameDao(application: Application) = MyDataBase.getDataBase(application).gameDao()
 
+    fun providesRecentlyGameDao(application: Application) = MyDataBase.getDataBase(application).recentlyGameDao()
+
 
 }

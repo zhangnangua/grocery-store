@@ -7,11 +7,13 @@ import android.os.Handler
 import android.os.Looper
 import android.os.Message
 import android.util.AttributeSet
+import android.util.Log
 import android.view.Choreographer
 import android.view.Choreographer.FrameCallback
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import com.pumpkin.data.AppUtil
 
 
 /**
@@ -34,10 +36,10 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
         xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
     }
 
-    private val redFish = Fish(PointF(350F, 350F))
+    private val redFish = Fish(PointF(350F, 1350F))
     private val redFishControl = FishControl(redFish, redFish.headPoint)
 
-    private val blackFish = Fish(PointF(650F, 550F)).apply {
+    private val blackFish = Fish(PointF(650F, 1550F)).apply {
         setColor(Color.parseColor("#213555"))
     }
     private val blackFishControl = FishControl(blackFish, blackFish.headPoint)
@@ -82,8 +84,8 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
     }
 
     override fun surfaceDestroyed(holder: SurfaceHolder) {
-        destroy()
         isDestroy = true
+        destroy()
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -108,7 +110,7 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
     private fun destroy() {
         redFishControl.destroy()
         blackFishControl.destroy()
-        renderHandler?.removeDoFrame()
+        renderHandler?.destroy()
     }
 
     internal fun draw() {
@@ -133,6 +135,10 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
                 food.draw(mCanvas!!, foodX, foodY)
             }
 
+        } catch (e: Exception) {
+            if (AppUtil.isDebug) {
+                Log.d(TAG, "draw () ->", e)
+            }
         } finally {
             if (null != mCanvas && !isDestroy) {
                 mHolder.unlockCanvasAndPost(mCanvas)
@@ -141,7 +147,7 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
     }
 
     private fun clearSurface() {
-        mCanvas!!.drawRect(0F, 0F, width.toFloat(), height.toFloat(), clearPaint)
+        mCanvas?.drawRect(0F, 0F, width.toFloat(), height.toFloat(), clearPaint)
     }
 
 
@@ -160,7 +166,13 @@ class RenderHandler(looper: Looper, private val renderThread: RenderThread) : Ha
 
     private var currentCallback: FrameCallback? = null
 
+    @Volatile
+    private var isDestroy = false
+
     fun sendDoFrame(frameTimeNanos: Long) {
+        if (isDestroy){
+            return
+        }
         sendMessage(obtainMessage(MSG_DO_FRAME, frameTimeNanos))
     }
 
@@ -184,7 +196,9 @@ class RenderHandler(looper: Looper, private val renderThread: RenderThread) : Ha
         Choreographer.getInstance().postFrameCallback(currentCallback)
     }
 
-    fun removeDoFrame() {
+    fun destroy() {
+        isDestroy = true
+        looper.quit()
         if (currentCallback != null) {
             val local = currentCallback
             Choreographer.getInstance().removeFrameCallback(local)

@@ -12,9 +12,13 @@ import kotlin.reflect.KProperty
 /**
  * 作者:  pumpkin
  * 描述:  viewBinding委托代理生成
+ *
+ *       使用示例:
+ *       Activity中：val binding by ActivityVB(TestBinding::inflate)
+ *       Fragment中：val binding by FragmentVB(TestBinding::inflate)
  */
 
-internal class ActivityVB<in A : AppCompatActivity, out V : ViewBinding>(
+class ActivityVB<in A : AppCompatActivity, out V : ViewBinding>(
     private val viewBinder: (A) -> V
 ) : ReadOnlyProperty<A, V> {
     private var binding: V? = null

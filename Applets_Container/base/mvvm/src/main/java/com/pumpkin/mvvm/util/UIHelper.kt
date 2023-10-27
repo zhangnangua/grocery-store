@@ -1,10 +1,12 @@
 package com.pumpkin.mvvm.util
 
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import com.pumpkin.data.AppUtil
 import com.pumpkin.mvvm.view.BaseFragment
+import com.pumpkin.ui.util.DeviceParams
 
 object UIHelper {
 
@@ -28,8 +30,54 @@ object UIHelper {
                 transaction.show(oldFragment)
             } else {
                 transaction.add(containerId, newFragment, tag)
-                transaction.commitAllowingStateLoss()
             }
+            transaction.commitAllowingStateLoss()
+        } catch (e: Exception) {
+            if (AppUtil.isDebug) {
+                throw e
+            }
+        }
+    }
+
+    /**
+     * showFragment
+     */
+    fun showFragmentRemove(
+        tag: String?,
+        fragmentManager: FragmentManager,
+        newFragment: Fragment,
+        containerId: Int
+    ) {
+        try {
+            var oldFragment: Fragment? = null
+            val transaction = fragmentManager.beginTransaction()
+            if (tag != null) {
+                oldFragment = fragmentManager.findFragmentByTag(tag)
+            }
+            if (oldFragment != null) {
+                transaction.remove(oldFragment)
+            } else {
+                transaction.add(containerId, newFragment, tag)
+            }
+            transaction.commitAllowingStateLoss()
+        } catch (e: Exception) {
+            if (AppUtil.isDebug) {
+                throw e
+            }
+        }
+    }
+
+    /**
+     * removeFragment
+     */
+    fun removeFragment(
+        fragmentManager: FragmentManager,
+        fragment: Fragment
+    ) {
+        try {
+            val transaction = fragmentManager.beginTransaction()
+            transaction.remove(fragment)
+            transaction.commitAllowingStateLoss()
         } catch (e: Exception) {
             if (AppUtil.isDebug) {
                 throw e
@@ -79,6 +127,13 @@ object UIHelper {
                 throw e
             }
         }
+    }
+
+    fun setStatusHeight(view: View) {
+        //设置状态栏高度
+        val statusBarHeight: Int = DeviceParams.getStatusBarHeight(AppUtil.application)
+        val layoutParams = view.layoutParams
+        layoutParams.height = statusBarHeight
     }
 
 }

@@ -17,6 +17,6 @@
     <item
         android:id="@+id/mine"
         android:enabled="true"
-        android:icon="@drawable/tab_mine_24dp"
-        android:title="@string/tab_mine" />
+        android:icon="@drawable/tab_net_24dp"
+        android:title="@string/tab_net" />
 </menu>

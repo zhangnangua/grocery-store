@@ -37,20 +37,6 @@
         <!--        <item name="android:windowBackground">@color/m3_sys_color_dark_primary</item>-->
     </style>
 
-    <style name="Theme.Main" parent="Theme.Applets_Container">
-        <!--        隐藏状态栏-->
-        <item name="windowActionBar">false</item>
-        <!--        隐藏标题栏-->
-        <item name="windowNoTitle">true</item>
-        <!--        状态栏透明色-->
-        <item name="android:windowTranslucentStatus">false</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-        <!--  状态栏颜色  -->
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <!--  导航栏字体黑色 -->
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
-    </style>
-
     <style name="Bottom.Tab" parent="Theme.Applets_Container">
         <!--    tab 选中 icon   -->
         <item name="colorOnSecondaryContainer">?colorSecondary</item>

@@ -45,15 +45,12 @@ class FBFetch {
                 }
 
                 override fun onError(error: FirebaseRemoteConfigException) {
-                    if (BuildConfig.DEBUG) {
-                        throw error
-                    }
+//                    if (BuildConfig.DEBUG) {
+//                        throw error
+//                    }
                 }
             })
-        } catch (e: Exception) {
-            if (BuildConfig.DEBUG) {
-                throw e
-            }
+        } catch (_: Exception) {
         }
     }
 

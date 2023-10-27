@@ -85,9 +85,9 @@ object WebViewPool {
             }
             try {
                 webView.stopLoading()
-                webView.clearHistory()
                 webView.clearFormData()
                 webView.loadUrl("about:blank")
+                webView.clearHistory()
                 webView.clear()
                 synchronized(stack) {
                     //放回缓存池

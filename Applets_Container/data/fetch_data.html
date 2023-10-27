@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>简单模板示例</title>
+</head>
+
+<body>
+    <h1>动态欢迎消息</h1>
+    <p id="welcome-message"></p>
+
+    <!-- 网页数据抓取 -->
+    <!-- <script>
+        // 在这里定义模板的变量
+        var name = "John";
+
+        // 使用模板字符串生成动态内容
+        var welcomeMessage = `欢迎，${name}`;
+
+        // 将动态内容插入到HTML中
+        document.getElementById("welcome-message").textContent = welcomeMessage;
+
+        // 创建一个函数，用于爬取网页内容和提取数据
+        function webScraper() {
+            // 替换为要爬取的网页URL
+            const url = 'https://yandex.com/games/';
+
+            // 发送HTTP GET请求获取网页内容
+            fetch(url, {
+                mode: 'no-cors'
+            })
+                .then(response => response.text())
+                .then(html => {
+                    // 创建一个DOM解析器
+                    const parser = new DOMParser();
+
+                    // 将HTML字符串解析为DOM文档
+                    const doc = parser.parseFromString(html, 'text/html');
+
+                    // 使用DOM操作提取数据
+                    console.log('doc:', doc);
+
+                    // const result = []
+                    // document.addEventListener('DOMContentLoaded', function () {
+                    //     // 使用querySelectorAll获取所有匹配的li元素
+                    //     const gameItems = document.querySelectorAll('.categorized-grid__game-item');
+
+                    //     // 遍历每个li元素
+                    //     gameItems.forEach((gameItem, index) => {
+                    //         // 在每个li元素内部查找<a>标签、<span>标签和<img>标签
+                    //         const anchorElement = gameItem.querySelector('a');
+                    //         const spanElement = gameItem.querySelector('.game-card__description span');
+                    //         const imgElement = gameItem.querySelector('img');
+
+                    //         // 获取<a>标签的href属性
+                    //         const hrefAttribute = anchorElement.getAttribute('href');
+
+                    //         // 获取<span>标签的文本内容
+                    //         const spanText = spanElement.textContent;
+
+                    //         // 获取<img>标签的alt属性和src属性
+                    //         const imgSrc = imgElement.getAttribute('src');
+
+                    //         // 打印结果
+                    //         result.push({
+                    //             'href':hrefAttribute,
+                    //             'spanText':spanText,
+                    //             'imgSrc':imgSrc
+                    //         })
+                    //     });
+                    // })
+                    const result = []
+                    // 使用querySelectorAll获取所有匹配的li元素
+                    const gameItems = document.querySelectorAll('.categorized-grid__game-item');
+                    // 遍历每个li元素
+                    gameItems.forEach((gameItem, index) => {
+                        // 在每个li元素内部查找<a>标签、<span>标签和<img>标签
+                        const anchorElement = gameItem.querySelector('a');
+                        const spanElement = gameItem.querySelector('.game-card__description span');
+                        const imgElement = gameItem.querySelector('img');
+
+                        // 获取<a>标签的href属性
+                        const hrefAttribute = anchorElement.getAttribute('href');
+
+                        // 获取<span>标签的文本内容
+                        const spanText = spanElement.textContent;
+
+                        // 获取<img>标签的alt属性和src属性
+                        const imgSrc = imgElement.getAttribute('src');
+
+                        // 打印结果
+                        result.push({
+                            'href': hrefAttribute,
+                            'spanText': spanText,
+                            'imgSrc': imgSrc
+                        })
+                    });
+                    // console.log('result:', result);
+
+
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function fetchResult() {
+            const result = []
+            // 使用querySelectorAll获取所有匹配的li元素
+            const gameItems = document.querySelectorAll('.categorized-grid__game-item');
+            // 遍历每个li元素
+            gameItems.forEach((gameItem, index) => {
+                // 在每个li元素内部查找<a>标签、<span>标签和<img>标签
+                const anchorElement = gameItem.querySelector('a');
+                const spanElement = gameItem.querySelector('.game-card__description span');
+                const imgElement = gameItem.querySelector('img');
+
+                // 获取<a>标签的href属性
+                const hrefAttribute = anchorElement.getAttribute('href');
+
+                // 获取<span>标签的文本内容
+                const spanText = spanElement.textContent;
+
+                // 获取<img>标签的alt属性和src属性
+                const imgSrc = imgElement.getAttribute('src');
+
+                // 打印结果
+                result.push({
+                    'href': hrefAttribute,
+                    'spanText': spanText,
+                    'imgSrc': imgSrc
+                })
+            });
+            return result;
+        }
+
+        // 调用爬虫函数
+        fetchResult();
+
+
+    </script> -->
+    <!-- 接口数据抓取 -->
+    <script>
+        const result = []
+        const allNum = 10
+        var num = 0
+
+        // flow 数据抓取
+        function fetch1(url) {
+            // 发送请求获取XML数据
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.data);
+                    // 解析XML数据
+                    // 提取name和link字段,并组成对象的列表
+                    const gameList = data.data.list.map(game => {
+                        return {
+                            id: game.gameInfo.id,
+                            name: game.gameInfo.name,
+                            link: game.gameInfo.link,
+                            describe: game.gameInfo.description,
+                            icon: game.gameInfo.iconPictureLink,
+                            bigIcon: game.gameInfo.cover,
+                            category: game.gameInfo.category
+                        };
+                    });
+
+                    result.push(gameList)
+
+                    console.log(++num)
+
+                    if (num == allNum) {
+                        console.log(JSON.stringify(result));
+                    }
+
+                    // 输出对象的列表
+                    // console.log(JSON.stringify(gameList));
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        // rank 数据抓取
+        function fetchRank(url) {
+            // 发送请求获取XML数据
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.data);
+                    // 解析XML数据
+                    // 提取name和link字段,并组成对象的列表
+                    const gameList = data.data.list.map(game => {
+                        return {
+                            id: game.id,
+                            name: game.name,
+                            link: game.link,
+                            describe: game.description,
+                            icon: game.iconPictureLink,
+                            bigIcon: game.cover,
+                            category: game.category
+                        };
+                    });
+
+                    console.log(JSON.stringify(gameList));
+
+                    // 输出对象的列表
+                    // console.log(JSON.stringify(gameList));
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+        // fetchRank('https://api.ahagamecenter.com/app/game/h5-lobby/rank-list?language=en&is_instant=1&pageNum=0&key=feature&versionCode=10082&versionName=V1.1.4.0&pageSize=30&packageName=net.bat.store&country=US&osVersion=13')
+        // fetchRank('https://api.ahagamecenter.com/app/game/h5-lobby/rank-list?language=en&is_instant=1&pageNum=1&key=feature&versionCode=10082&versionName=V1.1.4.0&pageSize=30&packageName=net.bat.store&country=US&osVersion=13')
+        // fetchRank('https://api.ahagamecenter.com/app/game/h5-lobby/rank-list?language=en&is_instant=1&pageNum=0&key=new&versionCode=10082&versionName=V1.1.4.0&pageSize=30&packageName=net.bat.store&country=US&osVersion=13')
+        // fetchRank('https://api.ahagamecenter.com/app/game/h5-lobby/rank-list?language=en&is_instant=1&pageNum=1&key=new&versionCode=10082&versionName=V1.1.4.0&pageSize=30&packageName=net.bat.store&country=US&osVersion=13')
+
+        fetch1('https://api.ahagamecenter.com/app/game/h5-lobby/for-you/info-flow?pageNum=0&pageSize=10')
+        fetch1('https://api.ahagamecenter.com/app/game/h5-lobby/for-you/info-flow?pageNum=1&pageSize=10')
+        fetch1('https://api.ahagamecenter.com/app/game/h5-lobby/for-you/info-flow?pageNum=2&pageSize=10')
+        fetch1('https://api.ahagamecenter.com/app/game/h5-lobby/for-you/info-flow?pageNum=3&pageSize=10')
+        fetch1('https://api.ahagamecenter.com/app/game/h5-lobby/for-you/info-flow?pageNum=4&pageSize=10')
+        fetch1('https://api.ahagamecenter.com/app/game/h5-lobby/for-you/info-flow?pageNum=5&pageSize=10')
+        fetch1('https://api.ahagamecenter.com/app/game/h5-lobby/for-you/info-flow?pageNum=6&pageSize=10')
+        fetch1('https://api.ahagamecenter.com/app/game/h5-lobby/for-you/info-flow?pageNum=7&pageSize=10')
+        fetch1('https://api.ahagamecenter.com/app/game/h5-lobby/for-you/info-flow?pageNum=8&pageSize=10')
+        fetch1('https://api.ahagamecenter.com/app/game/h5-lobby/for-you/info-flow?pageNum=9&pageSize=10')
+
+    </script>
+</body>
+
+</html>

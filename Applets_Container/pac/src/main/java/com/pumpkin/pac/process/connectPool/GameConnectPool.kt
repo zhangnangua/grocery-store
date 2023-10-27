@@ -34,6 +34,9 @@ object GameConnectPool : ConnectPool<IPACService>(true) {
     }
 
     override fun serviceConnected(service: IBinder?, serviceConnection: ServiceConnection) {
+        //最近游玩数据查询
+
+
         //爬虫 拉取数据
         handle(PACService.PARSE_DATA)
     }

@@ -1,10 +1,9 @@
 package com.pumpkin.pac_core.cache;
 
 import android.text.TextUtils;
-import android.util.Log;
 import android.webkit.MimeTypeMap;
 
-import com.pumpkin.pac_core.BuildConfig;
+import okhttp3.Response;
 
 /**
  * Created by yale on 2018/1/9.
@@ -48,14 +47,25 @@ public class MimeTypeMapUtils {
     }
 
     public static String getMimeTypeFromUrl(String url) {
-        String extension = getFileExtensionFromUrl(url);
-        if (TextUtils.isEmpty(extension)) {
-            if (BuildConfig.DEBUG) {
-                Log.d(TAG, "getMimeTypeFromUrl: parsing error " + url);
-            }
-            extension = "html";
-        }
+        final String extension = getFileExtensionFromUrl(url);
         return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+    }
+
+    public static String getMimeTypeFromUrl(String url, Response response) {
+        final String extension = getFileExtensionFromUrl(url);
+        String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+        if (TextUtils.isEmpty(mimeType)) {
+            final String contentType = response.header("Content-Type");
+            if (contentType == null || TextUtils.isEmpty(contentType)) {
+                //无法正确的获取到mime type 会导致未知错误 故不使用该资源
+                return null;
+            }
+            final String[] content = contentType.split(";");
+            if (content.length > 0) {
+                mimeType = content[0];
+            }
+        }
+        return mimeType;
     }
 
     public static String getMimeTypeFromExtension(String extension) {

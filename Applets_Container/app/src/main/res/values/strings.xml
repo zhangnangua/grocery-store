@@ -4,4 +4,10 @@
     <string name="tab_home">Home</string>
     <string name="tab_offline">Offline</string>
     <string name="tab_mine">Mine</string>
+    <string name="tab_net">World</string>
+
+
+    <string name="top_picks_for_you">Top Picks For You</string>
+    <string name="recently_play">Recently Play</string>
+
 </resources>

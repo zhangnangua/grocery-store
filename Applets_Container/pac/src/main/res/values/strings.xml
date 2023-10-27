@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">pac</string>
+
+    <string name="loading">Loading %s %%</string>
 </resources>

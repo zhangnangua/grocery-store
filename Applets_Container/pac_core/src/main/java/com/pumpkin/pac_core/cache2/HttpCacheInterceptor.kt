@@ -1,6 +1,8 @@
 package com.pumpkin.pac_core.cache2
 
 import android.text.TextUtils
+import android.util.Log
+import com.pumpkin.pac_core.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -14,6 +16,9 @@ class HttpCacheInterceptor : Interceptor {
         val request = chain.request()
         val cache = request.header(CACHE_REQUEST_HEAD)
         val originResponse = chain.proceed(request)
+        if (BuildConfig.DEBUG) {
+            Log.d(TAG, "intercept () -> url is ${request.url} , code is ${originResponse.code} , cache is $cache , method is ${request.method}")
+        }
         return if (!TextUtils.isEmpty(cache) && cache == CACHE_FALSE) {
             originResponse
         } else {
@@ -27,5 +32,7 @@ class HttpCacheInterceptor : Interceptor {
         const val CACHE_REQUEST_HEAD = "CACHE_REQUEST_KEY"
         const val CACHE_TRUE = "true"
         const val CACHE_FALSE = "false"
+
+        private const val TAG = "HttpCacheInterceptor"
     }
 }

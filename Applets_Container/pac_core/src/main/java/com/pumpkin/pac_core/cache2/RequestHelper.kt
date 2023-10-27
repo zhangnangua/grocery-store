@@ -6,22 +6,14 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import com.pumpkin.pac_core.BuildConfig
 import com.pumpkin.pac_core.cache.MimeTypeMapUtils
-import com.pumpkin.pac_core.cache.NetUtils
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
-import okhttp3.ResponseBody
+import okhttp3.*
 import java.io.*
+import java.util.*
 
 object RequestHelper {
     private const val TAG = "RequestHelper"
 
-    fun request(
-        request: WebResourceRequest,
-        url: String,
-        okHttpClient: OkHttpClient,
-        extraHeaders: Map<String, String>?
-    ): Response {
+    fun request(request: WebResourceRequest, url: String, okHttpClient: OkHttpClient, extraHeaders: Map<String, String>?): Response {
         val builder = Request.Builder().url(url).also { requestBuilder ->
             request.requestHeaders?.forEach(action = { entry ->
                 val key = entry.key
@@ -34,9 +26,55 @@ object RequestHelper {
                 requestBuilder.addHeader(it.key, it.value)
             }
         }
+        if (BuildConfig.DEBUG) {
+            Log.d(TAG, "request () -> header is ${request.requestHeaders} , url is ${request.url}")
+        }
         //request
         return okHttpClient.newCall(builder.build()).execute()
     }
+
+    fun resourceResponseByResponse(response: Response, url: String): WebResourceResponse? {
+        val mimeType = MimeTypeMapUtils.getMimeTypeFromUrl(url, response) ?: return null
+        val webResourceResponse = WebResourceResponse(mimeType, "utf-8", response.body?.byteStream())
+        var message = response.message
+        if (TextUtils.isEmpty(message)) {
+            message = "OK"
+        }
+        try {
+            webResourceResponse.setStatusCodeAndReasonPhrase(response.code, message)
+        } catch (e: Exception) {
+            return null
+        }
+
+        // headers
+        if (BuildConfig.DEBUG) {
+            val startTime = System.currentTimeMillis()
+            val headersToMap = headersToMap(response.headers)
+            webResourceResponse.responseHeaders = headersToMap
+            val endTime = System.currentTimeMillis()
+            Log.d(TAG, "NetUtils.multimapToSingle(response.headers.toMultimap()): execute time is ${endTime - startTime} ， headers is $headersToMap")
+        } else {
+            webResourceResponse.responseHeaders = headersToMap(response.headers)
+        }
+        return webResourceResponse
+    }
+
+    fun emptyWebResource() = WebResourceResponse("text/plain", "utf-8", null)
+
+    private fun headersToMap(headers: Headers): Map<String, String> {
+        val result = HashMap<String, String>()
+        for (i in 0 until headers.size) {
+            val name = headers.name(i).lowercase(Locale.US)
+            val lastValue = result[name]
+            var value = headers.value(i)
+            if (lastValue != null) {
+                value = "$lastValue;$value"
+            }
+            result[name] = value
+        }
+        return result
+    }
+
 
     fun saveFile(body: ResponseBody, targetFile: File) {
         val buf = ByteArray(1024 * 4)
@@ -110,34 +148,4 @@ object RequestHelper {
         return null
     }
 
-
-    fun resourceResponseByResponse(response: Response, url: String): WebResourceResponse? {
-//        val mimeType = MimeTypeMapUtils.getMimeTypeFromUrl(url)
-        val webResourceResponse = WebResourceResponse("", "", response.body?.byteStream())
-        var message = response.message
-        if (TextUtils.isEmpty(message)) {
-            message = "OK"
-        }
-        try {
-            webResourceResponse.setStatusCodeAndReasonPhrase(response.code, message)
-        } catch (e: Exception) {
-            return null
-        }
-
-        // TODO: 需要  但是需要对它进行优化
-        if (BuildConfig.DEBUG) {
-            val startTime = System.currentTimeMillis()
-            webResourceResponse.responseHeaders =
-                NetUtils.multimapToSingle(response.headers.toMultimap())
-            val endTime = System.currentTimeMillis()
-            Log.d(
-                TAG,
-                "NetUtils.multimapToSingle(response.headers.toMultimap()): execute time is ${endTime - startTime}"
-            )
-        } else {
-            webResourceResponse.responseHeaders =
-                NetUtils.multimapToSingle(response.headers.toMultimap())
-        }
-        return webResourceResponse
-    }
 }

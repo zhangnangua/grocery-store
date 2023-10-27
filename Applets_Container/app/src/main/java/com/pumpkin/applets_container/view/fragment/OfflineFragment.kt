@@ -1,4 +1,4 @@
-package com.pumpkin.applets_container.view
+package com.pumpkin.applets_container.view.fragment
 
 import android.view.View
 import com.pumpkin.applets_container.databinding.FragmentOfflineBinding
