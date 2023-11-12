@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.pumpkin.applets_container.databinding.FragmentHomeBinding
 import com.pumpkin.applets_container.helper.HomeScrollPlayHelper
-import com.pumpkin.applets_container.view.adapter.HomeFlowAdapter
 import com.pumpkin.applets_container.view.vh.BigCardVH
 import com.pumpkin.applets_container.viewmodel.HomeViewModel
 import com.pumpkin.applets_container.viewmodel.MainViewModel
 import com.pumpkin.data.AppUtil
+import com.pumpkin.mvvm.adapter.BasePagerAdapter
 import com.pumpkin.mvvm.adapter.FooterAdapter
 import com.pumpkin.mvvm.util.UIHelper
 import com.pumpkin.mvvm.view.SuperMultiStateBaseFragment
@@ -34,7 +34,7 @@ class HomeFragment : SuperMultiStateBaseFragment() {
         PACViewModelProviders.of(activity ?: this)[MainViewModel::class.java]
     }
 
-    private lateinit var flowAdapter: HomeFlowAdapter
+    private lateinit var flowAdapter: BasePagerAdapter
 
     lateinit var binding: FragmentHomeBinding
 
@@ -54,7 +54,7 @@ class HomeFragment : SuperMultiStateBaseFragment() {
         //rv
         val spanCount = 2
         val rv = binding.rv
-        flowAdapter = HomeFlowAdapter(localContext, Glide.with(localContext))
+        flowAdapter = BasePagerAdapter(Glide.with(localContext), localContext)
         val layoutManager = GridLayoutManager(localContext, spanCount).apply {
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int {

@@ -1,65 +1,37 @@
 package com.pumpkin.mvvm.adapter
 
 import android.content.Context
-import android.util.ArrayMap
-import android.util.Log
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
-import com.pumpkin.data.AppUtil
+import androidx.viewbinding.ViewBinding
+import com.bumptech.glide.RequestManager
 
-abstract class BasePagerAdapter(private val context: Context?) :
-    PagingDataAdapter<AdapterWrapBean, RecyclerView.ViewHolder>(COMPARATOR),
-    IVHProvider {
-
-    private val vhSets = ArrayMap<Int, IVHAdapter>()
-
-    private var init = false
-
-    private fun internalProviderVH(context: Context?) {
-        vhSets.clear()
-        val providers = provider(context)
-        providers.forEach {
-            vhSets[it.key] = it.value
-            if (AppUtil.isDebug) {
-                Log.d(TAG, "internalProviderVH () -> ${it.key}  &&  ${it.value}")
-            }
-        }
-
-    }
+class BasePagerAdapter(private val requestManager: RequestManager, private val context: Context?) :
+    PagingDataAdapter<AdapterWrapBean, BaseVH<Any, ViewBinding>>(COMPARATOR) {
 
     override fun getItemViewType(position: Int): Int =
         getItem(position)?.type ?: super.getItemViewType(position)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if (AppUtil.isDebug) {
-            Log.d(TAG, "internalProviderVH () -> $vhSets")
-        }
-        checkInit()
-        val vh = vhSets[viewType] ?: throw IllegalStateException("illegal view type .")
-        return vh.onCreateViewHolder(parent, viewType)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseVH<Any, ViewBinding> {
+        return TypeHelper.getVH(viewType, parent.context, parent, requestManager)
+            ?: throw IllegalStateException("illegal view type .")
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BaseVH<Any, ViewBinding>, position: Int) {
         val wrapBean = try {
             getItem(position)
         } catch (e: Exception) {
             null
         }
-        checkInit()
         if (wrapBean != null) {
-            val ivhAdapter =
-                vhSets[wrapBean.type] ?: throw IllegalStateException("illegal view type .")
-            ivhAdapter.onBindViewHolder(wrapBean.data, holder, position)
+            holder.bindViewHolder(wrapBean.data, holder.binding, position, context, requestManager)
         }
     }
 
-    private fun checkInit() {
-        if (!init) {
-            internalProviderVH(context)
-            init = true
-        }
+    override fun onViewRecycled(holder: BaseVH<Any, ViewBinding>) {
+        super.onViewRecycled(holder)
+        holder.onViewRecycled()
     }
 
     companion object {

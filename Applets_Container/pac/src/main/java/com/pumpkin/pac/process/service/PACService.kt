@@ -10,13 +10,6 @@ import com.pumpkin.pac.ICallback
 import com.pumpkin.pac.IPACService
 import com.pumpkin.pac.process.ProcessUtil
 import com.pumpkin.parse.ParseEngine
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.launch
 
 /**
  * pac 进程的预热service
@@ -37,7 +30,7 @@ class PACService : Service() {
                         ",action is $action").toLogD(TAG)
             }
             when (action) {
-                PARSE_DATA -> parseData(callback)
+                TYPE_PARSE_DATA -> parseData(callback)
             }
 
         }
@@ -53,17 +46,20 @@ class PACService : Service() {
 //                    .collect()
 //            }
             // todo 爬虫测试  需要切换到主线程
-            ThreadHelper.runOnUiThread{
+            ThreadHelper.runOnUiThread {
                 ParseEngine(AppUtil.application).loadUrl("https://yandex.com/games/")
             }
-            callback?.callback(RESULT_SUCCESS, PARSE_DATA, "")
+            callback?.callback(RESULT_SUCCESS, TYPE_PARSE_DATA, "")
         }
 
     }
 
     companion object {
         //爬取数据开始
-        const val PARSE_DATA = "parse.data"
+        const val TYPE_PARSE_DATA = "parse.data"
+
+        //最近游玩数据变动监听
+        const val TYPE_LISTENER_RECENTLY_DATA = "listener.recently.data"
 
         //result
         const val RESULT_SUCCESS = 1

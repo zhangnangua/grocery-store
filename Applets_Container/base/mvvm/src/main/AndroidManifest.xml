@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.pumpkin.mvvm">
-
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.pumpkin.mvvm">
+    <application>
+        <provider
+            android:exported="false"
+            android:authorities="${applicationId}.eventbus"
+            android:name=".provider.EventBusProvider"/>
+    </application>
 </manifest>

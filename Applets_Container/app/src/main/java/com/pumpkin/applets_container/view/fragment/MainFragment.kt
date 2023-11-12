@@ -13,7 +13,6 @@ import com.pumpkin.data.AppUtil
 import com.pumpkin.mvvm.util.Constant
 import com.pumpkin.mvvm.util.UIHelper
 import com.pumpkin.mvvm.view.BaseFragment
-import com.pumpkin.pac_core.cache2.RequestHelper
 
 
 class MainFragment : BaseFragment() {

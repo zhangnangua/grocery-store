@@ -3,33 +3,26 @@ package com.pumpkin.applets_container.view.vh
 import android.content.Context
 import android.text.TextUtils
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.ViewGroup
 import com.bumptech.glide.RequestManager
 import com.pumpkin.applets_container.R
 import com.pumpkin.applets_container.databinding.VhCarouselItemBinding
 import com.pumpkin.data.AppUtil
-import com.pumpkin.mvvm.adapter.BaseVHAdapter
+import com.pumpkin.mvvm.adapter.BaseVH
 import com.pumpkin.pac.bean.GameEntity
 import com.pumpkin.pac.util.GameHelper
 
-/**
- * 旋转木马VH
- */
-class CarouselItemVH(private val context: Context?,private val requestManager: RequestManager) :
-    BaseVHAdapter<GameEntity, VhCarouselItemBinding>() {
+class CarouselItemVH(binding: VhCarouselItemBinding,
+                     context: Context?,
+                     requestManager: RequestManager)
+    : BaseVH<GameEntity, VhCarouselItemBinding>(binding, context, requestManager) {
 
-    override fun createViewHolder(parent: ViewGroup): CommonVH<VhCarouselItemBinding> {
-        val binding = VhCarouselItemBinding.inflate(LayoutInflater.from(context), parent, false)
-        return CommonVH(binding)
-    }
-
-    override fun bindViewHolder(data: GameEntity?, binding: VhCarouselItemBinding, position: Int) {
+    override fun bindViewHolder(data: GameEntity?, binding: VhCarouselItemBinding, position: Int, context: Context?, requestManager: RequestManager) {
         if (AppUtil.isDebug) {
-            Log.d(TAG, "bindViewHolder () ->  $data")
+            Log.d(TAG, "CarouselItemVH bindViewHolder () ->  $data")
         }
         if (data != null && context != null) {
-            requestManager.load(if (TextUtils.isEmpty(data.bigIcon)) data.icon else data.bigIcon)
+            requestManager
+                .load(if (TextUtils.isEmpty(data.bigIcon)) data.icon else data.bigIcon)
                 .into(binding.carouselImageView)
 
             binding.root.setOnClickListener {
@@ -38,8 +31,16 @@ class CarouselItemVH(private val context: Context?,private val requestManager: R
         }
     }
 
+    override fun customBinding(binding: VhCarouselItemBinding, context: Context?, requestManager: RequestManager) {
+
+    }
+
+    override fun onViewRecycled() {
+
+    }
+
     companion object {
         const val TAG = "CarouselVH"
-        const val TYPE = R.id.vh_big_card
+        const val TYPE = R.id.vh_carousel
     }
 }

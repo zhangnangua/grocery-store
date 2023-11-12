@@ -1,24 +1,29 @@
 package com.pumpkin.applets_container.view.vh
 
 import android.content.Context
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import com.bumptech.glide.RequestManager
 import com.pumpkin.applets_container.R
 import com.pumpkin.applets_container.bean.TitleEntity
 import com.pumpkin.applets_container.databinding.VhTitleBinding
-import com.pumpkin.mvvm.adapter.BaseVHAdapter
+import com.pumpkin.mvvm.adapter.BaseVH
 
-class TitleVH(private val context: Context?) :
-    BaseVHAdapter<TitleEntity, VhTitleBinding>() {
-    override fun createViewHolder(parent: ViewGroup): CommonVH<VhTitleBinding> {
-        val binding = VhTitleBinding.inflate(LayoutInflater.from(context), parent, false)
-        return CommonVH(binding)
-    }
+class TitleVH(binding: VhTitleBinding,
+              context: Context?,
+              requestManager: RequestManager)
+    : BaseVH<TitleEntity, VhTitleBinding>(binding, context, requestManager) {
 
-    override fun bindViewHolder(data: TitleEntity?, binding: VhTitleBinding, position: Int) {
+    override fun bindViewHolder(data: TitleEntity?, binding: VhTitleBinding, position: Int, context: Context?, requestManager: RequestManager) {
         if (data != null && context != null) {
             binding.tvTitle.text = data.title
         }
+    }
+
+    override fun customBinding(binding: VhTitleBinding, context: Context?, requestManager: RequestManager) {
+
+    }
+
+    override fun onViewRecycled() {
+
     }
 
     companion object {

@@ -1,76 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?><!--    style="?attr/materialCardViewFilledStyle"-->
 <!--    app:cardForegroundColor="@android:color/transparent"-->
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="4dp"
-    android:layout_marginEnd="4dp"
-    android:layout_marginBottom="8dp"
-    app:cardElevation="3dp"
-    app:shapeAppearance="?attr/shapeAppearanceMediumComponent"
-    app:strokeWidth="0dp">
+    android:orientation="vertical">
 
-    <FrameLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="4dp"
+        app:cardElevation="3dp"
+        app:shapeAppearance="?attr/shapeAppearanceMediumComponent"
+        app:strokeWidth="0dp">
 
-        <!-- Media -->
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/big_icon"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="252dp"
-            android:scaleType="fitCenter"
-            tools:srcCompat="@drawable/ic_loading" />
+            android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_gravity="bottom"
-            android:background="@drawable/vh_card_bottom_mark_bg"
-            android:orientation="vertical">
-
+            <!-- Media -->
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/icon"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginStart="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:id="@+id/big_icon"
+                android:layout_width="match_parent"
+                android:layout_height="252dp"
+                android:scaleType="fitXY"
+                tools:srcCompat="@drawable/ic_loading" />
 
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="4dp"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:gravity="start|center_vertical"
-                android:textAppearance="?attr/textAppearanceTitleSmall"
-                android:textColor="#ffffffff"
-                app:layout_constraintBottom_toTopOf="@id/secondary_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/icon"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="title" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/vh_card_bottom_mark_bg"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/secondary_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/title"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textAppearance="?attr/textAppearanceLabelSmall"
-                android:textColor="#ffffffff"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@id/title"
-                app:layout_constraintTop_toBottomOf="@id/title"
-                tools:text="secondary_text" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </FrameLayout>
-</com.google.android.material.card.MaterialCardView>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icon"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="4dp"
+                    android:ellipsize="end"
+                    android:gravity="start|center_vertical"
+                    android:maxLines="2"
+                    android:textAppearance="?attr/textAppearanceTitleSmall"
+                    android:textColor="#ffffffff"
+                    app:layout_constraintBottom_toTopOf="@id/secondary_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/icon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="title" />
+
+                <TextView
+                    android:id="@+id/secondary_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/title"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textAppearance="?attr/textAppearanceLabelSmall"
+                    android:textColor="#ffffffff"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/title"
+                    app:layout_constraintTop_toBottomOf="@id/title"
+                    tools:text="secondary_text" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+</LinearLayout>
 

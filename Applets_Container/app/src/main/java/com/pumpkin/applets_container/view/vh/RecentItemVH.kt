@@ -1,26 +1,21 @@
 package com.pumpkin.applets_container.view.vh
 
 import android.content.Context
-import android.view.LayoutInflater
-import android.view.ViewGroup
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.pumpkin.applets_container.R
 import com.pumpkin.applets_container.databinding.VhRecentItemBinding
-import com.pumpkin.mvvm.adapter.BaseVHAdapter
+import com.pumpkin.mvvm.adapter.BaseVH
 import com.pumpkin.pac.bean.GameEntity
 import com.pumpkin.pac.util.GameHelper
 import com.pumpkin.ui.util.dpToPx
 
-class RecentItemVH(private val context: Context?, private val requestManager: RequestManager) :
-    BaseVHAdapter<GameEntity, VhRecentItemBinding>() {
+class RecentItemVH(binding: VhRecentItemBinding,
+                   context: Context?,
+                   requestManager: RequestManager)
+    : BaseVH<GameEntity, VhRecentItemBinding>(binding, context, requestManager) {
 
-    override fun createViewHolder(parent: ViewGroup): CommonVH<VhRecentItemBinding> {
-        val binding = VhRecentItemBinding.inflate(LayoutInflater.from(context), parent, false)
-        return CommonVH(binding)
-    }
-
-    override fun bindViewHolder(data: GameEntity?, binding: VhRecentItemBinding, position: Int) {
+    override fun bindViewHolder(data: GameEntity?, binding: VhRecentItemBinding, position: Int, context: Context?, requestManager: RequestManager) {
         if (data != null && context != null) {
             requestManager
                 .load(data.icon)
@@ -31,6 +26,14 @@ class RecentItemVH(private val context: Context?, private val requestManager: Re
                 GameHelper.openGame(context, data)
             }
         }
+    }
+
+    override fun customBinding(binding: VhRecentItemBinding, context: Context?, requestManager: RequestManager) {
+
+    }
+
+    override fun onViewRecycled() {
+
     }
 
     companion object {
