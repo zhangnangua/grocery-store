@@ -13,4 +13,24 @@
     <color name="colorPrimary">@color/md_theme_light_primary</color>
     <color name="colorOnPrimary">@color/md_theme_light_onPrimary</color>
     <color name="colorPrimaryContainer">@color/md_theme_light_primaryContainer</color>
+    <color name="colorSecondary">@color/md_theme_light_secondary</color>
+    <color name="colorOnSecondary">@color/md_theme_light_onSecondary</color>
+    <color name="colorSecondaryContainer">@color/md_theme_light_secondaryContainer</color>
+    <color name="colorOnSecondaryContainer">@color/md_theme_light_onSecondaryContainer</color>
+    <color name="colorTertiary">@color/md_theme_light_tertiary</color>
+    <color name="colorOnTertiary">@color/md_theme_light_onTertiary</color>
+    <color name="colorTertiaryContainer">@color/md_theme_light_tertiaryContainer</color>
+    <color name="colorOnTertiaryContainer">@color/md_theme_light_onTertiaryContainer</color>
+    <color name="colorError">@color/md_theme_light_error</color>
+    <color name="colorErrorContainer">@color/md_theme_light_errorContainer</color>
+    <color name="colorOnError">@color/md_theme_light_onError</color>
+    <color name="colorOnErrorContainer">@color/md_theme_light_onErrorContainer</color>
+    <color name="colorOnBackground">@color/md_theme_light_onBackground</color>
+    <color name="colorOnSurface">@color/md_theme_light_onSurface</color>
+    <color name="colorSurfaceVariant">@color/md_theme_light_surfaceVariant</color>
+    <color name="colorOnSurfaceVariant">@color/md_theme_light_onSurfaceVariant</color>
+    <color name="colorOutline">@color/md_theme_light_outline</color>
+    <color name="colorOnSurfaceInverse">@color/md_theme_light_inverseOnSurface</color>
+    <color name="colorSurfaceInverse">@color/md_theme_light_inverseSurface</color>
+    <color name="colorPrimaryInverse">@color/md_theme_light_inversePrimary</color>
 </resources>

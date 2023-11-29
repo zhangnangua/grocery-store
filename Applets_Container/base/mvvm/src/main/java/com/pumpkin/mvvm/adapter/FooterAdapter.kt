@@ -29,7 +29,6 @@ class FooterAdapter(val retry: (() -> Unit)? = null) :
             }
             is LoadState.NotLoading -> {
                 binding.progress.visibility = View.GONE
-                binding.progress.visibility = View.GONE
             }
         }
     }

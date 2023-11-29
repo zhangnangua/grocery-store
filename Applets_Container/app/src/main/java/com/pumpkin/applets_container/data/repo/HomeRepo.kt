@@ -63,7 +63,7 @@ object HomeRepo : BasePageRepo(BigCardPagingSource()) {
             }
 
             // TODO: 模拟延时处理
-            delay(2000)
+//            delay(2000)
 
             if (AppUtil.isDebug) {
                 Log.d(TAG, "load () -> excludeIds is $excludeIds , data is $gameEntities .")

@@ -10,4 +10,6 @@
     <string name="top_picks_for_you">Top Picks For You</string>
     <string name="recently_play">Recently Play</string>
 
+    <string name="common_loading">Loading</string>
+
 </resources>

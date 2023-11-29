@@ -92,38 +92,6 @@ class ResourceInterceptionGlobal(val context: Context, private val rootUrl: Stri
 
         if (request.method == "GET" && cacheEnable) {
             extraHeaders[HttpCacheInterceptor.CACHE_REQUEST_HEAD] = HttpCacheInterceptor.CACHE_TRUE
-            //can cache
-//            val fileExtensionFromUrl = MimeTypeMapUtils.getFileExtensionFromUrl(url)
-//            if (TextUtils.isEmpty(fileExtensionFromUrl)) {
-//                extraHeaders[HttpCacheInterceptor.CACHE_REQUEST_HEAD] =
-//                    HttpCacheInterceptor.CACHE_FALSE
-//            } else {
-//                extraHeaders[HttpCacheInterceptor.CACHE_REQUEST_HEAD] =
-//                    HttpCacheInterceptor.CACHE_TRUE
-//            }
-            //find cache resource
-//            val filePath = InterceptorHelper.urlToPath(context, url, rootUrl)
-//            if (filePath != null) {
-//                val file = File(filePath)
-//
-//                return if (file.exists()) {
-//                    if (BuildConfig.DEBUG) {
-//                        Log.d(TAG, "internalIntercept: file exists $filePath . url is $url")
-//                    }
-//                    //intercept
-//                    RequestHelper.resourceResponseByFile(request, url, file)
-//                } else {
-//                    if (BuildConfig.DEBUG) {
-//                        Log.d(TAG, "internalIntercept: file not exists $filePath . url is $url")
-//                    }
-//                    //no find download
-//                    val response = RequestHelper.request(request, url, okHttpClient)
-//                    //save
-//                    RequestHelper.saveFile(response.body!!, file)
-//                    RequestHelper.resourceResponseByFile(request, url, file)
-//                }
-//            }
-            //no cache
         }
         if (BuildConfig.DEBUG) {
             Log.d(TAG, "real cache is ${extraHeaders[HttpCacheInterceptor.CACHE_REQUEST_HEAD]} , url is $url . method is ${request.method}")

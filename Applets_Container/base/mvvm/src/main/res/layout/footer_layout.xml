@@ -5,10 +5,10 @@
     android:paddingTop="16dp"
     android:paddingBottom="16dp">
 
-    <com.google.android.material.progressindicator.CircularProgressIndicator
+    <com.pumpkin.mvvm.widget.loading.LoadingView
         android:id="@+id/progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_gravity="center"
         android:indeterminate="true" />
 </FrameLayout>

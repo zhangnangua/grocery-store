@@ -8,6 +8,7 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.pumpkin.applets_container.databinding.FragmentHomeBinding
+import com.pumpkin.applets_container.databinding.LayoutLoadingBinding
 import com.pumpkin.applets_container.helper.HomeScrollPlayHelper
 import com.pumpkin.applets_container.view.vh.BigCardVH
 import com.pumpkin.applets_container.viewmodel.HomeViewModel
@@ -18,6 +19,7 @@ import com.pumpkin.mvvm.adapter.FooterAdapter
 import com.pumpkin.mvvm.util.UIHelper
 import com.pumpkin.mvvm.view.SuperMultiStateBaseFragment
 import com.pumpkin.mvvm.viewmodel.PACViewModelProviders
+import com.pumpkin.ui.widget.MultiStateView
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
@@ -34,15 +36,17 @@ class HomeFragment : SuperMultiStateBaseFragment() {
         PACViewModelProviders.of(activity ?: this)[MainViewModel::class.java]
     }
 
+    private var isLoading = true
+
     private lateinit var flowAdapter: BasePagerAdapter
 
     lateinit var binding: FragmentHomeBinding
 
     override fun initView(view: View) {
         val localContext = context ?: return
-        binding = FragmentHomeBinding.inflate(layoutInflater)
-        setPACContentView(binding.root)
-
+        fillView()
+        switchState(MultiStateView.ViewState.LOADING)
+        isLoading = true
         //设置 状态栏 高度
         UIHelper.setStatusHeight(binding.statusBar)
 
@@ -81,10 +85,18 @@ class HomeFragment : SuperMultiStateBaseFragment() {
             //比如处理下拉刷新逻辑
             when (it.refresh) {
                 is LoadState.NotLoading -> {
-
+                    if (AppUtil.isDebug) {
+                        Log.d(TAG, "LoadStateListener: NotLoading ${it.append.endOfPaginationReached} , ${it.prepend.endOfPaginationReached}")
+                    }
+                    if (isLoading) {
+                        switchState(MultiStateView.ViewState.CONTENT)
+                        isLoading = false
+                    }
                 }
                 is LoadState.Loading -> {
-
+                    if (AppUtil.isDebug) {
+                        Log.d(TAG, "LoadStateListener: loading")
+                    }
                 }
                 is LoadState.Error -> {
                     if (AppUtil.isDebug) {
@@ -109,6 +121,12 @@ class HomeFragment : SuperMultiStateBaseFragment() {
                     flowAdapter.submitData(it)
                 }.collect()
         }
+    }
+
+    private fun fillView() {
+        binding = FragmentHomeBinding.inflate(layoutInflater)
+        setBaseContentForState(LayoutLoadingBinding.inflate(layoutInflater).root, MultiStateView.ViewState.LOADING)
+        setPACContentView(binding.root)
     }
 
     companion object {
