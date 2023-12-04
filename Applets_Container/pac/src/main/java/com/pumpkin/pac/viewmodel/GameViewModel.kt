@@ -1,12 +1,15 @@
 package com.pumpkin.pac.viewmodel
 
+import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pumpkin.data.AppUtil
 import com.pumpkin.pac.bean.GameEntity
 import com.pumpkin.pac.repo.GameRepo
 import com.pumpkin.pac.util.GameProgressHelper
-import com.pumpkin.pac_core.cache2.ResourceInterceptionGlobal
+import com.pumpkin.webCache.WVCacheClient
+import com.pumpkin.webCache.interceptors.AdvertiseInterceptor
 import kotlinx.coroutines.launch
 
 class GameViewModel : ViewModel() {
@@ -15,12 +18,16 @@ class GameViewModel : ViewModel() {
 
     private val progressHelper = GameProgressHelper()
 
-    internal var interceptionGlobal: ResourceInterceptionGlobal? = null
+    private var cacheClient: WVCacheClient? = null
+
 
     fun attach(gameEntity: GameEntity) {
         gameRepo = GameRepo(gameEntity)
-        interceptionGlobal = ResourceInterceptionGlobal(AppUtil.application, gameEntity.link)
-        interceptionGlobal!!.cacheEnable = true
+        cacheClient = WVCacheClient.Builder(AppUtil.application)
+            .originUrl(gameEntity.link)
+            .addInterceptor(AdvertiseInterceptor())
+            .dynamicAbility()
+            .build()
     }
 
     fun getGameEntity() = gameRepo?.gameEntity
@@ -38,6 +45,9 @@ class GameViewModel : ViewModel() {
             progressHelper.progressFinished()
         }
     }
+
+    fun resInterceptor(request: WebResourceRequest?): WebResourceResponse? =
+        cacheClient?.engine?.interceptRequest(request)
 
     suspend fun recordToRecently() {
         gameRepo?.recordToRecently()

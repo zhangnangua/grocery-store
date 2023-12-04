@@ -6,7 +6,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.pumpkin.data.db.entity.GameTable
 import com.pumpkin.mvvm.util.Event
-import com.pumpkin.pac_core.cache2.MD5Utils
+import com.pumpkin.webCache.util.MD5Utils
 
 /**
  * id 、name、icon is required parameters.

@@ -130,7 +130,7 @@ class PACActivity : BaseActivity() {
                     view: WebView?,
                     request: WebResourceRequest?
                 ): WebResourceResponse? {
-                    return gameViewModel.interceptionGlobal?.intercept(view, request)
+                    return gameViewModel.resInterceptor(request)
                 }
 
                 override fun shouldOverrideUrlLoading(

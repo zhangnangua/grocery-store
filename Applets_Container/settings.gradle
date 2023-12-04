@@ -15,6 +15,7 @@ include ':base:data'
 include ':base:mvvm'
 include ':base:ui'
 
+include ':web_cache'
 include ':pac_core'
 include ':pac'
 include ':parse'

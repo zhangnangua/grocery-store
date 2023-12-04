@@ -1,30 +1,34 @@
-package com.pumpkin.pac_core.cache2
+package com.pumpkin.webCache.requestHelper
 
-import android.text.TextUtils
 import android.util.Log
-import com.pumpkin.pac_core.BuildConfig
+import androidx.viewbinding.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 
 /**
  * 增加开启请求头缓存能力
  */
-class HttpCacheInterceptor : Interceptor {
-
+class HttpCacheInterceptor(private val c: InterceptorConfig) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
-        val cache = request.header(CACHE_REQUEST_HEAD)
         val originResponse = chain.proceed(request)
-        if (BuildConfig.DEBUG) {
-            Log.d(TAG, "intercept () -> url is ${request.url} , code is ${originResponse.code} , cache is $cache , method is ${request.method}")
-        }
-        return if (!TextUtils.isEmpty(cache) && cache == CACHE_FALSE) {
+        return if (!c.isCache(request.url.toString())) {
+
+            if (BuildConfig.DEBUG) {
+                Log.d(TAG, "intercept () -> url is ${request.url} , code is ${originResponse.code} ,no cache")
+            }
+
             originResponse
         } else {
-            //默认有效时间100一年
+
+            if (BuildConfig.DEBUG) {
+                Log.d(TAG, "intercept () -> url is ${request.url} , code is ${originResponse.code} , cache ")
+            }
+
+
             originResponse.newBuilder().removeHeader("pragma").removeHeader("Cache-Control")
-                .header("Cache-Control", "max-age=3153600000").build()
+                .header("Cache-Control", c.cacheDay()).build()
         }
     }
 

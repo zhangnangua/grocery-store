@@ -1,8 +1,9 @@
-package com.pumpkin.pac_core.cache2
+package com.pumpkin.webCache.requestHelper
 
 import android.content.Context
 import android.net.Uri
 import android.text.TextUtils
+import com.pumpkin.webCache.util.MD5Utils
 import java.io.File
 
 /**
@@ -15,9 +16,9 @@ object InterceptorHelper {
     private const val FILE_SUFFIX = ".pac"
 
     /**
-     * 默认5个G
+     * 默认1个G
      */
-    const val CACHE_SIZE = 5 * 1024 * 1024 * 1024L
+    const val CACHE_SIZE = 1 * 1024 * 1024 * 1024L
 
     fun destinationFolder(context: Context, rootUrl: String?): String? {
         val zipId = zipId(rootUrl) ?: return null

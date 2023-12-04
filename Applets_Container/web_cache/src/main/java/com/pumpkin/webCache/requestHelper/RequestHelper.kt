@@ -1,11 +1,11 @@
-package com.pumpkin.pac_core.cache2
+package com.pumpkin.webCache.requestHelper
 
 import android.text.TextUtils
 import android.util.Log
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
-import com.pumpkin.pac_core.BuildConfig
-import com.pumpkin.pac_core.cache.MimeTypeMapUtils
+import androidx.viewbinding.BuildConfig
+import com.pumpkin.webCache.util.MimeTypeMapUtils
 import okhttp3.*
 import java.io.*
 import java.util.*
@@ -13,7 +13,7 @@ import java.util.*
 object RequestHelper {
     private const val TAG = "RequestHelper"
 
-    fun request(request: WebResourceRequest, url: String, okHttpClient: OkHttpClient, extraHeaders: Map<String, String>?): Response {
+    fun request(request: WebResourceRequest, url: String, okHttpClient: OkHttpClient): Response {
         val builder = Request.Builder().url(url).also { requestBuilder ->
             request.requestHeaders?.forEach(action = { entry ->
                 val key = entry.key
@@ -22,9 +22,6 @@ object RequestHelper {
                     requestBuilder.addHeader(key, value)
                 }
             })
-            extraHeaders?.forEach {
-                requestBuilder.addHeader(it.key, it.value)
-            }
         }
         if (BuildConfig.DEBUG) {
             Log.d(TAG, "request () -> header is ${request.requestHeaders} , url is ${request.url}")
@@ -58,8 +55,6 @@ object RequestHelper {
         }
         return webResourceResponse
     }
-
-    fun emptyWebResource() = WebResourceResponse("text/plain", "utf-8", null)
 
     private fun headersToMap(headers: Headers): Map<String, String> {
         val result = HashMap<String, String>()

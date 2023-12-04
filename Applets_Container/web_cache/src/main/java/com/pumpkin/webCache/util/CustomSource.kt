@@ -1,7 +1,7 @@
-package com.pumpkin.pac_core.cache2
+package com.pumpkin.webCache.util
 
 import android.util.Log
-import com.pumpkin.pac_core.BuildConfig
+import androidx.viewbinding.BuildConfig
 import okio.*
 
 /**

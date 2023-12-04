@@ -20,6 +20,7 @@ pac -> full name is pumpkin applets container
 ## 依赖关系整理
 `base.mvvm` -> `base.ui`、`base.data`
 `parse` -> `base.data`
+`pac_core` -> `web_cache`
 `pac` -> `pac_core` 、 `base.mvvm` 、`parse`
 `app` -> `pac`
 
