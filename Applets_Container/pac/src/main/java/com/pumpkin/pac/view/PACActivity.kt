@@ -11,6 +11,7 @@ import android.webkit.WebView
 import android.widget.FrameLayout
 import android.widget.Toolbar.LayoutParams
 import androidx.lifecycle.lifecycleScope
+import com.pumpkin.data.AppUtil
 import com.pumpkin.mvvm.util.Constant
 import com.pumpkin.mvvm.util.UIHelper
 import com.pumpkin.mvvm.util.toLogD
@@ -109,7 +110,7 @@ class PACActivity : BaseActivity() {
     }
 
     private fun getWV(gameEntity: GameEntity): PACWebView {
-        return WebViewPool.obtain(this, gameEntity.id).apply {
+        return WebViewPool.obtain(AppUtil.application).apply {
             layoutParams =
                 FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
             addClient()

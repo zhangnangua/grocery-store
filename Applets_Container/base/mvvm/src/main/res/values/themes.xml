@@ -36,11 +36,4 @@
         <!-- Customize your theme here. -->
         <!--        <item name="android:windowBackground">@color/m3_sys_color_dark_primary</item>-->
     </style>
-
-    <style name="Bottom.Tab" parent="Theme.Applets_Container">
-        <!--    tab 选中 icon   -->
-        <item name="colorOnSecondaryContainer">?colorSecondary</item>
-        <!--    tab 选中 font   -->
-        <item name="colorOnSurface">?colorSecondary</item>
-    </style>
 </resources>

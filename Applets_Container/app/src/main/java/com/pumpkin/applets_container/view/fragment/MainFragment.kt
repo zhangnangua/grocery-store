@@ -39,7 +39,7 @@ class MainFragment : BaseFragment() {
     }
 
     override fun loadData() {
-
+        
     }
 
     private fun navigationFragment(): NavigationBarView.OnItemSelectedListener {

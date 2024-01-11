@@ -8,8 +8,8 @@ interface InterceptorConfig {
 
     fun cacheDay(): String
 
-    fun dayToMaxAge(day: Int): String {
-        return "max-age=" + 86400 * day
+    fun dayToMaxAge(day: Long): String {
+        return "max-age=" + 86400L * day
     }
 }
 

@@ -1,7 +1,7 @@
 package com.pumpkin.webCache.requestHelper
 
 import android.util.Log
-import androidx.viewbinding.BuildConfig
+import com.pumpkin.webCache.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -23,7 +23,7 @@ class HttpCacheInterceptor(private val c: InterceptorConfig) : Interceptor {
         } else {
 
             if (BuildConfig.DEBUG) {
-                Log.d(TAG, "intercept () -> url is ${request.url} , code is ${originResponse.code} , cache ")
+                Log.d(TAG, "intercept () -> url is ${request.url} , code is ${originResponse.code} , cache ${c.cacheDay()}")
             }
 
 

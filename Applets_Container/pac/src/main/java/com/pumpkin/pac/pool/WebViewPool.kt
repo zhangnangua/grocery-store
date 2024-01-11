@@ -41,7 +41,7 @@ object WebViewPool {
     /**
      * 获取一个CacheWebView
      */
-    fun obtain(context: Context, id: String): PACWebView {
+    fun obtain(context: Context): PACWebView {
         if (AppUtil.isDebug) {
             Log.d(TAG, "obtain: the current stack count is ${stack.size}")
         }
@@ -68,7 +68,7 @@ object WebViewPool {
         if (webViewContext is MutableContextWrapper) {
             webViewContext.baseContext = context
         }
-        return webView
+        return PACWebView(context)
     }
 
 

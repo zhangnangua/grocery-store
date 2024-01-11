@@ -46,8 +46,7 @@ class GameViewModel : ViewModel() {
         }
     }
 
-    fun resInterceptor(request: WebResourceRequest?): WebResourceResponse? =
-        cacheClient?.engine?.interceptRequest(request)
+    fun resInterceptor(request: WebResourceRequest?): WebResourceResponse? = cacheClient?.engine?.interceptRequest(request)
 
     suspend fun recordToRecently() {
         gameRepo?.recordToRecently()

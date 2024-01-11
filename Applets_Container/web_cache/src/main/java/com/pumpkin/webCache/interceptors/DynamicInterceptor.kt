@@ -51,7 +51,12 @@ class DynamicInterceptor(application: Application, c: InterceptorConfig) : Defau
         }.build()
 
     override fun findResource(chain: Chain): WebResourceResponse? {
-        val response = RequestHelper.request(chain.request, chain.url, okHttpClient)
+        val response = try {
+            RequestHelper.request(chain.request, chain.url, okHttpClient)
+        } catch (e: Exception) {
+            null
+        }
+        response ?: return null
         if (response.code == 504) {
             return null
         }
