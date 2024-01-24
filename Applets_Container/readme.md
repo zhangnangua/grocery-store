@@ -18,9 +18,10 @@ pac -> full name is pumpkin applets container
 ```
 
 ## 依赖关系整理
+`native_game` -> `native_game_manager.*` 
 `base.mvvm` -> `base.ui`、`base.data`
 `parse` -> `base.data`
 `pac_core` -> `web_cache`
 `pac` -> `pac_core` 、 `base.mvvm` 、`parse`
-`app` -> `pac`
+`app` -> `pac`、`native_game`
 

@@ -21,4 +21,5 @@ include ':pac'
 include ':parse'
 
 
-include ':native_game'
+include ':native_game_manager'
+include ':native_game:quiz'
