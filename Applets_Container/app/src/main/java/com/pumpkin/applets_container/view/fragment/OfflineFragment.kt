@@ -11,6 +11,10 @@ class OfflineFragment : SuperMultiStateBaseFragment() {
     override fun initView(view: View) {
         binding = FragmentOfflineBinding.inflate(layoutInflater)
         setPACContentView(binding.root)
+
+        binding.tBt.setOnClickListener {
+//            activity?.startActivity(Intent(activity, AndroidInvaders::class.java))
+        }
     }
 
     override fun loadData() {
