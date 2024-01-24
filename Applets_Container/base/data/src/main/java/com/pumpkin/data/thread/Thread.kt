@@ -2,6 +2,10 @@ package com.pumpkin.data.thread
 
 import android.os.Handler
 import android.os.Looper
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlin.coroutines.CoroutineContext
 
 object ThreadHelper {
     private val MAIN_HANDLER = Handler(Looper.getMainLooper())
@@ -37,3 +41,10 @@ object ThreadHelper {
     }
 
 }
+
+internal class ContextScope(context: CoroutineContext) : CoroutineScope {
+    override val coroutineContext: CoroutineContext = context
+    override fun toString(): String = "CoroutineScope(coroutineContext=$coroutineContext)"
+}
+
+fun IoScope(): CoroutineScope = ContextScope(SupervisorJob() + Dispatchers.IO)
