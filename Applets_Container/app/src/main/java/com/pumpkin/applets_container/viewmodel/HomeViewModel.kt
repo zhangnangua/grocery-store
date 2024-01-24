@@ -6,11 +6,10 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.pumpkin.applets_container.data.repo.HomeRepo
 import com.pumpkin.mvvm.adapter.AdapterWrapBean
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOn
 
 class HomeViewModel : ViewModel() {
+    private val repo = HomeRepo()
 
     /**
      * 获取数据  分页获取？
@@ -19,7 +18,7 @@ class HomeViewModel : ViewModel() {
      * 假如手机横竖屏发生了旋转导致Activity重新创建，Paging 3就可以直接读取缓存中的数据，而不用重新发起网络请求了(使用shareIn转换为了replay = 1的ShareFlow)。
      */
     fun getBigCardPagingData(): Flow<PagingData<AdapterWrapBean>> {
-        return HomeRepo
+        return repo
             .getBigCardPagingData()
             .cachedIn(viewModelScope)
     }

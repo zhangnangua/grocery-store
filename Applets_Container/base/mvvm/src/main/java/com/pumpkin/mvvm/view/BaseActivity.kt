@@ -1,18 +1,28 @@
 package com.pumpkin.mvvm.view
 
-import android.view.View
+import android.os.Bundle
+import androidx.annotation.AnimRes
 import androidx.appcompat.app.AppCompatActivity
-import com.pumpkin.data.AppUtil
+import com.pumpkin.mvvm.R
 import com.pumpkin.mvvm.setting_bean.ActivitySettingBean
-import com.pumpkin.mvvm.util.toLogD
-import com.pumpkin.ui.util.DeviceParams
+import com.pumpkin.mvvm.util.Constant
 
 abstract class BaseActivity : AppCompatActivity() {
-
     /**
      * 页面设置bean
      */
-    private var pageSettingBean: ActivitySettingBean = ActivitySettingBean()
+    private var pageSettingBean: ActivitySettingBean? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        val bundle: Bundle? = savedInstanceState ?: intent.extras
+        if (bundle != null) {
+            val localPage: ActivitySettingBean? = bundle.getParcelable(Constant.PAGE_PARAMETER)
+            pageSettingBean = localPage
+            enterAnim(localPage)
+        }
+        super.onCreate(savedInstanceState)
+    }
+
 
     /**
      * 设置默认的页面bean
@@ -23,7 +33,32 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun finish() {
         super.finish()
-        //设置动画
-//        overridePendingTransition(pageSettingBean.startEnterAnim, pageSettingBean.startExitAnim)
+        exitAnim(pageSettingBean)
+    }
+
+    private fun exitAnim(pageSettingBean: ActivitySettingBean?) {
+        val localPage = pageSettingBean
+
+        @AnimRes
+        var exitAnim: Int? = null
+        if (localPage != null) {
+            exitAnim = localPage.exitAnim
+        }
+        if (exitAnim != null) {
+            overridePendingTransition(R.anim.slide_no_process, exitAnim)
+        }
+    }
+
+    private fun enterAnim(pageSettingBean: ActivitySettingBean?) {
+        val localPage = pageSettingBean
+
+        @AnimRes
+        var enterAnim: Int? = null
+        if (localPage != null) {
+            enterAnim = localPage.enterAnim
+        }
+        if (enterAnim != null) {
+            overridePendingTransition(enterAnim, R.anim.slide_no_process)
+        }
     }
 }

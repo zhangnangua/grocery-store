@@ -33,13 +33,12 @@ class MainFragment : BaseFragment() {
             //底部导航栏
             it.bottomNavigation.setOnItemSelectedListener(onItemSelectedListener)
             it.bottomNavigation.selectedItemId = currentId
-
             it.root
         }
     }
 
     override fun loadData() {
-        
+
     }
 
     private fun navigationFragment(): NavigationBarView.OnItemSelectedListener {

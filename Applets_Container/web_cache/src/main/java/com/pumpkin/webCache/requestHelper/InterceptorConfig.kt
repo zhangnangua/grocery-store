@@ -4,7 +4,7 @@ interface InterceptorConfig {
 
     fun isCache(url: String): Boolean
 
-    fun isAdvertise(url: String): Boolean
+    fun isOtherInterceptor(url: String): Boolean
 
     fun cacheDay(): String
 
@@ -13,16 +13,17 @@ interface InterceptorConfig {
     }
 }
 
-object DefaultInterceptorConfig : InterceptorConfig {
+abstract class BaseInterceptorConfig : InterceptorConfig {
     override fun isCache(url: String) = true
-
-    override fun isAdvertise(url: String) = url.contains("googleads")
+    override fun isOtherInterceptor(url: String) = url.contains("googleads")
             || url.contains("googlesyndication")
             || url.contains("google-analytics")
             || url.contains("athena")
             || url.contains("hisavana")
             || url.contains("pay-japi.ahagamecenter")
+}
 
+object DefaultInterceptorConfig : BaseInterceptorConfig() {
     /**
      * 默认有效时间100年
      */

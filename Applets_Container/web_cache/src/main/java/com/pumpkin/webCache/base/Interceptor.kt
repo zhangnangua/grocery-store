@@ -1,6 +1,7 @@
 package com.pumpkin.webCache.interceptor
 
 import android.app.Application
+import android.net.Uri
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 
@@ -13,6 +14,8 @@ interface Chain {
     val request: WebResourceRequest
 
     val url: String
+
+    val uri: Uri
 
     fun process(): WebResourceResponse?
 
@@ -28,6 +31,7 @@ class DefaultChain(private val interceptors: List<Interceptor>,
                    private val index: Int,
                    override val request: WebResourceRequest,
                    override val url: String,
+                   override val uri: Uri,
                    override val originUrl: String?,
                    override val resourceId: String?,
                    override val application: Application) : Chain {
@@ -40,6 +44,6 @@ class DefaultChain(private val interceptors: List<Interceptor>,
     }
 
     private fun copy(index: Int): Chain {
-        return DefaultChain(interceptors, index, request, url, originUrl, resourceId, application)
+        return DefaultChain(interceptors, index, request, url, uri, originUrl, resourceId, application)
     }
 }

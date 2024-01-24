@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.os.Build
 import android.util.ArrayMap
+import androidx.annotation.StringRes
 
 /**
  * 作者： pumpkin
@@ -39,6 +40,8 @@ object AppUtil {
         application = appApplication
         AppUtil.isDebug = isDebug
     }
+
+    fun getString(@StringRes resId: Int) = application.getString(resId)
 
     fun obtainProcessName(): String {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {

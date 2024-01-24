@@ -6,6 +6,7 @@ import com.pumpkin.applets_container.data.internal.Helper
 import com.pumpkin.data.AppUtil
 import com.pumpkin.data.db.DbHelper
 import com.pumpkin.data.db.entity.GameTable
+import com.pumpkin.data.thread.IoScope
 import com.pumpkin.pac.bean.entityToTables
 import com.pumpkin.pac.bean.entityToTablesMd5
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +17,7 @@ object DataDealHelper {
     const val TAG = "DataDealHelper"
 
     fun deal() {
-        GlobalScope.launch(Dispatchers.IO) {
+        IoScope().launch(Dispatchers.IO) {
             Log.d(TAG, "deal () -> start")
             val providesGameDao = DbHelper.providesGameDao(AppUtil.application)
 

@@ -21,8 +21,14 @@ class Engine(private val client: WVCacheClient) {
         if (request == null) {
             return null
         }
-        val uri = request.url ?: return null
 
+        val uri = request.url ?: return null
+        uri.host ?: return null
+
+        val path = uri.path
+        if (path != null && path.endsWith("/favicon.ico")) {
+            return WebResourceResponse(null, null, null)
+        }
 
         //非Get请求，不进行拦截
         return if (!TextUtils.equals(request.method, "GET")) {
@@ -31,6 +37,7 @@ class Engine(private val client: WVCacheClient) {
             0,
             request,
             uri.toString(),
+            uri,
             client.getOriginUrl(),
             client.getResourceId(),
             client.getApplication())

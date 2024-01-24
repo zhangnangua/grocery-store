@@ -2,6 +2,7 @@ package com.pumpkin.webCache.interceptors
 
 import android.webkit.WebResourceResponse
 import com.pumpkin.webCache.base.DefaultInterceptor
+import com.pumpkin.webCache.domain.matcher.UrlMatcher
 import com.pumpkin.webCache.interceptor.Chain
 import com.pumpkin.webCache.requestHelper.DefaultInterceptorConfig
 import com.pumpkin.webCache.requestHelper.InterceptorConfig
@@ -11,9 +12,11 @@ import com.pumpkin.webCache.requestHelper.InterceptorConfig
  */
 class AdvertiseInterceptor(private val c: InterceptorConfig = DefaultInterceptorConfig) : DefaultInterceptor() {
 
+    private val matcher = UrlMatcher()
+
     override fun findResource(chain: Chain): WebResourceResponse? {
-        return if (c.isAdvertise(chain.url)) {
-            WebResourceResponse("text/plain", "utf-8", null)
+        return if (c.isOtherInterceptor(chain.url) || (!chain.request.isForMainFrame && matcher.isBlock(chain.uri, chain.application.resources))) {
+            WebResourceResponse(null, null, null)
         } else {
             null
         }

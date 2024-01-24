@@ -2,17 +2,16 @@ package com.pumpkin.data.http
 
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.OkHttpClient
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
 
-object OkHttpClient {
+object OkHttp {
 
     private const val MAX_DELAY_TIME = 20000L
     private const val TAG = "OkHttpClient"
 
-    private val okHttpClient: OkHttpClient = OkHttpClient.Builder()
+    internal val okHttpClient: OkHttpClient = OkHttpClient.Builder()
         .dispatcher(Dispatcher().apply {
             maxRequestsPerHost = 10
             maxRequests = 128
@@ -24,7 +23,7 @@ object OkHttpClient {
         .readTimeout(MAX_DELAY_TIME, TimeUnit.SECONDS)
         .build()
 
-    fun getBuild(): Request.Builder {
+    fun getBuilder(): Request.Builder {
         return Request.Builder()
     }
 
@@ -40,4 +39,5 @@ object OkHttpClient {
     }
 }
 
-fun Request.newCall(okHttpClient: OkHttpClient): Call = okHttpClient.newCall(this)
+fun Request.newCall(okHttpClient: OkHttpClient = OkHttp.okHttpClient): Call =
+    okHttpClient.newCall(this)

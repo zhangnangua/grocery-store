@@ -15,9 +15,11 @@ import com.pumpkin.mvvm.repo.BasePageRepo
 import com.pumpkin.pac.bean.tablesToEntities
 import kotlinx.coroutines.delay
 
-object HomeRepo : BasePageRepo(BigCardPagingSource()) {
-    private const val BIG_CARD_NUM = 10
-    const val TAG = "HomeRepo"
+class HomeRepo : BasePageRepo(BigCardPagingSource()) {
+    companion object{
+        private const val BIG_CARD_NUM = 10
+        const val TAG = "HomeRepo"
+    }
 
     fun getBigCardPagingData() = getPagingData(
         PagingConfig(

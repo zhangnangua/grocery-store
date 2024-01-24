@@ -26,4 +26,5 @@
     <color name="colorOnSurfaceInverse">@color/md_theme_dark_inverseOnSurface</color>
     <color name="colorSurfaceInverse">@color/md_theme_dark_inverseSurface</color>
     <color name="colorPrimaryInverse">@color/md_theme_dark_inversePrimary</color>
+    <color name="colorSurfaceVariant50">@color/md_theme_light_surfaceVariant</color>
 </resources>

@@ -184,7 +184,6 @@ public class FormatUtil {
         }
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
-        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT0"));
         return simpleDateFormat.format(new Date(time));
     }
 

@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
@@ -17,14 +16,14 @@ import com.pumpkin.mvvm.util.UIHelper
 import com.pumpkin.mvvm.util.toLogD
 import com.pumpkin.mvvm.view.BaseActivity
 import com.pumpkin.mvvm.viewmodel.PACViewModelProviders
-import com.pumpkin.pac.BuildConfig
 import com.pumpkin.pac.R
 import com.pumpkin.pac.bean.GameEntity
 import com.pumpkin.pac.databinding.ActivityPacBinding
 import com.pumpkin.pac.pool.WebViewPool
+import com.pumpkin.pac.util.GameHelper
 import com.pumpkin.pac.view.fragment.LoadingFragment
 import com.pumpkin.pac.viewmodel.GameViewModel
-import com.pumpkin.pac_core.webview.PACWebView
+import com.pumpkin.pac_core.webview.PACWebEngine
 import com.pumpkin.pac_core.webview.Webinterface
 import kotlinx.coroutines.launch
 
@@ -36,11 +35,11 @@ import kotlinx.coroutines.launch
  *
  * todo webview 剥离 预热 ！！！！
  */
-class PACActivity : BaseActivity() {
+class GameActivity : BaseActivity() {
 
     private lateinit var binding: ActivityPacBinding
 
-    private var wv: PACWebView? = null
+    private var wv: PACWebEngine? = null
 
     private val gameViewModel by lazy(LazyThreadSafetyMode.NONE) {
         PACViewModelProviders.of(this).get(GameViewModel::class.java)
@@ -77,7 +76,7 @@ class PACActivity : BaseActivity() {
         )
 
         //wv
-        wv = getWV(gameEntity)
+        wv = getWV()
         binding.wvContainer.removeAllViews()
         binding.wvContainer.addView(wv)
     }
@@ -109,7 +108,7 @@ class PACActivity : BaseActivity() {
         wv?.loadUrl(url)
     }
 
-    private fun getWV(gameEntity: GameEntity): PACWebView {
+    private fun getWV(): PACWebEngine {
         return WebViewPool.obtain(AppUtil.application).apply {
             layoutParams =
                 FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
@@ -138,37 +137,9 @@ class PACActivity : BaseActivity() {
                     view: WebView?,
                     request: WebResourceRequest?
                 ): Boolean {
-                    if (request != null && request.url != null) {
-                        val uri = request.url
-                        val scheme = uri.scheme
-                        if (scheme?.startsWith("http") == true) {
-                            loadEntrance(uri.toString())
-                        } else {
-                            try {
-                                if (BuildConfig.DEBUG) {
-                                    Log.d(TAG, "deepLink  $uri")
-                                }
-                                this@PACActivity.startActivity(
-                                    Intent(
-                                        Intent.ACTION_VIEW,
-                                        uri
-                                    ).apply {
-                                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                    }
-                                )
-                            } catch (e: Exception) {
-                                if (BuildConfig.DEBUG) {
-                                    Log.d(
-                                        TAG,
-                                        "deepLink failure ",
-                                        e
-                                    )
-                                }
-                            }
-                        }
+                    return GameHelper.shouldOverrideUrlLoading(view, request) {
+                        loadEntrance(it)
                     }
-
-                    return true
                 }
 
             })
@@ -195,7 +166,7 @@ class PACActivity : BaseActivity() {
         private const val TAG = "PACActivity"
 
         fun go(context: Context, gameEntity: GameEntity) {
-            context.startActivity(Intent(context, PACActivity::class.java).apply {
+            context.startActivity(Intent(context, GameActivity::class.java).apply {
                 putExtra(Constant.FIRST_PARAMETER, gameEntity)
             })
         }

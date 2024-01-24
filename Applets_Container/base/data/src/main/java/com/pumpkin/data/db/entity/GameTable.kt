@@ -26,10 +26,11 @@ class GameTable(
     val bigIcon: String,
     val extra: JsonObject?,//额外参数
     @ColumnInfo(defaultValue = "", name = "module_id")
-    val moduleId: String// 该数据被使用在那个模块
+    val moduleId: String,// 该数据被使用在那个模块
+    val tag: String?
 ) {
     override fun toString(): String {
-        return "GameTable(id='$id', name='$name', link='$link', describe='$describe', icon='$icon', bigIcon='$bigIcon', extra=$extra, moduleId='$moduleId')"
+        return "GameTable(id='$id', name='$name', link='$link', describe='$describe', icon='$icon', bigIcon='$bigIcon', extra=$extra, moduleId='$moduleId , tag='$tag')"
     }
 
     companion object {
@@ -37,5 +38,6 @@ class GameTable(
         const val MODULE_FLOW = "flow"
         const val MODULE_RANK_HOT = "rank.hot"
         const val MODULE_RANK_NEW = "rank.new"
+        const val MODULE_GX_ = "gx_"
     }
 }

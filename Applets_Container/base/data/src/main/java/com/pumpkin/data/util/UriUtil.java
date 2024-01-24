@@ -1,4 +1,4 @@
-package net.bat.store.util;
+package com.pumpkin.data.util;
 
 import android.net.Uri;
 import android.text.TextUtils;

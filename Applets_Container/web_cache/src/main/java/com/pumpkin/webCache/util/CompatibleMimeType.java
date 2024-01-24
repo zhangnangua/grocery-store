@@ -1,4 +1,4 @@
-package net.bat.store.gameweb.webview.util;
+package com.pumpkin.webCache.util;
 
 import android.util.ArrayMap;
 

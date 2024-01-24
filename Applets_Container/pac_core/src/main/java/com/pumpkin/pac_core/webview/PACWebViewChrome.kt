@@ -27,7 +27,7 @@ internal class PACWebViewChrome : WebChromeClient() {
 
     override fun onConsoleMessage(consoleMessage: ConsoleMessage?): Boolean {
         if (BuildConfig.DEBUG) {
-            Log.d("PAC_WEB", "onConsoleMessage: ${consoleMessage?.message()}")
+            Log.d("PAC_WEB", "onConsoleMessage: ${consoleMessage?.message()} , code is ${consoleMessage?.sourceId()}")
         }
         return super.onConsoleMessage(consoleMessage)
     }

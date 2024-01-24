@@ -68,7 +68,7 @@ class DynamicInterceptor(application: Application, c: InterceptorConfig) : Defau
     }
 
     companion object {
-        private const val MAX_DELAY_TIME = 2000L
+        private const val MAX_DELAY_TIME = 20000L
         private const val TAG = "DI"
     }
 }

@@ -18,7 +18,8 @@ class GameEntity constructor(
     val describe: String = "",// 描述
     val icon: String,// 游戏icon
     val bigIcon: String = "",// 大图
-    val extra: JsonObject? = null // 额外的参数
+    val extra: JsonObject? = null, // 额外的参数
+    val tag: String?
 ) : Parcelable, Event {
 
     constructor(parcel: Parcel) : this(
@@ -36,7 +37,8 @@ class GameEntity constructor(
             }
         } catch (e: Exception) {
             null
-        }
+        },
+        parcel.readString()
     )
 
     override fun describeContents(): Int = 0
@@ -49,10 +51,11 @@ class GameEntity constructor(
         dest.writeString(icon)
         dest.writeString(bigIcon)
         dest.writeString(extra?.toString())
+        dest.writeString(tag)
     }
 
     override fun toString(): String {
-        return "GameEntity(id='$id', name='$name', link='$link', describe='$describe', icon='$icon', bigIcon='$bigIcon', extra=$extra)"
+        return "GameEntity(id='$id', name='$name', link='$link', describe='$describe', icon='$icon', bigIcon='$bigIcon', extra=$extra , tag=$tag)"
     }
 
 
@@ -76,7 +79,8 @@ fun GameEntity.entityToTableMd5(moduleId: String) = GameTable(
     icon = this.icon,
     bigIcon = this.bigIcon,
     extra = this.extra,
-    moduleId = moduleId
+    moduleId = moduleId,
+    tag = tag
 )
 
 fun GameEntity.entityToTable(moduleId: String) = GameTable(
@@ -87,7 +91,8 @@ fun GameEntity.entityToTable(moduleId: String) = GameTable(
     icon = this.icon,
     bigIcon = this.bigIcon,
     extra = this.extra,
-    moduleId = moduleId
+    moduleId = moduleId,
+    tag = this.tag
 )
 
 fun List<GameEntity?>.entityToTables(moduleId: String): List<GameTable> {
@@ -117,7 +122,8 @@ fun GameTable.tableToEntity() = GameEntity(
     describe = this.describe,
     icon = this.icon,
     bigIcon = this.bigIcon,
-    extra = this.extra
+    extra = this.extra,
+    tag = this.tag
 )
 
 

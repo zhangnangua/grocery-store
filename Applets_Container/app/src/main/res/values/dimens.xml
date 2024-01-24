@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <dimen name="tool_bar_height">54dp</dimen>
+
+    <dimen name="design_bottom_navigation_elevation" tools:override="true">8dp</dimen>
 </resources>

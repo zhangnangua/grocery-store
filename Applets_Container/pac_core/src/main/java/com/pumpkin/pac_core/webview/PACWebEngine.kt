@@ -16,7 +16,7 @@ import com.pumpkin.pac_core.BuildConfig
  * @author pumpkin
  */
 @SuppressLint("SetJavaScriptEnabled")
-class PACWebView
+class PACWebEngine
 @JvmOverloads
 constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) :
     WebView(context, attrs, defStyle) {

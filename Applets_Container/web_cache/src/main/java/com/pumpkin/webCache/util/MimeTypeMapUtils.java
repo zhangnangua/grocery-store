@@ -53,8 +53,15 @@ public class MimeTypeMapUtils {
 
     public static String getMimeTypeFromUrl(String url, Response response) {
         final String extension = getFileExtensionFromUrl(url);
+        //from system
         String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
         if (TextUtils.isEmpty(mimeType)) {
+            //from internal
+            mimeType = CompatibleMimeType.getMimeTypeByExtension(extension);
+            if (!TextUtils.isEmpty(mimeType)) {
+                return mimeType;
+            }
+            //from server
             final String contentType = response.header("Content-Type");
             if (contentType == null || TextUtils.isEmpty(contentType)) {
                 //无法正确的获取到mime type 会导致未知错误 故不使用该资源

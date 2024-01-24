@@ -12,7 +12,7 @@
         <!--  导航栏字体黑色 -->
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
-    
+
     <style name="Theme.Start" parent="Theme.SplashScreen.IconBackground">
         <!--启动画面背景颜色-->
         <item name="windowSplashScreenBackground">@color/colorPrimaryContainer</item>

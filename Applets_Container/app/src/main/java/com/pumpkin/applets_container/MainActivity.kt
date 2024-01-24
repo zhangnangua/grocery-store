@@ -58,7 +58,7 @@ class MainActivity : BaseActivity() {
         loadData()
 
         // TODO: 设置数据库数据
-//        DataDealHelper.deal()
+        DataDealHelper.deal()
     }
 
     private fun loadData() {

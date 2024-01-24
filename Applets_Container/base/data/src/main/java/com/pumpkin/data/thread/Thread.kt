@@ -42,9 +42,11 @@ object ThreadHelper {
 
 }
 
+fun IoScope(): CoroutineScope = ContextScope(SupervisorJob() + Dispatchers.IO)
+
+fun DefaultScope(): CoroutineScope = ContextScope(SupervisorJob() + Dispatchers.Default)
+
 internal class ContextScope(context: CoroutineContext) : CoroutineScope {
     override val coroutineContext: CoroutineContext = context
     override fun toString(): String = "CoroutineScope(coroutineContext=$coroutineContext)"
 }
-
-fun IoScope(): CoroutineScope = ContextScope(SupervisorJob() + Dispatchers.IO)

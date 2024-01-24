@@ -7,7 +7,7 @@ import android.util.Log
 import android.view.ViewGroup
 import android.view.ViewParent
 import com.pumpkin.pac.process.ProcessUtil
-import com.pumpkin.pac_core.webview.PACWebView
+import com.pumpkin.pac_core.webview.PACWebEngine
 import com.pumpkin.data.AppUtil
 
 /**
@@ -19,7 +19,7 @@ object WebViewPool {
     private const val TAG = "WebViewPool"
     private const val MAX_NUM = 1
 
-    private val stack = ArrayDeque<PACWebView>(MAX_NUM)
+    private val stack = ArrayDeque<PACWebEngine>(MAX_NUM)
 
     fun preLoad() {
         Looper.myQueue().addIdleHandler {
@@ -41,11 +41,11 @@ object WebViewPool {
     /**
      * 获取一个CacheWebView
      */
-    fun obtain(context: Context): PACWebView {
+    fun obtain(context: Context): PACWebEngine {
         if (AppUtil.isDebug) {
             Log.d(TAG, "obtain: the current stack count is ${stack.size}")
         }
-        var webView: PACWebView
+        var webView: PACWebEngine
         synchronized(stack) {
             if (!stack.isEmpty()) {
                 webView = stack.removeFirst()
@@ -68,11 +68,11 @@ object WebViewPool {
         if (webViewContext is MutableContextWrapper) {
             webViewContext.baseContext = context
         }
-        return PACWebView(context)
+        return PACWebEngine(context)
     }
 
 
-    fun recycle(webView: PACWebView?) {
+    fun recycle(webView: PACWebEngine?) {
         if (webView == null) {
             return
         }
@@ -103,9 +103,9 @@ object WebViewPool {
         }
     }
 
-    private fun createWebView(): PACWebView {
+    private fun createWebView(): PACWebEngine {
         val contextWrapper = MutableContextWrapper(AppUtil.application)
-        val cacheWebView: PACWebView
+        val cacheWebView: PACWebEngine
         try {
             cacheWebView = newWV(contextWrapper)
         } catch (e: Exception) {
@@ -115,7 +115,7 @@ object WebViewPool {
     }
 
 
-    private fun newWV(contextWrapper: MutableContextWrapper): PACWebView =
-        PACWebView(contextWrapper)
+    private fun newWV(contextWrapper: MutableContextWrapper): PACWebEngine =
+        PACWebEngine(contextWrapper)
 
 }

@@ -54,7 +54,11 @@ class BaseAdapter(private val requestManager: RequestManager, private val contex
 class AdapterWrapBean(
     val type: Int,
     val data: Any?
-)
+) {
+    override fun toString(): String {
+        return "AdapterWrapBean(type=$type, data=$data)"
+    }
+}
 
 abstract class BaseVH<in T, B : ViewBinding>(val binding: B,
                                              context: Context?,
