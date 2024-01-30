@@ -9,6 +9,7 @@
     <color name="black_12">#FF121212</color>
 
     <color name="page_background_color">#FDFDFD</color>
+    <color name="transparent">#0000</color>
 
     <color name="colorPrimary">@color/md_theme_light_primary</color>
     <color name="colorOnPrimary">@color/md_theme_light_onPrimary</color>

@@ -38,4 +38,7 @@ dependencies {
     implementation "com.google.android.material:material:$material_version"
 
     implementation project(':native_game:quiz')
+    implementation project(':native_game:snake')
+
+    implementation project(':base:mvvm')
 }

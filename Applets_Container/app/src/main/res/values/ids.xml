@@ -8,4 +8,5 @@
     <item name="vh_carousel_horizontal" type="id" />
     <item name="vh_recent_horizontal" type="id" />
     <item name="vh_word_card_style_1" type="id" />
+    <item name="vh_offline_card_style_1" type="id" />
 </resources>

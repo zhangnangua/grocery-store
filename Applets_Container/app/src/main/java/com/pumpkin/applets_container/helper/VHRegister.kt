@@ -38,5 +38,9 @@ object VHRegister {
             WordCardStyle1VH(VhWordCardStyle1Binding.inflate(layoutInflater), context, requestManager) as BaseVH<Any, ViewBinding>
         }
 
+        TypeHelper.register(OfflineCardStyle1VH.TYPE) { layoutInflater, context, parent, requestManager ->
+            OfflineCardStyle1VH(VhOfflineCardStyle1Binding.inflate(layoutInflater), context, requestManager) as BaseVH<Any, ViewBinding>
+        }
+
     }
 }

@@ -32,7 +32,7 @@ class GXSource : ISource {
                 response.body?.string()?.let {
                     val gxEntity = gson.fromJson(it, GXEntity::class.java)
                     val result = mapData(gxEntity)
-                    if (result != null) {
+                    if (result.isNotEmpty()) {
                         //save
                         isScope.launch {
                             DbHelper.providesGameDao(AppUtil.application).insertOrReplaceGameList(result.map { entity ->
@@ -56,8 +56,9 @@ class GXSource : ISource {
         .newCall()
         .execute()
 
-    private fun mapData(gxEntity: GXEntity?): List<Entity>? {
-        return gxEntity?.data?.games?.map { game ->
+    private fun mapData(gxEntity: GXEntity?): List<Entity> {
+        val result = ArrayList<Entity>()
+        gxEntity?.data?.games?.forEach { game ->
 
             var entity: Entity? = null
 
@@ -87,15 +88,11 @@ class GXSource : ISource {
                 )
 
             }
-
-            entity
-
-        }?.fold(ArrayList<Entity>()) { acc, unit ->
-            unit?.let { entity ->
-                acc.add(entity)
+            entity?.let {
+                result.add(it)
             }
-            acc
         }
+        return result
     }
 
     private fun getUrl(sort: Int, category: String?, search: String?, page: Int, pageSize: Int): String {

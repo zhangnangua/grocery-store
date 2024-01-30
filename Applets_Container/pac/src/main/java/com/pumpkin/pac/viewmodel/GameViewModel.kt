@@ -5,7 +5,9 @@ import android.webkit.WebResourceResponse
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pumpkin.data.AppUtil
+import com.pumpkin.pac.bean.GParameter
 import com.pumpkin.pac.bean.GameEntity
+import com.pumpkin.pac.internal.interceptor.InternalGameInterceptor
 import com.pumpkin.pac.repo.GameRepo
 import com.pumpkin.pac.util.GameProgressHelper
 import com.pumpkin.webCache.WVCacheClient
@@ -21,11 +23,16 @@ class GameViewModel : ViewModel() {
     private var cacheClient: WVCacheClient? = null
 
 
-    fun attach(gameEntity: GameEntity) {
+    fun attach(gameEntity: GameEntity, gParameter: GParameter?) {
         gameRepo = GameRepo(gameEntity)
         cacheClient = WVCacheClient.Builder(AppUtil.application)
             .originUrl(gameEntity.link)
             .addInterceptor(AdvertiseInterceptor())
+            .apply {
+                if (gParameter?.isInternal == true) {
+                    addInterceptor(InternalGameInterceptor())
+                }
+            }
             .dynamicAbility()
             .build()
     }
@@ -46,7 +53,8 @@ class GameViewModel : ViewModel() {
         }
     }
 
-    fun resInterceptor(request: WebResourceRequest?): WebResourceResponse? = cacheClient?.engine?.interceptRequest(request)
+    fun resInterceptor(request: WebResourceRequest?): WebResourceResponse? =
+        cacheClient?.engine?.interceptRequest(request)
 
     suspend fun recordToRecently() {
         gameRepo?.recordToRecently()

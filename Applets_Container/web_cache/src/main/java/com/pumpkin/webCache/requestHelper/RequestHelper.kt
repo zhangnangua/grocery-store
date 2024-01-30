@@ -112,7 +112,6 @@ object RequestHelper {
     }
 
     fun resourceResponseByFile(
-        request: WebResourceRequest,
         url: String,
         file: File
     ): WebResourceResponse? {
@@ -120,15 +119,8 @@ object RequestHelper {
             val mimeType: String = MimeTypeMapUtils.getMimeTypeFromUrl(url)
             try {
                 val inputStream: InputStream = FileInputStream(file)
-                val response = WebResourceResponse(mimeType, "", inputStream)
+                val response = WebResourceResponse(mimeType, "UTF_8", inputStream)
                 val headers: MutableMap<String, String> = HashMap()
-                request.requestHeaders?.forEach(action = { entry ->
-                    val key = entry.key
-                    val value = entry.value
-                    if (key != null && value != null) {
-                        headers[key] = value
-                    }
-                })
                 // 解决webView跨域问题
                 headers["Access-Control-Allow-Origin"] = "*"
                 headers["Access-Control-Allow-Headers"] = "*"

@@ -6,9 +6,9 @@ import android.webkit.WebResourceResponse
 import androidx.viewbinding.BuildConfig
 import com.pumpkin.webCache.base.DefaultInterceptor
 import com.pumpkin.webCache.interceptor.Chain
+import com.pumpkin.webCache.requestHelper.CacheHelper
 import com.pumpkin.webCache.requestHelper.HttpCacheInterceptor
 import com.pumpkin.webCache.requestHelper.InterceptorConfig
-import com.pumpkin.webCache.requestHelper.InterceptorHelper
 import com.pumpkin.webCache.requestHelper.RequestHelper
 import okhttp3.*
 import java.util.concurrent.TimeUnit
@@ -20,7 +20,7 @@ class DynamicInterceptor(application: Application, c: InterceptorConfig) : Defau
             maxRequestsPerHost = 10
             maxRequests = 128
         })
-        .cache(Cache(InterceptorHelper.getCacheFile(application), InterceptorHelper.CACHE_SIZE))
+        .cache(Cache(CacheHelper.getDynamicCacheFile(application), CacheHelper.DYNAMIC_CACHE_SIZE))
         .addNetworkInterceptor(HttpCacheInterceptor(c))
         .connectTimeout(MAX_DELAY_TIME, TimeUnit.SECONDS)
         .readTimeout(MAX_DELAY_TIME, TimeUnit.SECONDS)

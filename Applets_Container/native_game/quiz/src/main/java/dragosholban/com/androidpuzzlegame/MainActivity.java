@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         AssetManager am = getAssets();
         try {
-            final String[] files = am.list("img");
+            final String[] files = am.list("puzzle_img");
 
             GridView grid = findViewById(R.id.grid_g);
             grid.setAdapter(new ImageAdapter(this));

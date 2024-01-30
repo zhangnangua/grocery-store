@@ -9,6 +9,7 @@ import android.util.Log
 import android.util.SparseArray
 import com.pumpkin.data.AppUtil
 import com.pumpkin.data.BuildConfig
+import com.pumpkin.data.thread.IoScope
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
@@ -99,7 +100,7 @@ abstract class ProcessEventBus<T : Event>(private val eventType: Int, private va
                 if (BuildConfig.DEBUG) {
                     Log.d(TAG, "onChange()-> selfChange = $selfChange , uri = $uri , flags = $flags")
                 }
-                GlobalScope.launch(Dispatchers.IO + CoroutineExceptionHandler { coroutineContext, throwable ->
+                IoScope().launch(CoroutineExceptionHandler { coroutineContext, throwable ->
                     if (AppUtil.isDebug) {
                         throwable.printStackTrace()
                     }

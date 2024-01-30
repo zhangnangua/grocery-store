@@ -26,7 +26,7 @@ public class ImageAdapter extends BaseAdapter {
         mContext = c;
         am = mContext.getAssets();
         try {
-            files = am.list("img");
+            files = am.list("puzzle_img");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -89,7 +89,7 @@ public class ImageAdapter extends BaseAdapter {
         }
 
         try {
-            InputStream is = am.open("img/" + assetName);
+            InputStream is = am.open("puzzle_img/" + assetName);
             // Get the dimensions of the bitmap
             BitmapFactory.Options bmOptions = new BitmapFactory.Options();
             bmOptions.inJustDecodeBounds = true;

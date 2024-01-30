@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
@@ -11,12 +12,14 @@ import android.widget.FrameLayout
 import android.widget.Toolbar.LayoutParams
 import androidx.lifecycle.lifecycleScope
 import com.pumpkin.data.AppUtil
+import com.pumpkin.data.BuildConfig
 import com.pumpkin.mvvm.util.Constant
 import com.pumpkin.mvvm.util.UIHelper
 import com.pumpkin.mvvm.util.toLogD
 import com.pumpkin.mvvm.view.BaseActivity
 import com.pumpkin.mvvm.viewmodel.PACViewModelProviders
 import com.pumpkin.pac.R
+import com.pumpkin.pac.bean.GParameter
 import com.pumpkin.pac.bean.GameEntity
 import com.pumpkin.pac.databinding.ActivityPacBinding
 import com.pumpkin.pac.pool.WebViewPool
@@ -31,7 +34,7 @@ import kotlinx.coroutines.launch
  * game container
  *
  *
- * todo 接受 http/https 的能力
+ * todo 内置游戏load页面处理
  *
  * todo webview 剥离 预热 ！！！！
  */
@@ -42,7 +45,7 @@ class GameActivity : BaseActivity() {
     private var wv: PACWebEngine? = null
 
     private val gameViewModel by lazy(LazyThreadSafetyMode.NONE) {
-        PACViewModelProviders.of(this).get(GameViewModel::class.java)
+        PACViewModelProviders.of(this)[GameViewModel::class.java]
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,27 +56,35 @@ class GameActivity : BaseActivity() {
             return
         }
         val gameEntity = bundle.getParcelable<GameEntity>(Constant.FIRST_PARAMETER)
+        val gParameter = bundle.getParcelable<GParameter>(Constant.SECOND_PARAMETER)
+
+        if (BuildConfig.DEBUG) {
+            Log.d(TAG, "onCreate () -> game entity is $gameEntity , g parameter is $gParameter .")
+        }
+
         if (gameEntity == null) {
             finishPAC("game entity is null .")
             return
         }
 
-        initView(gameEntity)
+        initView(gParameter)
 
-        loadData(gameEntity)
+        loadData(gameEntity, gParameter)
     }
 
-    private fun initView(gameEntity: GameEntity) {
+    private fun initView(gParameter: GParameter?) {
         binding = ActivityPacBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         //show loading
-        UIHelper.showFragmentRemove(
-            LoadingFragment::class.simpleName,
-            supportFragmentManager,
-            LoadingFragment(),
-            R.id.loading_container
-        )
+        if (gParameter?.isInternal != true) {
+            UIHelper.showFragmentRemove(
+                LoadingFragment::class.simpleName,
+                supportFragmentManager,
+                LoadingFragment(),
+                R.id.loading_container
+            )
+        }
 
         //wv
         wv = getWV()
@@ -81,8 +92,8 @@ class GameActivity : BaseActivity() {
         binding.wvContainer.addView(wv)
     }
 
-    private fun loadData(gameEntity: GameEntity) {
-        gameViewModel.attach(gameEntity)
+    private fun loadData(gameEntity: GameEntity, gParameter: GParameter?) {
+        gameViewModel.attach(gameEntity, gParameter)
 
         load(gameEntity)
     }
@@ -165,10 +176,12 @@ class GameActivity : BaseActivity() {
     companion object {
         private const val TAG = "PACActivity"
 
-        fun go(context: Context, gameEntity: GameEntity) {
+        fun go(context: Context, gameEntity: GameEntity, gp: GParameter = GParameter(false)) {
             context.startActivity(Intent(context, GameActivity::class.java).apply {
                 putExtra(Constant.FIRST_PARAMETER, gameEntity)
+                putExtra(Constant.SECOND_PARAMETER, gp)
             })
         }
+
     }
 }

@@ -127,6 +127,18 @@ fun GameTable.tableToEntity() = GameEntity(
 )
 
 
+fun GameResponse.responseToEntity() = GameEntity(
+    id = this.id ?: "",
+    name = this.name ?: "",
+    link = this.link ?: "",
+    describe = this.describe ?: "",
+    icon = this.icon ?: "",
+    bigIcon = this.bigIcon ?: "",
+    extra = this.extra,
+    tag = this.tag
+)
+
+
 fun List<GameTable?>.tablesToEntities(): ArrayList<GameEntity> {
     val tables = ArrayList<GameEntity>()
     forEach {

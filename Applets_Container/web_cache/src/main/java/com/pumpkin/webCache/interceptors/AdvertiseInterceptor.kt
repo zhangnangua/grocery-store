@@ -16,7 +16,7 @@ class AdvertiseInterceptor(private val c: InterceptorConfig = DefaultInterceptor
 
     override fun findResource(chain: Chain): WebResourceResponse? {
         return if (c.isOtherInterceptor(chain.url) || (!chain.request.isForMainFrame && matcher.isBlock(chain.uri, chain.application.resources))) {
-            WebResourceResponse(null, null, null)
+            WebResourceResponse("text/html", "UTF_8", null)
         } else {
             null
         }

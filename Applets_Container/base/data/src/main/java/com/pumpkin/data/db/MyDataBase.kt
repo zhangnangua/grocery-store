@@ -33,7 +33,6 @@ abstract class MyDataBase : RoomDatabase() {
             INSTANCE ?: Room
                 .databaseBuilder(application, MyDataBase::class.java, DATA_NAME)
                 .fallbackToDestructiveMigrationOnDowngrade()
-                .fallbackToDestructiveMigration()
                 .createFromAsset("data/save.db")
                 .build()
                 .also {

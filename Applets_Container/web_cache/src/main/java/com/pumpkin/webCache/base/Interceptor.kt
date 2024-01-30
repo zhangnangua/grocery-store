@@ -21,7 +21,7 @@ interface Chain {
 
     val application: Application
 
-    val originUrl: String?
+    val originUrl: String
 
     val resourceId: String?
 
@@ -32,7 +32,7 @@ class DefaultChain(private val interceptors: List<Interceptor>,
                    override val request: WebResourceRequest,
                    override val url: String,
                    override val uri: Uri,
-                   override val originUrl: String?,
+                   override val originUrl: String,
                    override val resourceId: String?,
                    override val application: Application) : Chain {
 
