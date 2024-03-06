@@ -7,17 +7,18 @@
             android:name=".process.service.PACService"
             android:exported="false"
             android:process=":pac" />
+
         <activity
             android:name=".view.GameActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:process=":pac"
-            android:theme="@style/Theme.Applets_Container" />
+            android:theme="@style/Theme.Browser" />
 
         <activity
             android:name=".view.BrowserActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:process=":pac"
-            android:theme="@style/Theme.Applets_Container" />
+            android:theme="@style/Theme.Browser" />
     </application>
 
 </manifest>

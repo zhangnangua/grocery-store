@@ -152,6 +152,7 @@ class BrowserActivity : BaseActivity() {
             context.startActivity(Intent(context, BrowserActivity::class.java).apply {
                 putExtra(Constant.FIRST_PARAMETER, entity)
                 putExtra(Constant.PAGE_PARAMETER, ActivitySettingBean().apply {
+                    enableImmersiveBar = true
                     enterAnim = R.anim.slide_in_from_bottom
                     exitAnim = R.anim.slide_out_to_bottom
                 })

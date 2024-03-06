@@ -7,5 +7,14 @@
     "icon": "file:///android_asset/internal_game/icon/I1000_cf.png",
     "bigIcon": "",
     "tag": "fighting;ball;"
+  },
+  {
+    "id": "I1001_s",
+    "name": "Snake",
+    "link": "https://www.howie.com/snake/index.html",
+    "describe": "This is a classic! ! !",
+    "icon": "file:///android_asset/internal_game/icon/I1001_s.png",
+    "bigIcon": "",
+    "tag": "snake;"
   }
 ]

@@ -9,7 +9,7 @@ import androidx.annotation.AnimRes
  */
 class ActivitySettingBean(
     //是否开启沉浸式导航栏，默认开启
-    var enableImmersiveBar: Boolean = true,
+    var enableImmersiveBar: Boolean = false,
 
     //进入动画  进入   默认从右侧进入
     @AnimRes

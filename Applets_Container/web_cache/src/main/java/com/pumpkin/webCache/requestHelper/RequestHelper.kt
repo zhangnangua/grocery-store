@@ -116,7 +116,7 @@ object RequestHelper {
         file: File
     ): WebResourceResponse? {
         if (file.exists()) {
-            val mimeType: String = MimeTypeMapUtils.getMimeTypeFromUrl(url)
+            val mimeType: String? = MimeTypeMapUtils.getMimeTypeFromUrl(url)
             try {
                 val inputStream: InputStream = FileInputStream(file)
                 val response = WebResourceResponse(mimeType, "UTF_8", inputStream)

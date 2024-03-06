@@ -1,14 +1,23 @@
 package com.pumpkin.mvvm.util
 
+import android.content.Context
+import android.graphics.Color
+import android.view.ContextThemeWrapper
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
+import com.google.android.material.color.MaterialColors
 import com.pumpkin.data.AppUtil
+import com.pumpkin.mvvm.R
 import com.pumpkin.mvvm.view.BaseFragment
 import com.pumpkin.ui.util.DeviceParams
 
 object UIHelper {
+
+    fun getThemeAttrColor(context: Context?, attrResId: Int): Int {
+        return MaterialColors.getColor(ContextThemeWrapper(context, R.style.Theme_Applets_Container), attrResId, Color.WHITE)
+    }
 
     /**
      * showFragment

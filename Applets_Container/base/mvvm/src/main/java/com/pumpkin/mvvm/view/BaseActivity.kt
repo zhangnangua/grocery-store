@@ -1,11 +1,13 @@
 package com.pumpkin.mvvm.view
 
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.annotation.AnimRes
 import androidx.appcompat.app.AppCompatActivity
 import com.pumpkin.mvvm.R
 import com.pumpkin.mvvm.setting_bean.ActivitySettingBean
 import com.pumpkin.mvvm.util.Constant
+import com.pumpkin.mvvm.util.StatusBarUtil
 
 abstract class BaseActivity : AppCompatActivity() {
     /**
@@ -19,6 +21,10 @@ abstract class BaseActivity : AppCompatActivity() {
             val localPage: ActivitySettingBean? = bundle.getParcelable(Constant.PAGE_PARAMETER)
             pageSettingBean = localPage
             enterAnim(localPage)
+        }
+        if (pageSettingBean?.enableImmersiveBar == true) {
+            StatusBarUtil.hideBar(window)
+            StatusBarUtil.fullScreenAndLayoutStable(window)
         }
         super.onCreate(savedInstanceState)
     }

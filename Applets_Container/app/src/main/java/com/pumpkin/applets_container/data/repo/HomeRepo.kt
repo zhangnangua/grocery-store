@@ -4,7 +4,6 @@ import android.text.TextUtils
 import android.util.Log
 import androidx.paging.PagingConfig
 import com.pumpkin.applets_container.bean.TitleEntity
-import com.pumpkin.pac.util.RecentlyNoticeHelper
 import com.pumpkin.applets_container.view.vh.BigCardVH
 import com.pumpkin.applets_container.view.vh.RecentHorizontalVH
 import com.pumpkin.applets_container.view.vh.TitleVH
@@ -13,10 +12,12 @@ import com.pumpkin.data.db.DbHelper
 import com.pumpkin.mvvm.adapter.AdapterWrapBean
 import com.pumpkin.mvvm.repo.BasePageRepo
 import com.pumpkin.pac.bean.tablesToEntities
-import kotlinx.coroutines.delay
+import com.pumpkin.pac.util.RecentlyNoticeHelper
 
-class HomeRepo : BasePageRepo(BigCardPagingSource()) {
-    companion object{
+class HomeRepo : BasePageRepo({
+    BigCardPagingSource()
+}) {
+    companion object {
         private const val BIG_CARD_NUM = 10
         const val TAG = "HomeRepo"
     }

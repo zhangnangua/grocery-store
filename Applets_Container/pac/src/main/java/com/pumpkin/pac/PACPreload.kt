@@ -11,7 +11,8 @@ object PACPreload {
     fun pacPreload() {
         //在游戏进程 初始化
         if (ProcessUtil.isPACProcess()) {
-            WebViewPool.preLoad()
+            // TODO: do
+//            WebViewPool.preLoad()
         }
 
         if (ProcessUtil.isMainProcess()) {

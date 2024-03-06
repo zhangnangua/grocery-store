@@ -20,6 +20,7 @@ class WordRepo {
             val result = mutableListOf<AdapterWrapBean>()
             result.add(AdapterWrapBean(WordCardStyle1VH.TYPE, WordCardStyle(System.currentTimeMillis(), "https://gx.games/favicon.ico", "GX", "https://gx.games/")))
             result.add(AdapterWrapBean(WordCardStyle1VH.TYPE, WordCardStyle(System.currentTimeMillis(), "https://www.gamepix.com/favicon.ico", "GamePix", "https://www.gamepix.com/")))
+            result.add(AdapterWrapBean(WordCardStyle1VH.TYPE, WordCardStyle(System.currentTimeMillis(), "https://poki.com/favicon.ico", "PoKi", "https://poki.com/zh")))
             feedFlow.emit(result)
             if (BuildConfig.DEBUG) {
                 Log.d(TAG, "requestFeed emit () -> $result .")

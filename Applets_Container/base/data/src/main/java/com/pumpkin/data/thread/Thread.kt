@@ -29,6 +29,14 @@ object ThreadHelper {
         MAIN_HANDLER.post(runnable)
     }
 
+    fun runOnUiThreadDelay(runnable: Runnable, long: Long) {
+        MAIN_HANDLER.postDelayed(runnable, long)
+    }
+
+    fun removeUiThread(runnable: Runnable) {
+        MAIN_HANDLER.removeCallbacks(runnable)
+    }
+
     /**
      * 如果运行在主线程，则立即执行
      */

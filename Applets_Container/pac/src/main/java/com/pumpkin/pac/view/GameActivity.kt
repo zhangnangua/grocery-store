@@ -13,6 +13,7 @@ import android.widget.Toolbar.LayoutParams
 import androidx.lifecycle.lifecycleScope
 import com.pumpkin.data.AppUtil
 import com.pumpkin.data.BuildConfig
+import com.pumpkin.mvvm.setting_bean.ActivitySettingBean
 import com.pumpkin.mvvm.util.Constant
 import com.pumpkin.mvvm.util.UIHelper
 import com.pumpkin.mvvm.util.toLogD
@@ -180,6 +181,9 @@ class GameActivity : BaseActivity() {
             context.startActivity(Intent(context, GameActivity::class.java).apply {
                 putExtra(Constant.FIRST_PARAMETER, gameEntity)
                 putExtra(Constant.SECOND_PARAMETER, gp)
+                putExtra(Constant.PAGE_PARAMETER, ActivitySettingBean().apply {
+                    enableImmersiveBar = true
+                })
             })
         }
 

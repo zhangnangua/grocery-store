@@ -8,10 +8,10 @@ import com.pumpkin.mvvm.adapter.AdapterWrapBean
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-abstract class BasePageRepo(private val source: BasePagingSource) {
+abstract class BasePageRepo(private val source: () -> BasePagingSource) {
 
     fun getPagingData(config: PagingConfig) =
-        Pager(config = config, pagingSourceFactory = { source }).flow
+        Pager(config = config, pagingSourceFactory = { source() }).flow
 
 
     abstract class BasePagingSource : PagingSource<Int, AdapterWrapBean>() {

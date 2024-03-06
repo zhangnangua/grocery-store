@@ -6,16 +6,17 @@ internal object DataProvider {
     fun obtainInfo(who: Int): NativeInfo {
         if (who == NativeEntrance.PUZZLE) {
             return puzzleInfo()
-        }else if (who == NativeEntrance.SNAKE){
+        } else if (who == NativeEntrance.SNAKE) {
             return snakeInfo()
         }
         throw IllegalAccessException("not exist $who .")
     }
 
     private fun puzzleInfo() =
-        NativeInfo(name = "Puzzle", icon =  "${pathPrefix}puzzle_i.jpeg", who = NativeEntrance.PUZZLE)
+        NativeInfo(name = "Puzzle", icon = "${pathPrefix}puzzle_i.jpeg", who = NativeEntrance.PUZZLE)
+
     private fun snakeInfo() =
-        NativeInfo(name = "Snake", icon =  "", who = NativeEntrance.SNAKE)
+        NativeInfo(name = "Snake", icon = "", who = NativeEntrance.SNAKE)
 
 
 }
