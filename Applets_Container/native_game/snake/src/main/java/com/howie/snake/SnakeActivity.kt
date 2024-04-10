@@ -16,7 +16,7 @@ class SnakeActivity : BaseActivity() {
     }
 
     private fun init(){
-        binding.game.attachMoveHandlerView()
-        binding.game.attachAttackHandlerView()
+//        binding.game.attachMoveHandlerView()
+//        binding.game.attachAttackHandlerView()
     }
 }

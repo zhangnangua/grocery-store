@@ -2,4 +2,7 @@
     <string name="app_name">pac</string>
 
     <string name="loading">Loading %s %%</string>
+    <string name="exit">Exit</string>
+    <string name="cancel">Cancel</string>
+    <string name="sure_exit_game">Are you sure you want to leave?</string>
 </resources>

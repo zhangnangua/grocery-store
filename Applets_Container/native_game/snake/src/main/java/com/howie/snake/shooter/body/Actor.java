@@ -1,12 +1,14 @@
 package com.howie.snake.shooter.body;
 
 
+import android.graphics.Canvas;
+
 public abstract class Actor extends Body {
 
     /**
      * 旋转角度
      */
-    float rotationAngle;
+    public float rotationAngle;
 
     /**
      * 碰撞半径
@@ -17,7 +19,7 @@ public abstract class Actor extends Body {
         collisionRadius = _collisionRadius;
     }
 
-    public abstract void act();
+    public abstract void act(Canvas mCanvas);
 
     public boolean isCollided(Actor other) {
         return getDistance(other) < this.collisionRadius + other.collisionRadius;

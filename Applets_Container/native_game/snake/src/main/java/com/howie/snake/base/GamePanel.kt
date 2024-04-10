@@ -57,6 +57,8 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
         ).apply {
             start()
         }
+
+        initAfter()
     }
 
     override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
@@ -70,6 +72,8 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
     }
 
     abstract fun init()
+
+    abstract fun initAfter()
 
     abstract fun onPanelChange(holder: SurfaceHolder, format: Int, width: Int, height: Int)
 

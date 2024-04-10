@@ -60,6 +60,16 @@ class BrowserActivity : BaseActivity() {
         binding.wvContainer.addView(wv)
     }
 
+    override fun onBackPressed() {
+        if (wv != null) {
+            if (wv!!.canGoBack()) {
+                wv!!.goBack()
+                return
+            }
+        }
+        super.onBackPressed()
+    }
+
 
     private fun progressUI(progress: Int) {
         val pUI = binding.progress

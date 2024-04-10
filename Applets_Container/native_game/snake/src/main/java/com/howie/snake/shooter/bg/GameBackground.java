@@ -6,8 +6,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
 import com.howie.snake.BuildConfig;
 import com.howie.snake.shooter.GameEngine;
 import com.howie.snake.shooter.util.MathUtils;

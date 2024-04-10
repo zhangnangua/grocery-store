@@ -113,7 +113,7 @@ abstract class ProcessEventBus<T : Event>(private val eventType: Int, private va
         contentObserver = local
     }
 
-    public fun unregister() {
+    fun unregister() {
         val local = contentObserver
         if (local != null) {
             context.contentResolver.unregisterContentObserver(local)

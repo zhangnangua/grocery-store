@@ -2,14 +2,16 @@ package com.howie.snake.shooter.input;
 
 import android.content.Context;
 import android.graphics.Point;
+import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.FrameLayout;
 
 import com.howie.snake.rocker.RockerView;
 import com.pumpkin.data.thread.ThreadHelper;
 
-public class AttackView extends FrameLayout {
+public class AttackView extends View {
     private static final int TOUCH_SLOP = 7;
     private Point mCenterPoint = null;
     private boolean isMoving = false;

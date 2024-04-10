@@ -3,49 +3,52 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mcv"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/mcv_bg"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_margin="3dp"
-        android:orientation="vertical"
-        android:layout_gravity="center_horizontal"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="3dp"
-        app:shapeAppearance="?attr/shapeAppearanceMediumComponent"
-        app:strokeWidth="0dp">
+    <FrameLayout
+        android:layout_width="160dp"
+        android:layout_height="160dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mcv_bg"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="3dp"
+            app:shapeAppearance="?attr/shapeAppearanceMediumComponent"
+            app:strokeWidth="0dp">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_image"
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:scaleType="fitXY"
-                tools:src="@mipmap/leak_canary_icon" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_name"
-                style="@style/TextAppearance.Material3.ActionBar.Title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                tools:text="name" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_image"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:scaleType="fitXY"
+                    tools:src="@mipmap/leak_canary_icon" />
 
-        </LinearLayout>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_name"
+                    style="@style/TextAppearance.Material3.ActionBar.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    tools:text="name" />
 
-    </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+    </FrameLayout>
 
 </FrameLayout>

@@ -2,23 +2,19 @@ package com.howie.snake.shooter.body
 
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.PaintFlagsDrawFilter
 import androidx.annotation.ColorInt
 import com.howie.snake.shooter.GameEngine
-import com.howie.snake.shooter.body.state.NoActionState
-import com.howie.snake.shooter.body.state.PlayerActorState
+import com.howie.snake.shooter.body.state.ActionState
 import com.pumpkin.ui.util.dpToPx
 import kotlin.math.sqrt
 
+
 abstract class AbstractPlayerActor(collisionRadius: Float) : Actor(collisionRadius) {
-
-    var playerActorState: PlayerActorState = NoActionState
-
+    val actionState = ActionState(this)
 }
 
 class PlayerActor(@ColorInt val colorInt: Int) : AbstractPlayerActor(16F) {
-
-    private val bodySize = 32.0f.dpToPx
-    private val halfBodySize = (bodySize / 2).toFloat()
 
     private val paint = Paint().apply {
         color = colorInt
@@ -50,16 +46,25 @@ class PlayerActor(@ColorInt val colorInt: Int) : AbstractPlayerActor(16F) {
     override fun display(canvas: Canvas) {
 
 //        Log.d("PlayerActor", "display xPosition $xPosition , yPosition $yPosition , rotationAngle $rotationAngle")
+        //抗锯齿
+        canvas.drawFilter = PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG)
 
         canvas.save()
         canvas.translate(xPosition, yPosition)
         canvas.rotate(rotationAngle, halfBodySize, halfBodySize)
         canvas.drawRect(0F, 0F, bodySize.toFloat(), bodySize.toFloat(), paint)
         canvas.restore()
+
+        actionState.decorate(canvas)
+
     }
 
-    override fun act() {
+    override fun act(mCanvas: Canvas) {
+    }
 
+    companion object {
+        val bodySize = 32.0f.dpToPx
+        val halfBodySize = (bodySize / 2).toFloat()
     }
 
 }

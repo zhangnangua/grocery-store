@@ -5,12 +5,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.view.View
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
 import android.widget.FrameLayout
 import android.widget.Toolbar.LayoutParams
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.pumpkin.data.AppUtil
 import com.pumpkin.data.BuildConfig
 import com.pumpkin.mvvm.setting_bean.ActivitySettingBean
@@ -24,6 +26,7 @@ import com.pumpkin.pac.bean.GParameter
 import com.pumpkin.pac.bean.GameEntity
 import com.pumpkin.pac.databinding.ActivityPacBinding
 import com.pumpkin.pac.pool.WebViewPool
+import com.pumpkin.pac.util.FloatDragHelper
 import com.pumpkin.pac.util.GameHelper
 import com.pumpkin.pac.view.fragment.LoadingFragment
 import com.pumpkin.pac.viewmodel.GameViewModel
@@ -39,7 +42,7 @@ import kotlinx.coroutines.launch
  *
  * todo webview 剥离 预热 ！！！！
  */
-class GameActivity : BaseActivity() {
+class GameActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityPacBinding
 
@@ -91,33 +94,10 @@ class GameActivity : BaseActivity() {
         wv = getWV()
         binding.wvContainer.removeAllViews()
         binding.wvContainer.addView(wv)
-    }
 
-    private fun loadData(gameEntity: GameEntity, gParameter: GParameter?) {
-        gameViewModel.attach(gameEntity, gParameter)
-
-        load(gameEntity)
-    }
-
-//    override fun onBackPressed() {
-//        if (wv != null) {
-//            if (wv!!.canGoBack()) {
-//                wv!!.goBack()
-//                return
-//            }
-//        }
-//        super.onBackPressed()
-//    }
-
-    private fun load(gameEntity: GameEntity) {
-        loadEntrance(gameEntity.link)
-        lifecycleScope.launch {
-            gameViewModel.recordToRecently()
-        }
-    }
-
-    private fun loadEntrance(url: String) {
-        wv?.loadUrl(url)
+        //float
+        binding.vFloat.setOnClickListener(this)
+        binding.vFloat.setOnTouchListener(FloatDragHelper(this))
     }
 
     private fun getWV(): PACWebEngine {
@@ -126,6 +106,9 @@ class GameActivity : BaseActivity() {
                 FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
             addClient()
             setPageInterface(object : Webinterface.DefaultPage() {
+                val PROGRESS_100 = 100
+                val CLOSE_PROGRESS_40 = 40
+
                 override fun onPageFinished(view: WebView?, url: String?) {
                     if (TextUtils.isEmpty(url) || TextUtils.equals(url, "about:blank")) {
                         return
@@ -134,7 +117,11 @@ class GameActivity : BaseActivity() {
                 }
 
                 override fun onProgressChanged(view: WebView?, newProgress: Int) {
-                    gameViewModel.setProgress(newProgress)
+                    if (newProgress >= CLOSE_PROGRESS_40) {
+                        gameViewModel.progressFinished()
+                    } else {
+                        gameViewModel.setProgress(newProgress * PROGRESS_100 / CLOSE_PROGRESS_40)
+                    }
                 }
             })
             setResourceInterface(object : Webinterface.ResourceInterface {
@@ -157,6 +144,49 @@ class GameActivity : BaseActivity() {
             })
             // TODO: error temporarily not processed .
         }
+    }
+
+    private fun loadData(gameEntity: GameEntity, gParameter: GParameter?) {
+        gameViewModel.attach(gameEntity, gParameter)
+
+        load(gameEntity)
+    }
+
+    private fun load(gameEntity: GameEntity) {
+        loadEntrance(gameEntity.link)
+        lifecycleScope.launch {
+            gameViewModel.recordToRecently()
+        }
+    }
+
+    private fun exitDialog() {
+        MaterialAlertDialogBuilder(this)
+            .setTitle(getString(R.string.sure_exit_game))
+            .setNegativeButton(getString(R.string.cancel)) { dialog, which ->
+                // Respond to negative button press
+            }
+            .setPositiveButton(getString(R.string.exit)) { dialog, which ->
+                exit()
+            }
+            .show()
+    }
+
+    private fun loadEntrance(url: String) {
+        wv?.loadUrl(url)
+    }
+
+    override fun onClick(v: View?) {
+        if (v == binding.vFloat) {
+            exitDialog()
+        }
+    }
+
+    override fun onBackPressed() {
+        exitDialog()
+    }
+
+    private fun exit() {
+        finishPAC("exit")
     }
 
 

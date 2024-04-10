@@ -64,11 +64,7 @@ object WebViewPool {
                 }
             }
         }
-        val webViewContext: Context = webView.context
-        if (webViewContext is MutableContextWrapper) {
-            webViewContext.baseContext = context
-        }
-        return PACWebEngine(context)
+        return webView
     }
 
 
@@ -76,38 +72,33 @@ object WebViewPool {
         if (webView == null) {
             return
         }
-        val context: Context = webView.context
-        if (context is MutableContextWrapper) {
-            context.baseContext = AppUtil.application
-            val parent: ViewParent = webView.parent
-            if (parent is ViewGroup) {
-                parent.removeView(webView)
-            }
-            try {
-                webView.stopLoading()
-                webView.clearFormData()
-                webView.loadUrl("about:blank")
-                webView.clearHistory()
-                webView.clear()
-                synchronized(stack) {
-                    //放回缓存池
-                    if (stack.size < MAX_NUM) {
-                        stack.addFirst(webView)
-                    }
+        val parent: ViewParent = webView.parent
+        if (parent is ViewGroup) {
+            parent.removeView(webView)
+        }
+        try {
+            webView.stopLoading()
+            webView.clearFormData()
+            webView.loadUrl("about:blank")
+            webView.clearHistory()
+            webView.clear()
+            synchronized(stack) {
+                //放回缓存池
+                if (stack.size < MAX_NUM) {
+                    stack.addFirst(webView)
                 }
-            } catch (ignored: Exception) {
             }
-            if (AppUtil.isDebug) {
-                Log.d(TAG, "obtain: recycle is success, the current stack count is ${stack.size}")
-            }
+        } catch (ignored: Exception) {
+        }
+        if (AppUtil.isDebug) {
+            Log.d(TAG, "obtain: recycle is success, the current stack count is ${stack.size}")
         }
     }
 
     private fun createWebView(): PACWebEngine {
-        val contextWrapper = MutableContextWrapper(AppUtil.application)
         val cacheWebView: PACWebEngine
         try {
-            cacheWebView = newWV(contextWrapper)
+            cacheWebView = newWV(AppUtil.application)
         } catch (e: Exception) {
             throw e
         }
@@ -115,7 +106,7 @@ object WebViewPool {
     }
 
 
-    private fun newWV(contextWrapper: MutableContextWrapper): PACWebEngine =
-        PACWebEngine(contextWrapper)
+    private fun newWV(context: Context): PACWebEngine =
+        PACWebEngine(context)
 
 }

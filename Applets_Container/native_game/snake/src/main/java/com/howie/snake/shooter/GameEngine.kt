@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.util.AttributeSet
+import android.util.Log
 import android.view.SurfaceHolder
 import com.howie.snake.base.GamePanel
 import com.howie.snake.shooter.bg.GameBackground
@@ -14,13 +15,19 @@ class GameEngine
 constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : GamePanel(context, attrs, defStyleAttr) {
 
     private lateinit var bg: GameBackground
-    private val players = ArrayList<PlayerActor>()
+    private lateinit var player1: PlayerActor
+
+    var initListener: (() -> Unit)? = null
 
     override fun init() {
         setParam(Param(width, height))
         bg = GameBackground(0.1F, param)
-        players.add(PlayerActor(Color.parseColor("#FF5F0F")))
+        player1 = PlayerActor(Color.parseColor("#FF5F0F"))
 
+    }
+
+    override fun initAfter() {
+        initListener?.invoke()
     }
 
     override fun render(mCanvas: Canvas, frameTimeNanos: Long) {
@@ -31,11 +38,9 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
     }
 
     private fun playersRender(mCanvas: Canvas) {
-        players.forEach {
-            it.act()
-            it.update()
-            it.display(mCanvas)
-        }
+        player1.act(mCanvas)
+        player1.update()
+        player1.display(mCanvas)
     }
 
     override fun onPanelChange(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
@@ -47,10 +52,10 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
     }
 
     fun myPlayerMove(dir: Float, speed: Float) {
-        players.forEach {
-            it.setVelocity(dir, speed)
-        }
+        player1.setVelocity(dir, speed)
     }
+
+    fun myPlayerActionState() = player1.actionState
 
     private fun setParam(p: Param) {
         param.heightSideLength = p.heightSideLength

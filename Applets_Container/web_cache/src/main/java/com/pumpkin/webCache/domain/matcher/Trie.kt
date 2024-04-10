@@ -20,6 +20,9 @@ open class Trie {
             //but foo.bar.com should match.
             return this
         }
+        if (s.length() == 0) {
+            return null
+        }
         val c = s.chatAt(0)
         return children.get(c.code)?.findNode(s.substring(1))
     }

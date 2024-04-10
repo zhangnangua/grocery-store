@@ -8,10 +8,8 @@ import com.pumpkin.mvvm.adapter.AdapterWrapBean
 import com.pumpkin.pac.bean.WordCardStyle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
-import kotlin.math.log
 
 class WordRepo {
 
@@ -21,6 +19,7 @@ class WordRepo {
             result.add(AdapterWrapBean(WordCardStyle1VH.TYPE, WordCardStyle(System.currentTimeMillis(), "https://gx.games/favicon.ico", "GX", "https://gx.games/")))
             result.add(AdapterWrapBean(WordCardStyle1VH.TYPE, WordCardStyle(System.currentTimeMillis(), "https://www.gamepix.com/favicon.ico", "GamePix", "https://www.gamepix.com/")))
             result.add(AdapterWrapBean(WordCardStyle1VH.TYPE, WordCardStyle(System.currentTimeMillis(), "https://poki.com/favicon.ico", "PoKi", "https://poki.com/zh")))
+            result.add(AdapterWrapBean(WordCardStyle1VH.TYPE, WordCardStyle(System.currentTimeMillis(), "https://yandex.com/favicon.ico", "Yandex", "https://yandex.com/games")))
             feedFlow.emit(result)
             if (BuildConfig.DEBUG) {
                 Log.d(TAG, "requestFeed emit () -> $result .")

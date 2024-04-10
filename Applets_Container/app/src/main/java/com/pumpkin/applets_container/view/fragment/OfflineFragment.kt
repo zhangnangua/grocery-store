@@ -6,12 +6,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.pumpkin.applets_container.databinding.FragmentOfflineBinding
+import com.pumpkin.applets_container.view.itemDecoration.GridItemDecoration
 import com.pumpkin.applets_container.viewmodel.OfflineViewModel
 import com.pumpkin.mvvm.adapter.BaseAdapter
 import com.pumpkin.mvvm.util.UIHelper
 import com.pumpkin.mvvm.view.SuperMultiStateBaseFragment
 import com.pumpkin.mvvm.viewmodel.PACViewModelProviders
 import com.pumpkin.pac.BuildConfig
+import com.pumpkin.ui.util.dpToPx
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -38,6 +40,11 @@ class OfflineFragment : SuperMultiStateBaseFragment() {
         val rv = binding.rvContent
         flowAdapter = BaseAdapter(Glide.with(localContext), localContext)
         val layoutManager = GridLayoutManager(localContext, spanCount)
+        val startEndMargin = 16F.dpToPx
+        val verticalInterval = 0
+        val topMargin = 10F.dpToPx
+        val itemWidth = 160F.dpToPx
+        rv.addItemDecoration(GridItemDecoration(startEndMargin, startEndMargin, itemWidth, topMargin, verticalInterval))
         rv.layoutManager = layoutManager
         rv.adapter = flowAdapter
 
