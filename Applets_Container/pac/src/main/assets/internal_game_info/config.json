@@ -1,0 +1,39 @@
+[
+  {
+    "id": "internal_editor_snake",
+    "name": "Snake",
+    "link": "https://snake.googlemaps.com/",
+    "describe": "A fun snake game",
+    "icon": "https://snake.googlemaps.com/static/img/share_screen.png",
+    "bigIcon": "",
+    "tag": "fighting;run;"
+  },
+  {
+    "id": "internal_chess",
+    "name": "Chess",
+    "link": "https://www.chess.com/play",
+    "describe": "chess this is a classic.",
+    "icon": "https://www.chess.com/favicon.ico",
+    "bigIcon": "",
+    "tag": "chess;multiple people;"
+  },
+  {
+    "id": "internal_archery",
+    "name": "ArcheryWorldTour",
+    "link": "https://play.famobi.com/wrapper/archery-world-tour/A1000-10",
+    "describe": "Grab a bow and put your archery skills to the ultimate test! ",
+    "icon": "https://img.cdn.famobi.com/portal/html5games/images/tmp/ArcheryWorldTourTeaser.jpg",
+    "bigIcon": "",
+    "tag": "archery"
+  },
+  {
+    "id": "internal_hills_of_steel",
+    "name": "HillsOfSteel",
+    "link": "https://poki.com/zh/g/hills-of-steel#fullscreen",
+    "describe": "Rush to destroy enemy tanks! ! !",
+    "icon": "https://img.poki.com/cdn-cgi/image/quality=78,width=314,height=314,fit=cover,f=auto/e8a5f2eda2e5340e8ded263692835caa.png",
+    "bigIcon": "",
+    "tag": "fighting",
+    "orientation": 0
+  }
+]

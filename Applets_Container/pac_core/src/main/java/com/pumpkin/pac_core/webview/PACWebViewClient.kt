@@ -2,7 +2,12 @@ package com.pumpkin.pac_core.webview
 
 import android.graphics.Bitmap
 import android.net.http.SslError
-import android.webkit.*
+import android.webkit.SslErrorHandler
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
+import android.webkit.WebView
+import android.webkit.WebViewClient
 
 /**
  * howie
@@ -54,6 +59,21 @@ internal class PACWebViewClient : WebViewClient() {
     override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
         super.onPageStarted(view, url, favicon)
         pageInterface?.onPageStarted(view, url, favicon)
+    }
+
+    override fun onLoadResource(view: WebView?, url: String?) {
+        super.onLoadResource(view, url)
+        pageInterface?.onLoadResource(view, url)
+    }
+
+    override fun doUpdateVisitedHistory(view: WebView?, url: String?, isReload: Boolean) {
+        super.doUpdateVisitedHistory(view, url, isReload)
+        pageInterface?.doUpdateVisitedHistory(view, url,isReload)
+    }
+
+    override fun onPageCommitVisible(view: WebView?, url: String?) {
+        super.onPageCommitVisible(view, url)
+        pageInterface?.onPageCommitVisible(view, url)
     }
 
     override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {

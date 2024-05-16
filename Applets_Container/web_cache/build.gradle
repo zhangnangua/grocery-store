@@ -36,4 +36,6 @@ android {
 dependencies {
     //okhttp
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
+    //br 解压缩处理
+    implementation("org.brotli:dec:$br_version")
 }

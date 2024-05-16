@@ -1,64 +1,58 @@
 package com.pumpkin.applets_container.view.fragment
 
-import android.util.Log
+import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import androidx.lifecycle.coroutineScope
+import android.view.ViewGroup
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.paging.LoadState
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.pumpkin.applets_container.databinding.FragmentHomeBinding
-import com.pumpkin.applets_container.databinding.LayoutLoadingBinding
-import com.pumpkin.applets_container.helper.HomeScrollPlayHelper
-import com.pumpkin.applets_container.view.vh.BigCardVH
+import com.pumpkin.applets_container.view.itemDecoration.GridItemDecoration
+import com.pumpkin.applets_container.view.itemDecoration.HorizontalInternalItemDecoration
+import com.pumpkin.applets_container.view.vh.OfflineCardStyle1VH
+import com.pumpkin.applets_container.view.vh.WordCardStyle1VH
 import com.pumpkin.applets_container.viewmodel.HomeViewModel
-import com.pumpkin.applets_container.viewmodel.MainViewModel
-import com.pumpkin.data.AppUtil
-import com.pumpkin.mvvm.adapter.BasePagerAdapter
-import com.pumpkin.mvvm.adapter.FooterAdapter
+import com.pumpkin.mvvm.adapter.BaseAdapter
 import com.pumpkin.mvvm.util.UIHelper
-import com.pumpkin.mvvm.view.SuperMultiStateBaseFragment
+import com.pumpkin.mvvm.view.BaseFragment
 import com.pumpkin.mvvm.viewmodel.PACViewModelProviders
-import com.pumpkin.ui.widget.MultiStateView
-import kotlinx.coroutines.flow.catch
+import com.pumpkin.ui.util.dpToPx
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
+class HomeFragment : BaseFragment() {
 
-class HomeFragment : SuperMultiStateBaseFragment() {
+    lateinit var binding: FragmentHomeBinding
+
+    private lateinit var flowAdapter: BaseAdapter
 
     private val viewModel by lazy(LazyThreadSafetyMode.NONE) {
         PACViewModelProviders.of(this)[HomeViewModel::class.java]
     }
 
-    private val mainViewModel by lazy(LazyThreadSafetyMode.NONE) {
-        PACViewModelProviders.of(activity ?: this)[MainViewModel::class.java]
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentHomeBinding.inflate(layoutInflater)
+        return binding.root
     }
 
-    private var isLoading = true
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView(savedInstanceState)
+    }
 
-    private lateinit var flowAdapter: BasePagerAdapter
-
-    lateinit var binding: FragmentHomeBinding
-
-    override fun initView(view: View) {
+    private fun initView(savedInstanceState: Bundle?) {
         val localContext = context ?: return
-        fillView()
-        switchState(MultiStateView.ViewState.LOADING)
-        isLoading = true
+
         //设置 状态栏 高度
         UIHelper.setStatusHeight(binding.statusBar)
 
-        //drawerLayout设置
-        binding.toolBar.setNavigationOnClickListener {
-            mainViewModel.openDrawer()
-        }
-
-        //rv
         val spanCount = 2
-        val rv = binding.rv
-        flowAdapter = BasePagerAdapter(Glide.with(localContext), localContext)
+        val rv = binding.rvContent
+        flowAdapter = BaseAdapter(Glide.with(localContext), localContext)
         val layoutManager = GridLayoutManager(localContext, spanCount).apply {
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int {
@@ -66,7 +60,7 @@ class HomeFragment : SuperMultiStateBaseFragment() {
                         return spanCount
                     }
                     val type = flowAdapter.getItemViewType(position)
-                    return if (type == BigCardVH.TYPE) {
+                    return if (type == WordCardStyle1VH.TYPE) {
                         1
                     } else {
                         spanCount
@@ -75,61 +69,54 @@ class HomeFragment : SuperMultiStateBaseFragment() {
 
             }
         }
+        val startEndMargin = 16F.dpToPx
+        val verticalInterval = 0
+        val topMargin = 0
+        val itemWidth = 160F.dpToPx
+        rv.addItemDecoration(GridItemDecoration(startEndMargin, startEndMargin, itemWidth, topMargin, verticalInterval))
         rv.layoutManager = layoutManager
-        binding.rv.adapter = flowAdapter.withLoadStateFooter(FooterAdapter())
-        //scroll register
-        HomeScrollPlayHelper().startListener(rv, layoutManager, lifecycleScope)
+        rv.adapter = flowAdapter
 
-        //监听加载状态
-        flowAdapter.addLoadStateListener {
-            //比如处理下拉刷新逻辑
-            when (it.refresh) {
-                is LoadState.NotLoading -> {
-                    if (AppUtil.isDebug) {
-                        Log.d(TAG, "LoadStateListener: NotLoading ${it.append.endOfPaginationReached} , ${it.prepend.endOfPaginationReached}")
-                    }
-                    if (isLoading) {
-                        switchState(MultiStateView.ViewState.CONTENT)
-                        isLoading = false
-                    }
-                }
-                is LoadState.Loading -> {
-                    if (AppUtil.isDebug) {
-                        Log.d(TAG, "LoadStateListener: loading")
-                    }
-                }
-                is LoadState.Error -> {
-                    if (AppUtil.isDebug) {
-                        val state = it.refresh as LoadState.Error
-                        Log.d(TAG, "loadData () -> e is ${state.error.message}")
-                    }
-                }
-            }
-        }
+//        lifecycleScope.launch{
+//            delay(5000)
+//            binding.loading.visibility = View.GONE
+//            delay(5000)
+//            binding.loading.visibility = View.VISIBLE
+//        }
     }
 
     override fun loadData() {
-        context ?: return
-        lifecycle.coroutineScope.launch {
-            viewModel.getBigCardPagingData()
-                .catch { e ->
-                    if (AppUtil.isDebug) {
-                        Log.d(TAG, "loadData () -> e is ${e.message}")
-                    }
-                }
-                .onEach {
-                    flowAdapter.submitData(it)
+        lifecycleScope.launch {
+            // 每次生命周期处于 STARTED 状态（或更高状态）时，repeatOnLifecycle 在新的协程中启动块，并在它停止时取消它。
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.feed().onEach {
+                    flowAdapter.setData(it)
                 }.collect()
+            }
+
+            //如果这里被执行，则代表生命周期已经走到了onDestroy，因为repeatOnLifecycle是挂起函数，在生命周期为onDestroy的时候进行了恢复。
+
         }
-    }
-
-    private fun fillView() {
-        binding = FragmentHomeBinding.inflate(layoutInflater)
-        setBaseContentForState(LayoutLoadingBinding.inflate(layoutInflater).root, MultiStateView.ViewState.LOADING)
-        setPACContentView(binding.root)
-    }
-
-    companion object {
-        private const val TAG = "HomeFragment"
+        viewModel.requestFeed()
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -24,12 +24,12 @@ class GameViewModel : ViewModel() {
 
 
     fun attach(gameEntity: GameEntity, gParameter: GParameter?) {
-        gameRepo = GameRepo(gameEntity)
+        gameRepo = GameRepo(gameEntity, gParameter)
         cacheClient = WVCacheClient.Builder(AppUtil.application)
             .originUrl(gameEntity.link)
             .addInterceptor(AdvertiseInterceptor())
             .apply {
-                if (gParameter?.isInternal == true) {
+                if (gParameter?.isShowLoading == true) {
                     addInterceptor(InternalGameInterceptor())
                 }
             }
@@ -38,6 +38,8 @@ class GameViewModel : ViewModel() {
     }
 
     fun getGameEntity() = gameRepo?.gameEntity
+
+    fun getGParameter() = gameRepo?.gParameter
 
     fun getProgressFlow() = progressHelper.getProgressFlow()
 

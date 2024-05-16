@@ -1,14 +1,13 @@
-package com.pumpkin.pac.pool
+package com.pumpkin.pac
 
 import android.content.Context
-import android.content.MutableContextWrapper
 import android.os.Looper
 import android.util.Log
 import android.view.ViewGroup
 import android.view.ViewParent
+import com.pumpkin.data.AppUtil
 import com.pumpkin.pac.process.ProcessUtil
 import com.pumpkin.pac_core.webview.PACWebEngine
-import com.pumpkin.data.AppUtil
 
 /**
  * @author pumpkin
@@ -25,7 +24,8 @@ object WebViewPool {
         Looper.myQueue().addIdleHandler {
             synchronized(stack) {
                 if (stack.size < MAX_NUM) {
-                    stack.addFirst(createWebView())
+                    val createWebView = createWebView() ?: return@synchronized
+                    stack.addFirst(createWebView)
                     if (AppUtil.isDebug) {
                         Log.d(
                             TAG,
@@ -41,11 +41,14 @@ object WebViewPool {
     /**
      * 获取一个CacheWebView
      */
-    fun obtain(context: Context): PACWebEngine {
+    fun obtain(context: Context? = null, isNew: Boolean = false): PACWebEngine? {
+        if (isNew) {
+            return createWebView(context)
+        }
         if (AppUtil.isDebug) {
             Log.d(TAG, "obtain: the current stack count is ${stack.size}")
         }
-        var webView: PACWebEngine
+        var webView: PACWebEngine?
         synchronized(stack) {
             if (!stack.isEmpty()) {
                 webView = stack.removeFirst()
@@ -95,14 +98,12 @@ object WebViewPool {
         }
     }
 
-    private fun createWebView(): PACWebEngine {
-        val cacheWebView: PACWebEngine
-        try {
-            cacheWebView = newWV(AppUtil.application)
+    private fun createWebView(context: Context? = null): PACWebEngine? {
+        return try {
+            newWV(context ?: AppUtil.application)
         } catch (e: Exception) {
-            throw e
+            null
         }
-        return cacheWebView
     }
 
 

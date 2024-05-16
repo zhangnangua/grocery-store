@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.pumpkin.applets_container.databinding.FragmentOfflineBinding
 import com.pumpkin.applets_container.view.itemDecoration.GridItemDecoration
+import com.pumpkin.applets_container.view.vh.OfflineCardStyle1VH
 import com.pumpkin.applets_container.viewmodel.OfflineViewModel
 import com.pumpkin.mvvm.adapter.BaseAdapter
 import com.pumpkin.mvvm.util.UIHelper
@@ -39,10 +40,25 @@ class OfflineFragment : SuperMultiStateBaseFragment() {
         val spanCount = 2
         val rv = binding.rvContent
         flowAdapter = BaseAdapter(Glide.with(localContext), localContext)
-        val layoutManager = GridLayoutManager(localContext, spanCount)
+        val layoutManager = GridLayoutManager(localContext, spanCount).apply {
+            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    if (position > flowAdapter.itemCount - 1) {
+                        return spanCount
+                    }
+                    val type = flowAdapter.getItemViewType(position)
+                    return if (type == OfflineCardStyle1VH.TYPE) {
+                        1
+                    } else {
+                        spanCount
+                    }
+                }
+
+            }
+        }
         val startEndMargin = 16F.dpToPx
         val verticalInterval = 0
-        val topMargin = 10F.dpToPx
+        val topMargin = 0
         val itemWidth = 160F.dpToPx
         rv.addItemDecoration(GridItemDecoration(startEndMargin, startEndMargin, itemWidth, topMargin, verticalInterval))
         rv.layoutManager = layoutManager

@@ -1,7 +1,6 @@
 package com.pumpkin.applets_container.viewmodel
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.pumpkin.applets_container.data.repo.OfflineRepo
 import com.pumpkin.mvvm.adapter.AdapterWrapBean
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +15,7 @@ class OfflineViewModel : ViewModel() {
 
 
     fun request() {
-        repo.request(feedFlow, viewModelScope)
+        repo.request(feedFlow)
     }
 
 }

@@ -12,7 +12,7 @@ import com.pumpkin.pac_core.BuildConfig
 /**
  * pac 进程链接
  */
-object GameConnectPool : ConnectPool<IPACService>(true) {
+object PACProcessClient : ConnectPool<IPACService>(true) {
 
     private const val TAG = "GameConnectPool"
 
@@ -22,7 +22,7 @@ object GameConnectPool : ConnectPool<IPACService>(true) {
     override fun createConnectServiceIntent(): Intent =
         Intent(AppUtil.application, PACService::class.java)
 
-    fun handle(action: String, callBack: ICallback.Stub? = null): Boolean {
+    private fun handle(action: String, callBack: ICallback.Stub? = null): Boolean {
         return execute {
             it?.handle(action, object : ICallback.Stub() {
                 override fun callback(code: Int, action: String?, message: String?) {
@@ -35,9 +35,16 @@ object GameConnectPool : ConnectPool<IPACService>(true) {
         }
     }
 
-    override fun serviceConnected(service: IBinder?, serviceConnection: ServiceConnection) {
-        //爬虫 拉取数据
-        handle(PACService.TYPE_PARSE_DATA)
+    fun warmUp(){
+        connect()
     }
+
+    override fun serviceConnected(service: IBinder?, serviceConnection: ServiceConnection) {
+        //调度到子进程  爬虫 拉取数据
+        handle(PACService.TYPE_PARSE_DATA)
+        //web 预热
+        handle(PACService.TYPE_PRELOAD)
+    }
+
 
 }

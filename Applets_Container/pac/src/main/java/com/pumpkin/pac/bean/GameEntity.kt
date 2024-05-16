@@ -5,6 +5,7 @@ import android.os.Parcelable
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.pumpkin.data.db.entity.GameTable
+import com.pumpkin.mvvm.util.Constant
 import com.pumpkin.mvvm.util.Event
 import com.pumpkin.webCache.util.MD5Utils
 
@@ -19,7 +20,8 @@ class GameEntity constructor(
     val icon: String,// 游戏icon
     val bigIcon: String = "",// 大图
     val extra: JsonObject? = null, // 额外的参数
-    val tag: String?
+    val tag: String?,
+    val orientation: Int? = Constant.INVALID_ID
 ) : Parcelable, Event {
 
     constructor(parcel: Parcel) : this(
@@ -38,7 +40,8 @@ class GameEntity constructor(
         } catch (e: Exception) {
             null
         },
-        parcel.readString()
+        parcel.readString(),
+        parcel.readInt()
     )
 
     override fun describeContents(): Int = 0
@@ -52,12 +55,12 @@ class GameEntity constructor(
         dest.writeString(bigIcon)
         dest.writeString(extra?.toString())
         dest.writeString(tag)
+        dest.writeInt(orientation ?: Constant.INVALID_ID)
     }
 
     override fun toString(): String {
-        return "GameEntity(id='$id', name='$name', link='$link', describe='$describe', icon='$icon', bigIcon='$bigIcon', extra=$extra , tag=$tag)"
+        return "GameEntity(id='$id', name='$name', link='$link', describe='$describe', icon='$icon', bigIcon='$bigIcon', extra=$extra , tag=$tag , orientation=$orientation)"
     }
-
 
     companion object CREATOR : Parcelable.Creator<GameEntity> {
         override fun createFromParcel(parcel: Parcel): GameEntity {
@@ -69,6 +72,8 @@ class GameEntity constructor(
         }
     }
 }
+
+fun gameIdByUrl(url: String): String = MD5Utils.md5(url)
 
 ///region 转换
 fun GameEntity.entityToTableMd5(moduleId: String) = GameTable(
@@ -135,7 +140,8 @@ fun GameResponse.responseToEntity() = GameEntity(
     icon = this.icon ?: "",
     bigIcon = this.bigIcon ?: "",
     extra = this.extra,
-    tag = this.tag
+    tag = this.tag,
+    orientation = this.orientation
 )
 
 

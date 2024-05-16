@@ -43,7 +43,9 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) :
 //        settings.setAppCachePath(context.cacheDir.absolutePath)
         settings.databaseEnabled = true
 
-        settings.userAgentString = "${settings.userAgentString}PAC"
+        settings.userAgentString = "${WebSettings.getDefaultUserAgent(context)}PAC"
+
+        settings.setSupportMultipleWindows(true)
 
         setWebContentsDebuggingEnabled(BuildConfig.DEBUG)
 
@@ -92,6 +94,10 @@ interface Webinterface {
         fun onProgressChanged(view: WebView?, newProgress: Int)
         fun onReceivedIcon(view: WebView?, icon: Bitmap?)
         fun onReceivedTitle(view: WebView?, title: String?)
+        fun onLoadResource(view: WebView?, url: String?)
+        fun doUpdateVisitedHistory(view: WebView?, url: String?, reload: Boolean)
+        fun onPageCommitVisible(view: WebView?, url: String?)
+        fun onJsBeforeUnload(view: WebView?, url: String?, message: String?, result: JsResult?): Boolean?
     }
 
     interface ErrorInterface {
@@ -136,6 +142,22 @@ interface Webinterface {
 
         override fun onReceivedTitle(view: WebView?, title: String?) {
         }
+
+        override fun onLoadResource(view: WebView?, url: String?) {
+
+        }
+
+        override fun doUpdateVisitedHistory(view: WebView?, url: String?, reload: Boolean) {
+
+        }
+
+        override fun onPageCommitVisible(view: WebView?, url: String?) {
+
+        }
+
+        override fun onJsBeforeUnload(view: WebView?, url: String?, message: String?, result: JsResult?): Boolean? {
+            return false
+        }
     }
 
     open class DefaultError : ErrorInterface {
@@ -166,3 +188,11 @@ interface Webinterface {
     }
 
 }
+
+internal val xRequestHeader = mapOf(
+    // For every request WebView sends a "X-requested-with" header with the package name of the
+    // application. We can't really prevent that but we can at least send an empty value.
+    // Unfortunately the additional headers will not be propagated to subsequent requests
+    // (e.g. redirects). See issue #696.
+    "X-Requested-With" to "",
+)

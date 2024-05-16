@@ -38,7 +38,7 @@ abstract class CommonHorizontalVH(binding: VhCommonHorizontalBinding,
 
     }
 
-    abstract fun customLayoutManager(context: Context?): RecyclerView.LayoutManager?
+    abstract fun customLayoutManager(context: Context?): RecyclerView.LayoutManager
 
     abstract fun customCommonBinding(binding: VhCommonHorizontalBinding)
 

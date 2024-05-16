@@ -1,8 +1,12 @@
 <resources>
-    <string name="app_name">pac</string>
+    <string name="app_name">Game Box</string>
 
     <string name="loading">Loading %s %%</string>
     <string name="exit">Exit</string>
     <string name="cancel">Cancel</string>
     <string name="sure_exit_game">Are you sure you want to leave?</string>
+    <string name="game_controls">Game Controls</string>
+    <string name="rotate_screen">Rotate Screen</string>
+    <string name="shortcut">Add To Desktop</string>
+    <string name="random_next_game">Random next game</string>
 </resources>

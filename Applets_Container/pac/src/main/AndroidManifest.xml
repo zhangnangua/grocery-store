@@ -12,6 +12,7 @@
             android:name=".view.GameActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:process=":pac"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Browser" />
 
         <activity

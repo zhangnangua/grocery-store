@@ -4,8 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- NestedScrollingChild goes here (NestedScrollView, RecyclerView, etc.). -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <!-- Screen content goes here. -->
+
+    </androidx.recyclerview.widget.RecyclerView>
+
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -15,24 +24,22 @@
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|enterAlways" />
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/tool_bar"
+        <com.pumpkin.applets_container.view.widget.search.SearchView
+            android:id="@+id/et_search"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/tool_bar_height"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:navigationIcon="@drawable/home_navigation_24dp"
-            app:title="@string/tab_home"
-            app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge"/>
+            android:layout_height="45dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:hint="@string/search_hint" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:overScrollMode="never"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
+    <!--    <com.google.android.material.search.SearchView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:hint="@string/search_hint"-->
+    <!--        app:layout_anchor="@id/search_bar">-->
+    <!--        &lt;!&ndash; Search suggestions/results go here (ScrollView, RecyclerView, etc.). &ndash;&gt;-->
+    <!--    </com.google.android.material.search.SearchView>-->
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

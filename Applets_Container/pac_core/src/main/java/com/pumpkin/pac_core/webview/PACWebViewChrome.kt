@@ -3,6 +3,8 @@ package com.pumpkin.pac_core.webview
 import android.graphics.Bitmap
 import android.util.Log
 import android.webkit.ConsoleMessage
+import android.webkit.JsPromptResult
+import android.webkit.JsResult
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import com.pumpkin.pac_core.BuildConfig
@@ -32,9 +34,19 @@ internal class PACWebViewChrome : WebChromeClient() {
         return super.onConsoleMessage(consoleMessage)
     }
 
+    override fun onJsBeforeUnload(view: WebView?, url: String?, message: String?, result: JsResult?): Boolean {
+        return pageInterface?.onJsBeforeUnload(view, url, message, result)
+            ?: super.onJsBeforeUnload(view, url, message, result)
+    }
+
     override fun onProgressChanged(view: WebView?, newProgress: Int) {
         super.onProgressChanged(view, newProgress)
         pageInterface?.onProgressChanged(view, newProgress)
+    }
+
+    override fun onJsPrompt(view: WebView?, url: String?, message: String?, defaultValue: String?, result: JsPromptResult?): Boolean {
+        return super.onJsPrompt(view, url, message, defaultValue, result)
+        
     }
 
     fun clear() {

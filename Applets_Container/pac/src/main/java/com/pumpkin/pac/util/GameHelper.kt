@@ -6,13 +6,14 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import com.pumpkin.data.AppUtil
 import com.pumpkin.pac.BuildConfig
+import com.pumpkin.pac.bean.GParameter
 import com.pumpkin.pac.bean.GameEntity
 import com.pumpkin.pac.view.GameActivity
 
 object GameHelper {
 
-    fun openGame(context: Context, gameEntity: GameEntity) {
-        GameActivity.go(context, gameEntity)
+    fun openGame(context: Context, gameEntity: GameEntity, gp: GParameter = GParameter(isShowLoading = false)) {
+        GameActivity.go(context, gameEntity, gp)
     }
 
 

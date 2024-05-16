@@ -14,9 +14,13 @@ object InternalManager {
 
     private const val CONFIG_JSON_ASSERTS_PATH = "internal_game/config.json"
     private const val CONFIG_ZIP_ASSERTS_PATH = "internal_game/packet/";
+    private const val CONFIG__GAME_INFO_JSON_ASSERTS_PATH = "internal_game_info/config.json"
 
     @Volatile
     private var games: Set<GameEntity>? = null
+
+    @Volatile
+    private var gameInfo: Set<GameEntity>? = null
 
     fun copy() {
         IoScope().launch {
@@ -29,6 +33,12 @@ object InternalManager {
      * 只返回已解压缩成功的数据
      */
     fun getGames() = jsonFileToGame()
+
+
+    /**
+     * 只返回内置的游戏信息
+     */
+    fun getGamesInfo() = jsonFileToGameInfo()
 
     private fun copy(game: Set<GameEntity>) {
         for (entity in game) {
@@ -66,6 +76,28 @@ object InternalManager {
                 acc
             }
             games = local
+            return HashSet(local)
+        }
+    }
+
+    private fun jsonFileToGameInfo(): HashSet<GameEntity> {
+        val localGames: Set<GameEntity>? = gameInfo
+        if (localGames != null) {
+            return HashSet(localGames)
+        }
+        synchronized(this) {
+            var local = gameInfo
+            if (local != null) {
+                return HashSet(local)
+            }
+            val parse = Helper.strToListGame(Helper.readJson(CONFIG__GAME_INFO_JSON_ASSERTS_PATH), Gson())
+            local = parse.fold(HashSet()) { acc, response ->
+                if (response != null) {
+                    acc.add(response.responseToEntity())
+                }
+                acc
+            }
+            gameInfo = local
             return HashSet(local)
         }
     }

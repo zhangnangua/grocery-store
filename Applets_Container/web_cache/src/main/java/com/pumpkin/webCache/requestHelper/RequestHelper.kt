@@ -2,19 +2,21 @@ package com.pumpkin.webCache.requestHelper
 
 import android.text.TextUtils
 import android.util.Log
+import android.webkit.CookieManager
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
-import androidx.viewbinding.BuildConfig
 import com.pumpkin.webCache.util.MimeTypeMapUtils
 import okhttp3.*
+import org.brotli.dec.BrotliInputStream
 import java.io.*
 import java.util.*
 
 object RequestHelper {
     private const val TAG = "RequestHelper"
+    private const val DEBUG = false
 
     fun request(request: WebResourceRequest, url: String, okHttpClient: OkHttpClient): Response {
-        val builder = Request.Builder().url(url).also { requestBuilder ->
+        val okhttpRequest = Request.Builder().url(url).let { requestBuilder ->
             request.requestHeaders?.forEach(action = { entry ->
                 val key = entry.key
                 val value = entry.value
@@ -22,17 +24,37 @@ object RequestHelper {
                     requestBuilder.addHeader(key, value)
                 }
             })
+            val cookie = CookieManager.getInstance().getCookie(url)
+            requestBuilder.removeHeader("cookie")
+            requestBuilder.addHeader("cookie", cookie)
+            //br 压缩支持
+            requestBuilder.addHeader("accept-encoding", "gzip, deflate, br")
+            requestBuilder.addHeader("sec-fetch-mode", "no-cors")
+            requestBuilder.addHeader("sec-fetch-site", "same-site")
+
+            requestBuilder.build()
         }
-        if (BuildConfig.DEBUG) {
-            Log.d(TAG, "request () -> header is ${request.requestHeaders} , url is ${request.url}")
+
+        if (DEBUG) {
+            Log.d(TAG, "request () -> header is ${okhttpRequest.headers} , url is ${request.url}")
         }
         //request
-        return okHttpClient.newCall(builder.build()).execute()
+        return okHttpClient.newCall(okhttpRequest).execute()
     }
 
     fun resourceResponseByResponse(response: Response, url: String): WebResourceResponse? {
         val mimeType = MimeTypeMapUtils.getMimeTypeFromUrl(url, response) ?: return null
-        val webResourceResponse = WebResourceResponse(mimeType, "utf-8", response.body?.byteStream())
+
+        //br 压缩支持
+        val brStream = response.header("Content-Encoding")?.let {
+            if (it != "br" || response.body == null) {
+                return null
+            }
+            BrotliInputStream(response.body!!.source().inputStream())
+        }
+
+        val webResourceResponse = WebResourceResponse(mimeType, "utf-8", brStream
+            ?: response.body?.byteStream())
         var message = response.message
         if (TextUtils.isEmpty(message)) {
             message = "OK"
@@ -44,19 +66,29 @@ object RequestHelper {
         }
 
         // headers
-        if (BuildConfig.DEBUG) {
+        if (DEBUG) {
             val startTime = System.currentTimeMillis()
             val headersToMap = headersToMap(response.headers)
             webResourceResponse.responseHeaders = headersToMap
             val endTime = System.currentTimeMillis()
-            Log.d(TAG, "NetUtils.multimapToSingle(response.headers.toMultimap()): execute time is ${endTime - startTime} ， headers is $headersToMap")
+            Log.d(TAG, """
+                code is ${response.code}
+                NetUtils.multimapToSingle(response.headers.toMultimap()): 
+                execute time is ${endTime - startTime} ， 
+                headers is $headersToMap
+                mimeType is $mimeType
+            """.trimIndent())
         } else {
-            webResourceResponse.responseHeaders = headersToMap(response.headers)
+            webResourceResponse.responseHeaders = headersToMap(response.headers).apply {
+                if (brStream != null) {
+                    put("Content-Encoding", "br")
+                }
+            }
         }
         return webResourceResponse
     }
 
-    private fun headersToMap(headers: Headers): Map<String, String> {
+    private fun headersToMap(headers: Headers): HashMap<String, String> {
         val result = HashMap<String, String>()
         for (i in 0 until headers.size) {
             val name = headers.name(i).lowercase(Locale.US)

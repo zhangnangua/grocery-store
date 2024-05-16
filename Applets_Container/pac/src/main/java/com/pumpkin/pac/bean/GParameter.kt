@@ -2,12 +2,16 @@ package com.pumpkin.pac.bean
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.pumpkin.mvvm.util.Constant
 
-class GParameter(val isInternal: Boolean) : Parcelable {
-    constructor(parcel: Parcel) : this(parcel.readInt() != 0)
+class GParameter(val isShowLoading: Boolean, val module: String = "", val orientation: Int = Constant.INVALID_ID) : Parcelable {
+    constructor(parcel: Parcel) : this(parcel.readInt() != 0, parcel.readString()
+        ?: "", parcel.readInt() ?: Constant.INVALID_ID)
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(if (isInternal) 1 else 0)
+        parcel.writeInt(if (isShowLoading) 1 else 0)
+        parcel.writeString(module)
+        parcel.writeInt(orientation)
     }
 
     override fun describeContents(): Int {
@@ -15,7 +19,7 @@ class GParameter(val isInternal: Boolean) : Parcelable {
     }
 
     override fun toString(): String {
-        return "GParameter(isInternal=$isInternal)"
+        return "GParameter(isShowLoading=$isShowLoading)"
     }
 
     companion object CREATOR : Parcelable.Creator<GParameter> {

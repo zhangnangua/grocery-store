@@ -2,6 +2,7 @@ package com.pumpkin.pac.view
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -25,13 +26,16 @@ import com.pumpkin.pac.R
 import com.pumpkin.pac.bean.GParameter
 import com.pumpkin.pac.bean.GameEntity
 import com.pumpkin.pac.databinding.ActivityPacBinding
-import com.pumpkin.pac.pool.WebViewPool
+import com.pumpkin.pac.WebViewPool
 import com.pumpkin.pac.util.FloatDragHelper
 import com.pumpkin.pac.util.GameHelper
+import com.pumpkin.pac.view.fragment.GameDialogFragment
 import com.pumpkin.pac.view.fragment.LoadingFragment
 import com.pumpkin.pac.viewmodel.GameViewModel
 import com.pumpkin.pac_core.webview.PACWebEngine
 import com.pumpkin.pac_core.webview.Webinterface
+import com.pumpkin.ui.util.toLongToast
+import com.pumpkin.ui.util.toShortToast
 import kotlinx.coroutines.launch
 
 /**
@@ -61,27 +65,44 @@ class GameActivity : BaseActivity(), View.OnClickListener {
         }
         val gameEntity = bundle.getParcelable<GameEntity>(Constant.FIRST_PARAMETER)
         val gParameter = bundle.getParcelable<GParameter>(Constant.SECOND_PARAMETER)
-
         if (BuildConfig.DEBUG) {
             Log.d(TAG, "onCreate () -> game entity is $gameEntity , g parameter is $gParameter .")
         }
-
         if (gameEntity == null) {
             finishPAC("game entity is null .")
             return
         }
-
-        initView(gParameter)
-
-        loadData(gameEntity, gParameter)
-    }
-
-    private fun initView(gParameter: GParameter?) {
         binding = ActivityPacBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        if (!showGuide()) {
+            setOrientation(gParameter)
+        }
+        initView(gParameter)
+        loadData(gameEntity, gParameter)
+    }
+
+    private fun showGuide(): Boolean {
+        // TODO: 是否展示引导页面
+        // TODO: 引导界面如何展示
+        return false
+    }
+
+    private fun setOrientation(gParameter: GParameter?) {
+        if (gParameter != null && gParameter.orientation != Constant.INVALID_ID) {
+            if (requestedOrientation != gParameter.orientation) {
+                requestedOrientation = if (gParameter.orientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+                    ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                } else {
+                    ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                }
+            }
+        }
+    }
+
+    private fun initView(gParameter: GParameter?) {
         //show loading
-        if (gParameter?.isInternal != true) {
+        if (gParameter?.isShowLoading != true) {
             UIHelper.showFragmentRemove(
                 LoadingFragment::class.simpleName,
                 supportFragmentManager,
@@ -91,7 +112,12 @@ class GameActivity : BaseActivity(), View.OnClickListener {
         }
 
         //wv
-        wv = getWV()
+        val pacWebEngine = getWV()
+        if (pacWebEngine == null) {
+            finishPAC("wv is null .")
+            return
+        }
+        wv = pacWebEngine
         binding.wvContainer.removeAllViews()
         binding.wvContainer.addView(wv)
 
@@ -100,8 +126,8 @@ class GameActivity : BaseActivity(), View.OnClickListener {
         binding.vFloat.setOnTouchListener(FloatDragHelper(this))
     }
 
-    private fun getWV(): PACWebEngine {
-        return WebViewPool.obtain(AppUtil.application).apply {
+    private fun getWV(): PACWebEngine? {
+        return WebViewPool.obtain(AppUtil.application)?.apply {
             layoutParams =
                 FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
             addClient()
@@ -136,7 +162,7 @@ class GameActivity : BaseActivity(), View.OnClickListener {
                     view: WebView?,
                     request: WebResourceRequest?
                 ): Boolean {
-                    return GameHelper.shouldOverrideUrlLoading(view, request) {
+                    return GameHelper.shouldOverrideUrlLoading(view = view, request = request) {
                         loadEntrance(it)
                     }
                 }
@@ -148,7 +174,6 @@ class GameActivity : BaseActivity(), View.OnClickListener {
 
     private fun loadData(gameEntity: GameEntity, gParameter: GParameter?) {
         gameViewModel.attach(gameEntity, gParameter)
-
         load(gameEntity)
     }
 
@@ -160,15 +185,11 @@ class GameActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun exitDialog() {
-        MaterialAlertDialogBuilder(this)
-            .setTitle(getString(R.string.sure_exit_game))
-            .setNegativeButton(getString(R.string.cancel)) { dialog, which ->
-                // Respond to negative button press
-            }
-            .setPositiveButton(getString(R.string.exit)) { dialog, which ->
-                exit()
-            }
-            .show()
+        if (GameDialogFragment.isExit(this)) {
+            GameDialogFragment.hide(this)
+        } else {
+            GameDialogFragment.show(this)
+        }
     }
 
     private fun loadEntrance(url: String) {
@@ -185,7 +206,7 @@ class GameActivity : BaseActivity(), View.OnClickListener {
         exitDialog()
     }
 
-    private fun exit() {
+    fun exit() {
         finishPAC("exit")
     }
 
@@ -204,10 +225,32 @@ class GameActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
+    /**
+     * 被外部调用 切换横竖屏
+     */
+    fun switchOrientation() {
+        val gParameter = gameViewModel.getGParameter()
+        if (gParameter != null && gParameter.orientation != Constant.INVALID_ID) {
+            if (requestedOrientation == gParameter.orientation) {
+                if (requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+                    "Already vertical screen".toShortToast()
+                } else {
+                    "Already horizontal screen".toShortToast()
+                }
+                return
+            }
+        }
+        requestedOrientation = if (requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+            ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        } else {
+            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        }
+    }
+
     companion object {
         private const val TAG = "PACActivity"
 
-        fun go(context: Context, gameEntity: GameEntity, gp: GParameter = GParameter(false)) {
+        fun go(context: Context, gameEntity: GameEntity, gp: GParameter = GParameter(isShowLoading = false)) {
             context.startActivity(Intent(context, GameActivity::class.java).apply {
                 putExtra(Constant.FIRST_PARAMETER, gameEntity)
                 putExtra(Constant.SECOND_PARAMETER, gp)

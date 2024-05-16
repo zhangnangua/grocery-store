@@ -5,7 +5,6 @@ import com.bumptech.glide.RequestManager
 import com.pumpkin.applets_container.R
 import com.pumpkin.applets_container.bean.OfflineInfo
 import com.pumpkin.applets_container.databinding.VhOfflineCardStyle1Binding
-import com.pumpkin.game.NativeEntrance
 import com.pumpkin.mvvm.adapter.BaseVH
 import com.pumpkin.pac.bean.GParameter
 import com.pumpkin.pac.view.GameActivity
@@ -21,7 +20,7 @@ class OfflineCardStyle1VH(binding: VhOfflineCardStyle1Binding,
         if (data == null) {
             return
         }
-        if (!data.isNative && data.gameEntity != null) {
+        if (data.gameEntity != null) {
             val gameEntity = data.gameEntity
             binding.name.text = gameEntity.name
             requestManager.load(gameEntity.icon)
@@ -30,17 +29,6 @@ class OfflineCardStyle1VH(binding: VhOfflineCardStyle1Binding,
             binding.root.setOnClickListener {
                 context ?: return@setOnClickListener
                 GameActivity.go(context, gameEntity, GParameter(data.isInternal))
-            }
-        } else if (data.isNative && data.nativeInfo != null) {
-            val nativeInfo = data.nativeInfo
-
-            binding.name.text = nativeInfo.name
-            requestManager.load(nativeInfo.icon)
-                .into(binding.icon)
-
-            binding.root.setOnClickListener {
-                context ?: return@setOnClickListener
-                NativeEntrance.open(context, nativeInfo.who)
             }
         }
 

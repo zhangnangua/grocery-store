@@ -48,6 +48,8 @@ buildscript {
     ext.splashscreen = "1.0.1"
     //paging
     ext.paging_version = '3.1.1'
+    //br version
+    ext.br_version = '0.1.2'
 
     //build 相关的东西
     ext.applicationId = "com.pumpkin.applets_container"

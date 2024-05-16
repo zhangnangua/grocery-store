@@ -5,20 +5,29 @@
             <solid android:color="#33df9700" />
         </shape>
     </item>
-    <item
-        android:bottom="5dp"
-        android:left="5dp"
-        android:right="5dp"
-        android:top="5dp">
+    <item>
+<!--        <vector-->
+<!--            android:width="24dp"-->
+<!--            android:height="24dp"-->
+<!--            android:tint="#FEFEFE"-->
+<!--            android:viewportWidth="24"-->
+<!--            android:viewportHeight="24">-->
+<!--            <path-->
+<!--                android:fillColor="@android:color/white"-->
+<!--                android:pathData="M10,20v-6h4v6h5v-8h3L12,3 2,12h3v8z" />-->
+<!--        </vector>-->
         <vector
             android:width="24dp"
             android:height="24dp"
-            android:tint="#FEFEFE"
+            android:tint="?attr/colorPrimary"
             android:viewportWidth="24"
             android:viewportHeight="24">
+
             <path
                 android:fillColor="@android:color/white"
-                android:pathData="M10,20v-6h4v6h5v-8h3L12,3 2,12h3v8z" />
+                android:pathData="M12,7c-2.76,0 -5,2.24 -5,5s2.24,5 5,5 5,-2.24 5,-5 -2.24,-5 -5,-5zM12,2C6.48,2 2,6.48 2,12s4.48,10 10,10 10,-4.48 10,-10S17.52,2 12,2zM12,20c-4.42,0 -8,-3.58 -8,-8s3.58,-8 8,-8 8,3.58 8,8 -3.58,8 -8,8z" />
+
         </vector>
+
     </item>
 </layer-list>

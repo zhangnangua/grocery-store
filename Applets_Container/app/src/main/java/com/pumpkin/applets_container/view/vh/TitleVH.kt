@@ -1,6 +1,7 @@
 package com.pumpkin.applets_container.view.vh
 
 import android.content.Context
+import android.view.View
 import com.bumptech.glide.RequestManager
 import com.pumpkin.applets_container.R
 import com.pumpkin.applets_container.bean.TitleEntity
@@ -13,8 +14,15 @@ class TitleVH(binding: VhTitleBinding,
     : BaseVH<TitleEntity, VhTitleBinding>(binding, context, requestManager) {
 
     override fun bindViewHolder(data: TitleEntity?, binding: VhTitleBinding, position: Int, context: Context?, requestManager: RequestManager) {
-        if (data != null && context != null) {
-            binding.tvTitle.text = data.title
+        if (data == null || context == null) {
+            return
+        }
+        binding.tvTitle.text = data.title
+        if (data.subTitle == null) {
+            binding.tvSubTitle.visibility = View.GONE
+        } else {
+            binding.tvSubTitle.visibility = View.VISIBLE
+            binding.tvSubTitle.text = data.subTitle
         }
     }
 

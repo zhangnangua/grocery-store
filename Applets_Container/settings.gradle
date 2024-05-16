@@ -19,8 +19,3 @@ include ':web_cache'
 include ':pac_core'
 include ':pac'
 include ':parse'
-
-
-include ':native_game_manager'
-include ':native_game:quiz'
-include ':native_game:snake'

@@ -12,7 +12,7 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/mcv_bg"
-            android:layout_width="150dp"
+            android:layout_width="154dp"
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
             android:orientation="vertical"
@@ -32,16 +32,16 @@
                     android:layout_height="85dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
-                    android:scaleType="fitXY"
+                    android:scaleType="fitCenter"
                     tools:src="@mipmap/leak_canary_icon" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_name"
-                    style="@style/TextAppearance.Material3.ActionBar.Title"
+                    style="@style/TextAppearance.Material3.ActionBar.Subtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="8dp"
                     android:ellipsize="end"
                     android:maxLines="1"
                     tools:text="name" />
