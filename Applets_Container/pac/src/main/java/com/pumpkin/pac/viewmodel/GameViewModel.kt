@@ -29,7 +29,7 @@ class GameViewModel : ViewModel() {
             .originUrl(gameEntity.link)
             .addInterceptor(AdvertiseInterceptor())
             .apply {
-                if (gParameter?.isShowLoading == true) {
+                if (gParameter?.notShowLoading == true) {
                     addInterceptor(InternalGameInterceptor())
                 }
             }

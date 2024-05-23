@@ -45,8 +45,9 @@ internal class PACWebViewChrome : WebChromeClient() {
     }
 
     override fun onJsPrompt(view: WebView?, url: String?, message: String?, defaultValue: String?, result: JsPromptResult?): Boolean {
-        return super.onJsPrompt(view, url, message, defaultValue, result)
-        
+        return pageInterface?.onJsPrompt(view, url, message, defaultValue, result)
+            ?: super.onJsPrompt(view, url, message, defaultValue, result)
+
     }
 
     fun clear() {

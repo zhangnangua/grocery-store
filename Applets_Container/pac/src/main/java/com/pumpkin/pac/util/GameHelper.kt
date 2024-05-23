@@ -12,7 +12,7 @@ import com.pumpkin.pac.view.GameActivity
 
 object GameHelper {
 
-    fun openGame(context: Context, gameEntity: GameEntity, gp: GParameter = GParameter(isShowLoading = false)) {
+    fun openGame(context: Context, gameEntity: GameEntity, gp: GParameter = GParameter(notShowLoading = false)) {
         GameActivity.go(context, gameEntity, gp)
     }
 

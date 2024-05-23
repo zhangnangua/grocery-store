@@ -13,7 +13,6 @@ import android.webkit.WebView
 import android.widget.FrameLayout
 import android.widget.Toolbar.LayoutParams
 import androidx.lifecycle.lifecycleScope
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.pumpkin.data.AppUtil
 import com.pumpkin.data.BuildConfig
 import com.pumpkin.mvvm.setting_bean.ActivitySettingBean
@@ -34,7 +33,6 @@ import com.pumpkin.pac.view.fragment.LoadingFragment
 import com.pumpkin.pac.viewmodel.GameViewModel
 import com.pumpkin.pac_core.webview.PACWebEngine
 import com.pumpkin.pac_core.webview.Webinterface
-import com.pumpkin.ui.util.toLongToast
 import com.pumpkin.ui.util.toShortToast
 import kotlinx.coroutines.launch
 
@@ -102,7 +100,7 @@ class GameActivity : BaseActivity(), View.OnClickListener {
 
     private fun initView(gParameter: GParameter?) {
         //show loading
-        if (gParameter?.isShowLoading != true) {
+        if (gParameter?.notShowLoading != true) {
             UIHelper.showFragmentRemove(
                 LoadingFragment::class.simpleName,
                 supportFragmentManager,
@@ -250,7 +248,7 @@ class GameActivity : BaseActivity(), View.OnClickListener {
     companion object {
         private const val TAG = "PACActivity"
 
-        fun go(context: Context, gameEntity: GameEntity, gp: GParameter = GParameter(isShowLoading = false)) {
+        fun go(context: Context, gameEntity: GameEntity, gp: GParameter = GParameter(notShowLoading = false)) {
             context.startActivity(Intent(context, GameActivity::class.java).apply {
                 putExtra(Constant.FIRST_PARAMETER, gameEntity)
                 putExtra(Constant.SECOND_PARAMETER, gp)

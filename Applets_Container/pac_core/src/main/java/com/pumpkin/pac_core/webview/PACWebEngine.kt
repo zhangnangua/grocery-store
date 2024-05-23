@@ -98,6 +98,7 @@ interface Webinterface {
         fun doUpdateVisitedHistory(view: WebView?, url: String?, reload: Boolean)
         fun onPageCommitVisible(view: WebView?, url: String?)
         fun onJsBeforeUnload(view: WebView?, url: String?, message: String?, result: JsResult?): Boolean?
+        fun onJsPrompt(view: WebView?, url: String?, message: String?, defaultValue: String?, result: JsPromptResult?): Boolean?
     }
 
     interface ErrorInterface {
@@ -156,6 +157,10 @@ interface Webinterface {
         }
 
         override fun onJsBeforeUnload(view: WebView?, url: String?, message: String?, result: JsResult?): Boolean? {
+            return false
+        }
+
+        override fun onJsPrompt(view: WebView?, url: String?, message: String?, defaultValue: String?, result: JsPromptResult?): Boolean? {
             return false
         }
     }

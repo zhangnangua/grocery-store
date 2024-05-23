@@ -30,7 +30,11 @@ object ThreadHelper {
     }
 
     fun runOnUiThreadDelay(runnable: Runnable, long: Long) {
-        MAIN_HANDLER.postDelayed(runnable, long)
+        if (long == 0L && isUiThread()) {
+            runnable.run()
+        } else {
+            MAIN_HANDLER.postDelayed(runnable, long)
+        }
     }
 
     fun removeUiThread(runnable: Runnable) {
