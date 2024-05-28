@@ -9,14 +9,16 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.pumpkin.data.AppUtil
 import com.pumpkin.mvvm.viewmodel.PACViewModelProviders
 import com.pumpkin.pac.R
 import com.pumpkin.pac.databinding.FragmentGameDialogBinding
-import com.pumpkin.pac.internal.InternalManager
+import com.pumpkin.pac.util.GameHelper
 import com.pumpkin.pac.view.GameActivity
 import com.pumpkin.pac.viewmodel.GameViewModel
 import com.pumpkin.ui.util.DeviceParams
+import com.pumpkin.ui.util.dpToPx
 
 class GameDialogFragment : AppCompatDialogFragment(), View.OnClickListener {
     lateinit var binding: FragmentGameDialogBinding
@@ -49,7 +51,10 @@ class GameDialogFragment : AppCompatDialogFragment(), View.OnClickListener {
         val gameEntity = gameViewModel.getGameEntity()
         if (gameEntity != null) {
             binding.ivName.text = gameEntity.name
-            Glide.with(localActivity).load(gameEntity.icon).into(binding.ivIcon)
+            Glide.with(localActivity)
+                .load(gameEntity.icon)
+                .transform(RoundedCorners(8F.dpToPx))
+                .into(binding.ivIcon)
         }
 
         binding.flExit.setOnClickListener(this)
@@ -65,16 +70,29 @@ class GameDialogFragment : AppCompatDialogFragment(), View.OnClickListener {
                 localActivity.exit()
             }
         } else if (v == binding.flCreateShortCut) {
+            gameViewModel.createShortcut()
+            close()
 
         } else if (v == binding.flOrientation) {
             val localActivity = activity
             if (localActivity is GameActivity) {
                 localActivity.switchOrientation()
+                close()
             }
 
         } else if (v == binding.flNext) {
-//            InternalManager.copy()
-            // TODO: 随机
+            val localActivity = activity
+            if (localActivity is GameActivity) {
+                GameHelper.starrRandomNextGame(localActivity)
+                localActivity.exit()
+            }
+        }
+    }
+
+    private fun close() {
+        val localActivity = activity
+        if (localActivity is GameActivity) {
+            localActivity.exitDialog()
         }
     }
 

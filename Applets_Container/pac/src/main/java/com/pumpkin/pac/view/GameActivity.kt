@@ -13,6 +13,7 @@ import android.webkit.WebView
 import android.widget.FrameLayout
 import android.widget.Toolbar.LayoutParams
 import androidx.lifecycle.lifecycleScope
+import com.google.gson.Gson
 import com.pumpkin.data.AppUtil
 import com.pumpkin.data.BuildConfig
 import com.pumpkin.mvvm.setting_bean.ActivitySettingBean
@@ -22,10 +23,11 @@ import com.pumpkin.mvvm.util.toLogD
 import com.pumpkin.mvvm.view.BaseActivity
 import com.pumpkin.mvvm.viewmodel.PACViewModelProviders
 import com.pumpkin.pac.R
+import com.pumpkin.pac.WebViewPool
 import com.pumpkin.pac.bean.GParameter
 import com.pumpkin.pac.bean.GameEntity
 import com.pumpkin.pac.databinding.ActivityPacBinding
-import com.pumpkin.pac.WebViewPool
+import com.pumpkin.pac.repo.GameRepo
 import com.pumpkin.pac.util.FloatDragHelper
 import com.pumpkin.pac.util.GameHelper
 import com.pumpkin.pac.view.fragment.GameDialogFragment
@@ -61,12 +63,16 @@ class GameActivity : BaseActivity(), View.OnClickListener {
             finishPAC("bundle is null .")
             return
         }
-        val gameEntity = bundle.getParcelable<GameEntity>(Constant.FIRST_PARAMETER)
-        val gParameter = bundle.getParcelable<GParameter>(Constant.SECOND_PARAMETER)
+        val gson = Gson()
+        val gameEntity = bundle.getParcelable(Constant.FIRST_PARAMETER)
+            ?: GameRepo.shortCurParseGetEntity(bundle, gson)
+        val gParameter = bundle.getParcelable(Constant.SECOND_PARAMETER)
+            ?: GameRepo.shortCurParseGetParameter(bundle, gson)
         if (BuildConfig.DEBUG) {
             Log.d(TAG, "onCreate () -> game entity is $gameEntity , g parameter is $gParameter .")
         }
         if (gameEntity == null) {
+
             finishPAC("game entity is null .")
             return
         }
@@ -182,7 +188,7 @@ class GameActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    private fun exitDialog() {
+    fun exitDialog() {
         if (GameDialogFragment.isExit(this)) {
             GameDialogFragment.hide(this)
         } else {

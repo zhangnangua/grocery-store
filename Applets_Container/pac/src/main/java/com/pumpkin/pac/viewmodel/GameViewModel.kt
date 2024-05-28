@@ -58,6 +58,10 @@ class GameViewModel : ViewModel() {
     fun resInterceptor(request: WebResourceRequest?): WebResourceResponse? =
         cacheClient?.engine?.interceptRequest(request)
 
+    fun createShortcut() {
+        gameRepo?.createShortcut()
+    }
+
     suspend fun recordToRecently() {
         gameRepo?.recordToRecently()
     }

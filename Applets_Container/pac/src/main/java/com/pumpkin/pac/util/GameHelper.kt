@@ -8,6 +8,7 @@ import com.pumpkin.data.AppUtil
 import com.pumpkin.pac.BuildConfig
 import com.pumpkin.pac.bean.GParameter
 import com.pumpkin.pac.bean.GameEntity
+import com.pumpkin.pac.internal.InternalManager
 import com.pumpkin.pac.view.GameActivity
 
 object GameHelper {
@@ -44,8 +45,13 @@ object GameHelper {
                 }
             }
         }
-
         return true
+    }
+
+    fun starrRandomNextGame(context: Context) {
+        // TODO: 数据源
+        val games = InternalManager.getGames()
+        openGame(context, games.random())
     }
 
 }
