@@ -1,9 +1,10 @@
 package com.pumpkin.mvvm.view
 
 import android.os.Bundle
-import android.view.WindowManager
+import android.util.Log
 import androidx.annotation.AnimRes
 import androidx.appcompat.app.AppCompatActivity
+import com.pumpkin.data.AppUtil
 import com.pumpkin.mvvm.R
 import com.pumpkin.mvvm.setting_bean.ActivitySettingBean
 import com.pumpkin.mvvm.util.Constant
@@ -29,17 +30,17 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
     }
 
+    override fun finish() {
+        super.finish()
+        exitAnim(pageSettingBean)
+    }
+
 
     /**
      * 设置默认的页面bean
      */
     open fun setPageSettings(pageSettingBean: ActivitySettingBean) {
         this.pageSettingBean = pageSettingBean
-    }
-
-    override fun finish() {
-        super.finish()
-        exitAnim(pageSettingBean)
     }
 
     private fun exitAnim(pageSettingBean: ActivitySettingBean?) {
@@ -66,5 +67,9 @@ abstract class BaseActivity : AppCompatActivity() {
         if (enterAnim != null) {
             overridePendingTransition(enterAnim, R.anim.slide_no_process)
         }
+    }
+
+    companion object {
+        const val TAG = "BASE_ACTIVITY"
     }
 }

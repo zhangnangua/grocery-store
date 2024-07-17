@@ -22,4 +22,10 @@
         <attr name="msv_enableAnimateChanges" format="boolean" />
     </declare-styleable>
 
+<!--    <declare-styleable name="FlowGridContainer">-->
+<!--        <attr name="row_spacing" format="dimension"/>-->
+<!--        <attr name="column_spacing" format="dimension"/>-->
+<!--        <attr name="grid_count" format="integer"/>-->
+<!--    </declare-styleable>-->
+
 </resources>

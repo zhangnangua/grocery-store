@@ -22,3 +22,7 @@
 -keep class com.pumpkin.applets_container.data.source.bean.**{
     *;
 }
+
+-keep class com.pumpkin.applets_container.bean.**{
+    *;
+}

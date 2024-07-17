@@ -10,9 +10,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.pumpkin.applets_container.databinding.FragmentHomeBinding
+import com.pumpkin.applets_container.view.activity.SearchActivity
 import com.pumpkin.applets_container.view.itemDecoration.GridItemDecoration
-import com.pumpkin.applets_container.view.itemDecoration.HorizontalInternalItemDecoration
-import com.pumpkin.applets_container.view.vh.OfflineCardStyle1VH
 import com.pumpkin.applets_container.view.vh.WordCardStyle1VH
 import com.pumpkin.applets_container.viewmodel.HomeViewModel
 import com.pumpkin.mvvm.adapter.BaseAdapter
@@ -24,7 +23,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
-class HomeFragment : BaseFragment() {
+class HomeFragment : BaseFragment(), View.OnClickListener {
 
     lateinit var binding: FragmentHomeBinding
 
@@ -41,10 +40,10 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView(savedInstanceState)
+        initView()
     }
 
-    private fun initView(savedInstanceState: Bundle?) {
+    private fun initView() {
         val localContext = context ?: return
 
         //设置 状态栏 高度
@@ -77,12 +76,7 @@ class HomeFragment : BaseFragment() {
         rv.layoutManager = layoutManager
         rv.adapter = flowAdapter
 
-//        lifecycleScope.launch{
-//            delay(5000)
-//            binding.loading.visibility = View.GONE
-//            delay(5000)
-//            binding.loading.visibility = View.VISIBLE
-//        }
+        binding.etSearch.setOnClickListener(this)
     }
 
     override fun loadData() {
@@ -98,6 +92,13 @@ class HomeFragment : BaseFragment() {
 
         }
         viewModel.requestFeed()
+    }
+
+    override fun onClick(v: View?) {
+        if (v == binding.etSearch) {
+            val c = context ?: return
+            SearchActivity.go(c)
+        }
     }
 }
 

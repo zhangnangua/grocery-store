@@ -19,3 +19,6 @@ include ':web_cache'
 include ':pac_core'
 include ':pac'
 include ':parse'
+
+
+include ':libgdx'

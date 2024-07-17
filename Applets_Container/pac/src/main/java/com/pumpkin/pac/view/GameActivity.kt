@@ -27,6 +27,7 @@ import com.pumpkin.pac.WebViewPool
 import com.pumpkin.pac.bean.GParameter
 import com.pumpkin.pac.bean.GameEntity
 import com.pumpkin.pac.databinding.ActivityPacBinding
+import com.pumpkin.pac.internal.InternalManager
 import com.pumpkin.pac.repo.GameRepo
 import com.pumpkin.pac.util.FloatDragHelper
 import com.pumpkin.pac.util.GameHelper
@@ -82,7 +83,7 @@ class GameActivity : BaseActivity(), View.OnClickListener {
         if (!showGuide()) {
             setOrientation(gParameter)
         }
-        initView(gParameter)
+        initView(gameEntity, gParameter)
         loadData(gameEntity, gParameter)
     }
 
@@ -104,9 +105,9 @@ class GameActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    private fun initView(gParameter: GParameter?) {
+    private fun initView(gameEntity: GameEntity, gParameter: GParameter?) {
         //show loading
-        if (gParameter?.notShowLoading != true) {
+        if (gParameter?.notShowLoading != true && !InternalManager.isInternalGame(gameEntity.id)) {
             UIHelper.showFragmentRemove(
                 LoadingFragment::class.simpleName,
                 supportFragmentManager,

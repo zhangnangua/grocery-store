@@ -4,7 +4,11 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
-
+    <queries>
+        <intent>
+            <action android:name="android.support.customtabs.action.CustomTabsService" />
+        </intent>
+    </queries>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,9 +19,10 @@
         android:theme="@style/Theme.Applets_Container">
 
         <activity
-            android:name=".MainActivity"
+            android:name=".view.activity.MainActivity"
             android:theme="@style/Theme.Start"
             android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,6 +30,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".view.activity.SearchActivity"
+            android:theme="@style/Theme.Main"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:exported="false"/>
     </application>
 
 </manifest>

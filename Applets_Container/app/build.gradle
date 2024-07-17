@@ -6,6 +6,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('../keystore/pac')
+            storePassword 'fighting'
+            keyAlias 'key0'
+            keyPassword 'fighting'
+        }
+    }
     compileSdk rootProject.ext.compileSdk
 
     defaultConfig {
@@ -22,6 +30,7 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
         }
     }
     compileOptions {
@@ -33,6 +42,11 @@ android {
     }
     buildFeatures {
         viewBinding = true
+    }
+    android {
+        lint {
+            baseline = file("lint-baseline.xml")
+        }
     }
 }
 

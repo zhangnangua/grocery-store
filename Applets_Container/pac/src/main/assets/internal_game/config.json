@@ -1,14 +1,5 @@
 [
   {
-    "id": "I1000_cf",
-    "name": "Crazy Fighting",
-    "link": "https://www.howie.com/Crazy_Fighting/1.0/index.html",
-    "describe": "Take your army and conquer the world! ! !",
-    "icon": "file:///android_asset/internal_game/icon/I1000_cf.png",
-    "bigIcon": "",
-    "tag": "fighting;ball;"
-  },
-  {
     "id": "I1001_s",
     "name": "Snake",
     "link": "https://www.howie.com/snake/index.html",
@@ -16,5 +7,23 @@
     "icon": "file:///android_asset/internal_game/icon/I1001_s.png",
     "bigIcon": "",
     "tag": "snake;"
+  },
+  {
+    "id": "I1002_fruit",
+    "name": "Fruit Slices",
+    "link": "https://www.howie.com/Fruit_Slices/index.html",
+    "describe": "This is a classic! ! !",
+    "icon": "file:///android_asset/internal_game/icon/I1002_fruit.jpeg",
+    "bigIcon": "",
+    "tag": "casual;"
+  },
+  {
+    "id": "I1003_ball",
+    "name": "8Ball Pool",
+    "link": "https://www.howie.com/ball/index.html",
+    "describe": "This is a classic! ! !",
+    "icon": "file:///android_asset/internal_game/icon/I1003_ball.jpeg",
+    "bigIcon": "",
+    "tag": "Sports;Match 3;Ball Games"
   }
 ]

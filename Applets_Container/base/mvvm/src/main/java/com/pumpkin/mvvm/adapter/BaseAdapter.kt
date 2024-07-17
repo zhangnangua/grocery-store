@@ -34,6 +34,9 @@ class BaseAdapter(private val requestManager: RequestManager, private val contex
         } catch (e: Exception) {
             null
         }
+        if (AppUtil.isDebug) {
+            Log.d(TAG, "onBindViewHolder () -> ${System.identityHashCode(wrapBean)}")
+        }
         if (wrapBean != null) {
             holder.bindViewHolder(wrapBean.data, holder.binding, position, context, requestManager)
         }

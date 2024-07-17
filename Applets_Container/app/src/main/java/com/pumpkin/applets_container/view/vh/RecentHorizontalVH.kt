@@ -45,6 +45,9 @@ class RecentHorizontalVH(binding: VhCommonHorizontalBinding,
 
     private fun flow() = RecentlyNoticeHelper.recentItemFlow().map {
         ArrayList<AdapterWrapBean>().apply {
+            if (AppUtil.isDebug) {
+                Log.d(TAG, "flow recent data is $this .")
+            }
             it.games.forEach {
                 add(AdapterWrapBean(RecentItemVH.TYPE, it.tableToEntity()))
             }

@@ -11,4 +11,5 @@
     <item name="vh_offline_card_style_1" type="id" />
     <item name="vh_no_title_horizontal" type="id" />
     <item name="vh_editor_pick_item" type="id" />
+    <item name="vh_search_item" type="id" />
 </resources>

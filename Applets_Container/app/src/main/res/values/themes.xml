@@ -11,6 +11,9 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <!--  导航栏字体黑色 -->
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+
+
+        <item name="textInputStyle">@style/Widget.Material3.MaterialTimePicker.Display.TextInputLayout</item>
     </style>
 
     <style name="Theme.Start" parent="Theme.SplashScreen.IconBackground">

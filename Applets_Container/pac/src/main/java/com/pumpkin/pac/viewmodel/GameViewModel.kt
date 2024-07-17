@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.pumpkin.data.AppUtil
 import com.pumpkin.pac.bean.GParameter
 import com.pumpkin.pac.bean.GameEntity
+import com.pumpkin.pac.internal.InternalManager
 import com.pumpkin.pac.internal.interceptor.InternalGameInterceptor
 import com.pumpkin.pac.repo.GameRepo
 import com.pumpkin.pac.util.GameProgressHelper
@@ -29,7 +30,7 @@ class GameViewModel : ViewModel() {
             .originUrl(gameEntity.link)
             .addInterceptor(AdvertiseInterceptor())
             .apply {
-                if (gParameter?.notShowLoading == true) {
+                if (InternalManager.isInternalGame(gameEntity.id)) {
                     addInterceptor(InternalGameInterceptor())
                 }
             }

@@ -50,5 +50,10 @@ object VHRegister {
             EditorPickItemVH(VhEditorPickItemBinding.inflate(layoutInflater), context, requestManager) as BaseVH<Any, ViewBinding>
         }
 
+        TypeHelper.register(SearchItemVH.TYPE) { layoutInflater, context, parent, requestManager ->
+            SearchItemVH(VhSearchItemBinding.inflate(layoutInflater), context, requestManager) as BaseVH<Any, ViewBinding>
+        }
+
+
     }
 }

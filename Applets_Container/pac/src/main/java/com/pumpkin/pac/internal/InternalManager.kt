@@ -40,6 +40,8 @@ object InternalManager {
      */
     fun getGamesInfo() = jsonFileToGameInfo()
 
+    fun isInternalGame(id:String) = id.startsWith("I1")
+
     private fun copy(game: Set<GameEntity>) {
         for (entity in game) {
             val id = entity.id

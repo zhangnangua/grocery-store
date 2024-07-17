@@ -1,5 +1,6 @@
 package com.pumpkin.applets_container.data.source.gx
 
+import android.util.Log
 import com.google.gson.Gson
 import com.pumpkin.applets_container.data.source.ISource
 import com.pumpkin.applets_container.data.source.bean.Entity
@@ -13,6 +14,7 @@ import com.pumpkin.data.thread.IoScope
 import com.pumpkin.data.util.UriUtil
 import com.pumpkin.ui.util.FormatUtil
 import kotlinx.coroutines.launch
+import java.lang.RuntimeException
 
 class GXSource : ISource {
 
@@ -23,6 +25,9 @@ class GXSource : ISource {
     override fun key(): String = ISource.GX_SOURCE
 
     override fun request(sort: Int, category: String?, search: String?, page: Int, pageSize: Int): List<Entity> {
+        if (AppUtil.isDebug){
+            Log.d(TAG, "request () -> ")
+        }
         val url = getUrl(sort, category, search, page, pageSize)
         try {
             //request
@@ -45,7 +50,10 @@ class GXSource : ISource {
                     }
                 }
             }
-        } catch (_: Exception) {
+        } catch (e: Exception) {
+            if (AppUtil.isDebug){
+                throw RuntimeException(e)
+            }
         }
         return emptyList()
     }
@@ -118,6 +126,7 @@ class GXSource : ISource {
     private
 
     companion object {
+        const val TAG = "GXSource"
         const val BASE_URL = "https://api.gx.games/gxc/v3/games"
 
         const val BASE_LINK = "https://gx.games/games/"

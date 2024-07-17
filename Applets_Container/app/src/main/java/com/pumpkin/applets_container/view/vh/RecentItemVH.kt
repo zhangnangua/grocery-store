@@ -6,7 +6,9 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.pumpkin.applets_container.R
 import com.pumpkin.applets_container.databinding.VhRecentItemBinding
 import com.pumpkin.mvvm.adapter.BaseVH
+import com.pumpkin.pac.bean.GParameter
 import com.pumpkin.pac.bean.GameEntity
+import com.pumpkin.pac.internal.InternalManager
 import com.pumpkin.pac.util.GameHelper
 import com.pumpkin.ui.util.dpToPx
 

@@ -8,7 +8,7 @@ import androidx.annotation.AnimRes
  * Activity页面设置bean
  */
 class ActivitySettingBean(
-    //是否开启沉浸式导航栏，默认开启
+    //是否开启沉浸式导航栏，默认关闭
     var enableImmersiveBar: Boolean = false,
 
     //进入动画  进入   默认从右侧进入

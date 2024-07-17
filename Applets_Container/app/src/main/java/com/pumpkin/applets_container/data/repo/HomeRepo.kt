@@ -52,19 +52,6 @@ class HomeRepo {
         return editorPickWrap
     }
 
-    fun superRequest(scope: CoroutineScope, category: String? = null, search: String? = null, page: Int = 0, pageSize: Int = 20) {
-        Entrance().request(scope = scope,
-            category = category,
-            search = search,
-            pageSize = pageSize,
-            page = page) {
-            // TODO: 数据打印
-            if (AppUtil.isDebug) {
-                Log.d(TAG, "superRequest request is ${it.size} , current thread name is ${Thread.currentThread().name}")
-            }
-        }
-    }
-
     companion object {
         const val TAG = "HomeRepo"
     }
