@@ -21,4 +21,4 @@ include ':pac'
 include ':parse'
 
 
-include ':libgdx'
+include ':libgdx_blocks'

@@ -75,6 +75,6 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
 
     //libgdx
-    implementation project(':libgdx')
+    implementation project(':libgdx_blocks')
 
 }
