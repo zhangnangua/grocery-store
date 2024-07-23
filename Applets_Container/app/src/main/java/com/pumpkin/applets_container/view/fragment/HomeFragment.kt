@@ -76,7 +76,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener {
         rv.layoutManager = layoutManager
         rv.adapter = flowAdapter
 
-        binding.etSearch.setOnClickListener(this)
+//        binding.etSearch.setOnClickListener(this)
     }
 
     override fun loadData() {
@@ -95,10 +95,10 @@ class HomeFragment : BaseFragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        if (v == binding.etSearch) {
-            val c = context ?: return
-            SearchActivity.go(c)
-        }
+//        if (v == binding.etSearch) {
+//            val c = context ?: return
+//            SearchActivity.go(c)
+//        }
     }
 }
 

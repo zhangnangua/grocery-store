@@ -33,12 +33,10 @@ android {
 
 dependencies {
 
-    implementation "androidx.libgdx_core:libgdx_core-ktx:$core_ktx"
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation "com.google.android.material:material:$material_version"
 
-    implementation project(':native_game:quiz')
-    implementation project(':native_game:snake')
-
+    implementation project(':libgdx_blocks')
+    implementation project(':libgdx_super_boy')
     implementation project(':base:mvvm')
 }

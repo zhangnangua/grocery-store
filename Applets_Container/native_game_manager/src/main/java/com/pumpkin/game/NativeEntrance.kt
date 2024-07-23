@@ -3,25 +3,18 @@ package com.pumpkin.game
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import com.howie.snake.SnakeActivity
 import com.pumpkin.data.AppUtil
-import com.pumpkin.mvvm.setting_bean.ActivitySettingBean
-import com.pumpkin.mvvm.util.Constant
-import dragosholban.com.androidpuzzlegame.MainActivity
+import com.pumpkin.dgx.AndroidLauncher
 
 object NativeEntrance {
-    const val PUZZLE = 1
-    const val SNAKE = 2
+    const val BLOCKS = 1
+    const val SUPER_MAIN = 2
 
     fun open(context: Context, who: Int) {
-        if (who == PUZZLE) {
-            nativeGo(context, Intent(context, MainActivity::class.java))
-        } else if (who == SNAKE) {
-            nativeGo(context, Intent(context, SnakeActivity::class.java).apply {
-                putExtra(Constant.PAGE_PARAMETER, ActivitySettingBean().apply {
-                    enableImmersiveBar = true
-                })
-            })
+        if (who == BLOCKS) {
+            nativeGo(context, Intent(context, AndroidLauncher::class.java))
+        } else if (who == SUPER_MAIN) {
+            nativeGo(context, Intent(context, com.pumpkin.dgx_super_boy.AndroidLauncher::class.java))
         }
     }
 

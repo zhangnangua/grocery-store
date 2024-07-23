@@ -14,17 +14,17 @@
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|enterAlways" />
 
-        <com.pumpkin.applets_container.view.widget.search.SearchBar
-            android:id="@+id/et_search"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="10dp"
-            android:hint="@string/search_hint"
-            app:just_show="true"
-            app:layout_scrollFlags="scroll|enterAlways" />
+<!--        <com.pumpkin.applets_container.view.widget.search.SearchBar-->
+<!--            android:id="@+id/et_search"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="45dp"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            android:hint="@string/search_hint"-->
+<!--            app:just_show="true"-->
+<!--            app:layout_scrollFlags="scroll|enterAlways" />-->
 
     </com.google.android.material.appbar.AppBarLayout>
 

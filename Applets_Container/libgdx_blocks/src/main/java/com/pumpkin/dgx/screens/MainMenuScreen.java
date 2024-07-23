@@ -71,14 +71,14 @@ public class MainMenuScreen extends InputListener implements Screen {
         table.row();
 
         // Star button (on GitHub)
-        final SoftButton starButton = new SoftButton(1, "star_texture");
-        starButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                Gdx.net.openURI("https://github.com/LonamiWebs/Klooni1010/stargazers");
-            }
-        });
-        table.add(starButton).space(16);
+//        final SoftButton starButton = new SoftButton(1, "star_texture");
+//        starButton.addListener(new ChangeListener() {
+//            @Override
+//            public void changed(ChangeEvent event, Actor actor) {
+//                Gdx.net.openURI("https://github.com/LonamiWebs/Klooni1010/stargazers");
+//            }
+//        });
+//        table.add(starButton).space(16);
 
         // Time mode
         final SoftButton statsButton = new SoftButton(2, "stopwatch_texture");

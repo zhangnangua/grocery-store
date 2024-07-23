@@ -81,8 +81,8 @@ class GameActivity : BaseActivity(), View.OnClickListener {
         setContentView(binding.root)
 
         if (!showGuide()) {
-            setOrientation(gParameter)
         }
+        setOrientation(gParameter)
         initView(gameEntity, gParameter)
         loadData(gameEntity, gParameter)
     }

@@ -1,16 +1,17 @@
 package com.pumpkin.applets_container.view.vh
 
 import android.content.Context
-import android.content.Intent
 import android.text.TextUtils
 import android.util.Log
 import com.bumptech.glide.RequestManager
 import com.pumpkin.applets_container.R
 import com.pumpkin.applets_container.databinding.VhEditorPickItemBinding
 import com.pumpkin.data.AppUtil
-import com.pumpkin.dgx.AndroidLauncher
 import com.pumpkin.mvvm.adapter.BaseVH
+import com.pumpkin.mvvm.util.Constant
+import com.pumpkin.pac.bean.GParameter
 import com.pumpkin.pac.bean.GameEntity
+import com.pumpkin.pac.util.GameHelper
 
 class EditorPickItemVH(binding: VhEditorPickItemBinding,
                        context: Context?,
@@ -30,9 +31,8 @@ class EditorPickItemVH(binding: VhEditorPickItemBinding,
             binding.name.text = data.name
 
             binding.root.setOnClickListener {
-                context.startActivity(Intent(context, AndroidLauncher::class.java))
-//                GameHelper.openGame(context, data, GParameter(false, "", data.orientation
-//                    ?: Constant.INVALID_ID))
+                GameHelper.openGame(context, data, GParameter(false, "", data.orientation
+                    ?: Constant.INVALID_ID))
             }
 
         }

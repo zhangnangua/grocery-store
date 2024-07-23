@@ -5,6 +5,7 @@ import android.content.Intent
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import com.pumpkin.data.AppUtil
+import com.pumpkin.game.NativeEntrance
 import com.pumpkin.pac.BuildConfig
 import com.pumpkin.pac.bean.GParameter
 import com.pumpkin.pac.bean.GameEntity
@@ -15,6 +16,10 @@ object GameHelper {
 
     fun openGame(context: Context, gameEntity: GameEntity, gp: GParameter = GParameter(notShowLoading = false)) {
         GameActivity.go(context, gameEntity, gp)
+    }
+
+    fun openGame(context: Context, who: Int) {
+        NativeEntrance.open(context, who)
     }
 
 

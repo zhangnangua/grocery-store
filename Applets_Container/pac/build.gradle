@@ -54,4 +54,7 @@ dependencies {
     api project(':pac_core')
     //parse
     api project(':parse')
+
+    //libgdx
+    api project(':native_game_manager')
 }
