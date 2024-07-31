@@ -38,5 +38,6 @@ dependencies {
 
     implementation project(':libgdx_blocks')
     implementation project(':libgdx_super_boy')
+    implementation project(':libgdx_pixel_dungeon')
     implementation project(':base:mvvm')
 }

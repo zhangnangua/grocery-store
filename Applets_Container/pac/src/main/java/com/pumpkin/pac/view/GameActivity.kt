@@ -6,7 +6,6 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import android.view.View
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
@@ -22,6 +21,7 @@ import com.pumpkin.mvvm.util.UIHelper
 import com.pumpkin.mvvm.util.toLogD
 import com.pumpkin.mvvm.view.BaseActivity
 import com.pumpkin.mvvm.viewmodel.PACViewModelProviders
+import com.pumpkin.mvvm.widget.exit_dialog.ExitDialogManager
 import com.pumpkin.pac.R
 import com.pumpkin.pac.WebViewPool
 import com.pumpkin.pac.bean.GParameter
@@ -29,9 +29,7 @@ import com.pumpkin.pac.bean.GameEntity
 import com.pumpkin.pac.databinding.ActivityPacBinding
 import com.pumpkin.pac.internal.InternalManager
 import com.pumpkin.pac.repo.GameRepo
-import com.pumpkin.pac.util.FloatDragHelper
 import com.pumpkin.pac.util.GameHelper
-import com.pumpkin.pac.view.fragment.GameDialogFragment
 import com.pumpkin.pac.view.fragment.LoadingFragment
 import com.pumpkin.pac.viewmodel.GameViewModel
 import com.pumpkin.pac_core.webview.PACWebEngine
@@ -47,11 +45,13 @@ import kotlinx.coroutines.launch
  *
  * todo webview 剥离 预热 ！！！！
  */
-class GameActivity : BaseActivity(), View.OnClickListener {
+class GameActivity : BaseActivity() {
 
     private lateinit var binding: ActivityPacBinding
 
     private var wv: PACWebEngine? = null
+
+    private lateinit var exitDialogManager: ExitDialogManager
 
     private val gameViewModel by lazy(LazyThreadSafetyMode.NONE) {
         PACViewModelProviders.of(this)[GameViewModel::class.java]
@@ -127,8 +127,34 @@ class GameActivity : BaseActivity(), View.OnClickListener {
         binding.wvContainer.addView(wv)
 
         //float
-        binding.vFloat.setOnClickListener(this)
-        binding.vFloat.setOnTouchListener(FloatDragHelper(this))
+        float(gameEntity)
+    }
+
+    private fun float(gameEntity: GameEntity) {
+        exitDialogManager = ExitDialogManager(this, gameEntity.name, gameEntity.icon).apply {
+            register { type ->
+                when (type) {
+                    ExitDialogManager.BT_EXIT -> {
+                        exit()
+                    }
+
+                    ExitDialogManager.BT_CREATE_CUT -> {
+                        gameViewModel.createShortcut()
+                    }
+
+                    ExitDialogManager.BT_ORIENTATION -> {
+                        switchOrientation()
+
+                    }
+
+                    ExitDialogManager.BT_NEXT -> {
+                        GameHelper.starrRandomNextGame(this@GameActivity)
+                        exit()
+                    }
+                }
+            }
+            attach()
+        }
     }
 
     private fun getWV(): PACWebEngine? {
@@ -189,26 +215,12 @@ class GameActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    fun exitDialog() {
-        if (GameDialogFragment.isExit(this)) {
-            GameDialogFragment.hide(this)
-        } else {
-            GameDialogFragment.show(this)
-        }
-    }
-
     private fun loadEntrance(url: String) {
         wv?.loadUrl(url)
     }
 
-    override fun onClick(v: View?) {
-        if (v == binding.vFloat) {
-            exitDialog()
-        }
-    }
-
     override fun onBackPressed() {
-        exitDialog()
+        exitDialogManager.onBackPressed()
     }
 
     fun exit() {

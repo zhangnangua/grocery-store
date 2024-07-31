@@ -9,12 +9,15 @@ import com.pumpkin.dgx.AndroidLauncher
 object NativeEntrance {
     const val BLOCKS = 1
     const val SUPER_MAIN = 2
+    const val PIXEL_DUNGEON = 3
 
     fun open(context: Context, who: Int) {
         if (who == BLOCKS) {
             nativeGo(context, Intent(context, AndroidLauncher::class.java))
         } else if (who == SUPER_MAIN) {
             nativeGo(context, Intent(context, com.pumpkin.dgx_super_boy.AndroidLauncher::class.java))
+        } else if (who == PIXEL_DUNGEON) {
+            nativeGo(context, Intent(context, com.pumpkin.dgx_pixel_dungeon.AndroidLauncher::class.java))
         }
     }
 

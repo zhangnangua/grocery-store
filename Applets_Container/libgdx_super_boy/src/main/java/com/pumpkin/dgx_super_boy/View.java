@@ -45,12 +45,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.FloatArray;
 import com.badlogic.gdx.utils.ObjectFloatMap;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.esotericsoftware.spine.Animation;
 import com.esotericsoftware.spine.SkeletonRenderer;
 import com.pumpkin.dgx_super_boy.Model.State;
+import com.pumpkin.dgx_super_boy.rocker.RockerManager;
 
 /**
  * The core of the view logic. The view knows about the model and manages everything needed to draw to the screen.
@@ -85,6 +87,8 @@ public class View extends InputAdapter {
     public FloatArray hits = new FloatArray();
     public boolean touched, jumpPressed, leftPressed, rightPressed;
 
+    public RockerManager rockerManager;
+
     public View(Model model) {
         this.model = model;
 
@@ -106,6 +110,45 @@ public class View extends InputAdapter {
         Gdx.input.setInputProcessor(new InputMultiplexer(ui, ui.stage, this));
 
         restart();
+    }
+
+    public Stage getStage() {
+        return ui.getStage();
+    }
+
+    public void setRockerManager(RockerManager rockerManager) {
+        this.rockerManager = rockerManager;
+        rockerManager.walkState.setState(new RockerManager.WalkState.IState() {
+            @Override
+            public void state(int directionState, int upDownState) {
+                if (upDownState == RockerManager.STATE_WALK_UP) {
+                    if (player.hp == 0) return;
+                    jumpPressed = true;
+                    if (player.isGrounded()) player.view.jump();
+                } else {
+                    if (player.hp == 0) return;
+                    // Releasing jump on the way up reduces jump height.
+                    if (player.velocity.y > 0) player.velocity.y *= jumpDamping;
+                    jumpPressed = false;
+                }
+            }
+        });
+
+        rockerManager.attackState.setState(new RockerManager.AttackState.IState() {
+            @Override
+            public void state(boolean isShoot) {
+                if (isShoot) {
+                    touched = true;
+                    player.view.shoot();
+                } else {
+                    touched = false;
+                }
+            }
+        });
+    }
+
+    public double getAttackDegrees() {
+        return rockerManager.attackState.getDegrees();
     }
 
     public void restart() {
@@ -140,9 +183,9 @@ public class View extends InputAdapter {
     void updateInput(float delta) {
         if (player.hp == 0) return;
 
-        if (leftPressed)
+        if (rockerManager.walkState.isLeft())
             player.moveLeft(delta);
-        else if (rightPressed)
+        else if (rockerManager.walkState.isRight())
             player.moveRight(delta);
         else if (player.state == State.run) //
             player.setState(State.idle);
@@ -298,18 +341,22 @@ public class View extends InputAdapter {
     }
 
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if (isTouchArea(screenX)) {
-            touched = true;
-            player.view.shoot();
-        }
-        return true;
+//        if (isTouchArea(screenX)) {
+//            touched = true;
+//            player.view.shoot();
+//        }
+//        return true;
+
+        return false;
     }
 
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        if (isTouchArea(screenX)) {
-            touched = false;
-        }
-        return true;
+//        if (isTouchArea(screenX)) {
+//            touched = false;
+//        }
+//        return true;
+
+        return false;
     }
 
     public boolean keyDown(int keycode) {

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/v_mask"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#99000000" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/exit_dialog_context"
+        android:layout_width="300dp"
+        android:layout_height="296dp"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_game_success">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/baseline_icon_24" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/iv_name"
+            style="@style/TextAppearance.Material3.ActionBar.Title"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:gravity="center|start"
+            android:lines="1"
+            android:textColor="@color/md_theme_light_onSurface"
+            app:layout_constraintBottom_toBottomOf="@id/iv_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_icon"
+            app:layout_constraintTop_toTopOf="@+id/iv_icon"
+            tools:text="@string/game_controls" />
+        <!--退出 创建快捷方式 横竖屏 下一个-->
+        <FrameLayout
+            android:id="@+id/fl_exit"
+            android:layout_width="82dp"
+            android:layout_height="130dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:alpha="0.6"
+            android:background="@drawable/shape_dialog_bt_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_icon">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_gravity="center|top"
+                app:srcCompat="@drawable/baseline_power_close_new_24" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextAppearance.Material3.ActionBar.Subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom|center"
+                android:gravity="center"
+                android:text="@string/exit_game"
+                android:textColor="@color/md_theme_light_onSurface" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_orientation"
+            android:layout_width="82dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:alpha="0.6"
+            android:background="@drawable/shape_dialog_bt_bg"
+            app:layout_constraintBottom_toBottomOf="@id/fl_exit"
+            app:layout_constraintStart_toEndOf="@id/fl_exit"
+            app:layout_constraintTop_toTopOf="@id/fl_exit">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_gravity="center|top"
+                android:padding="7dp"
+                app:srcCompat="@drawable/baseline_screen_rotation_24" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextAppearance.Material3.ActionBar.Subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom|center"
+                android:gravity="center"
+                android:text="@string/rotate_screen"
+                android:textColor="@color/md_theme_light_onSurface" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_create_short_cut"
+            android:layout_width="82dp"
+            android:layout_height="130dp"
+            android:layout_marginStart="10dp"
+            android:alpha="0.6"
+            android:background="@drawable/shape_dialog_bt_bg"
+            app:layout_constraintBottom_toBottomOf="@id/fl_exit"
+            app:layout_constraintStart_toEndOf="@id/fl_orientation"
+            app:layout_constraintTop_toTopOf="@id/fl_exit">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_gravity="center|top"
+                android:padding="6dp"
+                app:srcCompat="@drawable/baseline_app_shortcut_24" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextAppearance.Material3.ActionBar.Subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom|center"
+                android:gravity="center"
+                android:text="@string/shortcut"
+                android:textColor="@color/md_theme_light_onSurface" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_next"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="10dp"
+            android:alpha="0.6"
+            android:background="@drawable/shape_dialog_bt_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fl_exit">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_gravity="start|center_vertical"
+                android:layout_marginStart="10dp"
+                app:srcCompat="@drawable/baseline_skip_next_24" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextAppearance.Material3.ActionBar.Subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="92dp"
+                android:gravity="center"
+                android:text="@string/random_next_game"
+                android:textColor="@color/md_theme_light_onSurface"
+                android:textSize="18sp" />
+        </FrameLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

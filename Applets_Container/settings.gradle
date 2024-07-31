@@ -23,4 +23,5 @@ include ':parse'
 
 include ':libgdx_blocks'
 include ':libgdx_super_boy'
+include ':libgdx_pixel_dungeon'
 include ':native_game_manager'

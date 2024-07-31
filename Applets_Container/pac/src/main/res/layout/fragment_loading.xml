@@ -48,9 +48,9 @@
             tools:progress="20" />
     </LinearLayout>
 
-    <com.pumpkin.pac.widget.gloading.FishSurfaceView
-        android:id="@+id/fl_fish"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+<!--    <com.pumpkin.pac.widget.gloading.FishSurfaceView-->
+<!--        android:id="@+id/fl_fish"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent" />-->
 
 </FrameLayout>

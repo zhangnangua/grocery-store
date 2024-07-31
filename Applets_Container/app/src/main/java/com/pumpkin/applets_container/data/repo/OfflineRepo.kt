@@ -20,6 +20,7 @@ class OfflineRepo {
 
             //native games
 //            result.add(AdapterWrapBean(OfflineCardStyle1VH.TYPE, OfflineInfo(isNative = true, nativeInfo = NativeEntrance.obtainInfo(NativeEntrance.PUZZLE))))
+            result.add(AdapterWrapBean(OfflineCardStyle1VH.TYPE, OfflineInfo(isNative = true, nativeInfo = NativeEntrance.obtainInfo(NativeEntrance.PIXEL_DUNGEON))))
             result.add(AdapterWrapBean(OfflineCardStyle1VH.TYPE, OfflineInfo(isNative = true, nativeInfo = NativeEntrance.obtainInfo(NativeEntrance.BLOCKS))))
             result.add(AdapterWrapBean(OfflineCardStyle1VH.TYPE, OfflineInfo(isNative = true, nativeInfo = NativeEntrance.obtainInfo(NativeEntrance.SUPER_MAIN))))
 

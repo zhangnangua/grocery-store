@@ -8,6 +8,8 @@ internal object DataProvider {
             return blocksInfo()
         } else if (who == NativeEntrance.SUPER_MAIN) {
             return superMainInfo()
+        } else if (who == NativeEntrance.PIXEL_DUNGEON) {
+            return pixelDungeonInfo()
         }
         throw IllegalAccessException("not exist $who .")
     }
@@ -17,6 +19,9 @@ internal object DataProvider {
 
     private fun blocksInfo() =
         NativeInfo(name = "Super Blocks", icon = "${pathPrefix}blocks.jpeg", who = NativeEntrance.BLOCKS)
+
+    private fun pixelDungeonInfo() =
+        NativeInfo(name = "Pixel Dungeon", icon = "${pathPrefix}pixel_dungeon.jpeg", who = NativeEntrance.PIXEL_DUNGEON)
 
 
 }

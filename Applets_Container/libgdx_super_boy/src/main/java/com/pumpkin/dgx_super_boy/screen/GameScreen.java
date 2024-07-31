@@ -10,6 +10,7 @@ import com.pumpkin.dgx_super_boy.Enemy;
 import com.pumpkin.dgx_super_boy.IGameController;
 import com.pumpkin.dgx_super_boy.Model;
 import com.pumpkin.dgx_super_boy.View;
+import com.pumpkin.dgx_super_boy.rocker.RockerManager;
 
 public class GameScreen implements Screen, IGameController {
     static Vector2 temp = new Vector2();
@@ -21,6 +22,7 @@ public class GameScreen implements Screen, IGameController {
     public void show() {
         model = new Model(this);
         view = new View(model);
+        view.setRockerManager(new RockerManager(view.getStage()));
     }
 
     @Override
@@ -55,7 +57,6 @@ public class GameScreen implements Screen, IGameController {
 
     @Override
     public void dispose() {
-
     }
 
     public void restart() {

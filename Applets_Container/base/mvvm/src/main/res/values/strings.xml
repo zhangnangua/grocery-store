@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="exit_game">Exit The Game</string>
+    <string name="rotate_screen">Rotate Screen</string>
+    <string name="shortcut">Add To Desktop</string>
+    <string name="random_next_game">Random Next Game</string>
+    <string name="game_controls">Game Controls</string>
+</resources>

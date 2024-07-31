@@ -48,8 +48,6 @@ import static com.pumpkin.dgx_super_boy.View.cameraMinWidth;
 import static com.pumpkin.dgx_super_boy.View.cameraZoom;
 import static com.pumpkin.dgx_super_boy.View.cameraZoomSpeed;
 
-import android.util.Log;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
@@ -80,7 +78,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.UIUtils;
@@ -88,6 +85,7 @@ import com.badlogic.gdx.utils.FloatArray;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.esotericsoftware.spine.SkeletonRendererDebug;
+import com.pumpkin.dgx_super_boy.rocker.RockerManager;
 
 /**
  * The user interface displayed on top of the game (menu, health bar, splash screens).
@@ -134,6 +132,10 @@ public class UI extends InputAdapter {
         events();
 
         showSplash(view.assets.titleRegion, view.assets.startRegion);
+    }
+
+    public Stage getStage() {
+        return stage;
     }
 
     private void create() {
@@ -382,13 +384,13 @@ public class UI extends InputAdapter {
         stage.getViewport().apply(true);
         stage.draw();
 
-        Batch batch = stage.getBatch();
-        batch.setColor(Color.WHITE);
-        batch.begin();
-        Vector2 cursor = stage.screenToStageCoordinates(temp.set(Gdx.input.getX(), Gdx.input.getY()));
-        TextureRegion crosshair = view.assets.crosshair;
-        batch.draw(crosshair, cursor.x - crosshair.getRegionWidth() / 2, cursor.y - crosshair.getRegionHeight() / 2 + 2);
-        batch.end();
+//        Batch batch = stage.getBatch();
+//        batch.setColor(Color.WHITE);
+//        batch.begin();
+//        Vector2 cursor = stage.screenToStageCoordinates(temp.set(Gdx.input.getX(), Gdx.input.getY()));
+//        TextureRegion crosshair = view.assets.crosshair;
+//        batch.draw(crosshair, cursor.x - crosshair.getRegionWidth() / 2, cursor.y - crosshair.getRegionHeight() / 2 + 2);
+//        batch.end();
     }
 
     void resize(int width, int height) {
