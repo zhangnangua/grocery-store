@@ -5,14 +5,26 @@ import android.content.Intent
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import com.pumpkin.data.AppUtil
+import com.pumpkin.data.provider.IGParameter
+import com.pumpkin.data.provider.IGame
+import com.pumpkin.data.provider.LocalGameProvider
+import com.pumpkin.data.util.IGameHelper
 import com.pumpkin.game.NativeEntrance
+import com.pumpkin.game.NativeInfo
 import com.pumpkin.pac.BuildConfig
 import com.pumpkin.pac.bean.GParameter
 import com.pumpkin.pac.bean.GameEntity
-import com.pumpkin.pac.internal.InternalManager
 import com.pumpkin.pac.view.GameActivity
 
-object GameHelper {
+object GameHelper : IGameHelper {
+
+    fun openGame(context: Context, game: IGame, gp: GParameter = GParameter(notShowLoading = false)) {
+        if (game is GameEntity) {
+            openGame(context, game, gp)
+        } else if (game is NativeInfo) {
+            openGame(context, game.who)
+        }
+    }
 
     fun openGame(context: Context, gameEntity: GameEntity, gp: GParameter = GParameter(notShowLoading = false)) {
         GameActivity.go(context, gameEntity, gp)
@@ -20,6 +32,16 @@ object GameHelper {
 
     fun openGame(context: Context, who: Int) {
         NativeEntrance.open(context, who)
+    }
+
+    override fun openGame(context: Context, game: IGame, gp: IGParameter) {
+        if (gp is GParameter) {
+            if (game is GameEntity) {
+                openGame(context, game, gp)
+            } else if (game is NativeInfo) {
+                openGame(context, game.who)
+            }
+        }
     }
 
 
@@ -53,10 +75,11 @@ object GameHelper {
         return true
     }
 
-    fun starrRandomNextGame(context: Context) {
-        // TODO: 数据源
-        val games = InternalManager.getGames()
-        openGame(context, games.random())
+   override fun starrRandomNextGame(context: Context) {
+        LocalGameProvider.randomGetOne()?.let {
+            openGame(context, it)
+        }
+
     }
 
 }

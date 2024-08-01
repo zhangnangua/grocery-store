@@ -26,6 +26,7 @@ class ExitDialogManager(val activity: Activity,
     private var callback: ((type: Int) -> Unit)? = null
     private lateinit var viewGroup: ViewGroup
     private var add = false
+    private var lastBtStatus = BT_NULL
 
     fun register(callback: (type: Int) -> Unit) {
         this.callback = callback
@@ -44,6 +45,8 @@ class ExitDialogManager(val activity: Activity,
         trigger()
     }
 
+    fun lastIsCanExit() = lastBtStatus == BT_EXIT || lastBtStatus == BT_NEXT
+
     private fun floatView(): View {
         val dp38 = 38F.dpToPx
         val view = View(activity)
@@ -60,18 +63,23 @@ class ExitDialogManager(val activity: Activity,
         if (v == floatView) {
             trigger()
         } else if (v == binding.flExit) {
+            lastBtStatus = BT_EXIT
             callback?.invoke(BT_EXIT)
             hide()
         } else if (v == binding.flNext) {
+            lastBtStatus = BT_NEXT
             callback?.invoke(BT_NEXT)
             hide()
         } else if (v == binding.flCreateShortCut) {
+            lastBtStatus = BT_CREATE_CUT
             callback?.invoke(BT_CREATE_CUT)
             hide()
         } else if (v == binding.flOrientation) {
+            lastBtStatus = BT_ORIENTATION
             callback?.invoke(BT_ORIENTATION)
             hide()
         } else if (v == binding.vMask) {
+            lastBtStatus = BT_EXIT
             trigger()
         }
     }
@@ -108,6 +116,7 @@ class ExitDialogManager(val activity: Activity,
     }
 
     companion object {
+        const val BT_NULL = 0
         const val BT_EXIT = 1
         const val BT_NEXT = 2
         const val BT_CREATE_CUT = 3

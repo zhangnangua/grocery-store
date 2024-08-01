@@ -37,11 +37,13 @@ import com.badlogic.gdx.backends.android.AndroidAudio;
 import com.badlogic.gdx.backends.android.AsynchronousAndroidAudio;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeType;
 import com.badlogic.gdx.utils.GdxNativesLoader;
+import com.pumpkin.data.AppUtil;
 import com.pumpkin.dgx_pixel_dungeon.core.SPDSettings;
 import com.pumpkin.dgx_pixel_dungeon.core.ShatteredPixelDungeon;
 import com.pumpkin.dgx_pixel_dungeon.core.ui.Button;
 import com.pumpkin.dgx_pixel_dungeon.spd.noosa.Game;
 import com.pumpkin.dgx_pixel_dungeon.spd.utils.FileUtils;
+import com.pumpkin.mvvm.util.WidgetUtil;
 import com.pumpkin.mvvm.widget.exit_dialog.ExitDialogManager;
 
 import kotlin.Unit;
@@ -135,21 +137,38 @@ public class AndroidLauncher extends AndroidApplication {
 
         initialize(new ShatteredPixelDungeon(support), config);
 
-        pixelDungeon = new ExitDialogManager(this, "PixelDungeon", "file:///android_asset/n_icon/pixel_dungeon.jpeg");
+        String name = "PixelDungeon";
+        String icon = "file:///android_asset/n_icon/pixel_dungeon.jpeg";
+        pixelDungeon = new ExitDialogManager(this, name, icon);
         pixelDungeon.register(new Function1<Integer, Unit>() {
             @Override
             public Unit invoke(Integer integer) {
                 if (integer == ExitDialogManager.BT_EXIT) {
                     finish();
                 } else if (integer == ExitDialogManager.BT_CREATE_CUT) {
-
+                    WidgetUtil.INSTANCE.createShortcut(AndroidLauncher.this, icon, name, String.valueOf(name.hashCode()), "com.pumpkin.dgx_pixel_dungeon.AndroidLauncher");
                 } else if (integer == ExitDialogManager.BT_NEXT) {
-
+                    AppUtil.INSTANCE.getGameHelper().starrRandomNextGame(AndroidLauncher.this);
+                    finish();
+                } else if (integer == ExitDialogManager.BT_ORIENTATION) {
+                    android.widget.Toast.makeText(AndroidLauncher.this, "no treatment required", android.widget.Toast.LENGTH_SHORT).show();
                 }
                 return null;
             }
         });
         pixelDungeon.attach();
+
+    }
+
+    @Override
+    public void finish() {
+        if (pixelDungeon != null) {
+            if (pixelDungeon.lastIsCanExit()) {
+                super.finish();
+            } else {
+                pixelDungeon.onBackPressed();
+            }
+        }
 
     }
 
@@ -174,9 +193,6 @@ public class AndroidLauncher extends AndroidApplication {
     @Override
     public void onBackPressed() {
         //do nothing, game should catch all back presses
-        if (pixelDungeon != null) {
-            pixelDungeon.onBackPressed();
-        }
     }
 
     @Override

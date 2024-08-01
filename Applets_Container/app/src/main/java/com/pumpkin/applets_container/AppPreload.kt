@@ -12,8 +12,8 @@ object AppPreload {
             FBFetch().fetchListener()
             //app vh register
             VHRegister.register()
-            //内置信息 copy
-            InternalManager.copy()
         }
+        // install and sync
+        InternalManager.installAndSync()
     }
 }

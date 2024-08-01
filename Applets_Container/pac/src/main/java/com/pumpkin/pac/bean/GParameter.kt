@@ -2,9 +2,10 @@ package com.pumpkin.pac.bean
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.pumpkin.data.provider.IGParameter
 import com.pumpkin.mvvm.util.Constant
 
-class GParameter(val notShowLoading: Boolean, val module: String = "", val orientation: Int = Constant.INVALID_ID) : Parcelable {
+class GParameter(val notShowLoading: Boolean, val module: String = "", val orientation: Int = Constant.INVALID_ID) : Parcelable ,IGParameter{
     constructor(parcel: Parcel) : this(parcel.readInt() != 0, parcel.readString()
         ?: "", parcel.readInt() ?: Constant.INVALID_ID)
 

@@ -23,10 +23,17 @@ import android.os.StrictMode;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.pumpkin.data.AppUtil;
+import com.pumpkin.mvvm.util.WidgetUtil;
+import com.pumpkin.mvvm.widget.exit_dialog.ExitDialogManager;
 
 import java.lang.reflect.Method;
 
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
+
 public class AndroidLauncher extends AndroidApplication {
+    ExitDialogManager pixelDungeon;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,5 +52,39 @@ public class AndroidLauncher extends AndroidApplication {
         final AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
         final AndroidShareChallenge shareChallenge = new AndroidShareChallenge(this);
         initialize(new Klooni(shareChallenge), config);
+
+        String name = "Blocks";
+        String icon = "file:///android_asset/n_icon/blocks.jpeg";
+        String clzName = "com.pumpkin.dgx.AndroidLauncher";
+        pixelDungeon = new ExitDialogManager(this, name, icon);
+        pixelDungeon.register(new Function1<Integer, Unit>() {
+            @Override
+            public Unit invoke(Integer integer) {
+                if (integer == ExitDialogManager.BT_EXIT) {
+                    finish();
+                } else if (integer == ExitDialogManager.BT_CREATE_CUT) {
+                    WidgetUtil.INSTANCE.createShortcut(AndroidLauncher.this, icon, name, String.valueOf(name.hashCode()), clzName);
+                } else if (integer == ExitDialogManager.BT_NEXT) {
+                    AppUtil.INSTANCE.getGameHelper().starrRandomNextGame(AndroidLauncher.this);
+                    finish();
+                } else if (integer == ExitDialogManager.BT_ORIENTATION) {
+                    android.widget.Toast.makeText(AndroidLauncher.this, "no treatment required", android.widget.Toast.LENGTH_SHORT).show();
+                }
+                return null;
+            }
+        });
+        pixelDungeon.attach();
+    }
+
+    @Override
+    public void finish() {
+        if (pixelDungeon != null) {
+            if (pixelDungeon.lastIsCanExit()) {
+                super.finish();
+            } else {
+                pixelDungeon.onBackPressed();
+            }
+        }
+
     }
 }

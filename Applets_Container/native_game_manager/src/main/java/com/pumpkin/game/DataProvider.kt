@@ -1,17 +1,24 @@
 package com.pumpkin.game
 
+import android.util.ArrayMap
+
 internal object DataProvider {
     private const val pathPrefix = "file:///android_asset/n_icon/"
 
+    private val map = ArrayMap<Int, NativeInfo>()
+
+    init {
+        map[NativeEntrance.BLOCKS] = blocksInfo()
+        map[NativeEntrance.SUPER_MAIN] = superMainInfo()
+        map[NativeEntrance.PIXEL_DUNGEON] = pixelDungeonInfo()
+    }
+
     fun obtainInfo(who: Int): NativeInfo {
-        if (who == NativeEntrance.BLOCKS) {
-            return blocksInfo()
-        } else if (who == NativeEntrance.SUPER_MAIN) {
-            return superMainInfo()
-        } else if (who == NativeEntrance.PIXEL_DUNGEON) {
-            return pixelDungeonInfo()
-        }
-        throw IllegalAccessException("not exist $who .")
+        return map[who] ?: throw IllegalAccessException("not exist $who .")
+    }
+
+    fun obtainInfo(): List<NativeInfo> {
+        return ArrayList(map.values)
     }
 
     private fun superMainInfo() =

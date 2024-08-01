@@ -5,6 +5,7 @@ import android.app.Application
 import android.os.Build
 import android.util.ArrayMap
 import androidx.annotation.StringRes
+import com.pumpkin.data.util.IGameHelper
 
 /**
  * 作者： pumpkin
@@ -36,9 +37,12 @@ object AppUtil {
      */
     val extraParams = ArrayMap<String, Any>()
 
-    fun inject(appApplication: Application, isDebug: Boolean) {
-        application = appApplication
+    lateinit var gameHelper: IGameHelper
+
+    fun inject(appApplication: Application, isDebug: Boolean, gameHelper: IGameHelper) {
+        this.application = appApplication
         AppUtil.isDebug = isDebug
+        this.gameHelper = gameHelper
     }
 
     fun getString(@StringRes resId: Int) = application.getString(resId)

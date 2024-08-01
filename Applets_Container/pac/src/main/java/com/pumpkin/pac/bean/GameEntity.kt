@@ -5,6 +5,7 @@ import android.os.Parcelable
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.pumpkin.data.db.entity.GameTable
+import com.pumpkin.data.provider.IGame
 import com.pumpkin.mvvm.util.Constant
 import com.pumpkin.mvvm.util.Event
 import com.pumpkin.webCache.util.MD5Utils
@@ -22,7 +23,7 @@ class GameEntity constructor(
     val extra: JsonObject? = null, // 额外的参数
     val tag: String?,
     val orientation: Int? = Constant.INVALID_ID
-) : Parcelable, Event {
+) : Parcelable, Event, IGame {
 
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",

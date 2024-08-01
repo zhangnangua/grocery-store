@@ -23,12 +23,15 @@ object NativeEntrance {
 
     fun obtainInfo(who: Int) = DataProvider.obtainInfo(who)
 
-    private fun nativeGo(context: Context, intent: Intent) {
-        if (context is Activity) {
-            context.startActivity(intent)
-        } else {
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            AppUtil.application.startActivity(intent)
-        }
+    fun obtainInfo() = DataProvider.obtainInfo()
+
+}
+
+private fun nativeGo(context: Context, intent: Intent) {
+    if (context is Activity) {
+        context.startActivity(intent)
+    } else {
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        AppUtil.application.startActivity(intent)
     }
 }

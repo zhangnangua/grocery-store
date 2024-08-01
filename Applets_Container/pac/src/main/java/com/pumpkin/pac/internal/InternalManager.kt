@@ -3,13 +3,19 @@ package com.pumpkin.pac.internal
 import android.text.TextUtils
 import com.google.gson.Gson
 import com.pumpkin.data.AppUtil
+import com.pumpkin.data.provider.LocalGameProvider
 import com.pumpkin.data.thread.IoScope
+import com.pumpkin.game.NativeEntrance
 import com.pumpkin.pac.bean.GameEntity
 import com.pumpkin.pac.bean.responseToEntity
+import com.pumpkin.pac.process.ProcessUtil
 import com.pumpkin.webCache.interceptors.FileUtil
 import com.pumpkin.webCache.requestHelper.CacheHelper
 import kotlinx.coroutines.launch
 
+/**
+ * todo 安装进度同步的问题
+ */
 object InternalManager {
 
     private const val CONFIG_JSON_ASSERTS_PATH = "internal_game/config.json"
@@ -22,10 +28,13 @@ object InternalManager {
     @Volatile
     private var gameInfo: Set<GameEntity>? = null
 
-    fun copy() {
+    fun installAndSync() {
         IoScope().launch {
             val game = jsonFileToGame()
-            copy(game)
+            sync(game)
+            if (ProcessUtil.isMainProcess()) {
+                install(game)
+            }
         }
     }
 
@@ -40,9 +49,14 @@ object InternalManager {
      */
     fun getGamesInfo() = jsonFileToGameInfo()
 
-    fun isInternalGame(id:String) = id.startsWith("I1")
+    fun isInternalGame(id: String) = id.startsWith("I1")
 
-    private fun copy(game: Set<GameEntity>) {
+    private fun sync(game: Set<GameEntity>) {
+        LocalGameProvider.add(game)
+        LocalGameProvider.add(NativeEntrance.obtainInfo())
+    }
+
+    private fun install(game: Set<GameEntity>) {
         for (entity in game) {
             val id = entity.id
             if (TextUtils.isEmpty(id)) {

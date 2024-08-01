@@ -21,7 +21,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -72,7 +72,7 @@ dependencies {
     implementation "org.json:json:20170516"
 
 
-    implementation project(':base:mvvm')
+    api project(':base:mvvm')
 }
 
 // called every time gradle gets executed, takes the native dependencies of

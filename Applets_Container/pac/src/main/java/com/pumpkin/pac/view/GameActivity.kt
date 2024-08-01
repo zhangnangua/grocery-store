@@ -144,7 +144,6 @@ class GameActivity : BaseActivity() {
 
                     ExitDialogManager.BT_ORIENTATION -> {
                         switchOrientation()
-
                     }
 
                     ExitDialogManager.BT_NEXT -> {

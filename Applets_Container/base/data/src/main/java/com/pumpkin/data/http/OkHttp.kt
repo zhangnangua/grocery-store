@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit
 
 object OkHttp {
 
-    private const val MAX_DELAY_TIME = 20000L
+    private const val MAX_DELAY_TIME = 20L
     private const val TAG = "OkHttpClient"
 
     internal val okHttpClient: OkHttpClient = OkHttpClient.Builder()
