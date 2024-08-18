@@ -4,7 +4,7 @@
     "name": "Snake",
     "link": "https://www.howie.com/snake/index.html",
     "describe": "This is a classic! ! !",
-    "icon": "file:///android_asset/internal_game/icon/I1001_s.jpeg",
+    "icon": "file:///android_asset/internal_game/icon/I1001_s.webp",
     "bigIcon": "",
     "tag": "snake;"
   },
@@ -25,5 +25,63 @@
     "icon": "file:///android_asset/internal_game/icon/I1003_ball.jpeg",
     "bigIcon": "",
     "tag": "Sports;Match 3;Ball Games"
+  },
+  {
+    "id": "I1004_matchman_warriors",
+    "name": "Matchman Warriors",
+    "icon": "file:///android_asset/internal_game/icon/I1004_matchman_warriors.png",
+    "orientation": 0,
+    "describe": "Fighting! ! !",
+    "link": "https://www.lxtgame.com/Matchman_Warriors/index.html",
+    "bigIcon": "",
+    "tag": "Sports;Fighting"
+  },
+  {
+    "id": "I1004_pizza_shop",
+    "name": "Pizza Shop",
+    "link": "https://www.fatfishgame.com/Pizza_Shop/index.html",
+    "icon": "file:///android_asset/internal_game/icon/I1004_pizza_shop.png",
+    "describe": "That's a really good idea.",
+    "bigIcon": "",
+    "tag": "Cooking;Minigames;Simulation"
+  },
+  {
+    "id": "I1005_ninja_assassin",
+    "name": "The Ninja Assassin",
+    "link": "https://www.gzxuanzhaogame.com/The_Ninja_Assassin/index.html",
+    "icon": "file:///android_asset/internal_game/icon/I1005_ninja_assassin.png",
+    "describe": "a ha.",
+    "bigIcon": "",
+    "tag": "Fighting;Simulation"
+  },
+  {
+    "id": "I1006_zoom_chicken",
+    "name": "Zooma Chicken",
+    "icon": "file:///android_asset/internal_game/icon/I1006_zoom_chicken.jpeg",
+    "link": "https://www.qyxgame.com/Zooma_Chicken/index.html",
+    "orientation": 1,
+    "describe": "Bubble Shooter .",
+    "bigIcon": "",
+    "tag": "Fighting;Shooting"
+  },
+  {
+    "id": "I1007_subway",
+    "name": "Subway Surfers SanFrancisco",
+    "icon": "file:///android_asset/internal_game/icon/I1007_subway.jpeg",
+    "link": "https://www.excellenth5game.com/Subway_Surfers_SanFrancisco/index.html",
+    "orientation": 1,
+    "describe": "run run run .",
+    "bigIcon": "",
+    "tag": "Parkour;runner;Parkour"
+  },
+  {
+    "id": "I1008_speed_master",
+    "name": "Speed Master",
+    "icon": "file:///android_asset/internal_game/icon/I1008_speed_master.jpeg",
+    "link": "https://www.excellenth5game.com/Speed_Master/index.html",
+    "orientation": 1,
+    "describe": "ah .",
+    "bigIcon": "",
+    "tag": "Car;Driving;Car Racing"
   }
 ]

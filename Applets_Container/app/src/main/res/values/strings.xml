@@ -16,4 +16,10 @@
     <string name="search_hint">Search or enter address</string>
     <string name="play">Play</string>
 
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="version_info">Version Information</string>
+    <string name="play_record">Play Record</string>
+    <string name="my_collection">My Collection</string>
+
 </resources>

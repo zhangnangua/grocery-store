@@ -6,9 +6,9 @@ import com.pumpkin.applets_container.R
 import com.pumpkin.applets_container.bean.OfflineInfo
 import com.pumpkin.applets_container.databinding.VhOfflineCardStyle1Binding
 import com.pumpkin.mvvm.adapter.BaseVH
+import com.pumpkin.mvvm.util.Constant
 import com.pumpkin.pac.bean.GParameter
 import com.pumpkin.pac.util.GameHelper
-import com.pumpkin.pac.view.GameActivity
 
 class OfflineCardStyle1VH(binding: VhOfflineCardStyle1Binding,
                           context: Context?,
@@ -29,7 +29,8 @@ class OfflineCardStyle1VH(binding: VhOfflineCardStyle1Binding,
 
             binding.root.setOnClickListener {
                 context ?: return@setOnClickListener
-                GameActivity.go(context, gameEntity, GParameter(data.isInternal))
+                GameHelper.openGame(context, gameEntity, GParameter(notShowLoading = data.isInternal, orientation = gameEntity.orientation
+                    ?: Constant.INVALID_ID))
             }
         } else if (data.nativeInfo != null) {
             val nativeInfo = data.nativeInfo

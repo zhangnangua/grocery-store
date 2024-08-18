@@ -2,6 +2,8 @@ package com.pumpkin.applets_container.view.vh
 
 import android.content.Context
 import android.util.Log
+import android.widget.FrameLayout
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,9 +15,15 @@ import com.pumpkin.mvvm.adapter.AdapterWrapBean
 import com.pumpkin.mvvm.view.BaseActivity
 import com.pumpkin.pac.bean.tableToEntity
 import com.pumpkin.pac.util.RecentlyNoticeHelper
+import com.pumpkin.ui.util.dpToPx
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class RecentHorizontalVH(binding: VhCommonHorizontalBinding,
@@ -29,6 +37,20 @@ class RecentHorizontalVH(binding: VhCommonHorizontalBinding,
         LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
 
     override fun customCommonBinding(binding: VhCommonHorizontalBinding) {
+        binding.ll.apply {
+            val dp10 = 10F.dpToPx
+            val dp16 = 16F.dpToPx
+            setPadding(0, 0, 0, 0)
+
+            (layoutParams as? FrameLayout.LayoutParams)?.apply {
+                topMargin = dp10
+                marginStart = dp16
+                marginEnd = dp16
+            }
+        }
+
+        binding.tvTitle.textSize = 18F
+//        binding.tvTitle.setTextColor(ContextCompat.getColor(AppUtil.application, R.color.colorPrimary))
     }
 
     override fun bindViewHolder(data: List<AdapterWrapBean>?, binding: VhCommonHorizontalBinding, position: Int, context: Context?, requestManager: RequestManager) {
@@ -59,9 +81,9 @@ class RecentHorizontalVH(binding: VhCommonHorizontalBinding,
     }.flowOn(Dispatchers.IO)
 
     override fun onViewRecycled() {
-        if (AppUtil.isDebug) {
-            Log.d(BigCardVH.TAG, "onViewRecycled () -> ")
-        }
+//        if (AppUtil.isDebug) {
+//            Log.d(BigCardVH.TAG, "onViewRecycled () -> ")
+//        }
         cancelJob()
     }
 

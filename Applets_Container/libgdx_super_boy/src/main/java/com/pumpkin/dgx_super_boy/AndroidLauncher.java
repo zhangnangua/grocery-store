@@ -14,6 +14,7 @@ import kotlin.jvm.functions.Function1;
 
 public class AndroidLauncher extends AndroidApplication {
     ExitDialogManager pixelDungeon;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +26,7 @@ public class AndroidLauncher extends AndroidApplication {
         String name = "SuperBoy";
         String icon = "file:///android_asset/n_icon/super_main.jpeg";
         String clzName = "com.pumpkin.dgx_super_boy.AndroidLauncher";
-        pixelDungeon = new ExitDialogManager(this, name, icon);
+        pixelDungeon = new ExitDialogManager(this, name, icon, "n_super_man_2");
         pixelDungeon.register(new Function1<Integer, Unit>() {
             @Override
             public Unit invoke(Integer integer) {

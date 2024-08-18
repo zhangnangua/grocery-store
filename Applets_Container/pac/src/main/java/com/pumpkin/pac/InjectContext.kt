@@ -7,6 +7,7 @@ import android.webkit.WebView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.pumpkin.data.AppUtil
+import com.pumpkin.data.db.entity.GameTable
 import com.pumpkin.data.thread.ThreadHelper
 import com.pumpkin.pac.bean.GameEntity
 import com.pumpkin.pac.bean.gameIdByUrl
@@ -62,7 +63,7 @@ class ParseContext(private val injectName: String, private val engine: PACWebEng
             return false
         }
         val icon = map["img"] ?: ""
-        GameHelper.openGame(context, GameEntity(id = gameIdByUrl(link), name = name, link = link, icon = icon, tag = null))
+        GameHelper.openGame(context, GameEntity(id = gameIdByUrl(link), name = name, link = link, icon = icon, type = GameTable.TYPE_H5_GAME,tag = null))
         return true
     }
 

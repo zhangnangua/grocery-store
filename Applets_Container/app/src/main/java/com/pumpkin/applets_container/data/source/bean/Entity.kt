@@ -17,6 +17,7 @@ class Entity(val id: String, val icon: String, val link: String, val name: Strin
             icon = this.icon,
             bigIcon = "",
             extra = this.extra,
+            type = GameTable.TYPE_H5_GAME,
             tag = this.tag)
     }
 
@@ -30,6 +31,7 @@ class Entity(val id: String, val icon: String, val link: String, val name: Strin
             bigIcon = "",
             extra = null,
             moduleId = moduleId,
+            type = 0,
             tag = tag)
     }
 }

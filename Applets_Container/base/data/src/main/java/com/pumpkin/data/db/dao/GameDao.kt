@@ -1,6 +1,10 @@
 package com.pumpkin.data.db.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.pumpkin.data.db.GAME_TABLE_NAME
 import com.pumpkin.data.db.entity.GameTable
 
@@ -21,6 +25,9 @@ interface GameDao {
 
     @Query("select * from $GAME_TABLE_NAME where id = :id")
     fun obtainGameById(id: String): GameTable?
+
+    @Query("select * from $GAME_TABLE_NAME where id in (:ids)")
+    fun obtainGameByIds(ids: List<String>): List<GameTable>
 
     @Query("select * from $GAME_TABLE_NAME where id not in(:ids) order by random() limit :num")
     fun obtainGameByRandomExclude(num: Int, ids: List<String>): List<GameTable>

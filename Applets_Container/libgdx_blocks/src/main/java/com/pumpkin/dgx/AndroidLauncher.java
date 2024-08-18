@@ -34,6 +34,7 @@ import kotlin.jvm.functions.Function1;
 
 public class AndroidLauncher extends AndroidApplication {
     ExitDialogManager pixelDungeon;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,9 +55,10 @@ public class AndroidLauncher extends AndroidApplication {
         initialize(new Klooni(shareChallenge), config);
 
         String name = "Blocks";
-        String icon = "file:///android_asset/n_icon/blocks.jpeg";
+        String icon = "file:///android_asset/n_icon/blocks.jpg";
         String clzName = "com.pumpkin.dgx.AndroidLauncher";
-        pixelDungeon = new ExitDialogManager(this, name, icon);
+        String id = "n_block_1";
+        pixelDungeon = new ExitDialogManager(this, name, icon, id);
         pixelDungeon.register(new Function1<Integer, Unit>() {
             @Override
             public Unit invoke(Integer integer) {

@@ -7,11 +7,11 @@ import com.pumpkin.data.AppUtil
 import com.pumpkin.dgx.AndroidLauncher
 
 object NativeEntrance {
-    const val BLOCKS = 1
-    const val SUPER_MAIN = 2
-    const val PIXEL_DUNGEON = 3
+    const val BLOCKS = "n_block_1"
+    const val SUPER_MAIN = "n_super_man_2"
+    const val PIXEL_DUNGEON = "n_pixel_dungeon_3"
 
-    fun open(context: Context, who: Int) {
+    fun open(context: Context, who: String) {
         if (who == BLOCKS) {
             nativeGo(context, Intent(context, AndroidLauncher::class.java))
         } else if (who == SUPER_MAIN) {
@@ -21,7 +21,7 @@ object NativeEntrance {
         }
     }
 
-    fun obtainInfo(who: Int) = DataProvider.obtainInfo(who)
+    fun obtainInfo(who: String) = DataProvider.obtainInfo(who)
 
     fun obtainInfo() = DataProvider.obtainInfo()
 

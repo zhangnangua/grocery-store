@@ -63,10 +63,6 @@ class GameViewModel : ViewModel() {
         gameRepo?.createShortcut()
     }
 
-    suspend fun recordToRecently() {
-        gameRepo?.recordToRecently()
-    }
-
     override fun onCleared() {
 
     }

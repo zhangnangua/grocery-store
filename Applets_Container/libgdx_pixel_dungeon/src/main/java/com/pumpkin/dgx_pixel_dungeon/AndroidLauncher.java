@@ -139,7 +139,7 @@ public class AndroidLauncher extends AndroidApplication {
 
         String name = "PixelDungeon";
         String icon = "file:///android_asset/n_icon/pixel_dungeon.jpeg";
-        pixelDungeon = new ExitDialogManager(this, name, icon);
+        pixelDungeon = new ExitDialogManager(this, name, icon,"n_pixel_dungeon_3");
         pixelDungeon.register(new Function1<Integer, Unit>() {
             @Override
             public Unit invoke(Integer integer) {

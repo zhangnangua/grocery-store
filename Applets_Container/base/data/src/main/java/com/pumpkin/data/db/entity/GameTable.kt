@@ -14,7 +14,7 @@ import com.pumpkin.data.db.GAME_TABLE_NAME
  * Ignore标签用来告诉Room忽略该字段或方法。
  */
 @Entity(tableName = GAME_TABLE_NAME)
-class GameTable(
+class GameTable constructor(
     @PrimaryKey
     val id: String,
     val name: String,
@@ -27,6 +27,7 @@ class GameTable(
     val extra: JsonObject?,//额外参数
     @ColumnInfo(defaultValue = "", name = "module_id")
     val moduleId: String,// 该数据被使用在那个模块
+    val type: Int,// 0 h5 游戏 1 native 游戏
     val tag: String?
 ) {
     override fun toString(): String {
@@ -39,5 +40,8 @@ class GameTable(
         const val MODULE_RANK_HOT = "rank.hot"
         const val MODULE_RANK_NEW = "rank.new"
         const val MODULE_GX_ = "gx_"
+
+        const val TYPE_H5_GAME = 0
+        const val TYPE_NATIVE_GAME = 1
     }
 }

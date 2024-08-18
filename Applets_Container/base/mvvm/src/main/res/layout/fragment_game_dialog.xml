@@ -134,12 +134,12 @@
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:alpha="0.6"
             android:background="@drawable/shape_dialog_bt_bg"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/fl_collect"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fl_exit">
 
@@ -152,14 +152,34 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/TextAppearance.Material3.ActionBar.Subtitle"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="92dp"
+                android:layout_marginStart="72dp"
                 android:gravity="center"
                 android:text="@string/random_next_game"
                 android:textColor="@color/md_theme_light_onSurface"
-                android:textSize="18sp" />
+                android:textSize="22sp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_collect"
+            android:layout_width="82dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="16dp"
+            android:alpha="0.6"
+            android:background="@drawable/shape_dialog_bt_bg"
+            app:layout_constraintBottom_toBottomOf="@id/fl_next"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/fl_next"
+            app:layout_constraintTop_toTopOf="@id/fl_next">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_collection"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/baseline_collections_24_outline" />
         </FrameLayout>
 
 

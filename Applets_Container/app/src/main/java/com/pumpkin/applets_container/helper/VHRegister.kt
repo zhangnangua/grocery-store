@@ -1,8 +1,31 @@
 package com.pumpkin.applets_container.helper
 
 import androidx.viewbinding.ViewBinding
-import com.pumpkin.applets_container.databinding.*
-import com.pumpkin.applets_container.view.vh.*
+import com.pumpkin.applets_container.databinding.LayoutSettingItemBinding
+import com.pumpkin.applets_container.databinding.VhBigCardBinding
+import com.pumpkin.applets_container.databinding.VhCommonHorizontalBinding
+import com.pumpkin.applets_container.databinding.VhCommonListItemBinding
+import com.pumpkin.applets_container.databinding.VhEditorPickItemBinding
+import com.pumpkin.applets_container.databinding.VhMineNavigationLayoutBinding
+import com.pumpkin.applets_container.databinding.VhOfflineBigCardStyle1Binding
+import com.pumpkin.applets_container.databinding.VhOfflineCardStyle1Binding
+import com.pumpkin.applets_container.databinding.VhRecentItemBinding
+import com.pumpkin.applets_container.databinding.VhSearchItemBinding
+import com.pumpkin.applets_container.databinding.VhTitleBinding
+import com.pumpkin.applets_container.databinding.VhWordCardStyle1Binding
+import com.pumpkin.applets_container.view.vh.BigCardVH
+import com.pumpkin.applets_container.view.vh.CommonListItemVH
+import com.pumpkin.applets_container.view.vh.EditorPickHorizontalVH
+import com.pumpkin.applets_container.view.vh.EditorPickItemVH
+import com.pumpkin.applets_container.view.vh.MineNavigationVH
+import com.pumpkin.applets_container.view.vh.MineSettingItemVH
+import com.pumpkin.applets_container.view.vh.OfflineBigCardStyle1VH
+import com.pumpkin.applets_container.view.vh.OfflineCardStyle1VH
+import com.pumpkin.applets_container.view.vh.RecentHorizontalVH
+import com.pumpkin.applets_container.view.vh.RecentItemVH
+import com.pumpkin.applets_container.view.vh.SearchItemVH
+import com.pumpkin.applets_container.view.vh.TitleVH
+import com.pumpkin.applets_container.view.vh.WordCardStyle1VH
 import com.pumpkin.mvvm.adapter.BaseVH
 import com.pumpkin.mvvm.adapter.TypeHelper
 
@@ -54,6 +77,20 @@ object VHRegister {
             SearchItemVH(VhSearchItemBinding.inflate(layoutInflater), context, requestManager) as BaseVH<Any, ViewBinding>
         }
 
+        TypeHelper.register(OfflineBigCardStyle1VH.TYPE) { layoutInflater, context, parent, requestManager ->
+            OfflineBigCardStyle1VH(VhOfflineBigCardStyle1Binding.inflate(layoutInflater), context, requestManager) as BaseVH<Any, ViewBinding>
+        }
 
+        TypeHelper.register(MineSettingItemVH.TYPE) { layoutInflater, context, parent, requestManager ->
+            MineSettingItemVH(LayoutSettingItemBinding.inflate(layoutInflater), context, requestManager) as BaseVH<Any, ViewBinding>
+        }
+
+        TypeHelper.register(MineNavigationVH.TYPE) { layoutInflater, context, parent, requestManager ->
+            MineNavigationVH(VhMineNavigationLayoutBinding.inflate(layoutInflater), context, requestManager) as BaseVH<Any, ViewBinding>
+        }
+
+        TypeHelper.register(CommonListItemVH.TYPE) { layoutInflater, context, parent, requestManager ->
+            CommonListItemVH(VhCommonListItemBinding.inflate(layoutInflater), context, requestManager) as BaseVH<Any, ViewBinding>
+        }
     }
 }

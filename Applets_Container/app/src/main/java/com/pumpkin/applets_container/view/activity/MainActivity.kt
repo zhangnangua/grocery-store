@@ -9,6 +9,7 @@ import com.google.android.material.navigation.NavigationBarView
 import com.pumpkin.applets_container.R
 import com.pumpkin.applets_container.databinding.ActivityMain1Binding
 import com.pumpkin.applets_container.view.fragment.HomeFragment
+import com.pumpkin.applets_container.view.fragment.MineFragment
 import com.pumpkin.applets_container.view.fragment.OfflineFragment
 import com.pumpkin.applets_container.view.fragment.OldHomeFragment
 import com.pumpkin.applets_container.viewmodel.MainViewModel
@@ -29,7 +30,7 @@ import com.pumpkin.pac.process.connectPool.PACProcessClient
 class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMain1Binding
-    var currentId = R.id.home
+    var currentId = R.id.offline
 
     private val viewModel by lazy(LazyThreadSafetyMode.NONE) {
         PACViewModelProviders.of(this)[MainViewModel::class.java]
@@ -42,7 +43,7 @@ class MainActivity : BaseActivity() {
         val bundle = savedInstanceState ?: intent?.extras
         val firstParameter = bundle?.getInt(Constant.FIRST_PARAMETER, Constant.INVALID_ID)
         currentId = if ((firstParameter == null || firstParameter == Constant.INVALID_ID)) {
-            R.id.home
+            R.id.offline
         } else {
             firstParameter
         }
@@ -102,7 +103,7 @@ class MainActivity : BaseActivity() {
                         OfflineFragment::class.java.simpleName
                     }
 
-                    else -> OldHomeFragment::class.java.simpleName
+                    else -> MineFragment::class.java.simpleName
                 }
 
                 UIHelper.switchFragment(lastTag, tag, fragmentManager, containerId) {
@@ -127,7 +128,7 @@ class MainActivity : BaseActivity() {
             }
 
             else -> {
-                OldHomeFragment()
+                MineFragment()
             }
         }
     }

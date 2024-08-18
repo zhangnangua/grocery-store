@@ -28,3 +28,8 @@
 -keep class com.pumpkin.pac.bean.**{
     *;
 }
+
+
+-keep class com.pumpkin.dgx.**{
+    *;
+}

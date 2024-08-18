@@ -11,25 +11,27 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.pumpkin.mvvm.R
 import com.pumpkin.mvvm.databinding.FragmentGameDialogBinding
+import com.pumpkin.mvvm.repo.CollectionKv
 import com.pumpkin.mvvm.util.FloatDragHelper
 import com.pumpkin.ui.util.dpToPx
 
 /**
  * 返回处理
  */
-class ExitDialogManager(val activity: Activity,
-                        val title: String,
-                        val icon: String) : View.OnClickListener {
+class ExitDialogManager constructor(val activity: Activity,
+                                    val title: String,
+                                    val icon: String,
+                                    val id: String) : View.OnClickListener {
 
     private lateinit var binding: FragmentGameDialogBinding
     private lateinit var floatView: View
-    private var callback: ((type: Int) -> Unit)? = null
+    private var callback: DefaultCallback? = null
     private lateinit var viewGroup: ViewGroup
     private var add = false
     private var lastBtStatus = BT_NULL
 
     fun register(callback: (type: Int) -> Unit) {
-        this.callback = callback
+        this.callback = DefaultCallback(this, callback)
     }
 
     fun attach() {
@@ -64,23 +66,26 @@ class ExitDialogManager(val activity: Activity,
             trigger()
         } else if (v == binding.flExit) {
             lastBtStatus = BT_EXIT
-            callback?.invoke(BT_EXIT)
+            callback?.callback(BT_EXIT)
             hide()
         } else if (v == binding.flNext) {
             lastBtStatus = BT_NEXT
-            callback?.invoke(BT_NEXT)
+            callback?.callback(BT_NEXT)
             hide()
         } else if (v == binding.flCreateShortCut) {
             lastBtStatus = BT_CREATE_CUT
-            callback?.invoke(BT_CREATE_CUT)
+            callback?.callback(BT_CREATE_CUT)
             hide()
         } else if (v == binding.flOrientation) {
             lastBtStatus = BT_ORIENTATION
-            callback?.invoke(BT_ORIENTATION)
+            callback?.callback(BT_ORIENTATION)
             hide()
         } else if (v == binding.vMask) {
             lastBtStatus = BT_EXIT
             trigger()
+        } else if (v == binding.flCollect) {
+            lastBtStatus = BT_COLLECTION
+            callback?.callback(BT_COLLECTION)
         }
     }
 
@@ -92,6 +97,12 @@ class ExitDialogManager(val activity: Activity,
             binding.flCreateShortCut.setOnClickListener(this)
             binding.flOrientation.setOnClickListener(this)
             binding.vMask.setOnClickListener(this)
+            binding.flCollect.setOnClickListener(this)
+            if (CollectionKv.alreadySubscribed(id)) {
+                alreadySubscribedUI()
+            } else {
+                unsubscribeUI()
+            }
             binding.ivName.text = title
             Glide.with(activity)
                 .load(icon)
@@ -105,6 +116,14 @@ class ExitDialogManager(val activity: Activity,
         } else {
             hide()
         }
+    }
+
+    internal fun alreadySubscribedUI() {
+        binding.ivCollection.setImageResource(R.drawable.baseline_collections_24_filled)
+    }
+
+    internal fun unsubscribeUI() {
+        binding.ivCollection.setImageResource(R.drawable.baseline_collections_24_outline)
     }
 
     private fun show() {
@@ -121,6 +140,7 @@ class ExitDialogManager(val activity: Activity,
         const val BT_NEXT = 2
         const val BT_CREATE_CUT = 3
         const val BT_ORIENTATION = 4
+        const val BT_COLLECTION = 5
     }
 
 }

@@ -21,6 +21,7 @@ class GameEntity constructor(
     val icon: String,// 游戏icon
     val bigIcon: String = "",// 大图
     val extra: JsonObject? = null, // 额外的参数
+    val type: Int,
     val tag: String?,
     val orientation: Int? = Constant.INVALID_ID
 ) : Parcelable, Event, IGame {
@@ -41,6 +42,7 @@ class GameEntity constructor(
         } catch (e: Exception) {
             null
         },
+        parcel.readInt(),
         parcel.readString(),
         parcel.readInt()
     )
@@ -55,6 +57,7 @@ class GameEntity constructor(
         dest.writeString(icon)
         dest.writeString(bigIcon)
         dest.writeString(extra?.toString())
+        dest.writeInt(type)
         dest.writeString(tag)
         dest.writeInt(orientation ?: Constant.INVALID_ID)
     }
@@ -86,6 +89,7 @@ fun GameEntity.entityToTableMd5(moduleId: String) = GameTable(
     bigIcon = this.bigIcon,
     extra = this.extra,
     moduleId = moduleId,
+    type = 0,
     tag = tag
 )
 
@@ -98,6 +102,7 @@ fun GameEntity.entityToTable(moduleId: String) = GameTable(
     bigIcon = this.bigIcon,
     extra = this.extra,
     moduleId = moduleId,
+    type = this.type,
     tag = this.tag
 )
 
@@ -129,6 +134,7 @@ fun GameTable.tableToEntity() = GameEntity(
     icon = this.icon,
     bigIcon = this.bigIcon,
     extra = this.extra,
+    type = this.type,
     tag = this.tag
 )
 
@@ -142,6 +148,7 @@ fun GameResponse.responseToEntity() = GameEntity(
     bigIcon = this.bigIcon ?: "",
     extra = this.extra,
     tag = this.tag,
+    type = 0,
     orientation = this.orientation
 )
 

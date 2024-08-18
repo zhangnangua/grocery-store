@@ -11,7 +11,6 @@ import android.webkit.WebResourceResponse
 import android.webkit.WebView
 import android.widget.FrameLayout
 import android.widget.Toolbar.LayoutParams
-import androidx.lifecycle.lifecycleScope
 import com.google.gson.Gson
 import com.pumpkin.data.AppUtil
 import com.pumpkin.data.BuildConfig
@@ -35,7 +34,6 @@ import com.pumpkin.pac.viewmodel.GameViewModel
 import com.pumpkin.pac_core.webview.PACWebEngine
 import com.pumpkin.pac_core.webview.Webinterface
 import com.pumpkin.ui.util.toShortToast
-import kotlinx.coroutines.launch
 
 /**
  * game container
@@ -131,7 +129,7 @@ class GameActivity : BaseActivity() {
     }
 
     private fun float(gameEntity: GameEntity) {
-        exitDialogManager = ExitDialogManager(this, gameEntity.name, gameEntity.icon).apply {
+        exitDialogManager = ExitDialogManager(this, gameEntity.name, gameEntity.icon, gameEntity.id).apply {
             register { type ->
                 when (type) {
                     ExitDialogManager.BT_EXIT -> {
@@ -209,9 +207,6 @@ class GameActivity : BaseActivity() {
 
     private fun load(gameEntity: GameEntity) {
         loadEntrance(gameEntity.link)
-        lifecycleScope.launch {
-            gameViewModel.recordToRecently()
-        }
     }
 
     private fun loadEntrance(url: String) {

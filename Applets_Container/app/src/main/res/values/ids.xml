@@ -9,7 +9,11 @@
     <item name="vh_recent_horizontal" type="id" />
     <item name="vh_word_card_style_1" type="id" />
     <item name="vh_offline_card_style_1" type="id" />
+    <item name="vh_offline_big_card_style_1" type="id" />
     <item name="vh_no_title_horizontal" type="id" />
     <item name="vh_editor_pick_item" type="id" />
     <item name="vh_search_item" type="id" />
+    <item name="vh_mine_setting_item" type="id" />
+    <item name="vh_mine_navigation" type="id" />
+    <item name="vh_common_list_item" type="id" />
 </resources>

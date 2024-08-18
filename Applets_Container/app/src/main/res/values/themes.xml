@@ -1,4 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
     <style name="Theme.Main" parent="Theme.Applets_Container">
         <!--        隐藏状态栏-->
         <!--        <item name="windowActionBar">false</item>-->
@@ -13,8 +14,12 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
 
 
-        <item name="textInputStyle">@style/Widget.Material3.MaterialTimePicker.Display.TextInputLayout</item>
+        <item name="textInputStyle">
+            @style/Widget.Material3.MaterialTimePicker.Display.TextInputLayout
+        </item>
     </style>
+
+    <style name="Theme.List" parent="Theme.Applets_Container.Bar" />
 
     <style name="Theme.Start" parent="Theme.SplashScreen.IconBackground">
         <!--启动画面背景颜色-->
@@ -23,9 +28,9 @@
         <item name="windowSplashScreenAnimatedIcon">@drawable/splash_anim2</item>
         <item name="windowSplashScreenIconBackgroundColor">@color/colorOnPrimary</item>
         <!-- icon动画在关闭之前显示的时长：最长时间为1000毫秒-->
-<!--        <item name="windowSplashScreenAnimationDuration">200</item>-->
+        <!--        <item name="windowSplashScreenAnimationDuration">200</item>-->
         <!-- 启动画面底部的 Brand 图片-->
-<!--        <item name="android:windowSplashScreenBrandingImage">@drawable/brand_img</item>-->
+        <!--        <item name="android:windowSplashScreenBrandingImage">@drawable/brand_img</item>-->
 
         <!--    真正的Main界面主题    -->
         <item name="postSplashScreenTheme">@style/Theme.Main</item>
