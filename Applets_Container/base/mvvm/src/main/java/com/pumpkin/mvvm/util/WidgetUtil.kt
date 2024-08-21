@@ -1,6 +1,8 @@
 package com.pumpkin.mvvm.util
 
 import android.app.PendingIntent
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -14,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.pumpkin.data.AppUtil
+
 
 object WidgetUtil {
     fun createShortcut(context: Context = AppUtil.application, icon: String, title: String, id: String, clsName: String) {
@@ -43,5 +46,11 @@ object WidgetUtil {
             }
 
         })
+    }
+
+    fun copyTextToClipboard(context: Context = AppUtil.application, text: String?) {
+        val clipboard: ClipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("label", text)
+        clipboard.setPrimaryClip(clip)
     }
 }

@@ -8,6 +8,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.android.material.navigation.NavigationBarView
 import com.pumpkin.applets_container.R
 import com.pumpkin.applets_container.databinding.ActivityMain1Binding
+import com.pumpkin.applets_container.helper.GDPRHelper
 import com.pumpkin.applets_container.view.fragment.HomeFragment
 import com.pumpkin.applets_container.view.fragment.MineFragment
 import com.pumpkin.applets_container.view.fragment.OfflineFragment
@@ -69,6 +70,8 @@ class MainActivity : BaseActivity() {
         val onItemSelectedListener = navigationFragment()
         binding.bottomNavigation.setOnItemSelectedListener(onItemSelectedListener)
         binding.bottomNavigation.selectedItemId = currentId
+
+        GDPRHelper.tryShowGdpr(this)
     }
 
     private fun loadData() {

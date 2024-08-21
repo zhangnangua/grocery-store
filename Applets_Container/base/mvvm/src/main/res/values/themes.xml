@@ -65,14 +65,7 @@
         <item name="colorOnSurfaceInverse">@color/md_theme_light_inverseOnSurface</item>
         <item name="colorSurfaceInverse">@color/md_theme_light_inverseSurface</item>
         <item name="colorPrimaryInverse">@color/md_theme_light_inversePrimary</item>
-
-        <!--   背景色     -->
-        <!--        <item name="colorSurface">@color/md_theme_light_surface</item>-->
-        <!--        <item name="android:colorBackground">@color/md_theme_light_background</item>-->
-
-        <!-- Status bar color. -->
-        <!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
-        <!-- Customize your theme here. -->
-        <!--        <item name="android:windowBackground">@color/m3_sys_color_dark_primary</item>-->
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">false</item>
     </style>
 </resources>

@@ -30,7 +30,7 @@ class MineNavigationVH(binding: VhMineNavigationLayoutBinding,
         binding.myCollect.setOnClickListener {
             CommonListActivity.go(context, CommonListParameterBuilder()
                 .setRepo(CollectionRepo::class.java)
-                .setTitle(AppUtil.application.getString(R.string.play_record)))
+                .setTitle(AppUtil.application.getString(R.string.my_collection)))
         }
 
     }

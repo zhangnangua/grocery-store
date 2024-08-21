@@ -31,7 +31,8 @@ class MineRepo {
             // setting
             data.add(AdapterWrapBean(MineSettingItemVH.TYPE, SettingEntity(title = R.string.privacy_policy, icon = R.drawable.baseline_local_florist_24, marginTop = 20F.dpToPx)))
             data.add(AdapterWrapBean(MineSettingItemVH.TYPE, SettingEntity(R.string.terms_of_service, R.drawable.baseline_flutter_dash_24)))
-            data.add(AdapterWrapBean(MineSettingItemVH.TYPE, SettingEntity(R.string.version_info, R.drawable.baseline_perm_device_information_24)))
+            data.add(AdapterWrapBean(MineSettingItemVH.TYPE, SettingEntity(R.string.version_info, R.drawable.baseline_emoji_emotions_24)))
+            data.add(AdapterWrapBean(MineSettingItemVH.TYPE, SettingEntity(R.string.feed_back, R.drawable.outline_rss_feed_24)))
 
             feedFlow.emit(data)
         }

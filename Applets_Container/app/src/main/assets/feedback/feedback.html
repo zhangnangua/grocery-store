@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f4f7f6;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          height: 100vh;
+          text-align: center;
+        }
+        .feedback-container {
+          background-color: white;
+          padding: 20px;
+          width: 100%;
+        }
+        .feedback-container h2 {
+          color: #333;
+          margin-bottom: 20px;
+        }
+        .feedback-container textarea {
+          width: calc(100% - 20px); /* Adjust width to account for padding */
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          margin-bottom: 10px;
+          resize: none; /* Prevents resizing of the textarea */
+        }
+        .feedback-container button {
+          width: 100%;
+          padding: 10px;
+          background-color: #5cb85c;
+          border: none;
+          border-radius: 4px;
+          color: white;
+          cursor: pointer;
+          outline: none;
+        }
+        .feedback-container button:disabled {
+          background-color: #cccccc;
+        }
+        .feedback-container .status-message {
+          height: 20px;
+          color: #5cb85c;
+          margin-top: 10px;
+        }
+    </style>
+    <script>
+        function simulateNetworkRequest() {
+          var button = document.getElementById('feedbackButton');
+          var input = document.getElementById('feedbackInput');
+          var message = document.getElementById('statusMessage');
+
+          // Disable the button and clear status message
+          button.disabled = true;
+          message.textContent = '';
+
+          // Show loading text
+          message.textContent = 'Sending feedback...';
+
+          // Simulate network request for 2-3 seconds
+          setTimeout(function() {
+            // Show success message
+            message.textContent = 'Feedback submitted successfully!';
+
+            // Clear the feedback input
+            input.value = '';
+
+            // Enable the button again
+            button.disabled = false;
+          }, 2000 + Math.random() * 1000);
+        }
+    </script>
+</head>
+<body>
+
+<div class="feedback-container">
+    <h2>Feedback</h2>
+    <textarea id="feedbackInput" rows="4" placeholder="Please enter your feedback here..."></textarea>
+    <button id="feedbackButton" onclick="simulateNetworkRequest()">Submit Feedback</button>
+    <div id="statusMessage" class="status-message"></div>
+</div>
+
+</body>
+</html>

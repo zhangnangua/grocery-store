@@ -2,10 +2,19 @@ package com.pumpkin.pac_core.webview
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.net.http.SslError
 import android.util.AttributeSet
-import android.webkit.*
+import android.webkit.CookieManager
+import android.webkit.JsPromptResult
+import android.webkit.JsResult
+import android.webkit.SslErrorHandler
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
+import android.webkit.WebSettings
+import android.webkit.WebView
 import com.pumpkin.pac_core.BuildConfig
 
 /**
@@ -18,8 +27,15 @@ import com.pumpkin.pac_core.BuildConfig
 @SuppressLint("SetJavaScriptEnabled")
 class PACWebEngine
 @JvmOverloads
-constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) :
-    WebView(context, attrs, defStyle) {
+constructor(context: Context,
+            attrs: AttributeSet? = null,
+            defStyle: Int =
+                try {
+                    Resources.getSystem().getIdentifier("webViewStyle", "attr", "android")
+                } catch (e: Exception) {
+                    0
+                }
+) : WebView(context, attrs, defStyle) {
 
     private val pacWebViewChrome: PACWebViewChrome
     private val pacWebViewClient: PACWebViewClient

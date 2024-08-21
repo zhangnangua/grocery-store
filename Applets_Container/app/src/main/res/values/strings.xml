@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Game Box</string>
 
     <string name="tab_home">Home</string>
@@ -18,8 +18,18 @@
 
     <string name="privacy_policy">Privacy Policy</string>
     <string name="terms_of_service">Terms of Service</string>
-    <string name="version_info">Version Information</string>
+    <string name="version_info">About Game Box</string>
     <string name="play_record">Play Record</string>
-    <string name="my_collection">My Collection</string>
+    <string name="my_collection">My Subscribed</string>
+    <string name="feed_back">Feed Back</string>
+    <string name="agree">AGREE</string>
+
+    <string name="notice">Notice</string>
+
+    <string name="game_box_version">Game Box Version : %s</string>
+
+    <string name="copy">Copy</string>
+
+    <string name="gdpr_content">By clicking AGREE, you agree to the terms stated in our <ns1:g id="user_agreement">%s</ns1:g> and <ns1:g id="private_policy">%s</ns1:g>.</string>
 
 </resources>

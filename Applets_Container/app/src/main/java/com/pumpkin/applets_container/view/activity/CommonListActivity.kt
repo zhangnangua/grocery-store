@@ -4,11 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.pumpkin.applets_container.R
 import com.pumpkin.applets_container.data.repo.AbsCommonListRepo
 import com.pumpkin.applets_container.databinding.ActivityCommonListBinding
 import com.pumpkin.applets_container.viewmodel.CommonListViewModel
@@ -64,6 +66,7 @@ class CommonListActivity : BaseActivity() {
 
     private fun initView() {
         setTitle(title)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding = ActivityCommonListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         adapter = BaseAdapter(Glide.with(this), this)
@@ -84,6 +87,14 @@ class CommonListActivity : BaseActivity() {
             //如果这里被执行，则代表生命周期已经走到了onDestroy，因为repeatOnLifecycle是挂起函数，在生命周期为onDestroy的时候进行了恢复。
         }
         viewModel.request()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home){
+            finish()
+            return false
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     companion object {
