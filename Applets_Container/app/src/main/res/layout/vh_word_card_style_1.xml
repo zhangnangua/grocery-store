@@ -32,7 +32,7 @@
                     android:layout_height="85dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
-                    android:scaleType="fitCenter"
+                    android:scaleType="fitXY"
                     tools:src="@mipmap/leak_canary_icon" />
 
                 <androidx.appcompat.widget.AppCompatTextView

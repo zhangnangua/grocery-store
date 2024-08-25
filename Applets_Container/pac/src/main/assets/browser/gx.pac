@@ -3,11 +3,24 @@
         var element = event.target;
         var parentAnchor = element.closest('a');
         var imgPath = "";
-        var link = "";
         var gameName = "";
-        var imgPath = parentAnchor.querySelector('img').src;
-        var link = parentAnchor.href;
-        gameName = toCamelCase(link);
+        var link = "";
+        if (parentAnchor) {
+            link = parentAnchor.href;
+            if (element.tagName.toLowerCase() === 'img') {
+                imgPath = element.src;
+                var divElement = parentAnchor.querySelector('.name');
+                if (divElement) {
+                    gameName = divElement.textContent || divElement.innerText;
+                }
+            } else if (element.tagName.toLowerCase() === 'div') {
+                gameName = toCamelCase(link);
+                var imgElement = parentAnchor.querySelector('img');
+                if (imgElement) {
+                    imgPath = imgElement.src;
+                }
+            }
+        }
         var data = {
             img: imgPath,
             name: gameName,
@@ -18,8 +31,9 @@
         }
         console.log(data);
         prompt(JSON.stringify(data), 'pt');
-    });
+    },true);
 })();
+
 function toCamelCase(url) {
     let path = url.split('?')[0];
     if (path.endsWith('/')) {

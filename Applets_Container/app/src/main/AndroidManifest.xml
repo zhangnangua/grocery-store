@@ -42,6 +42,7 @@
 
         <activity
             android:name=".view.activity.CommonListActivity"
+            android:exported="false"
             android:theme="@style/Theme.List"
             android:launchMode="standard" />
     </application>

@@ -30,7 +30,7 @@
                 android:layout_gravity="bottom"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="5dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/name"
@@ -38,16 +38,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    tools:text="game name " />
+                    android:layout_marginEnd="70dp"
+                    android:gravity="center"
+                    android:lines="2"
+                    tools:text="game name game " />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="68dp"
-                    android:layout_height="32dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="end|center"
+                    style="@style/TextAppearance.Material3.TitleLarge"
                     android:background="@drawable/shape_play_bg"
                     android:gravity="center"
                     android:text="@string/play"
-                    android:textColor="@color/seed" />
+                    android:textColor="?attr/colorPrimary" />
             </FrameLayout>
 
         </com.google.android.material.card.MaterialCardView>

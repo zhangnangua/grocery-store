@@ -3,12 +3,10 @@ package com.pumpkin.applets_container.data.repo
 import android.util.Log
 import com.pumpkin.applets_container.BuildConfig
 import com.pumpkin.applets_container.bean.TitleEntity
-import com.pumpkin.applets_container.data.source.Entrance
 import com.pumpkin.applets_container.view.vh.EditorPickHorizontalVH
 import com.pumpkin.applets_container.view.vh.EditorPickItemVH
 import com.pumpkin.applets_container.view.vh.TitleVH
 import com.pumpkin.applets_container.view.vh.WordCardStyle1VH
-import com.pumpkin.data.AppUtil
 import com.pumpkin.mvvm.adapter.AdapterWrapBean
 import com.pumpkin.pac.ParseContext
 import com.pumpkin.pac.bean.WordCardStyle
@@ -27,14 +25,13 @@ class HomeRepo {
             result.add(AdapterWrapBean(EditorPickHorizontalVH.TYPE, editorPickData()))
 
             result.add(AdapterWrapBean(TitleVH.TYPE, TitleEntity("Game Center")))
-            result.add(AdapterWrapBean(WordCardStyle1VH.TYPE, WordCardStyle(System.currentTimeMillis(), "https://ssl.gstatic.com/h5games_gamecenter/images/icon-512x512.png", "GameSnacks", "https://gamesnacks.com/", ParseContext.GAME_SNACK)))
-            result.add(AdapterWrapBean(WordCardStyle1VH.TYPE, WordCardStyle(System.currentTimeMillis(), "https://a.poki.com/icons/fav-512.png", "PoKi", "https://poki.com", ParseContext.POKI)))
-            result.add(AdapterWrapBean(WordCardStyle1VH.TYPE, WordCardStyle(System.currentTimeMillis(), "https://www.shakagame.com/favicon.ico", "ShakaGame", "https://www.shakagame.com/", ParseContext.SHAKA_GAME)))
-            result.add(AdapterWrapBean(WordCardStyle1VH.TYPE, WordCardStyle(System.currentTimeMillis(), "https://html5games.com/favicon.ico", "Html5games", "https://html5games.com/", ParseContext.HTML5_GAMES)))
-            result.add(AdapterWrapBean(WordCardStyle1VH.TYPE, WordCardStyle(System.currentTimeMillis(), "https://www.gamepix.com/favicon.ico", "GamePix", "https://www.gamepix.com/", ParseContext.GAME_PIX)))
-            result.add(AdapterWrapBean(WordCardStyle1VH.TYPE, WordCardStyle(System.currentTimeMillis(), "https://gx.games/favicon.ico", "GX", "https://gx.games/")))
-            result.add(AdapterWrapBean(WordCardStyle1VH.TYPE, WordCardStyle(System.currentTimeMillis(), "https://www.crazygames.com/favicon.ico", "CrazyGames", "https://www.crazygames.com/", ParseContext.CRAZY_GAMES)))
-            result.add(AdapterWrapBean(WordCardStyle1VH.TYPE, WordCardStyle(System.currentTimeMillis(), "https://famobi.com/favicon.ico", "Famobi", "https://famobi.com/", ParseContext.FAMOBI)))
+            result.add(AdapterWrapBean(WordCardStyle1VH.TYPE, WordCardStyle(System.currentTimeMillis(), ICON_PREFIX + "gamesnack.png", "GameSnacks", "https://gamesnacks.com/", ParseContext.GAME_SNACK)))
+            result.add(AdapterWrapBean(WordCardStyle1VH.TYPE, WordCardStyle(System.currentTimeMillis(), ICON_PREFIX + "poki.png", "PoKi", "https://poki.com", ParseContext.POKI)))
+            result.add(AdapterWrapBean(WordCardStyle1VH.TYPE, WordCardStyle(System.currentTimeMillis(), ICON_PREFIX + "gamepix.png", "GamePix", "https://www.gamepix.com/", ParseContext.GAME_PIX)))
+            result.add(AdapterWrapBean(WordCardStyle1VH.TYPE, WordCardStyle(System.currentTimeMillis(), ICON_PREFIX + "crazygames.jpeg", "CrazyGames", "https://www.crazygames.com/", ParseContext.CRAZY_GAMES)))
+            result.add(AdapterWrapBean(WordCardStyle1VH.TYPE, WordCardStyle(System.currentTimeMillis(), ICON_PREFIX + "gx.jpeg", "GX", "https://gx.games/",ParseContext.GX)))
+            result.add(AdapterWrapBean(WordCardStyle1VH.TYPE, WordCardStyle(System.currentTimeMillis(), ICON_PREFIX + "h5games.png", "Html5games", "https://html5games.com/", ParseContext.HTML5_GAMES)))
+            result.add(AdapterWrapBean(WordCardStyle1VH.TYPE, WordCardStyle(System.currentTimeMillis(), ICON_PREFIX + "famobi.jpeg", "Famobi", "https://famobi.com/", ParseContext.FAMOBI)))
 
             feedFlow.emit(result)
 
@@ -54,6 +51,8 @@ class HomeRepo {
 
     companion object {
         const val TAG = "HomeRepo"
+
+        const val ICON_PREFIX = "file:///android_asset/browser/icon/"
     }
 
 }

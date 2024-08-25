@@ -23,4 +23,15 @@
             column="27"/>
     </issue>
 
+    <issue
+        id="Instantiatable"
+        message="`CommonListActivity` must extend android.app.Activity"
+        errorLine1="            android:name=&quot;.view.activity.CommonListActivity&quot;"
+        errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="31"
+            column="27"/>
+    </issue>
+
 </issues>

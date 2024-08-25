@@ -1,39 +1,64 @@
 [
   {
-    "id": "internal_editor_snake",
-    "name": "Snake",
-    "link": "https://snake.googlemaps.com/",
-    "describe": "A fun snake game",
-    "icon": "https://snake.googlemaps.com/static/img/share_screen.png",
-    "bigIcon": "",
-    "tag": "fighting;run;"
+    "id": "n_pixel_dungeon_3",
+    "name": "Pixel Dungeon",
+    "type": 1,
+    "icon": "file:///android_asset/n_icon/pixel_dungeon.jpeg"
   },
   {
-    "id": "internal_chess",
-    "name": "Chess",
-    "link": "https://www.chess.com/play",
-    "describe": "chess this is a classic.",
-    "icon": "https://www.chess.com/favicon.ico",
-    "bigIcon": "",
-    "tag": "chess;multiple people;"
+    "id": "n_block_1",
+    "name": "Blocks Puzzle Pro",
+    "type": 1,
+    "icon": "file:///android_asset/internal_game_info/icon/blocks_puzzle_pro.jpeg"
   },
   {
-    "id": "internal_archery",
-    "name": "ArcheryWorldTour",
-    "link": "https://play.famobi.com/wrapper/archery-world-tour/A1000-10",
-    "describe": "Grab a bow and put your archery skills to the ultimate test! ",
-    "icon": "https://img.cdn.famobi.com/portal/html5games/images/tmp/ArcheryWorldTourTeaser.jpg",
+    "id": "internal_sniper_simulator",
+    "name": "Sniper Simulator",
+    "link": "https://www.excellenth5game.com/Sniper_Simulator/index.html",
+    "describe": "Play as a sniper\",\"introduction\":\"Sniper Simulator is a first-person shooting simulation game. In this game you will play a sniper and control a variety of classic firearms for sniper training. Shoot the target to destroy it and score points.",
+    "icon": "file:///android_asset/internal_game_info/icon/internal_sniper_simulator.webp",
     "bigIcon": "",
-    "tag": "archery"
+    "tag": "Hero;gun;",
+    "orientation": 0
   },
   {
-    "id": "internal_hills_of_steel",
-    "name": "HillsOfSteel",
-    "link": "https://poki.com/zh/g/hills-of-steel#fullscreen",
-    "describe": "Rush to destroy enemy tanks! ! !",
-    "icon": "https://img.poki.com/cdn-cgi/image/quality=78,width=314,height=314,fit=cover,f=auto/e8a5f2eda2e5340e8ded263692835caa.png",
+    "id": "internal_SnakeRun",
+    "name": "SnakeRun",
+    "link": "https://www.gzxuanzhaogame.com/SnakeRun/index.html",
+    "describe": "The best choice among all the running games.\",\"introduction\":\"*Be careful not to aim at snakes that are longer than you.\\n*Avoid various obstacles and stay away from your enemies.\\n*You are not alone! There are other snakes on the road to victory.\\n*Eating them can extend your race and help you pass the level!",
+    "icon": "file:///android_asset/internal_game_info/icon/SnakeRun.webp",
     "bigIcon": "",
-    "tag": "fighting",
+    "tag": "Cartoon;Animals;Survival",
+    "orientation": 1
+  },
+  {
+    "id": "internal_Battle_Cars_3D",
+    "name": "Battle Cars 3D",
+    "link": "https://www.lxtgame.com/Battle_Cars_3D/index.html",
+    "describe": "Drive fast,,shoot faster..Race,,fight,win!\",\"introduction\":\"Players can fill their garage with tanks, each with unique abilities and styles, and can be equipped with a wide range of weapons. The tank is waiting for you! Upgrade, customize, and dominate the battlefield, defeating competitors.",
+    "icon": "file:///android_asset/internal_game_info/icon/internal_Battle_Cars_3D.webp",
+    "bigIcon": "",
+    "tag": "Driving;Battle;drive",
+    "orientation": 1
+  },
+  {
+    "id": "internal_Critical_Strike_Shooting",
+    "name": "Critical Strike Shooting",
+    "link": "https://www.ooppgame.com/Critical_Strike_Shooting/index.html",
+    "describe": "Critical Strike is a fast-paced modern multiplayer FPS counter terrorist game.Are you a fan of the good old counter terrorists battles? Enjoying online shooters and multiplayer gun games? There is the best 3D First Person Shooter in real-time.Take the part in the vanguard at the battlefield of Crit",
+    "icon": "file:///android_asset/internal_game_info/icon/internal_Critical_Strike_Shooting.webp",
+    "bigIcon": "",
+    "tag": "Battle;shooting",
+    "orientation": 0
+  },
+  {
+    "id": "internal_Rac_Simulator_1",
+    "name": "Rac Simulator 1",
+    "link": "https://www.fatfishgame.com/Rac_Simulator_1/index.html",
+    "describe": "Drive on the open road and explore the huge world in a garage full of unique cars. Get straight into the fun and drive any vehicle in the latest free-roam car driving simulator game.",
+    "icon": "file:///android_asset/internal_game_info/icon/internal_Rac_Simulator_1.png",
+    "bigIcon": "",
+    "tag": "Driving;Battle;drive",
     "orientation": 0
   }
 ]

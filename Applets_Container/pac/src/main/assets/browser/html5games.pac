@@ -31,5 +31,5 @@
         }
         console.log(data);
         prompt(JSON.stringify(data), 'pt');
-    });
+    },true);
 })();

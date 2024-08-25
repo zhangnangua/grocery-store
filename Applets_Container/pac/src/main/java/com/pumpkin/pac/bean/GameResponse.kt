@@ -11,5 +11,6 @@ class GameResponse(
     var bigIcon: String? = null,
     var extra: JsonObject? = null,
     var tag: String? = null,
-    var orientation: Int? = null
+    var orientation: Int? = null,
+    var type: Int? = null
 )

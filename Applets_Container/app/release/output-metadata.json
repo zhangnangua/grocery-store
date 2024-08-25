@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.pumpkin.applets_container",
+  "variantName": "release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 999,
+      "versionName": "20240821.001",
+      "outputFile": "app-release.apk"
+    }
+  ],
+  "elementType": "File"
+}

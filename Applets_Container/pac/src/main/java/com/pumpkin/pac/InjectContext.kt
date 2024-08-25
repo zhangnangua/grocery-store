@@ -74,7 +74,7 @@ class ParseContext(private val injectName: String, private val engine: PACWebEng
         const val POKI = "poki"
         const val HTML5_GAMES = "html5games"
         const val FAMOBI = "famobi"
-        const val SHAKA_GAME = "shakagame"
+        const val GX = "gx"
     }
 }
 

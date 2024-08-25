@@ -83,5 +83,25 @@
     "describe": "ah .",
     "bigIcon": "",
     "tag": "Car;Driving;Car Racing"
+  },
+  {
+    "id": "I1009_real_moto",
+    "name": "Real Moto Race",
+    "icon": "file:///android_asset/internal_game/icon/I1009_real_moto.jpeg",
+    "link": "https://www.hwoie.com/race/index.html",
+    "orientation": 1,
+    "describe": "Experience the top tier motorcycle racing!",
+    "bigIcon": "",
+    "tag": "Moto;Driving;Offline"
+  },
+  {
+    "id": "I10010_Warfare_Area",
+    "name": "Warfare Area",
+    "icon": "file:///android_asset/internal_game/icon/I10010_Warfare_Area.webp",
+    "link": "https://www.hwoie.com/area/game240315/index.html",
+    "orientation": 0,
+    "describe": "Use your gun to clear the entire scene!",
+    "bigIcon": "",
+    "tag": "shooting;Space;Offline"
   }
 ]

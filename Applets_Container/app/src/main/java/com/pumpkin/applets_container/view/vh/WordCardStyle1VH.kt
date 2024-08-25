@@ -2,11 +2,13 @@ package com.pumpkin.applets_container.view.vh
 
 import android.content.Context
 import com.bumptech.glide.RequestManager
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.pumpkin.applets_container.R
 import com.pumpkin.applets_container.databinding.VhWordCardStyle1Binding
 import com.pumpkin.mvvm.adapter.BaseVH
 import com.pumpkin.pac.bean.WordCardStyle
 import com.pumpkin.pac.view.BrowserActivity
+import com.pumpkin.ui.util.dpToPx
 
 class WordCardStyle1VH(binding: VhWordCardStyle1Binding,
                        context: Context?,
@@ -22,6 +24,7 @@ class WordCardStyle1VH(binding: VhWordCardStyle1Binding,
 
         binding.tvName.text = data.name
         requestManager.load(data.icon)
+            .transform(RoundedCorners(16F.dpToPx))
             .into(binding.ivImage)
 
         binding.root.setOnClickListener {

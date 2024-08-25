@@ -148,7 +148,7 @@ fun GameResponse.responseToEntity() = GameEntity(
     bigIcon = this.bigIcon ?: "",
     extra = this.extra,
     tag = this.tag,
-    type = 0,
+    type = this.type ?: 0,
     orientation = this.orientation
 )
 
