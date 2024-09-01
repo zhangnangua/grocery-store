@@ -42,12 +42,13 @@ public class Helper {
         if (TextUtils.isEmpty(info)) {
             return result;
         }
-        try {
+//        try {
             Set<GameResponse> snapResult = gson.fromJson(info, new TypeToken<Set<GameResponse>>() {
             }.getType());
             result.addAll(snapResult);
-        } catch (Exception ignored) {
-        }
+//        } catch (Exception ignored) {
+//
+//        }
 
         return result;
     }

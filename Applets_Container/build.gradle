@@ -65,8 +65,8 @@ buildscript {
     ext.gdxControllersVersion = '2.2.1'
 
     ext.minSdk = 21
-    ext.targetSdk = 33
-    ext.compileSdk = 33
+    ext.targetSdk = 34
+    ext.compileSdk = 34
 
     repositories {
         google()

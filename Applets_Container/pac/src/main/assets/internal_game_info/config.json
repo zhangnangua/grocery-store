@@ -2,13 +2,13 @@
   {
     "id": "n_pixel_dungeon_3",
     "name": "Pixel Dungeon",
-    "type": 1,
+    "gType": 1,
     "icon": "file:///android_asset/n_icon/pixel_dungeon.jpeg"
   },
   {
     "id": "n_block_1",
     "name": "Blocks Puzzle Pro",
-    "type": 1,
+    "gType": 1,
     "icon": "file:///android_asset/internal_game_info/icon/blocks_puzzle_pro.jpeg"
   },
   {

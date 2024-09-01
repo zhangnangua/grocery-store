@@ -15,7 +15,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock
 /**
  * 进程通用链接
  */
-abstract class ConnectPool<iInterface : IInterface>(private val retry: Boolean) {
+abstract class ConnectPool<iInterface : IInterface> constructor(private val retry: Boolean) {
 
     private var iService: iInterface? = null
 
@@ -134,13 +134,17 @@ abstract class ConnectPool<iInterface : IInterface>(private val retry: Boolean) 
     }
 
     fun execute(logic: (iInterface: iInterface?) -> Unit): Boolean {
-        return if (isAlive()) {
-            logic.invoke(iService)
-            true
-        } else {
-            if (retry) {
-                connect()
+        return try {
+            if (isAlive()) {
+                logic.invoke(iService)
+                true
+            } else {
+                if (retry) {
+                    connect()
+                }
+                false
             }
+        } catch (_: Exception) {
             false
         }
     }

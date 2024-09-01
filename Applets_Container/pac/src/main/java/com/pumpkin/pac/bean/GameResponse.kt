@@ -2,7 +2,7 @@ package com.pumpkin.pac.bean
 
 import com.google.gson.JsonObject
 
-class GameResponse(
+class GameResponse (
     var id: String? = null,
     var name: String? = null,
     var link: String? = null,
@@ -12,5 +12,5 @@ class GameResponse(
     var extra: JsonObject? = null,
     var tag: String? = null,
     var orientation: Int? = null,
-    var type: Int? = null
+    var gType: Int? = null
 )

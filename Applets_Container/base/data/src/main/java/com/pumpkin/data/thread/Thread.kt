@@ -2,6 +2,8 @@ package com.pumpkin.data.thread
 
 import android.os.Handler
 import android.os.Looper
+import com.pumpkin.data.AppUtil
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -54,9 +56,19 @@ object ThreadHelper {
 
 }
 
-fun IoScope(): CoroutineScope = ContextScope(SupervisorJob() + Dispatchers.IO)
+fun IoScope(): CoroutineScope =
+    ContextScope(SupervisorJob() + Dispatchers.IO + CoroutineExceptionHandler { coroutineContext, throwable ->
+        if (AppUtil.isDebug) {
+            throwable.printStackTrace()
+        }
+    })
 
-fun DefaultScope(): CoroutineScope = ContextScope(SupervisorJob() + Dispatchers.Default)
+fun DefaultScope(): CoroutineScope =
+    ContextScope(SupervisorJob() + Dispatchers.Default + CoroutineExceptionHandler { coroutineContext, throwable ->
+        if (AppUtil.isDebug) {
+            throwable.printStackTrace()
+        }
+    })
 
 internal class ContextScope(context: CoroutineContext) : CoroutineScope {
     override val coroutineContext: CoroutineContext = context
