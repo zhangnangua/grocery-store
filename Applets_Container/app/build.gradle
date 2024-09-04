@@ -20,8 +20,8 @@ android {
         applicationId rootProject.ext.applicationId
         minSdk rootProject.ext.minSdk
         targetSdk rootProject.ext.targetSdk
-        versionCode 1002
-        versionName "20240904.1.1.0002"
+        versionCode 1003
+        versionName "20240904.1.1.0003"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
