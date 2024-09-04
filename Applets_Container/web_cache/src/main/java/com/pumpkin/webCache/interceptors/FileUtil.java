@@ -74,6 +74,20 @@ public class FileUtil {
             while ((zipEntry = zipInputStream.getNextEntry()) != null) {
 
                 String name = zipEntry.getName();
+
+                // Fixed Zip path traversal vulnerability (including ../ paths)
+                File onlyOutPathFile = new File(outPath);
+                String outCanonicalPath = onlyOutPathFile.getCanonicalPath();
+
+                File f = new File(outPath, name);
+                String canonicalPath = f.getCanonicalPath();
+                if (!canonicalPath.startsWith(outCanonicalPath)) {
+                    throw new SecurityException("zip file path is not safe"
+                            + ", zipFileNamee: " + zipFileName
+                            + ", name: " + name
+                            + ", canonicalPath:" + canonicalPath);
+                }
+
                 if (zipEntry.isDirectory()) {
 
                     File folder = new File(outPath, name);
