@@ -18,20 +18,16 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
     private static final boolean DEBUG = BuildConfig.DEBUG;
     private final int startMargin;
     private final int endMargin;
-    private final int itemWidth;
+    private final int intervalMargin;
     private final int topMargin;
     private final int verticalInterval;
 
-    public GridItemDecoration(int startMargin, int endMargin, int itemWidth, int topMargin, int verticalInterval) {
+    public GridItemDecoration(int startMargin, int endMargin, int intervalMargin, int topMargin, int verticalInterval) {
         this.startMargin = startMargin;
         this.endMargin = endMargin;
-        this.itemWidth = itemWidth;
+        this.intervalMargin = intervalMargin;
         this.topMargin = topMargin;
         this.verticalInterval = verticalInterval;
-    }
-
-    public GridItemDecoration(int startMargin, int endMargin, int itemWidth) {
-        this(startMargin, endMargin, itemWidth, 0, 0);
     }
 
     @Override
@@ -63,7 +59,7 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
 
             int parentWidth = parent.getMeasuredWidth();
             final int width = parentWidth - paddingStart - paddingEnd;
-            final int internal = (width - itemWidth * spanCount) / (spanCount - 1);
+//            final int internal = (width - itemWidth * spanCount) / (spanCount - 1);
 
             int perWidth = width / spanCount;
 
@@ -74,19 +70,19 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
                     Log.d(TAG, "getItemOffsets() -> " + spanIndex + " isFirst");
                 }
                 left = startMargin;
-                right = perWidth - itemWidth - left;
+                right = intervalMargin / 2;
             } else if (isLast(spanIndex, spanCount, layoutManager, parent.getLayoutDirection())) {
                 if (DEBUG) {
                     Log.d(TAG, "getItemOffsets() -> " + spanIndex + " isLast");
                 }
                 right = endMargin;
-                left = perWidth - itemWidth - right;
+                left = intervalMargin / 2;
             } else {
                 if (DEBUG) {
                     Log.d(TAG, "getItemOffsets() -> " + spanIndex + " middle");
                 }
-                left = internal - (spanIndex * perWidth - spanIndex * itemWidth - (spanIndex - 1) * internal);
-                right = perWidth - itemWidth - left;
+                left = intervalMargin / 2;
+                right = intervalMargin / 2;
             }
             int top = 0;
             if (isFirstLine(spanIndex, spanCount)) {

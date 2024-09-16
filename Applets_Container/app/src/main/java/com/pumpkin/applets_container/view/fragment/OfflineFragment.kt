@@ -59,8 +59,8 @@ class OfflineFragment : SuperMultiStateBaseFragment() {
         val startEndMargin = 16F.dpToPx
         val verticalInterval = 0
         val topMargin = 0
-        val itemWidth = 160F.dpToPx
-        rv.addItemDecoration(GridItemDecoration(startEndMargin, startEndMargin, itemWidth, topMargin, verticalInterval))
+        val intervalMargin = 10F.dpToPx
+        rv.addItemDecoration(GridItemDecoration(startEndMargin, startEndMargin, intervalMargin, topMargin, verticalInterval))
         rv.layoutManager = layoutManager
         rv.adapter = flowAdapter
 

@@ -7,12 +7,14 @@
     android:layout_height="wrap_content">
 
     <FrameLayout
-        android:layout_width="160dp"
+        android:layout_width="match_parent"
         android:layout_height="160dp">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/mcv_bg"
-            android:layout_width="154dp"
+            android:layout_width="match_parent"
+            android:paddingStart="3dp"
+            android:paddingEnd="3dp"
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
             android:orientation="vertical"
